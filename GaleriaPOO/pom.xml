@@ -4,11 +4,11 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>org.laboratorio3</groupId>
-  <artifactId>Laboratorio_3--Nicolas_Sebastian</artifactId>
+  <groupId>poo.project</groupId>
+  <artifactId>GaleriaPOO</artifactId>
   <version>1.0-SNAPSHOT</version>
 
-  <name>Laboratorio_3--Nicolas_Sebastian</name>
+  <name>GaleriaPOO</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
