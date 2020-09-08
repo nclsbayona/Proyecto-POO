@@ -1,10 +1,10 @@
 package poo.project.Entity;
 
 public class Cliente {
-    long codigoCliente;
-    long cedula;
-    String nombre;
-    String Apellidos;
-    String direccionEntrega;
-    long telefono;
+    private long codigoCliente;
+    private long cedula;
+    private String nombre;
+    private String Apellidos;
+    private String direccionEntrega;
+    private long telefono;
 }
