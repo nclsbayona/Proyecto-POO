@@ -3,6 +3,7 @@
 Pontificia Universidad Javeriana Bogotá D.C 
 
 ## About the Control System of an Art Gallery
+El Sistema
 
 1. Se requiere hacer un programa orientado a objetos que funcionará en una galería de arte.
 
@@ -14,6 +15,7 @@ la información de la compra en si. El pago se realiza físicamente en la galer�
 registrado.
 
 4. En el diagrama de clases UML que se muestra a continuación se observan las clases que intervienen en el problema:
+
 
 
 Menu Funcional:
@@ -28,7 +30,7 @@ Menu Funcional:
 8. Ver listado de Compras existentes
 9. Ver listado de Compras para un mes y año específico insertado por el usuario
 10. Ver listado de Artistas más vendidos
-11. Salir
+11. Salir.
 
 Para este proyecto se solicita implementar las siguientes funcionalidades:
 
