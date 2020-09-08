@@ -16,7 +16,7 @@ registrado.
 
 4. En el diagrama de clases UML que se muestra a continuación se observan las clases que intervienen en el problema:
 
- ![UML](https://octodex.github.com/images/Fintechtocat.png)
+ ![UML](https://i.ibb.co/4NFhFCJ/image.png)
 
 **Menu Funcional:**
 
