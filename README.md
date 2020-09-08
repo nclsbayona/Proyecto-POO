@@ -36,11 +36,11 @@ registrado.
 First Download Java SE 11 
 
 That is a Maven Project
-1. Clone and open whit Eclipse IDE or Intellij IDE.
+1. Clone and open with Eclipse IDE or Intellij IDE.
 2. Configure the project structure to compile on java 11.
 3. Go to src/main/java/poo/project/Control/main.java
 4. Run.
-5. You can also execute the whole project at the same time, in order to do this, you will need to run the command **"mvn exec:java -Dexec.mainClass="poo.project.View.PantallaGaleria"** inside the [ProyectoGaleria](https://github.com/bayona-n/Proyecto-POO/tree/master/ProyectoGaleria) package
+5. You can also execute the whole project at the same time, in order to do this, you will need to run the command **"mvn exec:java -Dexec.mainClass="poo.project.View.PantallaGaleria"** inside the [ProyectoGaleria](https://github.com/bayona-n/Proyecto-POO/tree/master/ProyectoGaleria) package. **Note that you'll need to have Maven installed to be able to perform this**.
 
 ## Main Contributors
 **Alejandro Sacristan** &  **Nicolás Bayona**  & **Juan S. Herrera** &  **Andrés R. Porras.** & **_**
