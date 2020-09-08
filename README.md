@@ -37,16 +37,12 @@ a. Crear la colección de Obras llamada listaObras (método en el controlador �
 de Obra y llena la lista de obras de la clase ControlGaleria. 
 Esta clase sólo existe para no tener que ingresar datos por pantalla de las obras y facilitar la prueba del programa. 
 No obstante, las funcionalidades para insertar, modificar y eliminar una obra deben programarse y funcionar correctamente.
-
 b. La clase GestiónObras también puede llenar la lista de Artistas.
-
 c. Crear la colección de clientes llamada listaClientes (método en el controlador ‘GestionCliente’ que crea
 instancias de Cliente y llena la lista de clientes de la clase ControlGaleria. Esta clase sólo existe para no tener
 que ingresar datos por pantalla de clientes y facilitar la prueba del programa. 
 No obstante, lasfuncionalidades para insertar, modificar y eliminar un cliente deben programarse.
-
 d. La clase ControlGaleria debe invocar en su constructor los métodos anteriores.
-
 
 NOTA: Para los métodos anteriores los objetos se pueden crear con valores literales; en la siguiente entrega esto se
 cambiará por un acceso a archivos del sistema.
@@ -88,13 +84,9 @@ b. Si existe, se deben mostrar los datos de la obra, enumerados, y solicitar el 
 c. No se puede asignar un código de una obra que ya exista, si esto ocurre se muestra un mensaje y no se modifica
 la obra.
 
-
 6. Eliminar una Obra:
-
 a. Solicitar el código de la obra a eliminar, si este no existe, se debe mostrar un mensaje y volver al menú principal.
-
 b. No se puede permitir eliminar una obra que esté asociado a una compra.
-
 c. Se debe mostrar un mensaje de confirmación para eliminar la obra.
 
 ## Usage
