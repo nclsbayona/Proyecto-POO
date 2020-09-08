@@ -45,8 +45,6 @@ That is a Maven Project
 ## Main Contributors
 **Alejandro Sacristan** &  **Nicolás Bayona**  & **Juan S. Herrera** &  **Andrés R. Porras.** & **_**
 
-## Collections usage help diagram
-![Collections diagram](https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/124a207f-4709-47e9-aa32-511436742e64/de4s4vn-9a387b9c-9d93-406b-8755-14abf89a0881.png/v1/fill/w_1280,h_1502,q_80,strp/1_by_beautypie526_de4s4vn-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3siaGVpZ2h0IjoiPD0xNTAyIiwicGF0aCI6IlwvZlwvMTI0YTIwN2YtNDcwOS00N2U5LWFhMzItNTExNDM2NzQyZTY0XC9kZTRzNHZuLTlhMzg3YjljLTlkOTMtNDA2Yi04NzU1LTE0YWJmODlhMDg4MS5wbmciLCJ3aWR0aCI6Ijw9MTI4MCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.-AhUCOQufH95uFO15qNxydlY2s-gtxjvFLj-22DljUs)
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
