@@ -16,32 +16,35 @@ registrado.
 4. En el diagrama de clases UML que se muestra a continuación se observan las clases que intervienen en el problema:
 
 
+Menu Funcional:
 
-6. Ver listado de Clientes registrados en el sistema
-7. Buscar un Cliente
-8. Insertar Cliente
-9. Modificar datos de Cliente
-10. Eliminar un Cliente
-11. Realizar compra de una Obra
-12. Eliminar compra de obra
-13. Ver listado de Compras existentes
-14. Ver listado de Compras para un mes y año específico insertado por el usuario
-15. Ver listado de Artistas más vendidos
-16. Salir
+1. Ver listado de Clientes registrados en el sistema
+2. Buscar un Cliente
+3. Insertar Cliente
+4. Modificar datos de Cliente
+5. Eliminar un Cliente
+6. Realizar compra de una Obra
+7. Eliminar compra de obra
+8. Ver listado de Compras existentes
+9. Ver listado de Compras para un mes y año específico insertado por el usuario
+10. Ver listado de Artistas más vendidos
+11. Salir
 
 Para este proyecto se solicita implementar las siguientes funcionalidades:
 
 1. Al iniciar el día se debe:
-
 a. Crear la colección de Obras llamada listaObras (método en el controlador ‘GestionObras’ que crea instancias
 de Obra y llena la lista de obras de la clase ControlGaleria. 
+
 Esta clase sólo existe para no tener que ingresar datos por pantalla de las obras y facilitar la prueba del programa. 
 No obstante, las funcionalidades para insertar, modificar y eliminar una obra deben programarse y funcionar correctamente.
 b. La clase GestiónObras también puede llenar la lista de Artistas.
+
 c. Crear la colección de clientes llamada listaClientes (método en el controlador ‘GestionCliente’ que crea
-instancias de Cliente y llena la lista de clientes de la clase ControlGaleria. Esta clase sólo existe para no tener
-que ingresar datos por pantalla de clientes y facilitar la prueba del programa. 
+instancias de Cliente y llena la lista de clientes de la clase ControlGaleria. 
+Esta clase sólo existe para no tenerque ingresar datos por pantalla de clientes y facilitar la prueba del programa. 
 No obstante, lasfuncionalidades para insertar, modificar y eliminar un cliente deben programarse.
+
 d. La clase ControlGaleria debe invocar en su constructor los métodos anteriores.
 
 NOTA: Para los métodos anteriores los objetos se pueden crear con valores literales; en la siguiente entrega esto se
@@ -49,7 +52,6 @@ cambiará por un acceso a archivos del sistema.
 
 
 2. Ver listado de Obras disponibles:
-
 a. Se debe mostrar un listado por pantalla que muestra la información básica de una obra que son título, fecha de
 creación, precio de referencia, una foto (la foto será para la entrega 3) y sus dimensiones. Solo deben salir las
 Obras que están disponibles para la Compra.
@@ -61,7 +63,6 @@ cumplan con el criterio de búsqueda.
 
 
 4. Insertar una Obra:
-
 a. Se debe permitir insertar una nueva obra en la lista de obras de la clase ControlGaleria. Para ello debe apoyarse
 en los métodos necesarios de la clase Obra.
 
@@ -75,7 +76,6 @@ d. El código de una obra tiene 7 números. Debe validar que nunca exista una ob
 
 
 5. Modificar una Obra:
-
 a. Se debe solicitar el código de la obra a modificar, si este no existe, se debe mostrar un mensaje y volver al menú
 principal.
 
@@ -84,10 +84,14 @@ b. Si existe, se deben mostrar los datos de la obra, enumerados, y solicitar el 
 c. No se puede asignar un código de una obra que ya exista, si esto ocurre se muestra un mensaje y no se modifica
 la obra.
 
+
 6. Eliminar una Obra:
 a. Solicitar el código de la obra a eliminar, si este no existe, se debe mostrar un mensaje y volver al menú principal.
+
 b. No se puede permitir eliminar una obra que esté asociado a una compra.
+
 c. Se debe mostrar un mensaje de confirmación para eliminar la obra.
+
 
 ## Usage
 Java SE 11 Maven Project
