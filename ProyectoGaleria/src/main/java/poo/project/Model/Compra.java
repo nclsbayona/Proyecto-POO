@@ -1,4 +1,4 @@
-package poo.project.Entity;
+package poo.project.Model;
 
 import java.util.Calendar;
 

@@ -1,4 +1,4 @@
-package poo.project.Entity;
+package poo.project.Model;
 
 public class Cliente {
     private long codigoCliente;
