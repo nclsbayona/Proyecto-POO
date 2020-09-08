@@ -16,7 +16,7 @@ registrado.
 
 4. En el diagrama de clases UML que se muestra a continuación se observan las clases que intervienen en el problema:
 
-
+ ![alt text](https://atoncode.tumblr.com/post/628663072670826496)
 
 Menu Funcional:
 
