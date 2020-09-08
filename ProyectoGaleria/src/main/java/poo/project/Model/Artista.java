@@ -1,8 +1,8 @@
-package poo.project.Entity;
-
+package poo.project.Model;
 import java.util.Calendar;
 
-public class Artista {
+public class Artista 
+{
     private long codigoArtista;
     private long cedula;
     private String nombre;

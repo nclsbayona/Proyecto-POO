@@ -1,6 +1,7 @@
-package poo.project.Entity;
+package poo.project.Model;
 
-public class Cliente {
+public class Cliente 
+{
     private long codigoCliente;
     private long cedula;
     private String nombre;
