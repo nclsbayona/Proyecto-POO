@@ -171,7 +171,7 @@ Java SE 11 Maven Project
 2. 
 
 ## Main Contributors
-Alejandro Sacristan &  Nicolás Bayona  & Juan S. Herrera &  Andrés R. Porras.
+**Alejandro Sacristan** &  **Nicolás Bayona**  & **Juan S. Herrera** &  **Andrés R. Porras.**
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
