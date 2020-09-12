@@ -37,15 +37,30 @@ public class Compra {
 		return this.codigoCompra;
 	}
 
-	public void setCodigoCompra(long codigoCompra) {
+	public void setCodigoCompra(long codigoCompra) 
+	{
 		this.codigoCompra = codigoCompra;
 	}
 
 
-	public Calendar getFecha() {
+	public Calendar getFecha() 
+	{
 		return this.fecha;
 	}
-	public void setF
+	public void setFecha(Calendar fecha)
+	{
+		this.fecha = fecha;
+	}
+
+	public boolean Pagado()
+	{
+		return this.pagado;
+	}
+
+	public void setPagado(boolean pagado)
+	{
+		this.pagado = pagado;
+	}
 
 
 }

@@ -12,7 +12,7 @@ public class Obra {
     private String dimensiones;
 
     // Métodos accesors
-    // Accesor Artista
+    // Accesor Artista proof
     public HashSet<Artista> getArtista() {
         return this.artistas;
     }
