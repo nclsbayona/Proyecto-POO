@@ -12,6 +12,7 @@ public class Obra {
     private String dimensiones;
 
     // Métodos accesors
+    // Accesor Artista
     public HashSet<Artista> getArtista() {
         return this.artistas;
     }
@@ -20,6 +21,7 @@ public class Obra {
         this.artistas = _artista;
     }
 
+    // Accesor CodigoObra
     public long getCodigoObra() {
         return this.codigoObra;
     }
@@ -28,6 +30,7 @@ public class Obra {
         this.codigoObra = _codigoObra;
     }
 
+    // Accesor Titulo
     public String getTitulo() {
         return this.titulo;
     }
@@ -36,14 +39,16 @@ public class Obra {
         this.titulo = _titulo;
     }
 
-    public Calendar getCalendar() {
+    // Accesor Fecha
+    public Calendar getFecha() {
         return this.fecha;
     }
 
-    public void setCalendar(Calendar _fecha) {
+    public void setFecha(Calendar _fecha) {
         this.fecha = _fecha;
     }
 
+    // Accesor Precio
     public float getPrecioRef() {
         return this.precioRef;
     }
@@ -52,11 +57,23 @@ public class Obra {
         this.precioRef = _precioRef;
     }
 
+    // Accesor Dimensiones
     public String getDimensiones() {
         return this.dimensiones;
     }
 
     public void setDimensiones(String _dimensiones) {
         this.dimensiones = _dimensiones;
+    }
+
+    // Constructor
+    public Obra(long _codigoObra, String _titulo, Calendar _fecha, float _precioRef, String _dimensiones) {
+        this.codigoObra = _codigoObra;
+        this.titulo = _titulo;
+        this.fecha = _fecha;
+        this.precioRef = _precioRef;
+        this.dimensiones = _dimensiones;
+        this.artistas = new HashSet<Artista>();
+
     }
 }
