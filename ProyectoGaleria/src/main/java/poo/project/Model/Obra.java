@@ -36,38 +36,23 @@ public class Obra {
     public String getDimensiones() {
         return this.dimensiones;
     }
-    // Accesor Artista proof
 
+    //Setters
     public void setArtista(HashSet<Artista> _artista) {
         this.artistas = _artista;
     }
-
-    // Accesor CodigoObra
-
     public void setCodigoObra(long _codigoObra) {
         this.codigoObra = _codigoObra;
     }
-
-    // Accesor Titulo
-
     public void setTitulo(String _titulo) {
         this.titulo = _titulo;
     }
-
-    // Accesor Fecha
-
     public void setFecha(Calendar _fecha) {
         this.fecha = _fecha;
     }
-
-    // Accesor Precio
-
     public void setPrecioRef(float _precioRef) {
         this.precioRef = _precioRef;
     }
-
-    // Accesor Dimensiones
-
     public void setDimensiones(String _dimensiones) {
         this.dimensiones = _dimensiones;
     }
