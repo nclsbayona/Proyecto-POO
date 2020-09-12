@@ -4,6 +4,6 @@ import poo.project.Model.*;
 import java.util.HashSet;
 public class ControlGaleria
 {
-    HashSet <Obra> obras;
-    HashSet <Cliente> clientes;
+    HashSet <Obra> listaObras;
+    HashSet <Cliente> listaClientes;
 }

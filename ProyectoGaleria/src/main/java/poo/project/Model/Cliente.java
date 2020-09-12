@@ -52,6 +52,12 @@ public class Cliente
         this.Apellidos = Apellidos;
         this.direccionEntrega = direccionEntrega;
         this.telefono = telefono;
-
+    }
+    public String toString()
+    {
+        //identificación, nombre completo, cantidad de personas que lo acompañan y teléfono.
+        String retorno=this.cedula+'\t'+this.nombre+' '+this.Apellidos;
+        /*retorno+='\nLo acompañan: "+this.acompañantes+" personas\tTelefono: "+this.telefono*/;
+        return retorno;
     }
 }

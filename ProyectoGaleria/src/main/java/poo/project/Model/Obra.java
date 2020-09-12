@@ -71,4 +71,11 @@ public class Obra {
         this.dimensiones = _dimensiones;
         this.artistas = new HashSet<Artista>();
     }
+    //Imprimir
+    public String toString()
+    {
+        String impresion;
+        impresion='\t'+this.titulo+"\n"+this.precioRef+'\t'+this.dimensiones;
+        return impresion;
+    }
 }
