@@ -77,11 +77,10 @@ public class Compra {
 	//Argumento Compra solo con codigoCompra
 
 	public Compra(long codigoCompra) {
+
 		this.clientes =  new HashSet<Cliente>();
 		this.obras = new HashSet<Obra>();
 		this.codigoCompra=codigoCompra;
-
-
 
 	}
 
