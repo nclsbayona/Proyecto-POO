@@ -11,10 +11,7 @@ public class Cliente
     private String Apellidos;
     private String direccionEntrega;
     private long telefono;
-
-    //Creacion de Coleccion HashSet
-    Set<Cliente> Coleccion_Cliente = new HashSet<Cliente>();
-
+    
     //Getters
     public long getCodigoCliente() { return codigoCliente; }
     public long getCedula() { return cedula; }
