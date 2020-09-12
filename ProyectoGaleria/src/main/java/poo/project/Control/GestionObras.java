@@ -19,12 +19,12 @@ public class GestionObras {
 
     public Obra buscarObra(Calendar fecha) {
         for (Obra obra : listaObras) {
-            if (obra.getFecha().equals(fecha)) 
+            if (obra.getFecha().equals(fecha)) {
                 System.out.println(obra);
                 return obra;
             }
-        }return null;
-
+        }
+        return null;
     }
     /*
      * public Obra buscarObra(Artista artista) { for (Obra obra : listaObras) { if
@@ -39,6 +39,7 @@ public class GestionObras {
     // Ver listado de obras
     public void verListadoObras() {
         for (Obra obra : listaObras) {
+            System.out.println(obra);
         }
     }
 }
