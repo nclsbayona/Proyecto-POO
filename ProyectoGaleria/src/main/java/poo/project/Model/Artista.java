@@ -76,5 +76,12 @@ public class Artista
     }
     //Constructores
     //Vacío
-    
+    public Artista()
+    {
+        this.obras=new HashSet <Obra> ();
+        //
+    }
+    //
+
+
 }
