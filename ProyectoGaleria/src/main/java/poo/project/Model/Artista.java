@@ -9,4 +9,5 @@ public class Artista
     private String apellidos;
     private Calendar fechaNacimiento;
     private long telefono;
+
 }
