@@ -12,55 +12,61 @@ public class Obra {
     private String dimensiones;
 
     // Métodos accesors
-    // Accesor Artista proof
+    // Getters
     public HashSet<Artista> getArtista() {
         return this.artistas;
     }
+
+    public long getCodigoObra() {
+        return this.codigoObra;
+    }
+
+    public String getTitulo() {
+        return this.titulo;
+    }
+
+    public Calendar getFecha() {
+        return this.fecha;
+    }
+
+    public float getPrecioRef() {
+        return this.precioRef;
+    }
+
+    public String getDimensiones() {
+        return this.dimensiones;
+    }
+    // Accesor Artista proof
 
     public void setArtista(HashSet<Artista> _artista) {
         this.artistas = _artista;
     }
 
     // Accesor CodigoObra
-    public long getCodigoObra() {
-        return this.codigoObra;
-    }
 
     public void setCodigoObra(long _codigoObra) {
         this.codigoObra = _codigoObra;
     }
 
     // Accesor Titulo
-    public String getTitulo() {
-        return this.titulo;
-    }
 
     public void setTitulo(String _titulo) {
         this.titulo = _titulo;
     }
 
     // Accesor Fecha
-    public Calendar getFecha() {
-        return this.fecha;
-    }
 
     public void setFecha(Calendar _fecha) {
         this.fecha = _fecha;
     }
 
     // Accesor Precio
-    public float getPrecioRef() {
-        return this.precioRef;
-    }
 
     public void setPrecioRef(float _precioRef) {
         this.precioRef = _precioRef;
     }
 
     // Accesor Dimensiones
-    public String getDimensiones() {
-        return this.dimensiones;
-    }
 
     public void setDimensiones(String _dimensiones) {
         this.dimensiones = _dimensiones;
