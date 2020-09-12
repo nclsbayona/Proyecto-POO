@@ -64,7 +64,15 @@ public class Compra {
 
 	//Constructores
 
-	public Compra()
+	public Compra(long codigoCompra, Calendar fecha, boolean pagado) {
+		
+		private HashSet<Obra>
+		this.codigoCompra = codigoCompra;
+		this.fecha = fecha;
+		this.pagado = pagado;
+
+
+	}
 
 
 }
