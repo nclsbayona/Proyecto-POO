@@ -23,19 +23,27 @@ public class Compra {
     }
 
     public HashSet<Obra> getObras()
-    {
-        return this.obras;
-    }
+	{
+		return this.obras;
+	}
     public void setObras(HashSet<Obra> obras)
 	{
-		this.obras  =  obras;
+		this.obras = obras;
 	}
 
-	public void getCodigoCompra()
+
+	public long getCodigoCompra()
 	{
 		return this.codigoCompra;
 	}
-	public set 
+
+	public void setCodigoCompra(long codigoCompra) {
+		this.codigoCompra = codigoCompra;
+	}
+
+	public calendar getFpublic Calendar getFecha() {
+	return fecha;
+}
 
 
 }
