@@ -74,6 +74,5 @@ public class Obra {
         this.precioRef = _precioRef;
         this.dimensiones = _dimensiones;
         this.artistas = new HashSet<Artista>();
-
     }
 }
