@@ -75,13 +75,22 @@ public class Artista
         this.fechaNacimiento=fechaNacimiento;
     }
     //Constructores
-    //Vacío
-    public Artista()
+    //Todos los Argumentos
+    public Artista(String nombre, String apellidos, long cedula, long codigoArtista)
     {
         this.obras=new HashSet <Obra> ();
-        //
+        this.nombre=nombre;
+        this.apellidos=apellidos;
+        this.cedula=cedula;
+        this.codigoArtista=codigoArtista;
+    }
+    //Argumentos con algunos menos
+    public Artista(String nombre, String apellidos, long codigoArtista)
+    {
+        this.obras=new HashSet <Obra> ();
+        this.nombre=nombre;
+        this.apellidos=apellidos;
+        this.codigoArtista=codigoArtista;
     }
     //
-
-
 }
