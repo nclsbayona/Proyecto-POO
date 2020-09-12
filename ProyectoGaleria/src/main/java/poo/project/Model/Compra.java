@@ -41,9 +41,11 @@ public class Compra {
 		this.codigoCompra = codigoCompra;
 	}
 
-	public calendar getFpublic Calendar getFecha() {
-	return fecha;
-}
+
+	public Calendar getFecha() {
+		return this.fecha;
+	}
+	public void setF
 
 
 }
