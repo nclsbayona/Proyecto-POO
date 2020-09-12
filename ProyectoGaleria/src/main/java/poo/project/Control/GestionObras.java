@@ -4,6 +4,7 @@ import poo.project.Model.Obra;
 import poo.project.Model.Artista;
 import java.util.HashSet;
 import java.util.Calendar;
+import java.util.HashSet;
 
 public class GestionObras {
 
