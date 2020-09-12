@@ -10,7 +10,7 @@ public class Compra {
 	private Calendar fecha;
 	private boolean pagado;
 
-	//Accessor 
+	//Accessor
 
 	public HashSet<Cliente> getClientes()
     {
@@ -61,6 +61,10 @@ public class Compra {
 	{
 		this.pagado = pagado;
 	}
+
+	//Constructores
+
+	public Compra()
 
 
 }
