@@ -43,11 +43,20 @@ public class Obra {
     public void setCalendar(Calendar _fecha) {
         this.fecha = _fecha;
     }
+
     public float getPrecioRef() {
-        return this.fecha;
+        return this.precioRef;
     }
 
-    public void setCalendar(Calendar _fecha) {
-        this.fecha = _fecha;
+    public void setPrecioRef(float _precioRef) {
+        this.precioRef = _precioRef;
+    }
+
+    public String getDimensiones() {
+        return this.dimensiones;
+    }
+
+    public void setDimensiones(String _dimensiones) {
+        this.dimensiones = _dimensiones;
     }
 }
