@@ -84,7 +84,7 @@ public class Artista
         this.cedula=cedula;
         this.codigoArtista=codigoArtista;
     }
-    //Argumentos con algunos menos
+    //Argumentos con cedula y código
     public Artista(long cedula, long codigoArtista)
     {
         this.obras=new HashSet <Obra> ();

@@ -35,7 +35,7 @@ public class Compra {
 	{
 		return this.codigoCompra;
 	}
-	public
+	public set 
 
 
 }
