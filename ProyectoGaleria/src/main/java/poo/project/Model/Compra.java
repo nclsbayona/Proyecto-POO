@@ -4,8 +4,8 @@ import java.util.HashSet;
 
 public class Compra {
 
-	private HashSet<Cliente> clientes;
-	private HashSet<Obra> obras;
+	private HashSet <Cliente> clientes;
+	private HashSet <Obra> obras;
 	private long codigoCompra;
 	private Calendar fecha;
 	private boolean pagado;
@@ -52,11 +52,11 @@ public class Compra {
 		this.fecha = fecha;
 	}
 
-	public boolean Pagado()
+
+	public boolean getPagado()
 	{
 		return this.pagado;
 	}
-
 	public void setPagado(boolean pagado)
 	{
 		this.pagado = pagado;
@@ -65,11 +65,22 @@ public class Compra {
 	//Constructores
 
 	public Compra(long codigoCompra, Calendar fecha, boolean pagado) {
-		
-		private HashSet<Obra>
+
+		this.clientes = new HashSet <Cliente>();
+		this.obras = new HashSet <Obra>();
 		this.codigoCompra = codigoCompra;
 		this.fecha = fecha;
 		this.pagado = pagado;
+
+	}
+
+	//Argumento Compra solo con codigoCompra
+
+	public Compra(long codigoCompra) {
+		this.clientes =  new HashSet<Cliente>();
+		this.obras = new HashSet<Obra>();
+		this.codigoCompra=codigoCompra;
+
 
 
 	}
