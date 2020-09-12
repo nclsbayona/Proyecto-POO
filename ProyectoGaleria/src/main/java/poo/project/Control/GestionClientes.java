@@ -16,6 +16,7 @@ public class GestionClientes
     //Agregar Cliente
     public Cliente agregarCliente(Cliente cliente)
     {
+        Cliente agregado=null;
         return agregado;
     }
     //Modificar Cliente
