@@ -4,7 +4,6 @@ import poo.project.Model.Obra;
 import poo.project.Model.Artista;
 import java.util.HashSet;
 import java.util.Calendar;
-import java.util.HashSet;
 
 public class GestionObras {
 
@@ -25,6 +24,7 @@ public class GestionObras {
             }
         }
     }
+    //FALTA BUSCAR POR ESTADO 
     /*
      * public Obra buscarObra(Artista artista) { for (Obra obra : listaObras) { if
      * (obra.getArtista() != null) { for (Artista art : obra.getArtista()) { if (art
