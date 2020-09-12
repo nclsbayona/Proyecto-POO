@@ -6,7 +6,7 @@ public class GestionClientes
     //Buscar un cliente
     public Cliente buscarCliente()
     {
-
+        return null;
     }
     //Eliminar Cliente
     public void eliminarCliente(Cliente cliente)
@@ -14,9 +14,9 @@ public class GestionClientes
 
     }
     //Agregar Cliente
-    public Cliente eliminarCliente(Cliente cliente)
+    public Cliente agregarCliente(Cliente cliente)
     {
-
+        return agregado;
     }
     //Modificar Cliente
     public void modificarCliente(Cliente cliente)

@@ -6,4 +6,5 @@ public class ControlGaleria
 {
     HashSet <Obra> listaObras;
     HashSet <Cliente> listaClientes;
+    HashSet <Compra> listaCompras;
 }
