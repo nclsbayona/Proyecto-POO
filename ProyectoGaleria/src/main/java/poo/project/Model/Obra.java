@@ -64,6 +64,11 @@ public class Obra {
 
     // Constructor
     public Obra(long _codigoObra, String _titulo, Calendar _fecha, float _precioRef, String _dimensiones) {
+        //El código de una obra tiene 7 números. Debe validar que nunca exista una obra con más o menos números
+        if (String.valueOf(_codigoObra).length()!=7)
+        {
+            return;
+        }
         this.codigoObra = _codigoObra;
         this.titulo = _titulo;
         this.fecha = _fecha;

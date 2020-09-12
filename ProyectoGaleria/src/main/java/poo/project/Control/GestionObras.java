@@ -7,7 +7,7 @@ import java.util.Calendar;
 
 public class GestionObras {
 
-    //FALTA BUSCAR POR ESTADO 
+    // FALTA BUSCAR POR ESTADO
     public void buscarObra(HashSet<Obra> listaObras, String titulo) {
         for (Obra obra : listaObras) {
             if (obra.getTitulo().equals(titulo)) {
@@ -24,7 +24,7 @@ public class GestionObras {
             }
         }
     }
-    //FALTA BUSCAR POR ESTADO 
+    // FALTA BUSCAR POR ESTADO
     /*
      * public Obra buscarObra(Artista artista) { for (Obra obra : listaObras) { if
      * (obra.getArtista() != null) { for (Artista art : obra.getArtista()) { if (art
@@ -45,10 +45,22 @@ public class GestionObras {
             }
         }
     }
-
+    //Buscar obra por código
+    public boolean buscarObraCodigo(HashSet<Obra> listaObras, long codigo)
+    {
+        for (Obra obra : listaObras)
+       {
+            if(codigo == obra.getCodigoObra()){
+                return true;
+            }
+       }
+        return false;
+    }
     // Crear Obra
     public void crearObra(HashSet<Obra> listaObras, Obra obra) {
-
-        listaObras.add(obra);
+        if (!this.buscarObraCodigo(listaObras, obra.getCodigoObra()))
+        {
+            listaObras.add(obra);
+        }
     }
 }
