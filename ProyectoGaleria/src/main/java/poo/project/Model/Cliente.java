@@ -1,8 +1,5 @@
 package poo.project.Model;
 
-import java.util.HashSet;
-import java.util.Set;
-
 public class Cliente
 {
     private long codigoCliente;
