@@ -11,7 +11,7 @@ public class Cliente
     private String Apellidos;
     private String direccionEntrega;
     private long telefono;
-    
+
     //Getters
     public long getCodigoCliente() { return codigoCliente; }
     public long getCedula() { return cedula; }
