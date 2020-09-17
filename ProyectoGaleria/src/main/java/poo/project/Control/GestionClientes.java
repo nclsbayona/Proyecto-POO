@@ -3,6 +3,20 @@ import poo.project.Model.Cliente;
 import java.util.HashSet;
 public class GestionClientes
 {
+    private HashSet<Cliente> listaClientes;
+
+    public HashSet<Cliente> getListaClientes()
+    {
+		return this.listaClientes;
+	}
+
+    private void setListaClientes(HashSet<Cliente> listaClientes)
+    {
+		this.listaClientes = listaClientes;
+	}
+    public void addListaClientes(HashSet<Cliente> listaCliente){
+        this.setListaClientes((this.listaClientes==null)?listaCliente:this.listaClientes);
+    }
     //Buscar un cliente
     public Cliente buscarCliente()
     {
@@ -14,10 +28,10 @@ public class GestionClientes
 
     }
     //Agregar Cliente
-    public Cliente agregarCliente(Cliente cliente)
+    public Cliente addCliente(Cliente cliente)
     {
-        Cliente agregado=null;
-        return agregado;
+        this.listaClientes.add(cliente);
+        return cliente;
     }
     //Modificar Cliente
     public void modificarCliente(Cliente cliente)

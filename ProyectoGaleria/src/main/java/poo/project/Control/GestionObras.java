@@ -20,6 +20,11 @@ public class GestionObras {
     public void addListaObras(HashSet<Obra> listaObras){
         this.setListaObras((this.listaObras==null)?listaObras:this.listaObras);
     }
+
+    public Obra addObra(Obra obra){
+        this.listaObras.add(obra);
+        return obra;
+    }
     /**/
     /*
     // FALTA BUSCAR POR ESTADO
