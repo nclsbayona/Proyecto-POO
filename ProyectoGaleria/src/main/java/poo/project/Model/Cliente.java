@@ -80,11 +80,11 @@ public class Cliente implements Comparable<Cliente>
         positive integer, if the current object is greater than the specified object.
         negative integer, if the current object is less than the specified object.
         zero, if the current object is equal to the specified object.*/
-        int a=1;
+        int a=-1;
         try {
-            a=(this.codigoCliente<cliente.getCodigoCliente())?1:(this.codigoCliente==cliente.getCodigoCliente())?0:-1;
+            a=(this.codigoCliente<cliente.getCodigoCliente())?-1:(this.codigoCliente==cliente.getCodigoCliente())?0:1;
         } catch (Exception e) {
-            a=1;
+            a=-1;
         }
         return a;
     }
