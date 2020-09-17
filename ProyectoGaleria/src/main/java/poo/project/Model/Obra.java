@@ -81,7 +81,7 @@ public class Obra {
     public String toString()
     {
         String impresion;
-        impresion='\t'+this.titulo+":\t"+this.precioRef+'\t'+this.dimensiones;
+        impresion='\t'+this.titulo+":\t$"+this.precioRef+'\t'+this.dimensiones;
         return impresion;
     }
     //Equals
