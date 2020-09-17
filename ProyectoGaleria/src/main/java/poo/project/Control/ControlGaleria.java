@@ -70,8 +70,8 @@ public class ControlGaleria
         GestionClientes gc=controlGaleria.gestionClientes;
         Cliente pruebasClientes[]=new Cliente[4];
         pruebasClientes[0]=new Cliente(1, 14223, "Alfredo", "Santamaria", "2085 NW Traverse Street", 6543212);
-        pruebasClientes[1]=new Cliente(3, 12933, "Fred", "Jones", "20822 SW Luxury Park", 98765432);
-        pruebasClientes[2]=new Cliente(4, 11837, "Juan", "Acosta", "Calle 100 #20-29", 3208426);
+        pruebasClientes[1]=new Cliente(5, 12933, "Fred", "Jones", "20822 SW Luxury Park", 98765432);
+        pruebasClientes[2]=new Cliente(6, 11837, "Juan", "Acosta", "Calle 100 #20-29", 3208426);
         gc.addCliente(pruebasClientes[0]);
         gc.addCliente(pruebasClientes[1]);
         controlGaleria.printClientes();
