@@ -1,6 +1,6 @@
 package poo.project.Model;
 
-public class Cliente
+public class Cliente implements Comparable<Cliente>
 {
     private long codigoCliente;
     private long cedula;
@@ -73,5 +73,19 @@ public class Cliente
     @Override
     public int hashCode(){
             return (int)this.codigoCliente;
+    }
+    @Override
+    public int compareTo(Object obj){
+        /*It is used to compare the current object with the specified object. It returns
+        positive integer, if the current object is greater than the specified object.
+        negative integer, if the current object is less than the specified object.
+        zero, if the current object is equal to the specified object.*/
+        int a=-1;
+        try {
+            Cliente cliente=(Cliente)obj;
+            a=(this.codigoCliente<cliente.getCodigoCliente())?-1:(this.codigoCliente==cliente.getCodigoCliente())?0:1;
+        } catch (Exception e) {
+            return a;
+        }
     }
 }
