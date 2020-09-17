@@ -66,8 +66,10 @@ public class ControlGaleria
     public static void main(String [] args){
         ControlGaleria controlGaleria=new ControlGaleria();
         //Se supone que añado un cliente a la lista de clientes de GestionClientes
+        //Los clientes se organizan por su código de cliente
         GestionClientes gc=controlGaleria.gestionClientes;
-        gc.addCliente(new Cliente(1, 123, "Alfredo", "Santamaria", "20855 NW Traverse Street", 43352482));
+        gc.addCliente(new Cliente(1, 14223, "Alfredo", "Santamaria", "20855 NW Traverse Street", 43352482));
+        gc.addCliente(new Cliente(2, 12933, "Fred", "Jones", "20822 SW Luxury Park", 82682638));
         //Ahora imprimo la lista desde el control como tal
         controlGaleria.printClientes();
     }

@@ -94,4 +94,8 @@ public class Obra {
             return false;
         }
     }
+    @Override
+    public int hashCode(){
+            return (int)this.codigoObra;
+    }
 }

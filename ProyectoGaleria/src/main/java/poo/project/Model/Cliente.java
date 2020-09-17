@@ -65,9 +65,13 @@ public class Cliente
     public boolean equals(Object obj){
         try{
             Cliente c=(Cliente)(obj);
-            return (this.cedula==c.cedula)?true:false;
+            return (this.codigoCliente==c.codigoCliente)?true:false;
         }catch(Exception e){
             return false;
         }
+    }
+    @Override
+    public int hashCode(){
+            return (int)this.codigoCliente;
     }
 }

@@ -5,7 +5,7 @@ import poo.project.Model.Artista;
 import java.util.HashSet;
 
 public class GestionObras {
-    /*/*Preguntar si se puede o no tener la misma tanto en control galeria como acá, en cuyo caso se pueden
+    /*Preguntar si se puede o no tener la misma tanto en control galeria como acá, en cuyo caso se pueden
     quitar estos comentarios y texto basura y el de control galería*/
     private HashSet<Obra> listaObras;
 
