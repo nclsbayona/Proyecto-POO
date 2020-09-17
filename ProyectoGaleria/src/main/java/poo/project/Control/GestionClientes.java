@@ -57,7 +57,8 @@ public class GestionClientes
         cliente.setCodigoCliente(codigoCliente);
         TreeSet<Cliente> nuevo=new TreeSet<Cliente>();
         nuevo.addAll(this.listaClientes);
-        HashSet<Cliente> nuevo2=new HashSet<Cliente>(nuevo);
+        HashSet<Cliente> nuevo2=new HashSet<Cliente>();
+        nuevo2.addAll(nuevo);
         this.listaClientes=nuevo2;
     }
     //Modificar Cliente conociendo su codigoCliente actual
