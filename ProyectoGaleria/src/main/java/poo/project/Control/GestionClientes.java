@@ -41,7 +41,6 @@ public class GestionClientes
     {
         Cliente cliente=this.buscarCliente(codigoCliente);
         this.listaClientes.remove(cliente);
-        cliente=null;
     }
     //Agregar Cliente
     public Cliente addCliente(Cliente cliente)
