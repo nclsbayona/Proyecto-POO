@@ -74,7 +74,6 @@ public class Cliente implements Comparable<Cliente>
     public int hashCode(){
             return (int)this.codigoCliente;
     }
-    @Override
     public int compareTo(Object obj){
         /*It is used to compare the current object with the specified object. It returns
         positive integer, if the current object is greater than the specified object.
@@ -85,7 +84,8 @@ public class Cliente implements Comparable<Cliente>
             Cliente cliente=(Cliente)obj;
             a=(this.codigoCliente<cliente.getCodigoCliente())?-1:(this.codigoCliente==cliente.getCodigoCliente())?0:1;
         } catch (Exception e) {
-            return a;
+            a=-1;
         }
+        return a;
     }
 }
