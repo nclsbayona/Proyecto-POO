@@ -55,7 +55,8 @@ public class GestionClientes
     public void modificarCliente(Cliente cliente, long codigoCliente)
     {
         cliente.setCodigoCliente(codigoCliente);
-        TreeSet<Cliente> nuevo=new TreeSet<Cliente>(this.listaClientes);
+        TreeSet<Cliente> nuevo=new TreeSet<Cliente>();
+        nuevo.addAll(this.listaClientes);
         HashSet<Cliente> nuevo2=new HashSet<Cliente>(nuevo);
         this.listaClientes=nuevo2;
     }
