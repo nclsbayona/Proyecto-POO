@@ -52,7 +52,7 @@ public class GestionClientes
     public void modificarCliente(Cliente cliente, long codigoCliente)
     {
         cliente.setCodigoCliente(codigoCliente);
-        HashSet<Cliente> nuevo=(HashSet<Cliente>) this.listaClientes.clone()
+        HashSet<Cliente> nuevo=(HashSet<Cliente>) this.listaClientes.clone();
         this.listaClientes=nuevo;
         nuevo=null;
     }
