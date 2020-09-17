@@ -1,5 +1,5 @@
 package poo.project.Control;
-import poo.project.Model.Cliente;
+import poo.project.Model.Cliente;s
 import java.util.HashSet;
 public class GestionClientes
 {
