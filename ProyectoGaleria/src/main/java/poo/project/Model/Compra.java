@@ -70,7 +70,16 @@ public class Compra {
 
 		this.codigoCompra=codigoCompra;
 	}
-
+	//Equals
+    @Override
+    public boolean equals(Object obj){
+        try{
+            Compra o=(Compra)(obj);
+            return (this.codigoCompra==o.codigoCompra)?true:false;
+        }catch(Exception e){
+            return false;
+        }
+    }
 
 }
 

@@ -91,5 +91,13 @@ public class Artista
         this.cedula=cedula;
         this.codigoArtista=codigoArtista;
     }
-    //
+    @Override
+    public boolean equals(Object obj){
+        try{
+            Artista c=(Artista)(obj);
+            return (this.cedula==c.cedula)?true:false;
+        }catch(Exception e){
+            return false;
+        }
+    }
 }
