@@ -60,7 +60,7 @@ public class GestionClientes
         System.out.println(nuevo);
         HashSet<Cliente> nuevo2=new HashSet<Cliente>();
         nuevo2.addAll(nuevo);
-        this.listaClientes=nuevo2;
+        this.setListaClientes(nuevo2);
     }
     //Modificar Cliente conociendo su codigoCliente actual
     public void modificarCliente(long codigoCliente, long codigoCliente2)
