@@ -3,10 +3,25 @@ package poo.project.Control;
 import poo.project.Model.Obra;
 import poo.project.Model.Artista;
 import java.util.HashSet;
-import java.util.Calendar;
 
 public class GestionObras {
+    /*/*Preguntar si se puede o no tener la misma tanto en control galeria como acá, en cuyo caso se pueden
+    quitar estos comentarios y texto basura y el de control galería*/
+    private HashSet<Obra> listaObras;
 
+    public HashSet<Obra> getListaObras() {
+        return this.listaObras;
+    }
+
+    private void setListaObras(HashSet<Obra> listaObras) {
+        this.listaObras = listaObras;
+    }
+    
+    public void addListaObras(HashSet<Obra> listaObras){
+        this.setListaObras((this.listaObras==null)?listaObras:this.listaObras);
+    }
+    /**/
+    /*
     // FALTA BUSCAR POR ESTADO
     public void buscarObra(HashSet<Obra> listaObras, String titulo) {
         for (Obra obra : listaObras) {
@@ -34,12 +49,13 @@ public class GestionObras {
      * 
      * } } }
      */
-
+    /*
     // Ver listado de obras
     public void verListadoObras(HashSet<Obra> listaObras) {
         for (Obra obra : listaObras) {
         //Solo deben salir las Obras que están disponibles para la Compra
-            if(/*Puede ser estado o puede ser una búsqueda*/)
+        //Puede ser estado o puede ser una búsqueda
+            if()
             {
                 System.out.println(obra);
             }
@@ -62,5 +78,5 @@ public class GestionObras {
         {
             listaObras.add(obra);
         }
-    }
+    }*/
 }
