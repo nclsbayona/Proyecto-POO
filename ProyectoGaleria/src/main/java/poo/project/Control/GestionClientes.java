@@ -34,11 +34,14 @@ public class GestionClientes
     public void eliminarCliente(Cliente cliente)
     {
         this.listaClientes.remove(cliente);
+        cliente=null;
     }
-    //Eliminar Cliente con el codigoCliente
+    //Eliminar Cliente conociendo el codigoCliente
     public void eliminarCliente(long codigoCliente)
     {
-        this.listaClientes.remove(this.buscarCliente(codigoCliente));
+        Cliente cliente=this.buscarCliente(codigoCliente);
+        this.listaClientes.remove(cliente);
+        cliente=null;
     }
     //Agregar Cliente
     public Cliente addCliente(Cliente cliente)
@@ -50,5 +53,10 @@ public class GestionClientes
     public void modificarCliente(Cliente cliente, long codigoCliente)
     {
         cliente.setCodigoCliente(codigoCliente);
+    }
+    //Modificar Cliente conociendo su codigoCliente actual
+    public void modificarCliente(long codigoCliente, long codigoCliente2)
+    {
+        this.buscarCliente(codigoCliente).setCodigoCliente(codigoCliente2);
     }
 }

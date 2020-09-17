@@ -68,8 +68,11 @@ public class ControlGaleria
         //Se supone que añado un cliente a la lista de clientes de GestionClientes
         //Los clientes se organizan por su código de cliente
         GestionClientes gc=controlGaleria.gestionClientes;
-        gc.addCliente(new Cliente(1, 14223, "Alfredo", "Santamaria", "20855 NW Traverse Street", 6543212));
-        gc.addCliente(new Cliente(2, 12933, "Fred", "Jones", "20822 SW Luxury Park", 9876543));
+        Cliente pruebasClientes[]=new Cliente[4];
+        pruebasClientes[0]=new Cliente(1, 14223, "Alfredo", "Santamaria", "2085 NW Traverse Street", 6543212);
+        pruebasClientes[1]=new Cliente(2, 12933, "Fred", "Jones", "20822 SW Luxury Park", 98765432);
+        gc.addCliente(pruebasClientes[0]);
+        gc.addCliente(pruebasClientes[1]);
         //Las obras se organizan por su codigo de obras
         //Los artistas se organizan por su codigo de artistas
         //Las compras se organizan por su codigo de obra
