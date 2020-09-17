@@ -55,11 +55,11 @@ public class GestionObras {
     public void verListadoObras(HashSet<Obra> listaObras) {
         for (Obra obra : listaObras) {
         //Solo deben salir las Obras que están disponibles para la Compra
-        //Puede ser estado o puede ser una búsqueda
-            if()
+        //Puede ser estado o puede ser una búsqueda, mejor preguntemosle al profe. No la vayamos a cagar :D
+            /*if()
             {
                 System.out.println(obra);
-            }
+            }*/
         }
     }
     //Buscar obra por código
