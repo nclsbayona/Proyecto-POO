@@ -79,6 +79,10 @@ public class Compra {
         }catch(Exception e){
             return false;
         }
+	}
+	@Override
+    public int hashCode(){
+            return (int)this.codigoCompra;
     }
 
 }
