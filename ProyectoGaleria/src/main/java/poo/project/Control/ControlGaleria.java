@@ -53,6 +53,11 @@ public class ControlGaleria
         for (Cliente cliente:this.listaClientes)
             System.out.println(cliente);
     }
+    public void printCompras(){
+        System.out.println("Imprimiendo la lista de Compras:");
+        for (Compra compra:this.listaCompras)
+            System.out.println(compra);
+    }
     public void printObras(){
         System.out.println("Imprimiendo la lista de Obras:");
         for (Obra obra:this.listaObras)
