@@ -76,6 +76,7 @@ public class ControlGaleria
         controlGaleria.printClientes();
         gc.eliminarCliente(pruebasClientes[0]);
         //Ahora imprimo la lista desde el control como tal
+        System.out.println();
         controlGaleria.printClientes();
         //Las obras se organizan por su codigo de obras
         //Los artistas se organizan por su codigo de artistas
