@@ -20,13 +20,25 @@ public class GestionClientes
     //Buscar un cliente
     public Cliente buscarCliente(long codigoCliente)
     {
-        
-        return null;
+        Cliente cliente2=null;
+        for (Cliente cliente:this.listaClientes)
+        {
+            if (cliente.getCodigoCliente()==codigoCliente)
+            {
+                cliente2=cliente;
+            }
+        }
+        return cliente2;
     }
     //Eliminar Cliente
     public void eliminarCliente(Cliente cliente)
     {
-
+        this.listaClientes.remove(cliente);
+    }
+    //Eliminar Cliente con el codigoCliente
+    public void eliminarCliente(long codigoCliente)
+    {
+        this.listaClientes.remove(this.buscarCliente(codigoCliente));
     }
     //Agregar Cliente
     public Cliente addCliente(Cliente cliente)
@@ -35,8 +47,8 @@ public class GestionClientes
         return cliente;
     }
     //Modificar Cliente
-    public void modificarCliente(Cliente cliente)
+    public void modificarCliente(Cliente cliente, long codigoCliente)
     {
-
+        cliente.setCodigoCliente(codigoCliente);
     }
 }
