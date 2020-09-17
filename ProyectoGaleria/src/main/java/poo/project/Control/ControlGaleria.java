@@ -73,6 +73,10 @@ public class ControlGaleria
         pruebasClientes[1]=new Cliente(2, 12933, "Fred", "Jones", "20822 SW Luxury Park", 98765432);
         gc.addCliente(pruebasClientes[0]);
         gc.addCliente(pruebasClientes[1]);
+        controlGaleria.printClientes();
+        gc.eliminarCliente(pruebasClientes[0]);
+        //Ahora imprimo la lista desde el control como tal
+        controlGaleria.printClientes();
         //Las obras se organizan por su codigo de obras
         //Los artistas se organizan por su codigo de artistas
         //Las compras se organizan por su codigo de obra
