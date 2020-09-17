@@ -77,10 +77,21 @@ public class Obra {
         this.artistas = new HashSet<Artista>();
     }
     //Imprimir
+    @Override
     public String toString()
     {
         String impresion;
         impresion='\t'+this.titulo+"\n"+this.precioRef+'\t'+this.dimensiones;
         return impresion;
+    }
+    //Equals
+    @Override
+    public boolean equals(Object obj){
+        try{
+            Obra o=(Obra)(obj);
+            return (this.codigoObra==o.codigoObra)?true:false;
+        }catch(Exception e){
+            return false;
+        }
     }
 }

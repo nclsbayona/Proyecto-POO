@@ -53,11 +53,21 @@ public class Cliente
         this.direccionEntrega = direccionEntrega;
         this.telefono = telefono;
     }
+    @Override
     public String toString()
     {
         //identificación, nombre completo, cantidad de personas que lo acompañan y teléfono.
         String retorno=this.cedula+"\t\t"+this.nombre+' '+this.Apellidos;
         /*retorno+='\nLo acompañan: "+this.acompañantes+" personas\tTelefono: "+this.telefono*/;
         return retorno;
+    }
+    @Override
+    public boolean equals(Object obj){
+        try{
+            Cliente c=(Cliente)(obj);
+            return (this.cedula==c.cedula)?true:false;
+        }catch(Exception e){
+            return false;
+        }
     }
 }
