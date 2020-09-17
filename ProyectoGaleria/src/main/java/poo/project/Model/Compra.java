@@ -1,37 +1,32 @@
 package poo.project.Model;
 import java.util.Calendar;
-import java.util.HashSet;
 
 public class Compra {
 
-	private HashSet <Cliente> clientes;
-	private HashSet <Obra> obras;
+	private Cliente cliente;
+	private Obra obra;
 	private long codigoCompra;
 	private Calendar fecha;
 	private boolean pagado;
 
-	//Accessor
-
-	public HashSet<Cliente> getClientes()
-    {
-		return this.clientes;
-    }
-
-	public void setClientes()
-	{
-		this.clientes = clientes;
-    }
-
-    public HashSet<Obra> getObras()
-	{
-		return this.obras;
-	}
-    public void setObras(HashSet<Obra> obras)
-	{
-		this.obras = obras;
+	//Accessors
+	//Cliente
+	public Cliente getCliente() {
+		return this.cliente;
 	}
 
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+	//Obra
+	public Obra getObra() {
+		return this.obra;
+	}
 
+	public void setObra(Obra obra) {
+		this.obra = obra;
+	}	
+	//Codigo compra
 	public long getCodigoCompra()
 	{
 		return this.codigoCompra;
@@ -42,7 +37,7 @@ public class Compra {
 		this.codigoCompra = codigoCompra;
 	}
 
-
+	//Fecha
 	public Calendar getFecha() 
 	{
 		return this.fecha;
@@ -52,7 +47,7 @@ public class Compra {
 		this.fecha = fecha;
 	}
 
-
+	//Pagado
 	public boolean getPagado()
 	{
 		return this.pagado;
@@ -63,25 +58,17 @@ public class Compra {
 	}
 
 	//Constructores
-
 	public Compra(long codigoCompra, Calendar fecha, boolean pagado) {
-
-		this.clientes = new HashSet <Cliente>();
-		this.obras = new HashSet <Obra>();
 		this.codigoCompra = codigoCompra;
 		this.fecha = fecha;
 		this.pagado = pagado;
-
 	}
 
 	//Argumento Compra solo con codigoCompra
 
 	public Compra(long codigoCompra) {
 
-		this.clientes =  new HashSet<Cliente>();
-		this.obras = new HashSet<Obra>();
 		this.codigoCompra=codigoCompra;
-
 	}
 
 
