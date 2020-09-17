@@ -102,6 +102,6 @@ public class Artista
     }
     @Override
     public int hashCode(){
-            return (int)this.codigoArtista;
+        return (int)this.codigoArtista;
     }
 }
