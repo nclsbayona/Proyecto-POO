@@ -100,4 +100,8 @@ public class Artista
             return false;
         }
     }
+    @Override
+    public int hashCode(){
+            return (int)this.codigoArtista;
+    }
 }

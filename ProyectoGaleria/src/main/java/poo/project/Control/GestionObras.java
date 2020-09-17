@@ -1,9 +1,8 @@
 package poo.project.Control;
-
 import poo.project.Model.Obra;
 import poo.project.Model.Artista;
 import java.util.HashSet;
-
+import java.util.Calendar;
 public class GestionObras {
     /*Preguntar si se puede o no tener la misma tanto en control galeria como acá, en cuyo caso se pueden
     quitar estos comentarios y texto basura y el de control galería*/
@@ -25,10 +24,8 @@ public class GestionObras {
         this.listaObras.add(obra);
         return obra;
     }
-    /**/
-    /*
     // FALTA BUSCAR POR ESTADO
-    public void buscarObra(HashSet<Obra> listaObras, String titulo) {
+    public void buscarObra(String titulo) {
         for (Obra obra : listaObras) {
             if (obra.getTitulo().equals(titulo)) {
                 System.out.println(obra);
@@ -37,8 +34,8 @@ public class GestionObras {
     }
 
     // BUSCAR SOLO POR AÑO- ME FALTA ESO-Y BUSCAR ESTADO
-    public void buscarObra(HashSet<Obra> listaObras, Calendar fecha) {
-        for (Obra obra : listaObras) {
+    public void buscarObra(Calendar fecha) {
+        for (Obra obra : this.listaObras) {
             if (obra.getFecha().equals(fecha)) {
                 System.out.println(obra);
             }
@@ -54,7 +51,6 @@ public class GestionObras {
      * 
      * } } }
      */
-    /*
     // Ver listado de obras
     public void verListadoObras(HashSet<Obra> listaObras) {
         for (Obra obra : listaObras) {
@@ -83,5 +79,5 @@ public class GestionObras {
         {
             listaObras.add(obra);
         }
-    }*/
+    }
 }

@@ -70,6 +70,9 @@ public class ControlGaleria
         GestionClientes gc=controlGaleria.gestionClientes;
         gc.addCliente(new Cliente(1, 14223, "Alfredo", "Santamaria", "20855 NW Traverse Street", 43352482));
         gc.addCliente(new Cliente(2, 12933, "Fred", "Jones", "20822 SW Luxury Park", 82682638));
+        //Las obras se organizan por su codigo de obras
+        //Los artistas se organizan por su codigo de artistas
+        //Las compras se organizan por su codigo de obra
         //Ahora imprimo la lista desde el control como tal
         controlGaleria.printClientes();
     }

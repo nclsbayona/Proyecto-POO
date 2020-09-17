@@ -18,8 +18,9 @@ public class GestionClientes
         this.setListaClientes((this.listaClientes==null)?listaCliente:this.listaClientes);
     }
     //Buscar un cliente
-    public Cliente buscarCliente()
+    public Cliente buscarCliente(long codigoCliente)
     {
+        
         return null;
     }
     //Eliminar Cliente
