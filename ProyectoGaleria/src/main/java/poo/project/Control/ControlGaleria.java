@@ -70,13 +70,21 @@ public class ControlGaleria
         GestionClientes gc=controlGaleria.gestionClientes;
         Cliente pruebasClientes[]=new Cliente[4];
         pruebasClientes[0]=new Cliente(1, 14223, "Alfredo", "Santamaria", "2085 NW Traverse Street", 6543212);
-        pruebasClientes[1]=new Cliente(2, 12933, "Fred", "Jones", "20822 SW Luxury Park", 98765432);
+        pruebasClientes[1]=new Cliente(3, 12933, "Fred", "Jones", "20822 SW Luxury Park", 98765432);
+        pruebasClientes[2]=new Cliente(4, 11837, "Juan", "Acosta", "Calle 100 #20-29", 3208426);
         gc.addCliente(pruebasClientes[0]);
         gc.addCliente(pruebasClientes[1]);
         controlGaleria.printClientes();
-        gc.eliminarCliente(2);
+        gc.eliminarCliente(1);
         //Ahora imprimo la lista desde el control como tal
         System.out.println();
+        controlGaleria.printClientes();
+        System.out.println();
+        gc.addCliente(pruebasClientes[3]);
+        System.out.println();
+        controlGaleria.printClientes();
+        System.out.println();
+        gc.modificarCliente(pruebasClientes[3], 2);
         //Las obras se organizan por su codigo de obras
         //Los artistas se organizan por su codigo de artistas
         //Las compras se organizan por su codigo de obra

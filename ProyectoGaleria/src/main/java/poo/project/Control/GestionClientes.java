@@ -40,8 +40,6 @@ public class GestionClientes
     public void eliminarCliente(long codigoCliente)
     {
         Cliente cliente=this.buscarCliente(codigoCliente);
-        System.out.println(cliente);
-        System.out.println(this.listaClientes.contains(cliente));
         this.listaClientes.remove(cliente);
     }
     //Agregar Cliente
