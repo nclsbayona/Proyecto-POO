@@ -63,6 +63,7 @@ public class GestionClientes
         System.out.println(nuevo2);
         this.listaClientes=null;
         this.setListaClientes(nuevo2);
+        System.out.println(this.listaClientes);
     }
     //Modificar Cliente conociendo su codigoCliente actual
     public void modificarCliente(long codigoCliente, long codigoCliente2)
