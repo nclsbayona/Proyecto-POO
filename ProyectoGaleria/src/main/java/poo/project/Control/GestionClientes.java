@@ -57,11 +57,8 @@ public class GestionClientes
         cliente.setCodigoCliente(codigoCliente);
         TreeSet<Cliente> nuevo=new TreeSet<Cliente>();
         nuevo.addAll(this.listaClientes);
-        System.out.println(nuevo);
         HashSet<Cliente> nuevo2=new HashSet<Cliente>();
         nuevo2.addAll(nuevo);
-        System.out.println(nuevo2);
-        this.listaClientes=null;
         this.setListaClientes(nuevo2);
         System.out.println(this.listaClientes);
     }
