@@ -5,17 +5,21 @@ import java.util.Scanner;
 import java.util.TreeSet;
 public class GestionClientes
 {
+    //Accessors
+    //listaClientes
     private HashSet<Cliente> listaClientes;
 
     public HashSet<Cliente> getListaClientes()
     {
 		return this.listaClientes;
 	}
-
+    //Es privado para evitar que se modifique fuera de esta clase
+    //debe pasar por el método de addListaClientes
     private void setListaClientes(HashSet<Cliente> listaClientes)
     {
 		this.listaClientes = listaClientes;
-	}
+    }
+    //Este método addListaClientes no permite que sobreescriba mi set si ya existe
     public void addListaClientes(HashSet<Cliente> listaCliente){
         this.setListaClientes((this.listaClientes==null)?listaCliente:this.listaClientes);
     }
@@ -30,7 +34,7 @@ public class GestionClientes
                 cliente2=cliente;
             }
         }
-        this.organizarLista();
+        this.organizarListaClientes();
         return cliente2;
     }
     //Buscar un cliente por cedula
@@ -44,7 +48,7 @@ public class GestionClientes
                 cliente2=cliente;
             }
         }
-        this.organizarLista();
+        this.organizarListaClientes();
         return cliente2;
     }
     //Eliminar Cliente
@@ -64,14 +68,14 @@ public class GestionClientes
         }
         //El scanner causa problemas, por eso esto no sigue su rumbo normal
         this.listaClientes.remove(cliente);
-        this.organizarLista();
+        this.organizarListaClientes();
         scan.close();
     }
     //Agregar Cliente
     public Cliente addCliente(Cliente cliente)
     {
         this.listaClientes.add(cliente);
-        this.organizarLista();
+        this.organizarListaClientes();
         return cliente;
     }
     //Modificar Cliente
@@ -109,7 +113,7 @@ public class GestionClientes
             case 2:
                 System.out.print("Ingrese la cedula nueva: ");
                 long cedula2=sc.nextLong();
-                if(this.buscarCliente(cedula2, "w")!=null)
+                if(this.buscarCliente(cedula2, "cedula")!=null)
                 {
                     System.out.println("Ya existe un cliente con esa cedula");
                     sc.close();
@@ -144,10 +148,11 @@ public class GestionClientes
         }
         sc.close();
         sc=null;
-        this.organizarLista();
+        this.organizarListaClientes();
         //System.out.println(this.listaClientes);
     }
-    public void organizarLista(){
+    //Organizar la lista (Para mantener un orden)
+    public void organizarListaClientes(){
         TreeSet<Cliente> nuevo=new TreeSet<Cliente>();
         nuevo.addAll(this.listaClientes);
         this.listaClientes.clear();

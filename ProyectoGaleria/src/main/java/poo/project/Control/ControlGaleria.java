@@ -8,7 +8,9 @@ public class ControlGaleria
     private HashSet<Compra> listaCompras;
     private GestionObras gestionObras;
     private GestionClientes gestionClientes;
-
+    //Métodos
+    //Accessors
+    //ListaObras
     public HashSet<Obra> getListaObras() {
         return this.listaObras;
     }
@@ -16,7 +18,7 @@ public class ControlGaleria
     public void setListaObras(HashSet<Obra> listaObras) {
         this.listaObras = listaObras;
     }
-
+    //gestionClientes
     public GestionClientes getGestionClientes() {
         return this.gestionClientes;
     }
@@ -24,7 +26,7 @@ public class ControlGaleria
     public void setGestionClientes(GestionClientes gestionClientes) {
         this.gestionClientes = gestionClientes;
     }
-
+    //listaClientes
     public HashSet<Cliente> getListaClientes() {
         return this.listaClientes;
     }
@@ -32,7 +34,7 @@ public class ControlGaleria
     public void setListaClientes(HashSet<Cliente> listaClientes) {
         this.listaClientes = listaClientes;
     }
-
+    //listaCompras
     public HashSet<Compra> getListaCompras() {
         return this.listaCompras;
     }
@@ -40,7 +42,7 @@ public class ControlGaleria
     public void setListaCompras(HashSet<Compra> listaCompras) {
         this.listaCompras = listaCompras;
     }
-
+    //gestionObras
     public GestionObras getGestionObras() {
         return this.gestionObras;
     }
@@ -48,21 +50,25 @@ public class ControlGaleria
     public void setGestionObras(GestionObras gestionObras) {
         this.gestionObras = gestionObras;
     }
+    //Imprimir listaClientes
     public void printClientes(){
         System.out.println("Imprimiendo la lista de Clientes:");
         for (Cliente cliente:this.listaClientes)
             System.out.println(cliente);
     }
+    //Imprimir listaCompras
     public void printCompras(){
         System.out.println("Imprimiendo la lista de Compras:");
         for (Compra compra:this.listaCompras)
             System.out.println(compra);
     }
+    //Imprimir listaObras
     public void printObras(){
         System.out.println("Imprimiendo la lista de Obras:");
         for (Obra obra:this.listaObras)
             System.out.println(obra);
     }
+    //Main (Solo para probar que todo funcione bien)
     public static void main(String [] args){
         ControlGaleria controlGaleria=new ControlGaleria();
         //Se supone que añado un cliente a la lista de clientes de GestionClientes
@@ -77,25 +83,27 @@ public class ControlGaleria
         gc.addCliente(pruebasClientes[1]);
         //Ahora imprimo la lista desde el control como tal
         controlGaleria.printClientes();
+        //Son el mismo objeto entonces, lo que pasa es que muestro aquí todo lo que ejecute en gestionObras
         //Si eliminan este comentario veran lo que les digo, el scan causa problemas
         //gc.eliminarCliente();
         gc.addCliente(pruebasClientes[2]);
-        System.err.println("Antes de poner al 3: "+controlGaleria.getListaClientes());
         gc.addCliente(pruebasClientes[3]);
-        System.err.println("Despues de poner al 3: "+controlGaleria.getListaClientes());
         gc.modificarCliente();
         //Las obras se organizan por su codigo de obras
         //Los artistas se organizan por su codigo de artistas
         //Las compras se organizan por su codigo de obra
-        //Ahora imprimo la lista desde el control como tal
+        //Ahora imprimo la lista desde el control como tal, pueden cambiar el codigoCliente y se actualiza todo
         controlGaleria.printClientes();
     }
+    //Constructor
     public ControlGaleria(){
         this.gestionClientes=new GestionClientes();
         this.gestionObras=new GestionObras();
         this.listaClientes=new HashSet<Cliente>();
         this.listaCompras=new HashSet<Compra>();
         this.listaObras=new HashSet<Obra>();
+        //Exactamente aquí estoy diciendo que mi objeto de gestion obras y el de gestion cliente tienen 
+        //acceso a mi listaObras de aquí, por eso se modifican las de aquí allá
         this.gestionObras.addListaObras(this.listaObras);
         this.gestionClientes.addListaClientes(this.listaClientes);
     }

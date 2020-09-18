@@ -71,7 +71,7 @@ public class Cliente implements Comparable<Cliente>
     public boolean equals(Object obj){
         try{
             Cliente c=(Cliente)(obj);
-            return (this.codigoCliente==c.getCodigoCliente())?true:false;
+            return (this.codigoCliente==c.getCodigoCliente()||this.cedula==c.getCedula())?true:false;
         }catch(Exception e){
             return false;
         }
