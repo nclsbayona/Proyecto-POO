@@ -76,6 +76,7 @@ public class GestionClientes
         System.out.println();
         System.out.print("Ingrese el codigo del cliente a modificar: ");
         respuesta=sc.nextLong();
+        String r2=String.valueOf(respuesta);
         cliente=this.buscarCliente(respuesta);
         if (cliente==null){
             System.out.println("El cliente no existe, vuelva a intentarlo");
@@ -87,7 +88,7 @@ public class GestionClientes
             System.out.print("Ingrese numero de atributo a modificar: ");
             respuesta=sc.nextInt();
         } while(respuesta>6||respuesta<0);
-        switch (respuesta){
+        switch (r2){
             case 1:
                 System.out.print("Ingrese el codigo nuevo: ");
                 long codigoCliente2=sc.nextLong();
@@ -129,6 +130,8 @@ public class GestionClientes
                 System.out.print("Ingrese el telefono nuevo: ");
                 long telefono2=sc.nextLong();
                 cliente.setTelefono(telefono2);
+                break;
+            default:
                 break;
         }
         sc.close();
