@@ -86,9 +86,9 @@ public class ControlGaleria
         controlGaleria.printClientes();
         System.out.println();
         gc.modificarCliente(pruebasClientes[2], 2);
-        System.err.println(controlGaleria.getListaClientes());
-        System.out.println((gc.addCliente(pruebasClientes[3])));
-        System.err.println(controlGaleria.getListaClientes());
+        System.err.println("Antes de poner al 3: "+controlGaleria.getListaClientes());
+        gc.addCliente(pruebasClientes[3]);
+        System.err.println("Despues de poner al 3: "+controlGaleria.getListaClientes());
         //Las obras se organizan por su codigo de obras
         //Los artistas se organizan por su codigo de artistas
         //Las compras se organizan por su codigo de obra
