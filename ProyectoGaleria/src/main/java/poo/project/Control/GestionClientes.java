@@ -140,9 +140,7 @@ public class GestionClientes
     public void organizarLista(){
         TreeSet<Cliente> nuevo=new TreeSet<Cliente>();
         nuevo.addAll(this.listaClientes);
-        for(Cliente cl:this.listaClientes){
-            this.listaClientes.remove(cl);
-        }
+        this.listaClientes.clear();
         this.listaClientes.addAll(nuevo);
         nuevo=null;
     }
