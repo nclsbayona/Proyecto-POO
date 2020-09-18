@@ -83,7 +83,7 @@ public class ControlGaleria
         gc.addCliente(pruebasClientes[3]);
         System.err.println("Despues de poner al 3: "+controlGaleria.getListaClientes());
         //controlGaleria.printClientes();
-        controlGaleria.printClientes();
+        System.out.println(controlGaleria.listaClientes==gc.getListaClientes());
         gc.modificarCliente();
         /*
             Borrar comentario para Mostrar el problema del HashSet

@@ -1,6 +1,7 @@
 package poo.project.Control;
 import poo.project.Model.Cliente;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Scanner;
 import java.util.TreeSet;
 public class GestionClientes
@@ -30,6 +31,7 @@ public class GestionClientes
                 cliente2=cliente;
             }
         }
+        this.organizarLista();
         return cliente2;
     }
     //Buscar un cliente por cedula
@@ -43,6 +45,7 @@ public class GestionClientes
                 cliente2=cliente;
             }
         }
+        this.organizarLista();
         return cliente2;
     }
     //Eliminar Cliente
@@ -137,9 +140,11 @@ public class GestionClientes
     public void organizarLista(){
         TreeSet<Cliente> nuevo=new TreeSet<Cliente>();
         nuevo.addAll(this.listaClientes);
-        HashSet<Cliente> nuevo2=new HashSet<Cliente>();
-        nuevo2.addAll(nuevo);
-        this.setListaClientes(null);
-        this.addListaClientes(nuevo2);
+        for(Cliente cl:this.listaClientes){
+            this.listaClientes.remove(cl);
+        }
+        for(Cliente cl:nuevo){
+            this.listaClientes.add(cl);
+        }
     }
 }
