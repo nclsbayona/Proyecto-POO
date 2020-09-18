@@ -1,7 +1,6 @@
 package poo.project.Control;
 import poo.project.Model.Cliente;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Scanner;
 import java.util.TreeSet;
 public class GestionClientes
