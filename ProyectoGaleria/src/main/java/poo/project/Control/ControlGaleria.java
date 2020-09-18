@@ -73,9 +73,7 @@ public class ControlGaleria
         pruebasClientes[1]=new Cliente(5, 12933, "Fred", "Jones", "20822 SW Luxury Park", 98765432);
         pruebasClientes[2]=new Cliente(6, 11837, "Juan", "Acosta", "Calle 100 #20-29", 3208426);
         pruebasClientes[3]=new Cliente(3, 3982, "Lucas", "Ramirez", "Diagonal 68 #78-03", 3208426);
-        System.err.println("Antes de poner al 3: "+controlGaleria.getListaClientes());
-        gc.addCliente(pruebasClientes[3]);
-        System.err.println("Despues de poner al 3: "+controlGaleria.getListaClientes());
+        
         gc.addCliente(pruebasClientes[0]);
         gc.addCliente(pruebasClientes[1]);
         controlGaleria.printClientes();
@@ -83,6 +81,9 @@ public class ControlGaleria
         //Ahora imprimo la lista desde el control como tal
         //controlGaleria.printClientes();
         gc.addCliente(pruebasClientes[2]);
+        System.err.println("Antes de poner al 3: "+controlGaleria.getListaClientes());
+        gc.addCliente(pruebasClientes[3]);
+        System.err.println("Despues de poner al 3: "+controlGaleria.getListaClientes());
         //controlGaleria.printClientes();
         gc.modificarCliente();
         /*
