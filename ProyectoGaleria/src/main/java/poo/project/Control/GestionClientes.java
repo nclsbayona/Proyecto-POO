@@ -58,6 +58,7 @@ public class GestionClientes
         cliente=this.buscarCliente(codigoCliente);
         this.listaClientes.remove(cliente);
         this.organizarLista();
+        scan.next();
         scan.close();
     }
     //Agregar Cliente
