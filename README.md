@@ -43,15 +43,17 @@ Para este proyecto se solicita implementar las siguientes funcionalidades:
 
 **1.** [5] Al iniciar el día se debe:
 
-a. Crear la colección de Obras llamada listaObras (método en el controlador ‘GestionObras’ que crea instancias de Obra y llena la lista de obras de la clase ControlGaleria. 
+**a.** Crear la colección de Obras llamada listaObras (método en el controlador ‘GestionObras’ que crea instancias de Obra y llena la lista de obras de la clase ControlGaleria. 
 
 Esta clase sólo existe para no tener que ingresar datos por pantalla de las obras y facilitar la prueba del programa. No obstante, las funcionalidades para insertar, modificar y eliminar una obra deben programarse y funcionar correctamente.
 
 **b.** La clase GestiónObras también puede llenar la lista de Artistas.
+
 **c.** Crear la colección de clientes llamada listaClientes (método en el controlador ‘GestionCliente’ que crea instancias de Cliente y llena la lista de clientes de la clase  ControlGaleria. Esta clase sólo existe para no tener que ingresar datos por pantalla de clientes y facilitar la prueba del programa. No obstante, las funcionalidades para insertar, modificar y eliminar un cliente deben programarse.
+
 **d.** La clase ControlGaleria debe invocar en su constructor los métodos anteriores.
 
-### NOTA: Para los métodos anteriores los objetos se pueden crear con valores literales; en la siguiente entrega esto se cambiará por un acceso a archivos del sistema.
+**NOTA: Para los métodos anteriores los objetos se pueden crear con valores literales; en la siguiente entrega esto se cambiará por un acceso a archivos del sistema.**
 
 **2.** [5] Ver listado de Obras disponibles
 
@@ -65,22 +67,29 @@ Esta clase sólo existe para no tener que ingresar datos por pantalla de las obr
 
 **a.** Se debe permitir insertar una nueva obra en la lista de obras de la clase ControlGaleria. Para ello debe apoyarse
 en los métodos necesarios de la clase Obra.
+
 **b.** Debe listar los artistas existentes (Cedula y NombreyApellidos) y si no está debe permitir insertar un nuevo artista. De un artista se guarda su cédula, nombre y apellidos, fecha de nacimiento y teléfono.
+
 **c.** No se puede crear una obra con el mismo código de una que ya exista
+
 **d.** El código de una obra tiene 7 números. Debe validar que nunca exista una obra con más o menos números.
 
 **5.** [5] Modificar una Obra:
 
 **a.** Se debe solicitar el código de la obra a modificar, si este no existe, se debe mostrar un mensaje y volver al menú
 principal.
+
 **b**. Si existe, se deben mostrar los datos de la obra, enumerados, y solicitar el dato que se quiere modificar.
+
 **c.** No se puede asignar un código de una obra que ya exista, si esto ocurre se muestra un mensaje y no se modifica
 la obra.
 
 **6.** [5] Eliminar una Obra:
 
 **a.** Solicitar el código de la obra a eliminar, si este no existe, se debe mostrar un mensaje y volver al menú principal.
+
 **b.** No se puede permitir eliminar una obra que esté asociado a una compra.
+
 **c.** Se debe mostrar un mensaje de confirmación para eliminar la obra.
 
 **7.** [5] Ver listado de Clientes registrados en el sistema:
