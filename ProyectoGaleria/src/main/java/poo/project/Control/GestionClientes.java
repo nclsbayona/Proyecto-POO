@@ -50,15 +50,15 @@ public class GestionClientes
     //Eliminar Cliente
     public void eliminarCliente()
     {
-        Scanner sc=new Scanner(System.in);
+        Scanner scan=new Scanner(System.in);
         Cliente cliente;
         long codigoCliente;
         System.out.print("Ingrese el codigo del cliente a eliminar: ");
-        codigoCliente=sc.nextLong();
+        codigoCliente=scan.nextLong();
         cliente=this.buscarCliente(codigoCliente);
         this.listaClientes.remove(cliente);
         this.organizarLista();
-        sc.close();
+        scan.close();
     }
     //Agregar Cliente
     public Cliente addCliente(Cliente cliente)
@@ -72,7 +72,7 @@ public class GestionClientes
     {
         Scanner sc=new Scanner(System.in);
         Cliente cliente;
-        Integer respuesta;
+        int respuesta;
         System.out.println();
         System.out.print("Ingrese el codigo del cliente a modificar: ");
         respuesta=sc.nextInt();
