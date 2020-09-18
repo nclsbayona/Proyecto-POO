@@ -1,6 +1,7 @@
 package poo.project.Control;
 import poo.project.Model.Cliente;
 import java.util.HashSet;
+import java.util.Scanner;
 import java.util.TreeSet;
 public class GestionClientes
 {
@@ -31,6 +32,19 @@ public class GestionClientes
         }
         return cliente2;
     }
+    //Buscar un cliente por cedula
+    public Cliente buscarCliente(long cedula, String s)
+    {
+        Cliente cliente2=null;
+        for (Cliente cliente:this.listaClientes)
+        {
+            if (cliente.getCedula()==cedula)
+            {
+                cliente2=cliente;
+            }
+        }
+        return cliente2;
+    }
     //Eliminar Cliente
     public void eliminarCliente(Cliente cliente)
     {
@@ -50,9 +64,66 @@ public class GestionClientes
         return cliente;
     }
     //Modificar Cliente
-    public void modificarCliente(Cliente cliente, long codigoCliente)
+    public void modificarCliente()
     {
-        cliente.setCodigoCliente(codigoCliente);
+        Scanner sc=new Scanner(System.in);
+        Cliente cliente;
+        int respuesta;
+        System.out.println();
+        System.out.print("Ingrese el codigo del cliente a modificar: ");
+        respuesta=sc.nextInt();
+        cliente=this.buscarCliente(respuesta);
+        if (cliente==null){
+            System.out.println("El cliente no existe, vuelva a intentarlo");
+            return;
+        }
+        cliente.printC();
+        do{
+            System.out.print("Ingrese numero de atributo a modificar: ");
+            respuesta=sc.nextInt();
+        } while(respuesta>6||respuesta<0);
+        switch (respuesta){
+            case 1:
+                System.out.print("Ingrese el codigo nuevo: ");
+                long codigoCliente2=sc.nextLong();
+                if(this.buscarCliente(codigoCliente2)!=null)
+                {
+                    System.out.println("Ya existe un cliente con ese codigo");
+                    return;
+                }
+                cliente.setCodigoCliente(codigoCliente2);
+                break;
+            case 2:
+                System.out.print("Ingrese la cedula nueva: ");
+                long cedula2=sc.nextLong();
+                if(this.buscarCliente(cedula2, "w")!=null)
+                {
+                    System.out.println("Ya existe un cliente con esa cedula");
+                    return;
+                }
+                cliente.setCedula(cedula2);
+                break;
+            case 3:
+                System.out.print("Ingrese el nombre nuevo: ");
+                String nombre2=sc.nextLine();
+                cliente.setNombre(nombre2);
+                break;
+            case 4:
+                System.out.print("Ingrese los apellidos nuevos: ");
+                String apellidos2=sc.nextLine();
+                cliente.setApellidos(apellidos2);
+                break;
+            case 5:
+                System.out.print("Ingrese la direccion nueva: ");
+                String direccion2=sc.nextLine();
+                cliente.setDireccionEntrega(direccion2);
+                break;
+            case 6:
+                System.out.print("Ingrese el telefono nuevo: ");
+                long telefono2=sc.nextLong();
+                cliente.setTelefono(telefono2);
+                break;
+        }
         TreeSet<Cliente> nuevo=new TreeSet<Cliente>();
         nuevo.addAll(this.listaClientes);
         HashSet<Cliente> nuevo2=new HashSet<Cliente>();
@@ -61,8 +132,15 @@ public class GestionClientes
         //System.out.println(this.listaClientes);
     }
     //Modificar Cliente conociendo su codigoCliente actual
-    public void modificarCliente(long codigoCliente, long codigoCliente2)
+    public void modificarCliente(long codigoCliente)
     {
-        this.buscarCliente(codigoCliente).setCodigoCliente(codigoCliente2);
+        try{
+            this.buscarCliente(codigoCliente).setCodigoCliente();
+        }catch(NullPointerException np){
+            System.out.println("No existe el cliente en la lista");
+        }
+        catch(Exception e){
+            return;
+        }
     }
 }

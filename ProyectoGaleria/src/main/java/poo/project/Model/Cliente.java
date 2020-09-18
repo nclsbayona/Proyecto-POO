@@ -53,6 +53,12 @@ public class Cliente implements Comparable<Cliente>
         this.direccionEntrega = direccionEntrega;
         this.telefono = telefono;
     }
+    public void printC(){
+        String retorno="1 "+String.valueOf(this.codigoCliente)+'\n';
+        retorno+="2 "+this.cedula+"\n3 "+this.nombre+"\n4 "+this.Apellidos+"\n";
+        retorno+="5 "+this.direccionEntrega+"\n6 "+this.telefono;
+        System.out.println(retorno);
+    }
     @Override
     public String toString()
     {
