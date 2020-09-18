@@ -143,8 +143,8 @@ public class GestionClientes
         for(Cliente cl:this.listaClientes){
             this.listaClientes.remove(cl);
         }
-        for(Cliente cl:nuevo){
-            this.listaClientes.add(cl);
+        for(Cliente c:nuevo){
+            this.listaClientes.add(c);
         }
     }
 }
