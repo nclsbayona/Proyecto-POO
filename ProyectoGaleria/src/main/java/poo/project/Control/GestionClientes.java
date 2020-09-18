@@ -59,7 +59,6 @@ public class GestionClientes
         this.listaClientes.remove(cliente);
         this.organizarLista();
         sc.close();
-        sc=null;
     }
     //Agregar Cliente
     public Cliente addCliente(Cliente cliente)
