@@ -75,7 +75,7 @@ public class GestionClientes
         long respuesta;
         System.out.println();
         System.out.print("Ingrese el codigo del cliente a modificar: ");
-        respuesta=sc.nextInt();
+        respuesta=sc.nextLong();
         cliente=this.buscarCliente(respuesta);
         if (cliente==null){
             System.out.println("El cliente no existe, vuelva a intentarlo");
