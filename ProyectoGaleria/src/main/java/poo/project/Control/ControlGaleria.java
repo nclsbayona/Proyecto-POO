@@ -79,13 +79,9 @@ public class ControlGaleria
         controlGaleria.printClientes();
         gc.eliminarCliente(1);
         //Ahora imprimo la lista desde el control como tal
-        System.out.println();
         //controlGaleria.printClientes();
-        System.out.println();
         gc.addCliente(pruebasClientes[2]);
-        System.out.println();
         //controlGaleria.printClientes();
-        System.out.println();
         gc.modificarCliente(pruebasClientes[2], 2);
         System.err.println("Antes de poner al 3: "+controlGaleria.getListaClientes());
         gc.addCliente(pruebasClientes[3]);
