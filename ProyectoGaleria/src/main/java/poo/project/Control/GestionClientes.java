@@ -2,8 +2,6 @@ package poo.project.Control;
 import poo.project.Model.Cliente;
 import java.util.HashSet;
 import java.util.TreeSet;
-
-import javax.swing.event.TreeSelectionEvent;
 public class GestionClientes
 {
     private HashSet<Cliente> listaClientes;
@@ -49,6 +47,7 @@ public class GestionClientes
     public Cliente addCliente(Cliente cliente)
     {
         this.listaClientes.add(cliente);
+        System.out.println(this.listaClientes);
         return cliente;
     }
     //Modificar Cliente
