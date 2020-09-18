@@ -72,10 +72,9 @@ public class GestionClientes
     {
         Scanner sc=new Scanner(System.in);
         Cliente cliente;
-        int respuesta;
+        long respuesta;
         System.out.println();
         System.out.print("Ingrese el codigo del cliente a modificar: ");
-        sc.nextLine();
         respuesta=sc.nextInt();
         cliente=this.buscarCliente(respuesta);
         if (cliente==null){
