@@ -43,7 +43,10 @@ Para este proyecto se solicita implementar las siguientes funcionalidades:
 
 1. [5] Al iniciar el día se debe:
 
-a. Crear la colección de Obras llamada listaObras (método en el controlador ‘GestionObras’ que crea instancias de Obra y llena la lista de obras de la clase ControlGaleria. Esta clase sólo existe para no tener que ingresar datos por pantalla de las obras y facilitar la prueba del programa. No obstante, las funcionalidades para insertar, modificar y eliminar una obra deben programarse y funcionar correctamente.
+a. Crear la colección de Obras llamada listaObras (método en el controlador ‘GestionObras’ que crea instancias de Obra y llena la lista de obras de la clase ControlGaleria. 
+
+Esta clase sólo existe para no tener que ingresar datos por pantalla de las obras y facilitar la prueba del programa. No obstante, las funcionalidades para insertar, modificar y eliminar una obra deben programarse y funcionar correctamente.
+
 b. La clase GestiónObras también puede llenar la lista de Artistas.
 c. Crear la colección de clientes llamada listaClientes (método en el controlador ‘GestionCliente’ que crea instancias de Cliente y llena la lista de clientes de la clase  ControlGaleria. Esta clase sólo existe para no tener que ingresar datos por pantalla de clientes y facilitar la prueba del programa. No obstante, las funcionalidades para insertar, modificar y eliminar un cliente deben programarse.
 d. La clase ControlGaleria debe invocar en su constructor los métodos anteriores.
