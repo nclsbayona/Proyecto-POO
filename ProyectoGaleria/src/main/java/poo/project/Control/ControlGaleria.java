@@ -78,7 +78,7 @@ public class ControlGaleria
         //Ahora imprimo la lista desde el control como tal
         controlGaleria.printClientes();
         //Si eliminan este comentario veran lo que les digo, el scan causa problemas
-        gc.eliminarCliente();
+        //gc.eliminarCliente();
         gc.addCliente(pruebasClientes[2]);
         System.err.println("Antes de poner al 3: "+controlGaleria.getListaClientes());
         gc.addCliente(pruebasClientes[3]);
