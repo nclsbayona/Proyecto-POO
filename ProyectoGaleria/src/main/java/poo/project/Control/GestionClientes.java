@@ -77,6 +77,7 @@ public class GestionClientes
         cliente=this.buscarCliente(respuesta);
         if (cliente==null){
             System.out.println("El cliente no existe, vuelva a intentarlo");
+            sc.close();
             return;
         }
         cliente.printC();
@@ -91,6 +92,7 @@ public class GestionClientes
                 if(this.buscarCliente(codigoCliente2)!=null)
                 {
                     System.out.println("Ya existe un cliente con ese codigo");
+                    sc.close();
                     return;
                 }
                 cliente.setCodigoCliente(codigoCliente2);
@@ -101,6 +103,7 @@ public class GestionClientes
                 if(this.buscarCliente(cedula2, "w")!=null)
                 {
                     System.out.println("Ya existe un cliente con esa cedula");
+                    sc.close();
                     return;
                 }
                 cliente.setCedula(cedula2);
