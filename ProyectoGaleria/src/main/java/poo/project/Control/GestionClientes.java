@@ -56,9 +56,11 @@ public class GestionClientes
         System.out.print("Ingrese el codigo del cliente a eliminar: ");
         codigoCliente=scan.nextLong();
         cliente=this.buscarCliente(codigoCliente);
+        System.out.println("Aca");
         if(cliente==null)
         {
             System.err.println("No existe");
+            scan.close();
             return;
         }
         System.out.println(scan.hasNext());
@@ -118,25 +120,27 @@ public class GestionClientes
                 break;
             case 3:
                 System.out.print("Ingrese el nombre nuevo: ");
+                sc.next();
                 String nombre2=sc.nextLine();
                 cliente.setNombre(nombre2);
                 break;
             case 4:
                 System.out.print("Ingrese los apellidos nuevos: ");
+                sc.next();
                 String apellidos2=sc.nextLine();
                 cliente.setApellidos(apellidos2);
                 break;
             case 5:
                 System.out.print("Ingrese la direccion nueva: ");
+                sc.next();
                 String direccion2=sc.nextLine();
                 cliente.setDireccionEntrega(direccion2);
                 break;
             case 6:
                 System.out.print("Ingrese el telefono nuevo: ");
+                sc.next();
                 long telefono2=sc.nextLong();
                 cliente.setTelefono(telefono2);
-                break;
-            default:
                 break;
         }
         sc.close();
