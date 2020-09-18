@@ -75,6 +75,7 @@ public class GestionClientes
         int respuesta;
         System.out.println();
         System.out.print("Ingrese el codigo del cliente a modificar: ");
+        sc.nextLine();
         respuesta=sc.nextInt();
         cliente=this.buscarCliente(respuesta);
         if (cliente==null){
