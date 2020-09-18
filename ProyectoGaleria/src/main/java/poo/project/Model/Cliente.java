@@ -72,7 +72,8 @@ public class Cliente implements Comparable<Cliente>
     }
     @Override
     public int hashCode(){
-            return (int)this.codigoCliente;
+        int a=(int)this.codigoCliente;
+            return String.valueOf(a).hashCode();
     }
     @Override
     public int compareTo(Cliente cliente){

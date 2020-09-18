@@ -47,7 +47,6 @@ public class GestionClientes
     public Cliente addCliente(Cliente cliente)
     {
         this.listaClientes.add(cliente);
-        System.out.println(this.listaClientes);
         return cliente;
     }
     //Modificar Cliente
