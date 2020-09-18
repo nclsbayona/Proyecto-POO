@@ -56,14 +56,13 @@ public class GestionClientes
         System.out.print("Ingrese el codigo del cliente a eliminar: ");
         codigoCliente=scan.nextLong();
         cliente=this.buscarCliente(codigoCliente);
-        System.out.println("Aca");
         if(cliente==null)
         {
             System.err.println("No existe");
             scan.close();
             return;
         }
-        System.out.println(scan.hasNext());
+        //El scanner causa problemas, por eso esto no sigue su rumbo normal
         this.listaClientes.remove(cliente);
         this.organizarLista();
         scan.close();
