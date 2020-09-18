@@ -49,17 +49,18 @@ public class GestionClientes
         return cliente2;
     }
     //Eliminar Cliente
-    public void eliminarCliente(Cliente cliente)
+    public void eliminarCliente()
     {
+        Scanner sc=new Scanner(System.in);
+        Cliente cliente;
+        long codigoCliente;
+        System.out.print("Ingrese el codigo del cliente a eliminar: ");
+        codigoCliente=sc.nextLong();
+        cliente=this.buscarCliente(codigoCliente);
         this.listaClientes.remove(cliente);
         this.organizarLista();
-    }
-    //Eliminar Cliente conociendo el codigoCliente
-    public void eliminarCliente(long codigoCliente)
-    {
-        Cliente cliente=this.buscarCliente(codigoCliente);
-        this.listaClientes.remove(cliente);
-        this.organizarLista();
+        sc.close();
+        sc=null;
     }
     //Agregar Cliente
     public Cliente addCliente(Cliente cliente)

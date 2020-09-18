@@ -76,21 +76,11 @@ public class ControlGaleria
         gc.addCliente(pruebasClientes[0]);
         gc.addCliente(pruebasClientes[1]);
         gc.eliminarCliente(1);
-        //Ahora imprimo la lista desde el control como tal
-        //controlGaleria.printClientes();
         gc.addCliente(pruebasClientes[2]);
         System.err.println("Antes de poner al 3: "+controlGaleria.getListaClientes());
         gc.addCliente(pruebasClientes[3]);
         System.err.println("Despues de poner al 3: "+controlGaleria.getListaClientes());
-        //controlGaleria.printClientes();
-        System.out.println(controlGaleria.listaClientes==gc.getListaClientes());
         gc.modificarCliente();
-        /*
-            Borrar comentario para Mostrar el problema del HashSet
-            System.err.println("Antes de poner al 3: "+controlGaleria.getListaClientes());
-            gc.addCliente(pruebasClientes[3]);
-            System.err.println("Despues de poner al 3: "+controlGaleria.getListaClientes());
-         */
         //Las obras se organizan por su codigo de obras
         //Los artistas se organizan por su codigo de artistas
         //Las compras se organizan por su codigo de obra
