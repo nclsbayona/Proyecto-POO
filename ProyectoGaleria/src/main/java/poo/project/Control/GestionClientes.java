@@ -56,9 +56,14 @@ public class GestionClientes
         System.out.print("Ingrese el codigo del cliente a eliminar: ");
         codigoCliente=scan.nextLong();
         cliente=this.buscarCliente(codigoCliente);
+        if(cliente==null)
+        {
+            System.err.println("No existe");
+            return;
+        }
+        System.out.println(scan.hasNext());
         this.listaClientes.remove(cliente);
         this.organizarLista();
-        scan.next();
         scan.close();
     }
     //Agregar Cliente

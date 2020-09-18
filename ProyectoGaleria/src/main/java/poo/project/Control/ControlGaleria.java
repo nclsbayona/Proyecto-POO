@@ -75,6 +75,8 @@ public class ControlGaleria
         pruebasClientes[3]=new Cliente(3, 3982, "Lucas", "Ramirez", "Diagonal 68 #78-03", 3208426);
         gc.addCliente(pruebasClientes[0]);
         gc.addCliente(pruebasClientes[1]);
+        //Ahora imprimo la lista desde el control como tal
+        controlGaleria.printClientes();
         gc.eliminarCliente();
         gc.addCliente(pruebasClientes[2]);
         System.err.println("Antes de poner al 3: "+controlGaleria.getListaClientes());
