@@ -72,11 +72,10 @@ public class GestionClientes
     {
         Scanner sc=new Scanner(System.in);
         Cliente cliente;
-        long respuesta;
+        Integer respuesta;
         System.out.println();
         System.out.print("Ingrese el codigo del cliente a modificar: ");
-        respuesta=sc.nextLong();
-        String r2=String.valueOf(respuesta);
+        respuesta=sc.nextInt();
         cliente=this.buscarCliente(respuesta);
         if (cliente==null){
             System.out.println("El cliente no existe, vuelva a intentarlo");
@@ -88,7 +87,7 @@ public class GestionClientes
             System.out.print("Ingrese numero de atributo a modificar: ");
             respuesta=sc.nextInt();
         } while(respuesta>6||respuesta<0);
-        switch (r2){
+        switch (respuesta){
             case 1:
                 System.out.print("Ingrese el codigo nuevo: ");
                 long codigoCliente2=sc.nextLong();
