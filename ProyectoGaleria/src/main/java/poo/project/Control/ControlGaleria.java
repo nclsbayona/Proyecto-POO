@@ -75,7 +75,6 @@ public class ControlGaleria
         pruebasClientes[3]=new Cliente(3, 3982, "Lucas", "Ramirez", "Diagonal 68 #78-03", 3208426);
         gc.addCliente(pruebasClientes[0]);
         gc.addCliente(pruebasClientes[1]);
-        controlGaleria.printClientes();
         gc.eliminarCliente(1);
         //Ahora imprimo la lista desde el control como tal
         //controlGaleria.printClientes();
@@ -84,6 +83,7 @@ public class ControlGaleria
         gc.addCliente(pruebasClientes[3]);
         System.err.println("Despues de poner al 3: "+controlGaleria.getListaClientes());
         //controlGaleria.printClientes();
+        controlGaleria.printClientes();
         gc.modificarCliente();
         /*
             Borrar comentario para Mostrar el problema del HashSet
