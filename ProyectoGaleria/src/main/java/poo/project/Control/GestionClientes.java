@@ -124,23 +124,13 @@ public class GestionClientes
                 cliente.setTelefono(telefono2);
                 break;
         }
+        sc.close();
+        sc=null;
         TreeSet<Cliente> nuevo=new TreeSet<Cliente>();
         nuevo.addAll(this.listaClientes);
         HashSet<Cliente> nuevo2=new HashSet<Cliente>();
         nuevo2.addAll(nuevo);
         this.setListaClientes(nuevo2);
         //System.out.println(this.listaClientes);
-    }
-    //Modificar Cliente conociendo su codigoCliente actual
-    public void modificarCliente(long codigoCliente)
-    {
-        try{
-            this.buscarCliente(codigoCliente).setCodigoCliente();
-        }catch(NullPointerException np){
-            System.out.println("No existe el cliente en la lista");
-        }
-        catch(Exception e){
-            return;
-        }
     }
 }
