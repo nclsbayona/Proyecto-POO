@@ -54,9 +54,9 @@ public class Cliente implements Comparable<Cliente>
         this.telefono = telefono;
     }
     public void printC(){
-        String retorno="1 "+String.valueOf(this.codigoCliente)+'\n';
-        retorno+="2 "+this.cedula+"\n3 "+this.nombre+"\n4 "+this.Apellidos+"\n";
-        retorno+="5 "+this.direccionEntrega+"\n6 "+this.telefono;
+        String retorno="1 CodigoCliente: "+String.valueOf(this.codigoCliente)+'\n';
+        retorno+="2 Cedula: "+this.cedula+"\n3 Nombre: "+this.nombre+"\n4 Apellidos: "+this.Apellidos+"\n";
+        retorno+="5 DireccionEntrega: "+this.direccionEntrega+"\n6 Telefono: "+this.telefono;
         System.out.println(retorno);
     }
     @Override

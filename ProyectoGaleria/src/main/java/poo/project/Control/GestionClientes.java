@@ -49,18 +49,20 @@ public class GestionClientes
     public void eliminarCliente(Cliente cliente)
     {
         this.listaClientes.remove(cliente);
-        cliente=null;
+        this.organizarLista();
     }
     //Eliminar Cliente conociendo el codigoCliente
     public void eliminarCliente(long codigoCliente)
     {
         Cliente cliente=this.buscarCliente(codigoCliente);
         this.listaClientes.remove(cliente);
+        this.organizarLista();
     }
     //Agregar Cliente
     public Cliente addCliente(Cliente cliente)
     {
         this.listaClientes.add(cliente);
+        this.organizarLista();
         return cliente;
     }
     //Modificar Cliente
@@ -126,11 +128,15 @@ public class GestionClientes
         }
         sc.close();
         sc=null;
+        this.organizarLista();
+        //System.out.println(this.listaClientes);
+    }
+    public void organizarLista(){
         TreeSet<Cliente> nuevo=new TreeSet<Cliente>();
         nuevo.addAll(this.listaClientes);
         HashSet<Cliente> nuevo2=new HashSet<Cliente>();
         nuevo2.addAll(nuevo);
-        this.setListaClientes(nuevo2);
-        //System.out.println(this.listaClientes);
+        this.setListaClientes(null);
+        this.addListaClientes(nuevo2);
     }
 }
