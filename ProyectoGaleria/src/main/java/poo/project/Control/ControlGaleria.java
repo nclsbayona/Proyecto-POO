@@ -1,8 +1,10 @@
 package poo.project.Control;
+
 import java.util.Calendar;
 import poo.project.Model.*;
 import java.util.HashSet;
 import java.util.Scanner;
+
 public class ControlGaleria {
 
     private HashSet<Obra> listaObras;
@@ -118,6 +120,7 @@ public class ControlGaleria {
             System.out.println(obra);
         }
     }
+
     /*
      * 14. [5] Ver listado de Compras para un mes y año específico insertado por el
      * usuario a. Se debe solicitar mes y año al usuario y mostrar listado de Obras
@@ -134,8 +137,7 @@ public class ControlGaleria {
         }
     }
     /*
-     * 15. [5] Ver listado de Artistas más vendidos 
-     * a. Mostrar los artistas más
+     * 15. [5] Ver listado de Artistas más vendidos a. Mostrar los artistas más
      * vendidos ordenados de mayor a menor ventas
      */
 
@@ -171,9 +173,6 @@ public class ControlGaleria {
         gc.eliminarCliente();
         controlGaleria.printClientes();
     }
-
-}
-
     // Constructor
     public ControlGaleria() {
         this.gestionClientes = new GestionClientes();
@@ -181,8 +180,9 @@ public class ControlGaleria {
         this.listaClientes = new HashSet<Cliente>();
         this.listaCompras = new HashSet<Compra>();
         this.listaObras = new HashSet<Obra>();
-        //Exactamente aquí estoy diciendo que mi objeto de gestion obras y el de gestion cliente tienen 
-        //acceso a mi listaObras de aquí, por eso se modifican las de aquí allá
+        // Exactamente aquí estoy diciendo que mi objeto de gestion obras y el de
+        // gestion cliente tienen
+        // acceso a mi listaObras de aquí, por eso se modifican las de aquí allá
         this.gestionObras.addListaObras(this.listaObras);
         this.gestionClientes.addListaClientes(this.listaClientes);
     }
