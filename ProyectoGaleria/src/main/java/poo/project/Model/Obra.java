@@ -1,6 +1,8 @@
 package poo.project.Model;
 
 import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashSet;
 
 public class Obra{
@@ -12,6 +14,7 @@ public class Obra{
     private float precioRef;
     private boolean estado;
 
+    Calendar cal = new GregorianCalendar();
 
     public boolean getEstado() {
         return estado;
@@ -55,8 +58,9 @@ public class Obra{
         this.titulo = _titulo;
     }
 
-    public void setFecha(int YEAR, int DAY_OF_YEAR) { this.fecha = new Calendar.Builder().setCalendarType("Gregorian")
-            .setFields(YEAR, 1, DAY_OF_YEAR, 1).build(); }
+    public void setFecha(int YEAR, int MES) {
+        cal.set(YEAR, MES);
+    }
 
     public void setPrecioRef(float _precioRef) {
         this.precioRef = _precioRef;
