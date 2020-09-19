@@ -3,7 +3,7 @@ package poo.project.Control;
 import java.util.Calendar;
 import poo.project.Model.*;
 import java.util.HashSet;
-import java.util.HashMap;
+import java.util.TreeMap;
 import java.util.Scanner;
 
 public class ControlGaleria {
@@ -107,8 +107,8 @@ public class ControlGaleria {
         }
         System.out.println("Seguro? (0/1)");
         codigo = sc.nextLong();
-        if (codigo==0)
-            return compra;
+        if (codigo == 0)
+            return null;
         this.listaCompras.remove(compra);
         return compra;
     }
@@ -183,20 +183,23 @@ public class ControlGaleria {
      * vendidos ordenados de mayor a menor ventas
      */
     public void verListadoArtistas() {
-        HashMap<Artista, Integer> mapsold = new HashMap<Artista, Integer>();
+        TreeMap<Artista, Integer> mapsold = new TreeMap<Artista, Integer>();
         HashSet<Artista> artistas;
         for (Compra compra : this.listaCompras) {
             // Así busco un elemento un en el hashmap
-            // Si no lo encuentra
+            // Si no lo encuentraS
             artistas = compra.getObra().getArtista();
             for (Artista art : artistas) {
                 if (mapsold.containsKey(art)) {
                     mapsold.replace(art, mapsold.get(art) + 1);
                 } else {
                     mapsold.put(art, 1);
+                    mapsold.
                 }
             }
+
         }
+        
     }
 
     // Main (Solo para probar que todo funcione bien)
