@@ -111,7 +111,7 @@ public class ControlGaleria {
         //Son el mismo objeto entonces, lo que pasa es que muestro aquí todo lo que ejecute en gestionObras
         gc.modificarCliente();
         gc.eliminarCliente();
-
+    }
     //Constructor
     public ControlGaleria() {
         this.gestionClientes = new GestionClientes();
