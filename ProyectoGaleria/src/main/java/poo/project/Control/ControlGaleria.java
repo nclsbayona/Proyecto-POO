@@ -12,6 +12,7 @@ public class ControlGaleria {
     private HashSet<Compra> listaCompras;
     private GestionObras gestionObras;
     private GestionClientes gestionClientes;
+
     // Métodos
     // Accessors
     // ListaObras
@@ -68,7 +69,12 @@ public class ControlGaleria {
     }
 
     public boolean existeCodCompra(long cod) {
-
+        for (Compra compra : this.listaCompras) {
+            if (compra.getCodigoCompra() == cod) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean buscarClienteYObraEnCompra(Cliente cliente, Obra obra) {
@@ -78,6 +84,33 @@ public class ControlGaleria {
             }
         }
         return false;
+    }
+
+    /*
+     * 12.[5]Eliminar compra de obra a.Solicitar el número de compra a eliminar, si
+     * este no existe, se debe mostrar un mensaje y volver al menú principal. b.Se
+     * debe mostrar un mensaje de confirmación para eliminar la compra
+     */
+    public Compra eliminCompra() {
+        long codigo;
+        Compra compra = null;
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Ingrese codigo de la compra");
+        codigo = sc.nextLong();
+        for (Compra c : this.listaCompras) {
+            if (c.getCodigoCompra() == codigo && compra == null)
+                compra = c;
+        }
+        if (compra == null) {
+            System.out.println("La compra no existe");
+            return;
+        }
+        System.out.println("Seguro? (0/1)");
+        codigo = sc.nextLong();
+        if (codigo==0)
+            return;
+        this.listaCompras.remove(compra);
+        return compra;
     }
 
     // Realizar una compra
@@ -103,7 +136,7 @@ public class ControlGaleria {
             return;
         }
         long cod;
-        cod = this.listaCompras.size();
+        cod = this.listaCompras.size() - 1;
         do {
             cod += 1;
         } while (this.existeCodCompra(cod));
@@ -150,10 +183,19 @@ public class ControlGaleria {
      * vendidos ordenados de mayor a menor ventas
      */
     public void verListadoArtistas() {
-        HashMap<Artistas> mapsold=new HashMap<Artistas>;
+        HashMap<Artista, Integer> mapsold = new HashMap<Artista, Integer>();
+        HashSet<Artista> artistas;
         for (Compra compra : this.listaCompras) {
             // Así busco un elemento un en el hashmap
             // Si no lo encuentra
+            artistas = compra.getObra().getArtista();
+            for (Artista art : artistas) {
+                if (mapsold.containsKey(art)) {
+                    mapsold.replace(art, mapsold.get(art) + 1);
+                } else {
+                    mapsold.put(art, 1);
+                }
+            }
         }
     }
 
