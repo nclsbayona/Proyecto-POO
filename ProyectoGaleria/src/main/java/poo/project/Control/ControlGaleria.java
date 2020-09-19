@@ -86,6 +86,8 @@ public class ControlGaleria {
     //Main (Solo para probar que todo funcione bien)
     public static void main(String[] args) {
         ControlGaleria controlGaleria = new ControlGaleria();
+        GestionClientes gc=controlGaleria.gestionClientes;
+        Cliente pruebasClientes[]=new Cliente[4];
         GestionObras go = controlGaleria.gestionObras;
         Obra obras[] = new Obra[3];
         Calendar proof = Calendar.getInstance();
@@ -100,8 +102,18 @@ public class ControlGaleria {
         go.modificarObra(1234567);
         //go.eliminarObra(1234567);
        // System.out.println(go);
-       
-
+        pruebasClientes[0]=new Cliente(1, 14223, "Alfredo", "Santamaria", "2085 NW Traverse Street", 6543212);
+        pruebasClientes[1]=new Cliente(5, 12933, "Fred", "Jones", "20822 SW Luxury Park", 98765432);
+        pruebasClientes[2]=new Cliente(6, 11837, "Juan", "Acosta", "Calle 100 #20-29", 3208426);
+        pruebasClientes[3]=new Cliente(3, 3982, "Lucas", "Ramirez", "Diagonal 68 #78-03", 3208426);
+        gc.addCliente(pruebasClientes[0]);
+        gc.addCliente(pruebasClientes[1]);
+        controlGaleria.printClientes();
+        //Son el mismo objeto entonces, lo que pasa es que muestro aquí todo lo que ejecute en gestionObras
+        gc.eliminarCliente();
+        gc.addCliente(pruebasClientes[2]);
+        gc.addCliente(pruebasClientes[3]);
+        gc.modificarCliente();
     }
 
     //Constructor

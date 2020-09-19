@@ -69,6 +69,9 @@ public class GestionClientes
         //El scanner causa problemas, por eso esto no sigue su rumbo normal
         this.listaClientes.remove(cliente);
         this.organizarListaClientes();
+        while(scan.hasNext()) {
+            scan.next();
+        }
         scan.close();
     }
     //Agregar Cliente
