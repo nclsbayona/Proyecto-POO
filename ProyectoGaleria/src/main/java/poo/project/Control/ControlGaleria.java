@@ -3,16 +3,15 @@ package poo.project.Control;
 import java.util.Calendar;
 import poo.project.Model.*;
 import java.util.HashSet;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class ControlGaleria {
-
     private HashSet<Obra> listaObras;
     private HashSet<Cliente> listaClientes;
     private HashSet<Compra> listaCompras;
     private GestionObras gestionObras;
     private GestionClientes gestionClientes;
-
     // Métodos
     // Accessors
     // ListaObras
@@ -68,6 +67,10 @@ public class ControlGaleria {
         }
     }
 
+    public boolean existeCodCompra(long cod) {
+
+    }
+
     public boolean buscarClienteYObraEnCompra(Cliente cliente, Obra obra) {
         for (Compra compra : this.listaCompras) {
             if (compra.getCliente() == cliente && compra.getObra() == obra) {
@@ -99,7 +102,12 @@ public class ControlGaleria {
             System.out.println("Esta compra ya existe en el sistema");
             return;
         }
-        comp = new Compra(this.listaCompras.size() + 1, fecha, true);
+        long cod;
+        cod = this.listaCompras.size();
+        do {
+            cod += 1;
+        } while (this.existeCodCompra(cod));
+        comp = new Compra(cod, fecha, true);
         comp.setCliente(clien);
         comp.setObra(obr);
         this.listaCompras.add(comp);
@@ -126,7 +134,7 @@ public class ControlGaleria {
      * usuario a. Se debe solicitar mes y año al usuario y mostrar listado de Obras
      * que hayan sido compradas, cliente que la compró, fecha y precio.
      */
-    void listadoDeCompra(int mes, int ano) {
+    public void listadoDeCompra(int mes, int ano) {
         for (Compra compra : this.listaCompras) {
             if ((compra.getFecha().get(Calendar.YEAR) == ano) && (compra.getFecha().get(Calendar.MONTH) == mes)) {
                 System.out.println("Obra: " + compra.getObra().getTitulo());
@@ -136,10 +144,18 @@ public class ControlGaleria {
             }
         }
     }
+
     /*
      * 15. [5] Ver listado de Artistas más vendidos a. Mostrar los artistas más
      * vendidos ordenados de mayor a menor ventas
      */
+    public void verListadoArtistas() {
+        HashMap<Artistas> mapsold=new HashMap<Artistas>;
+        for (Compra compra : this.listaCompras) {
+            // Así busco un elemento un en el hashmap
+            // Si no lo encuentra
+        }
+    }
 
     // Main (Solo para probar que todo funcione bien)
     public static void main(String[] args) {
@@ -173,6 +189,7 @@ public class ControlGaleria {
         gc.eliminarCliente();
         controlGaleria.printClientes();
     }
+
     // Constructor
     public ControlGaleria() {
         this.gestionClientes = new GestionClientes();

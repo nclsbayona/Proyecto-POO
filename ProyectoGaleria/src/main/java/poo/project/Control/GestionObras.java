@@ -84,7 +84,7 @@ public class GestionObras {
             System.out.println("Modificando Obra *" + obra.getTitulo() + "*");
             System.out.println("1. Codigo: " + obra.getCodigoObra());
             System.out.println("2. Titulo: " + obra.getTitulo());
-            System.out.println("3. Fecha: " + obra.getFecha());
+            System.out.println("3. Fecha: " + obra.getFecha().get(0)+" / "+ obra.getFecha().get(2)+" / "+ obra.getFecha().get(1));
             System.out.println("4. Precio referencia: " + obra.getPrecioRef());
             System.out.println("5. Dimensiones del cuadro: " + obra.getDimensiones());
             System.out.println("Que opcion desea ingresar: ");

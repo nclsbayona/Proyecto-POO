@@ -87,8 +87,3 @@ public class Compra {
 	
 
 }
-
-
-
-
-
