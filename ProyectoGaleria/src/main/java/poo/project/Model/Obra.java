@@ -85,7 +85,6 @@ public class Obra{
         this.dimensiones = _dimensiones;
         this.artistas = new HashSet<Artista>();
     }
-
     //Imprimir
     @Override
     public String toString() {
@@ -93,18 +92,16 @@ public class Obra{
         impresion = '\t' + this.titulo + ":\t$" + this.precioRef + '\t' + this.dimensiones;
         return impresion;
     }
-
     //Equals
     @Override
     public boolean equals(Object obj) {
         try {
             Obra o = (Obra) obj;
             return (this.codigoObra == o.codigoObra) ? true : false;
-        } catch (Exception e) {
+        }catch (Exception e){
             return false;
         }
     }
-
     @Override
     public int hashCode() {
         return (int) this.codigoObra;

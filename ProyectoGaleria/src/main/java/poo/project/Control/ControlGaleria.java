@@ -1,9 +1,8 @@
 package poo.project.Control;
-
 import java.util.Calendar;
 import poo.project.Model.*;
 import java.util.HashSet;
-
+import java.util.Scanner;
 public class ControlGaleria {
 
     private HashSet<Obra> listaObras;
@@ -12,9 +11,9 @@ public class ControlGaleria {
     private GestionObras gestionObras;
     private GestionClientes gestionClientes;
 
-    //Métodos
-    //Accessors
-    //ListaObras
+    // Métodos
+    // Accessors
+    // ListaObras
     public HashSet<Obra> getListaObras() {
         return this.listaObras;
     }
@@ -23,7 +22,7 @@ public class ControlGaleria {
         this.listaObras = listaObras;
     }
 
-    //gestionClientes
+    // gestionClientes
     public GestionClientes getGestionClientes() {
         return this.gestionClientes;
     }
@@ -32,7 +31,7 @@ public class ControlGaleria {
         this.gestionClientes = gestionClientes;
     }
 
-    //listaClientes
+    // listaClientes
     public HashSet<Cliente> getListaClientes() {
         return this.listaClientes;
     }
@@ -41,7 +40,7 @@ public class ControlGaleria {
         this.listaClientes = listaClientes;
     }
 
-    //listaCompras
+    // listaCompras
     public HashSet<Compra> getListaCompras() {
         return this.listaCompras;
     }
@@ -50,7 +49,7 @@ public class ControlGaleria {
         this.listaCompras = listaCompras;
     }
 
-    //gestionObras
+    // gestionObras
     public GestionObras getGestionObras() {
         return this.gestionObras;
     }
@@ -59,7 +58,7 @@ public class ControlGaleria {
         this.gestionObras = gestionObras;
     }
 
-    //Imprimir listaClientes
+    // Imprimir listaClientes
     public void printClientes() {
         System.out.println("Imprimiendo la lista de Clientes:");
         for (Cliente cliente : this.listaClientes) {
@@ -67,7 +66,44 @@ public class ControlGaleria {
         }
     }
 
-    //Imprimir listaCompras
+    public boolean buscarClienteYObraEnCompra(Cliente cliente, Obra obra) {
+        for (Compra compra : this.listaCompras) {
+            if (compra.getCliente() == cliente && compra.getObra() == obra) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // Realizar una compra
+    public void realizarCompra() {
+        Compra comp;
+        Cliente clien;
+        long codigo;
+        Obra obr;
+        Calendar fecha = Calendar.getInstance();
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Ingrese codigo del cliente");
+        codigo = sc.nextLong();
+        clien = this.gestionClientes.buscarCliente(codigo);
+        if (clien == null)
+            return;
+        System.out.println("Ingrese codigo de la obra");
+        codigo = sc.nextLong();
+        obr = this.gestionObras.buscarObra(codigo);
+        if (obr == null)
+            return;
+        if (this.buscarClienteYObraEnCompra(clien, obr)) {
+            System.out.println("Esta compra ya existe en el sistema");
+            return;
+        }
+        comp = new Compra(this.listaCompras.size() + 1, fecha, true);
+        comp.setCliente(clien);
+        comp.setObra(obr);
+        this.listaCompras.add(comp);
+    }
+
+    // Imprimir listaCompras
     public void printCompras() {
         System.out.println("Imprimiendo la lista de Compras:");
         for (Compra compra : this.listaCompras) {
@@ -75,43 +111,70 @@ public class ControlGaleria {
         }
     }
 
-    //Imprimir listaObras
+    // Imprimir listaObras
     public void printObras() {
         System.out.println("Imprimiendo la lista de Obras:");
         for (Obra obra : this.listaObras) {
             System.out.println(obra);
         }
     }
-    //Main (Solo para probar que todo funcione bien)
+    /*
+     * 14. [5] Ver listado de Compras para un mes y año específico insertado por el
+     * usuario a. Se debe solicitar mes y año al usuario y mostrar listado de Obras
+     * que hayan sido compradas, cliente que la compró, fecha y precio.
+     */
+    void listadoDeCompra(int mes, int ano) {
+        for (Compra compra : this.listaCompras) {
+            if ((compra.getFecha().get(Calendar.YEAR) == ano) && (compra.getFecha().get(Calendar.MONTH) == mes)) {
+                System.out.println("Obra: " + compra.getObra().getTitulo());
+                System.out.println("Comprador: " + compra.getCliente().getNombre());
+                System.out.println("Fecha: " + compra.getFecha());
+                System.out.println("Precio: " + compra.getObra().getPrecioRef());
+            }
+        }
+    }
+    /*
+     * 15. [5] Ver listado de Artistas más vendidos 
+     * a. Mostrar los artistas más
+     * vendidos ordenados de mayor a menor ventas
+     */
+
+    // Main (Solo para probar que todo funcione bien)
     public static void main(String[] args) {
         ControlGaleria controlGaleria = new ControlGaleria();
-        GestionClientes gc=controlGaleria.gestionClientes;
-        Cliente pruebasClientes[]=new Cliente[4];
+        GestionClientes gc = controlGaleria.gestionClientes;
+        Cliente pruebasClientes[] = new Cliente[4];
         GestionObras go = controlGaleria.gestionObras;
         Obra obras[] = new Obra[3];
         Calendar proof = Calendar.getInstance();
-        proof.set(2020,11,01);
+        proof.set(2020, 11, 01);
         obras[0] = new Obra(1234567, "Mera", proof, 20000, "20x5");
         obras[1] = new Obra(5432198, "Okaloka", proof, 20000, "10x8");
-        obras[2] = new Obra(7654321, "Machupichu", proof,15000, "10x2");
+        obras[2] = new Obra(7654321, "Machupichu", proof, 15000, "10x2");
         go.addObra(obras[0]);
         go.addObra(obras[1]);
         go.addObra(obras[2]);
         System.out.println(go);
         go.modificarObra(1234567);
-        pruebasClientes[0]=new Cliente(1, 14223, "Alfredo", "Santamaria", "2085 NW Traverse Street", 6543212);
-        pruebasClientes[1]=new Cliente(5, 12933, "Fred", "Jones", "20822 SW Luxury Park", 98765432);
-        pruebasClientes[2]=new Cliente(6, 11837, "Juan", "Acosta", "Calle 100 #20-29", 3208426);
-        pruebasClientes[3]=new Cliente(3, 3982, "Lucas", "Ramirez", "Diagonal 68 #78-03", 3208426);
+        pruebasClientes[0] = new Cliente(1, 14223, "Alfredo", "Santamaria", "2085 NW Traverse Street", 6543212);
+        pruebasClientes[1] = new Cliente(5, 12933, "Fred", "Jones", "20822 SW Luxury Park", 98765432);
+        pruebasClientes[2] = new Cliente(6, 11837, "Juan", "Acosta", "Calle 100 #20-29", 3208426);
+        pruebasClientes[3] = new Cliente(3, 3982, "Lucas", "Ramirez", "Diagonal 68 #78-03", 3208426);
         gc.addCliente(pruebasClientes[0]);
         gc.addCliente(pruebasClientes[1]);
-        //go.eliminarObra(1234567);
+        // go.eliminarObra(1234567);
         controlGaleria.printObras();
         controlGaleria.printClientes();
-        //Son el mismo objeto entonces, lo que pasa es que muestro aquí todo lo que ejecute en gestionObras
+        // Son el mismo objeto entonces, lo que pasa es que muestro aquí todo lo que
+        // ejecute en gestionObras
         gc.modificarCliente();
         gc.eliminarCliente();
+        controlGaleria.printClientes();
     }
+
+}
+
+    // Constructor
     public ControlGaleria() {
         this.gestionClientes = new GestionClientes();
         this.gestionObras = new GestionObras();

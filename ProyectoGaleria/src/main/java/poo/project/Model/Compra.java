@@ -83,7 +83,8 @@ public class Compra {
 	@Override
     public int hashCode(){
             return (int)this.codigoCompra;
-    }
+	}
+	
 
 }
 
