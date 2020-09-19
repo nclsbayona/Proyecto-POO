@@ -183,7 +183,7 @@ public class ControlGaleria {
      * vendidos ordenados de mayor a menor ventas
      */
     public void verListadoArtistas() {
-        TreeMap<Artista, Integer> mapsold = new TreeMap<Artista, Integer>();
+        HashMap<Artista, Integer> mapsold = new HashMap<Artista, Integer>();
         HashSet<Artista> artistas;
         for (Compra compra : this.listaCompras) {
             // Así busco un elemento un en el hashmap
@@ -194,12 +194,11 @@ public class ControlGaleria {
                     mapsold.replace(art, mapsold.get(art) + 1);
                 } else {
                     mapsold.put(art, 1);
-                    mapsold.
                 }
             }
 
         }
-        
+
     }
 
     // Main (Solo para probar que todo funcione bien)
