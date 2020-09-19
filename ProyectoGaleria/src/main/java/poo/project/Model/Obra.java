@@ -3,7 +3,7 @@ package poo.project.Model;
 import java.util.Calendar;
 import java.util.HashSet;
 
-public class Obra implements Comparable<Obra>{
+public class Obra{
 
     private HashSet<Artista> artistas;
     private long codigoObra;
