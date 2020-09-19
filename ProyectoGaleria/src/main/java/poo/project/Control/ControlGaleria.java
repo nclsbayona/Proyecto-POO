@@ -103,12 +103,12 @@ public class ControlGaleria {
         }
         if (compra == null) {
             System.out.println("La compra no existe");
-            return;
+            return compra;
         }
         System.out.println("Seguro? (0/1)");
         codigo = sc.nextLong();
         if (codigo==0)
-            return;
+            return compra;
         this.listaCompras.remove(compra);
         return compra;
     }
