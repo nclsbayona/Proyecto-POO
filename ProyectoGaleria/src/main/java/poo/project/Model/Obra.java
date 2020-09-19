@@ -4,11 +4,21 @@ import java.util.Calendar;
 import java.util.HashSet;
 
 public class Obra {
+
     private HashSet<Artista> artistas;
     private long codigoObra;
     private String titulo;
     private Calendar fecha;
     private float precioRef;
+    private boolean estado;
+
+    public boolean getEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean _estado) {
+        this.estado = _estado;
+    }
     private String dimensiones;
 
     // Métodos accesors
@@ -65,8 +75,7 @@ public class Obra {
     // Constructor
     public Obra(long _codigoObra, String _titulo, Calendar _fecha, float _precioRef, String _dimensiones) {
         //El código de una obra tiene 7 números. Debe validar que nunca exista una obra con más o menos números
-        if (String.valueOf(_codigoObra).length()!=7)
-        {
+        if (String.valueOf(_codigoObra).length() != 7) {
             return;
         }
         this.codigoObra = _codigoObra;
@@ -76,26 +85,28 @@ public class Obra {
         this.dimensiones = _dimensiones;
         this.artistas = new HashSet<Artista>();
     }
+
     //Imprimir
     @Override
-    public String toString()
-    {
+    public String toString() {
         String impresion;
-        impresion='\t'+this.titulo+":\t$"+this.precioRef+'\t'+this.dimensiones;
+        impresion = '\t' + this.titulo + ":\t$" + this.precioRef + '\t' + this.dimensiones;
         return impresion;
     }
+
     //Equals
     @Override
-    public boolean equals(Object obj){
-        try{
-            Obra o=(Obra)(obj);
-            return (this.codigoObra==o.codigoObra)?true:false;
-        }catch(Exception e){
+    public boolean equals(Object obj) {
+        try {
+            Obra o = (Obra) obj;
+            return (this.codigoObra == o.codigoObra) ? true : false;
+        } catch (Exception e) {
             return false;
         }
     }
+
     @Override
-    public int hashCode(){
-            return (int)this.codigoObra;
+    public int hashCode() {
+        return (int) this.codigoObra;
     }
 }
