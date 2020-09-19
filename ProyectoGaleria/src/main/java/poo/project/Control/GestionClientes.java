@@ -63,7 +63,7 @@ public class GestionClientes
         if(cliente==null)
         {
             System.err.println("No existe");
-            scan.close();
+          //  scan.close();
             return;
         }
        // while(scan.hasNext()) {
@@ -71,7 +71,6 @@ public class GestionClientes
        // }
         this.listaClientes.remove(cliente);
         this.organizarListaClientes();
-        scan.close();
     }
     //Agregar Cliente
     public Cliente addCliente(Cliente cliente)
