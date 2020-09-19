@@ -101,7 +101,7 @@ public class ControlGaleria {
         System.out.println(go);
         go.modificarObra(1234567);
         //go.eliminarObra(1234567);
-       // System.out.println(go);
+        controlGaleria.printObras();
         pruebasClientes[0]=new Cliente(1, 14223, "Alfredo", "Santamaria", "2085 NW Traverse Street", 6543212);
         pruebasClientes[1]=new Cliente(5, 12933, "Fred", "Jones", "20822 SW Luxury Park", 98765432);
         pruebasClientes[2]=new Cliente(6, 11837, "Juan", "Acosta", "Calle 100 #20-29", 3208426);
@@ -111,9 +111,10 @@ public class ControlGaleria {
         controlGaleria.printClientes();
         //Son el mismo objeto entonces, lo que pasa es que muestro aquí todo lo que ejecute en gestionObras
         gc.eliminarCliente();
-        gc.addCliente(pruebasClientes[2]);
+        /*gc.addCliente(pruebasClientes[2]);
         gc.addCliente(pruebasClientes[3]);
         gc.modificarCliente();
+        controlGaleria.printClientes();*/
     }
 
     //Constructor
