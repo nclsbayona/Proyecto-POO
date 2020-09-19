@@ -3,7 +3,6 @@ package poo.project.Control;
 import poo.project.Model.Artista;
 import poo.project.Model.Obra;
 import java.util.HashSet;
-import java.util.TreeSet;
 import java.util.Calendar;
 import java.util.Scanner;
 
@@ -69,7 +68,6 @@ public class GestionObras {
     public Obra addObra(Obra obra) {
         if (this.buscarObra(obra.getCodigoObra()) == null) {
             this.listaObras.add(obra);
-            this.organizarListaObras();
             return obra;
         } else {
             return null;
@@ -139,7 +137,6 @@ public class GestionObras {
         } else {
             System.out.println("\nLa obra no existe");
         }
-        this.organizarListaObras();
     }
 
     public void eliminarObra(long codigo) {
@@ -156,7 +153,6 @@ public class GestionObras {
         } else {
             System.err.println("No se encuentra la obra");
         }
-        this.organizarListaObras();
     }
 
     @Override
@@ -166,14 +162,5 @@ public class GestionObras {
             print += obra.toString() + "\n";
         }
         return print;
-    }
-
-    // Organizar la lista (Para mantener un orden)
-    public void organizarListaObras() {
-        TreeSet<Obra> nuevo = new TreeSet<Obra>();
-        nuevo.addAll(this.listaObras);
-        this.listaObras.clear();
-        this.listaObras.addAll(nuevo);
-        nuevo = null;
     }
 }
