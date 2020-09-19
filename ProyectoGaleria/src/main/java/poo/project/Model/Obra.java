@@ -37,7 +37,7 @@ public class Obra{
         return this.titulo;
     }
     public Calendar getFecha() {
-        return this.fecha;
+        return this.cal;
     }
     public float getPrecioRef() {
         return this.precioRef;
