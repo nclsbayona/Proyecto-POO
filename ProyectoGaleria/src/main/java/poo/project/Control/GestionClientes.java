@@ -66,12 +66,11 @@ public class GestionClientes
             scan.close();
             return;
         }
-        //El scanner causa problemas, por eso esto no sigue su rumbo normal
-        this.listaClientes.remove(cliente);
-        this.organizarListaClientes();
         while(scan.hasNext()) {
             scan.next();
         }
+        this.listaClientes.remove(cliente);
+        this.organizarListaClientes();
         scan.close();
     }
     //Agregar Cliente

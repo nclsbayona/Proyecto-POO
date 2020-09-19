@@ -110,11 +110,11 @@ public class ControlGaleria {
         gc.addCliente(pruebasClientes[1]);
         controlGaleria.printClientes();
         //Son el mismo objeto entonces, lo que pasa es que muestro aquí todo lo que ejecute en gestionObras
-        gc.eliminarCliente();
-        /*gc.addCliente(pruebasClientes[2]);
+        //gc.eliminarCliente();
+        gc.addCliente(pruebasClientes[2]);
         gc.addCliente(pruebasClientes[3]);
         gc.modificarCliente();
-        controlGaleria.printClientes();*/
+        controlGaleria.printClientes();
     }
 
     //Constructor
