@@ -63,12 +63,8 @@ public class GestionClientes
         if(cliente==null)
         {
             System.err.println("No existe");
-          //  scan.close();
             return;
         }
-       // while(scan.hasNext()) {
-        //    scan.next();
-       // }
         this.listaClientes.remove(cliente);
         this.organizarListaClientes();
     }

@@ -3,7 +3,7 @@ package poo.project.Model;
 import java.util.Calendar;
 import java.util.HashSet;
 
-public class Obra {
+public class Obra implements Comparable<Obra>{
 
     private HashSet<Artista> artistas;
     private long codigoObra;
@@ -108,5 +108,23 @@ public class Obra {
     @Override
     public int hashCode() {
         return (int) this.codigoObra;
+    }
+    @Override
+    public int compareTo(Obra obj)
+    {
+        int a=-1;
+        /*It is used to compare the current object with the specified object. It returns
+        positive integer, if the current object is greater than the specified object.
+        negative integer, if the current object is less than the specified object.
+        zero, if the current object is equal to the specified object.*/
+       if(this.precioRef==obj.getPrecioRef())
+        {
+            a=0;
+        }
+        else if(this.precioRef>obj.getPrecioRef())
+        {
+            a=1;
+        }
+        return a;
     }
 }

@@ -82,7 +82,6 @@ public class ControlGaleria {
             System.out.println(obra);
         }
     }
-
     //Main (Solo para probar que todo funcione bien)
     public static void main(String[] args) {
         ControlGaleria controlGaleria = new ControlGaleria();
@@ -102,8 +101,6 @@ public class ControlGaleria {
         go.modificarObra(1234567);
         //go.eliminarObra(1234567);
         controlGaleria.printObras();
-        pruebasClientes[0]=new Cliente(1, 14223, "Alfredo", "Santamaria", "2085 NW Traverse Street", 6543212);
-        pruebasClientes[1]=new Cliente(5, 12933, "Fred", "Jones", "20822 SW Luxury Park", 98765432);
         pruebasClientes[2]=new Cliente(6, 11837, "Juan", "Acosta", "Calle 100 #20-29", 3208426);
         pruebasClientes[3]=new Cliente(3, 3982, "Lucas", "Ramirez", "Diagonal 68 #78-03", 3208426);
         gc.addCliente(pruebasClientes[0]);
