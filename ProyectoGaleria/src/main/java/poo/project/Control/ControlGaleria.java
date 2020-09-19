@@ -194,11 +194,14 @@ public class ControlGaleria {
                     mapsold.replace(art, mapsold.get(art) + 1);
                 } else {
                     mapsold.put(art, 1);
+                    
                 }
             }
 
         }
-
+    /* System.out.println("\nSorted Map......By Key");
+        Map<String, String> treeMap = new TreeMap<String, String>(unsortMap);
+        printMap(treeMap); */
     }
 
     // Main (Solo para probar que todo funcione bien)
