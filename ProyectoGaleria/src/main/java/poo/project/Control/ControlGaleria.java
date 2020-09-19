@@ -112,7 +112,6 @@ public class ControlGaleria {
         gc.modificarCliente();
         gc.eliminarCliente();
     }
-    //Constructor
     public ControlGaleria() {
         this.gestionClientes = new GestionClientes();
         this.gestionObras = new GestionObras();

@@ -143,8 +143,6 @@ public class GestionClientes
                 cliente.setTelefono(telefono2);
                 break;
         }
-        sc.close();
-        sc=null;
         this.organizarListaClientes();
         //System.out.println(this.listaClientes);
     }
