@@ -111,8 +111,6 @@ public class ControlGaleria {
         //Son el mismo objeto entonces, lo que pasa es que muestro aquí todo lo que ejecute en gestionObras
         gc.modificarCliente();
         gc.eliminarCliente();
-        controlGaleria.printClientes();
-    }
 
     //Constructor
     public ControlGaleria() {
