@@ -57,7 +57,7 @@ public class GestionClientes
         Scanner scan=new Scanner(System.in);
         Cliente cliente;
         long codigoCliente;
-        System.out.print("Ingrese el codigo del cliente a eliminar: ");
+        System.out.println("Ingrese el codigo del cliente a eliminar: ");
         codigoCliente=scan.nextLong();
         cliente=this.buscarCliente(codigoCliente);
         if(cliente==null)
@@ -66,9 +66,9 @@ public class GestionClientes
             scan.close();
             return;
         }
-        while(scan.hasNext()) {
-            scan.next();
-        }
+       // while(scan.hasNext()) {
+        //    scan.next();
+       // }
         this.listaClientes.remove(cliente);
         this.organizarListaClientes();
         scan.close();
