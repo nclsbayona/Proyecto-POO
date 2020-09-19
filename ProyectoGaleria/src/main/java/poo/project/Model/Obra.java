@@ -12,6 +12,7 @@ public class Obra{
     private float precioRef;
     private boolean estado;
 
+
     public boolean getEstado() {
         return estado;
     }
@@ -21,56 +22,47 @@ public class Obra{
     }
     private String dimensiones;
 
-    // Métodos accesors
+    // Métodos accesors->
     // Getters
     public HashSet<Artista> getArtista() {
         return this.artistas;
     }
-
     public long getCodigoObra() {
         return this.codigoObra;
     }
-
     public String getTitulo() {
         return this.titulo;
     }
-
     public Calendar getFecha() {
         return this.fecha;
     }
-
     public float getPrecioRef() {
         return this.precioRef;
     }
-
     public String getDimensiones() {
         return this.dimensiones;
     }
+
 
     // Setters
     public void setArtista(HashSet<Artista> _artista) {
         this.artistas = _artista;
     }
-
     public void setCodigoObra(long _codigoObra) {
         this.codigoObra = _codigoObra;
     }
-
     public void setTitulo(String _titulo) {
         this.titulo = _titulo;
     }
 
-    public void setFecha(Calendar _fecha) {
-        this.fecha = _fecha;
-    }
+    public void setFecha(int YEAR, int DAY_OF_YEAR) { this.fecha = new Calendar.Builder().setCalendarType("Gregorian")
+            .setFields(YEAR, 1, DAY_OF_YEAR, 1).build(); }
 
     public void setPrecioRef(float _precioRef) {
         this.precioRef = _precioRef;
     }
+    public void setDimensiones(String _dimensiones) { this.dimensiones = _dimensiones; }
 
-    public void setDimensiones(String _dimensiones) {
-        this.dimensiones = _dimensiones;
-    }
 
     // Constructor
     public Obra(long _codigoObra, String _titulo, Calendar _fecha, float _precioRef, String _dimensiones) {
