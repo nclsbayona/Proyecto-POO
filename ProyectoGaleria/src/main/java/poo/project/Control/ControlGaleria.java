@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class ControlGaleria {
+
     private HashSet<Obra> listaObras;
     private HashSet<Cliente> listaClientes;
     private HashSet<Compra> listaCompras;
@@ -17,6 +18,7 @@ public class ControlGaleria {
     // Accessors
     // ListaObras
     public HashSet<Obra> getListaObras() {
+
         return this.listaObras;
     }
 
@@ -92,6 +94,7 @@ public class ControlGaleria {
      * debe mostrar un mensaje de confirmación para eliminar la compra
      */
     public Compra eliminCompra() {
+
         long codigo;
         Compra compra = null;
         Scanner sc = new Scanner(System.in);
@@ -115,6 +118,7 @@ public class ControlGaleria {
 
     // Realizar una compra
     public void realizarCompra() {
+
         Compra comp;
         Cliente clien;
         long codigo;
@@ -148,6 +152,7 @@ public class ControlGaleria {
 
     // Imprimir listaCompras
     public void printCompras() {
+
         System.out.println("Imprimiendo la lista de Compras:");
         for (Compra compra : this.listaCompras) {
             System.out.println(compra);
@@ -156,6 +161,7 @@ public class ControlGaleria {
 
     // Imprimir listaObras
     public void printObras() {
+
         System.out.println("Imprimiendo la lista de Obras:");
         for (Obra obra : this.listaObras) {
             System.out.println(obra);
@@ -168,7 +174,9 @@ public class ControlGaleria {
      * que hayan sido compradas, cliente que la compró, fecha y precio.
      */
     public void listadoDeCompra(int mes, int ano) {
+
         for (Compra compra : this.listaCompras) {
+
             if ((compra.getFecha().get(Calendar.YEAR) == ano) && (compra.getFecha().get(Calendar.MONTH) == mes)) {
                 System.out.println("Obra: " + compra.getObra().getTitulo());
                 System.out.println("Comprador: " + compra.getCliente().getNombre());
@@ -183,6 +191,7 @@ public class ControlGaleria {
      * vendidos ordenados de mayor a menor ventas
      */
     public void verListadoArtistas() {
+
         HashMap<Artista, Integer> mapsold = new HashMap<Artista, Integer>();
         HashSet<Artista> artistas;
         for (Compra compra : this.listaCompras) {
@@ -206,6 +215,7 @@ public class ControlGaleria {
 
     // Constructor
     public ControlGaleria() {
+
         this.gestionClientes = new GestionClientes();
         this.gestionObras = new GestionObras();
         this.listaClientes = new HashSet<Cliente>();

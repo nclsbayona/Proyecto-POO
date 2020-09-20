@@ -1,5 +1,7 @@
 package poo.project.Control;
 import poo.project.Model.Cliente;
+import poo.project.Model.Obra;
+
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.TreeSet;
@@ -23,6 +25,16 @@ public class GestionClientes
     public void addListaClientes(HashSet<Cliente> listaCliente){
         this.setListaClientes((this.listaClientes==null)?listaCliente:this.listaClientes);
     }
+
+    // 6. Listar Clientes Disponibles
+    public void listarClientesDisponibles(){
+        for (Cliente cliente : listaClientes) {
+
+            System.out.println(cliente.getNombre());
+
+        }
+    }
+
     //Buscar un cliente
     public Cliente buscarCliente(long codigoCliente)
     {

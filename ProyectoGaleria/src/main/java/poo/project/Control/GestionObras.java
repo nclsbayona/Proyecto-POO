@@ -23,8 +23,20 @@ public class GestionObras {
         this.listaObras = listaObras;
     }
 
+    // 1. Listar Obras Disponibles
+    public void listarObrasDisponibles(){
+
+        for (Obra obra : listaObras) {
+
+            System.out.println(obra.getTitulo());
+
+        }
+
+    }
+
     // Buscar obra por titulo
     public void buscarObra(String titulo) {
+
         for (Obra obra : listaObras) {
             if (obra.getTitulo().equals(titulo)) {
                 System.out.println(obra);
@@ -34,6 +46,7 @@ public class GestionObras {
 
     // Buscar obra por código
     public Obra buscarObra(long codigo) {
+
         for (Obra obra : listaObras) {
             if (obra.getCodigoObra() == codigo) {
                 return obra;
@@ -44,6 +57,7 @@ public class GestionObras {
 
     // BUSCAR SOLO POR AÑO
     public void buscarObra(Calendar fecha) {
+
         for (Obra obra : this.listaObras) {
             if (obra.getFecha().get(Calendar.YEAR) == fecha.get(Calendar.YEAR)) {
                 System.out.println(obra);
@@ -52,6 +66,7 @@ public class GestionObras {
     }
 
     public void buscarObraporArtista(String nombre_artista) {
+
         for (Obra obra : this.listaObras) {
             for (Artista artista : obra.getArtista()) {
                 if (artista.getNombre().equals(nombre_artista)) {
@@ -62,10 +77,12 @@ public class GestionObras {
     }
 
     public void addListaObras(HashSet<Obra> listaObras) {
+
         this.setListaObras((this.listaObras == null) ? listaObras : this.listaObras);
     }
 
     public Obra addObra(Obra obra) {
+
         if (this.buscarObra(obra.getCodigoObra()) == null) {
             this.listaObras.add(obra);
             return obra;
@@ -75,10 +92,12 @@ public class GestionObras {
     }
 
     public void modificarObra(long codigo) {
+
         Scanner input = new Scanner(System.in);
         Obra obra;
         obra = this.buscarObra(codigo);
         int criterio = 1;
+
         if (obra != null) {
 
             System.out.println("Modificando Obra *" + obra.getTitulo() + "*");
@@ -93,8 +112,10 @@ public class GestionObras {
             switch (criterio) {
 
                 case 1: {
+
                     System.out.println("Ingrese el codigo nuevo: ");
                     long newCodigo = input.nextLong();
+
                     if (this.buscarObra(newCodigo) == null) {
                         obra.setCodigoObra(newCodigo);
                         System.out.println(obra + "   " + obra.getCodigoObra());
@@ -131,8 +152,8 @@ public class GestionObras {
                     break;
                 }
                 default:
-                    System.out.println("Shit2");
 
+                    System.out.println("Shit2");
             }
         } else {
             System.out.println("\nLa obra no existe");
