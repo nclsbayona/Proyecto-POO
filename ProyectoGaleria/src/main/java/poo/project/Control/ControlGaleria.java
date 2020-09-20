@@ -3,7 +3,7 @@ package poo.project.Control;
 import java.util.Calendar;
 import poo.project.Model.*;
 import java.util.HashSet;
-import java.util.TreeMap;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class ControlGaleria {
