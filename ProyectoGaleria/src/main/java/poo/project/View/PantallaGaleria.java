@@ -40,14 +40,49 @@ public class PantallaGaleria {
         controlGaleria.printClientes();
     }
 
-    public static void main(String[] args) {
+    public static void printMenu(){
 
-        System.out.println("-------------------------");
-        System.out.println("Galeria de Arte Javeriana");
-        System.out.println("-------------------------");
-        System.out.println("---------- Menu ---------");
-        System.out.println("");
+        System.out.println("---------------------------");
+        System.out.println("- Galeria de Arte Javeriana -");
+        System.out.println("---------------------------");
+        System.out.println("----------- Menu ----------");
+        System.out.println(" ");
+
+        System.out.println("-- Obras ------------------");
+        System.out.println("1. Listar Obras Disponibles");
+        System.out.println("2. Buscar Obra");
+        System.out.println("3. Insertar Obra");
+        System.out.println("4. Modificar Obra");
+        System.out.println("5. Eliminar Obra");
+        System.out.println(" ");
+
+        System.out.println("-- Clientes ----------------");
+        System.out.println("6. Listar Clientes");
+        System.out.println("7. Buscar Cliente");
+        System.out.println("8. Insertar Cliente");
+        System.out.println("9. Modificar Cliente");
+        System.out.println("10. Eliminar Cliente");
+        System.out.println(" ");
+
+        System.out.println("-- Compras ------------------");
+        System.out.println("11. Compra de Obra");
+        System.out.println("12. Eliminar Compra");
+        System.out.println("13. Listar Compras");
+        System.out.println("14. Listar Compras Filtado");
+        System.out.println("15. Listar Artistas mas Vendidos");
+        System.out.println("---------------------------------");
+        System.out.println(" ");
+        System.out.println("16. Salir");
+        System.out.println(" ");
+        System.out.println("---------------------------------");
 
     }
-    
+
+    public static void main(String[] args) {
+
+        //Se Muestra el Menu al Usuario
+        printMenu();
+
+    }
+
 }
