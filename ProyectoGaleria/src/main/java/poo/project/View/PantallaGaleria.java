@@ -24,7 +24,7 @@ public class PantallaGaleria {
         go.addObra(obras[0]);
         go.addObra(obras[1]);
         go.addObra(obras[2]);
-        go.modificarObra(1234567);
+        //go.modificarObra(1234567);
 
     }
 
