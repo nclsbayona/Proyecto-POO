@@ -9,6 +9,12 @@ import poo.project.Model.Obra;// No deberia Existir esta coneccion
 //Boundary
 public class PantallaGaleria {
 
+    //Limpia la Pantalla
+    public static void clearScreen() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
+
     //Incerta Clientes, Obras y Autores de prueba al sistema.
     public static void prueba(ControlGaleria controlGaleria){
 
@@ -33,13 +39,13 @@ public class PantallaGaleria {
 
     //Muestra el Menu al Usuario
     public static void printMenu(){
+        clearScreen();//Limpia la Pantalla
 
-        System.out.println("---------------------------");
+        System.out.println("-----------------------------");
         System.out.println("- Galeria de Arte Javeriana -");
-        System.out.println("---------------------------");
-        System.out.println("----------- Menu ----------");
+        System.out.println("-----------------------------");
         System.out.println(" ");
-
+        System.out.println("----------- Menu ------------");
         System.out.println("-- Obras ------------------");
         System.out.println("1. Listar Obras Disponibles");
         System.out.println("2. Buscar Obra");
@@ -72,9 +78,7 @@ public class PantallaGaleria {
 
     //Controla las deciciones del usuario
     public static void controlMenu(Scanner entrada, ControlGaleria controlGaleria ){
-
-
-
+        
         //Variables internas
         int opcionObras = 0;
         long buscarObraporCodigo = 0;
@@ -107,7 +111,7 @@ public class PantallaGaleria {
             case 2: {
 
                 //Menu de Busqueda Interno para Obras
-                System.out.println("Busca Obras por: ");
+                System.out.println("Menu Busca Obras por: ");
                 System.out.println("1. Titulo");
                 System.out.println("2. Autor");
                 System.out.println("3. Codigo");
@@ -192,7 +196,7 @@ public class PantallaGaleria {
 
                 //Metodo Crear Obra
 
-                controlGaleria.getGestionObras().addObra(null);
+                //controlGaleria.getGestionObras().addObra(null);
                 System.out.println("---------------------------------");
                 break;
             }
