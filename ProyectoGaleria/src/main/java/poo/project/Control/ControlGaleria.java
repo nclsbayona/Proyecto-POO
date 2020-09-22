@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 public class ControlGaleria {
 
+    //Colecciones
     private HashSet<Obra> listaObras;
     private HashSet<Cliente> listaClientes;
     private HashSet<Compra> listaCompras;
@@ -17,11 +18,7 @@ public class ControlGaleria {
     // Métodos
     // Accessors
     // ListaObras
-    public HashSet<Obra> getListaObras() {
-
-        return this.listaObras;
-    }
-
+    public HashSet<Obra> getListaObras() { return this.listaObras; }
     public void setListaObras(HashSet<Obra> listaObras) {
         this.listaObras = listaObras;
     }
@@ -30,7 +27,6 @@ public class ControlGaleria {
     public GestionClientes getGestionClientes() {
         return this.gestionClientes;
     }
-
     public void setGestionClientes(GestionClientes gestionClientes) {
         this.gestionClientes = gestionClientes;
     }
@@ -39,7 +35,6 @@ public class ControlGaleria {
     public HashSet<Cliente> getListaClientes() {
         return this.listaClientes;
     }
-
     public void setListaClientes(HashSet<Cliente> listaClientes) {
         this.listaClientes = listaClientes;
     }
@@ -48,7 +43,6 @@ public class ControlGaleria {
     public HashSet<Compra> getListaCompras() {
         return this.listaCompras;
     }
-
     public void setListaCompras(HashSet<Compra> listaCompras) {
         this.listaCompras = listaCompras;
     }
@@ -57,7 +51,6 @@ public class ControlGaleria {
     public GestionObras getGestionObras() {
         return this.gestionObras;
     }
-
     public void setGestionObras(GestionObras gestionObras) {
         this.gestionObras = gestionObras;
     }

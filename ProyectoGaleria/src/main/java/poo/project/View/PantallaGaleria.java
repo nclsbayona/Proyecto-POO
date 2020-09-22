@@ -1,33 +1,37 @@
 package poo.project.View;
-import poo.project.Control.*;
-import poo.project.Model.Cliente;
-import poo.project.Model.Obra;
 
+import poo.project.Control.ControlGaleria;
 import java.util.Calendar;
 import java.util.Scanner;
 
+import poo.project.Model.Obra;// No deberia Existir esta coneccion
+
+//Boundary
 public class PantallaGaleria {
 
-    public static void prueba(){
+    //Incerta Clientes, Obras y Autores de prueba al sistema.
+    public static void prueba(ControlGaleria controlGaleria){
 
-        ControlGaleria controlGaleria = new ControlGaleria();
-
-        Cliente pruebasClientes[] = new Cliente[4];
-        GestionObras go = controlGaleria.getGestionObras();
+        //Cliente pruebasClientes[] = new Cliente[4];
         Obra obras[] = new Obra[3];
-        Calendar proof = Calendar.getInstance();
-        proof.set(2020, 11, 01);
-        obras[0] = new Obra(1234567, "Mera", proof, 20000, "20x5");
-        obras[1] = new Obra(5432198, "Okaloka", proof, 20000, "10x8");
-        obras[2] = new Obra(7654321, "Machupichu", proof, 15000, "10x2");
 
-        go.addObra(obras[0]);
-        go.addObra(obras[1]);
-        go.addObra(obras[2]);
-        //go.modificarObra(1234567);
+        Calendar fecha = Calendar.getInstance();
+        fecha.set(2020, 11, 01);
+
+         //Creación de instancias
+        obras[0] = new Obra(1, "A", fecha, 20000, "20x5");
+        obras[1] = new Obra(2, "B", fecha, 20000, "10x8");
+        obras[2] = new Obra(3, "C", fecha, 15000, "10x2");
+
+        //Añadiendo Instancias
+        controlGaleria.getGestionObras().addObra(obras[0]);
+        controlGaleria.getGestionObras().addObra(obras[1]);
+        controlGaleria.getGestionObras().addObra(obras[2]);
+
 
     }
 
+    //Muestra el Menu al Usuario
     public static void printMenu(){
 
         System.out.println("---------------------------");
@@ -66,52 +70,58 @@ public class PantallaGaleria {
 
     }
 
-    public static void controlMenu(){
-        Scanner entrada = new Scanner(System.in);
-        GestionObras gestionObras = new GestionObras();
-        GestionClientes gestionClientes = new GestionClientes();
+    //Controla las deciciones del usuario
+    public static void controlMenu(Scanner entrada, ControlGaleria controlGaleria ){
 
+
+
+        //Variables internas
         int opcionObras = 0;
-        String buscarObraporArtista = " ";
-        String buscarObraporTitulo =  " ";
         long buscarObraporCodigo = 0;
         Calendar buscarObraporFecha = null;
+        String buscarObraporArtista = " ";
+        String buscarObraporTitulo =  " ";
 
-
+        //Registra la decicion del Usuario
         System.out.println("Digita el Numero de la Opcion: ");
         int opcionSeleect = entrada.nextInt();
         System.out.println("---------------------------------");
         System.out.println(" ");
 
-        // Logica de Menu
+        // Procesa la decición del Usuario
         switch (opcionSeleect) {
 
             //Obras
+            //Lista Obras
             case 1: {
 
                 //Imprime por pantalla todas las obras Disponibles
                 System.out.println("Lista De Obras Disponibles: ");
                 System.out.println("---------------------------------");
-                gestionObras.listarObrasDisponibles();
+                controlGaleria.getGestionObras().listarObrasDisponibles();
                 System.out.println("---------------------------------");
                 break;
             }
+
+            //Busca obras por titulo, autor, fecha o codigo
             case 2: {
 
+                //Menu de Busqueda Interno para Obras
                 System.out.println("Busca Obras por: ");
-                System.out.println(" ");
-
                 System.out.println("1. Titulo");
                 System.out.println("2. Autor");
                 System.out.println("3. Codigo");
                 System.out.println("4. Fecha");
 
+                //Registra la decicion del Usuario
                 System.out.println("Selecciona la Opcion: ");
                 opcionObras=entrada.nextInt();
                 System.out.println(" ");
 
+                //Procesa la Decición del Usuario
                 switch (opcionObras){
 
+                    //Busqueda por Titulo
                     case 1:{
                         entrada.nextLine();
 
@@ -121,10 +131,12 @@ public class PantallaGaleria {
 
                         System.out.println("--Obras del Titulo "+ buscarObraporTitulo);
 
-                        gestionObras.buscarObra(buscarObraporTitulo);
+                        controlGaleria.getGestionObras().buscarObra(buscarObraporTitulo);
                         System.out.println("---------------------------------");
                         break;
                     }
+
+                    //Busqueda Por Autor
                     case 2:{
                         entrada.nextLine();
 
@@ -134,11 +146,13 @@ public class PantallaGaleria {
 
                         System.out.println("--Obras del Autor "+ buscarObraporArtista);
 
-                        gestionObras.buscarObraporArtista(buscarObraporArtista);
+                        controlGaleria.getGestionObras().buscarObraporArtista(buscarObraporArtista);
                         System.out.println("---------------------------------");
                         break;
 
                     }
+
+                    //Busqueda Por Codigo
                     case 3:{
                         entrada.nextLong();
 
@@ -148,10 +162,12 @@ public class PantallaGaleria {
 
                         System.out.println("--Obra del Codigo "+ buscarObraporCodigo);
 
-                        gestionObras.buscarObra(buscarObraporCodigo);
+                        controlGaleria.getGestionObras().buscarObra(buscarObraporCodigo);
                         System.out.println("---------------------------------");
                         break;
                     }
+
+                    //Busqueda Por Fecha
                     case 4: {
                         entrada.nextLine();
 
@@ -161,7 +177,7 @@ public class PantallaGaleria {
 
                         System.out.println("--Obras de la Fecha "+ buscarObraporFecha);
 
-                        gestionObras.buscarObra(buscarObraporFecha);
+                        controlGaleria.getGestionObras().buscarObra(buscarObraporFecha);
                         System.out.println("---------------------------------");
                         break;
                     }
@@ -169,39 +185,45 @@ public class PantallaGaleria {
                 }
                 break;//Case 2
             }
+
+            //Incerta Obra
             case 3:{
                 System.out.println("Insertar Obra");
 
                 //Metodo Crear Obra
 
-                gestionObras.addObra(null);
+                controlGaleria.getGestionObras().addObra(null);
                 System.out.println("---------------------------------");
                 break;
             }
+            //Modifica Obra por Codigo
             case 4: {
                 System.out.println("Modificar Obra");
 
                 System.out.println("Escribe el Codigo:");
                 buscarObraporCodigo= entrada.nextLong();
-                gestionObras.modificarObra(buscarObraporCodigo);
+                controlGaleria.getGestionObras().modificarObra(buscarObraporCodigo);
                 System.out.println("---------------------------------");
                 break;
             }
+
+            //Elimina Obra Por Codigo
             case 5:{
                 System.out.println("Eliminar Obra");
 
                 System.out.println("Escribe el Codigo:");
                 buscarObraporCodigo= entrada.nextLong();
-                gestionObras.eliminarObra(buscarObraporCodigo);
+                controlGaleria.getGestionObras().eliminarObra(buscarObraporCodigo);
                 System.out.println("---------------------------------");
                 break;
             }
 
             //Clientes
+            //Lista Clientes Activos
             case 6:{
                 System.out.println("Listar Cliente");
 
-                gestionClientes.listarClientesDisponibles();
+                controlGaleria.getGestionObras().listarObrasDisponibles();
 
                 System.out.println("---------------------------------");
                 break;
@@ -209,13 +231,22 @@ public class PantallaGaleria {
         }
     }
 
+    //Main Boundary del Sistema
     public static void main(String[] args) {
-        prueba();
-        //Se Muestra el Menu al Usuario
+
+        //Creaciones de Objetos
+        Scanner entrada = new Scanner(System.in);
+        ControlGaleria controlGaleria = new ControlGaleria();
+
+
+        //Incerta Clientes, Obras y Autores.
+        prueba(controlGaleria);
+
+        //Muestra el Menu al Usuario
         printMenu();
 
-        //Controlador de acciones del Usuario
-        controlMenu();
+        //Controla las deciciones del usuario
+        controlMenu(entrada, controlGaleria);
 
     }
 }
