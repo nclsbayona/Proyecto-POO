@@ -9,6 +9,7 @@ import poo.project.Model.Obra;// No deberia Existir esta coneccion
 //Boundary
 public class PantallaGaleria {
 
+    private ControlGaleria controlGaleria;
     //Limpia la Pantalla
     public void clearScreen() {
         System.out.print("\033[H\033[2J");
@@ -55,9 +56,10 @@ public class PantallaGaleria {
     }
 
     //Controla las deciciones del usuario
-    public void controlMenu(Scanner entrada){
+    public void controlMenu(){
 
         //Variables internas
+    	Scanner entrada=new Scanner(System.in);
         ControlGaleria controlGaleria=this.getControlGaleria();
         int opcionObras = 0;
         long buscarObraporCodigo = 0;
@@ -229,13 +231,12 @@ public class PantallaGaleria {
             //Muestra el Menu al Usuario
             pantallaGaleria.printMenu();
             //Controla las deciciones del usuario
-            pantallaGaleria.controlMenu(entrada);
+            pantallaGaleria.controlMenu();
             System.out.println("Desea ingresar otra opción (1/0)");
             opc=entrada2Scanner.nextInt();
         }while (!(opc==0));
+        entrada2Scanner.close();
     }
-
-    private ControlGaleria controlGaleria;
 
     public ControlGaleria getControlGaleria() {
         return this.controlGaleria;
