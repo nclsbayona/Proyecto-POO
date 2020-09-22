@@ -78,7 +78,7 @@ public class PantallaGaleria {
 
     //Controla las deciciones del usuario
     public static void controlMenu(Scanner entrada, ControlGaleria controlGaleria ){
-        
+
         //Variables internas
         int opcionObras = 0;
         long buscarObraporCodigo = 0;
