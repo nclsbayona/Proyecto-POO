@@ -11,12 +11,25 @@ public class ControlGaleria {
     //Colecciones
     private HashSet<Obra> listaObras;
     private HashSet<Cliente> listaClientes;
+
+    
+
     private HashSet<Compra> listaCompras;
     private GestionObras gestionObras;
     private GestionClientes gestionClientes;
 
     // Métodos
     // Accessors
+    //gestionObras
+    public GestionObras getGestionObras() {
+        return this.gestionObras;
+    }
+
+    public void setGestionObras(GestionObras gestionObras) {
+        this.gestionObras = gestionObras;
+    }
+
+    
     // gestionClientes
     public GestionClientes getGestionClientes() {
         return this.gestionClientes;
@@ -25,22 +38,48 @@ public class ControlGaleria {
     public void setGestionClientes(GestionClientes gestionClientes) {
         this.gestionClientes = gestionClientes;
     }
-
-    // Accessors
-    // listaClientes
-
-    // Buscar un cliente
-    public Cliente buscarCliente(long codigoCliente) {
-        Cliente cliente2 = null;
-        for (Cliente cliente : this.listaClientes) {
-            if (cliente.getCodigoCliente() == codigoCliente) {
-                cliente2 = cliente;
-            }
-        }
-        this.organizarListaClientes();
-        return cliente2;
+    // listaCompras
+    public HashSet<Compra> getListaCompras() {
+        return this.listaCompras;
     }
 
+    public void setListaCompras(HashSet<Compra> listaCompras) {
+        this.listaCompras = listaCompras;
+    }
+    //listaObras
+    public HashSet<Obra> getListaObras() {
+        return this.listaObras;
+    }
+
+    public void setListaObras(HashSet<Obra> listaObras) {
+        this.listaObras = listaObras;
+    }
+
+    
+    // listaClientes
+    public HashSet<Cliente> getListaClientes() {
+        return this.listaClientes;
+    }
+
+    public void setListaClientes(HashSet<Cliente> listaClientes) {
+        this.listaClientes = listaClientes;
+    }
+    
+
+    
+    //Este método añade Clientes, Obras y Compras a la galería
+    public void startDay(){
+        for (Cliente c:this.gestionClientes.startClientes()){
+            if(c!=null)
+                this.listaClientes.add(c);
+        }
+        for (Obra c:this.gestionObras.startObras()){
+            if(c!=null)
+                this.listaObras.add(c);
+        }
+    }
+    //Clientes
+    
     // Buscar un cliente por cedula
     public Cliente buscarCliente(long cedula, String s) {
         Cliente cliente2 = null;
@@ -165,18 +204,24 @@ public class ControlGaleria {
         sc.close();
         return;
     }
-    //Este método añade Clientes, Obras y Compras a la galería
-    public void startDay(){
-        for (Cliente c:this.gestionClientes.startClientes()){
-            if(c!=null)
-                this.listaClientes.add(c);
-        }
-        for (Obra c:this.gestionObras.startObras()){
-            if(c!=null)
-                this.listaObras.add(c);
+    // Imprimir listaClientes
+    public void printClientes() {
+        System.out.println("Imprimiendo la lista de Clientes:");
+        for (Cliente cliente : this.listaClientes) {
+            System.out.println(cliente);
         }
     }
-
+    // Buscar un cliente
+    public Cliente buscarCliente(long codigoCliente) {
+        Cliente cliente2 = null;
+        for (Cliente cliente : this.listaClientes) {
+            if (cliente.getCodigoCliente() == codigoCliente) {
+                cliente2 = cliente;
+            }
+        }
+        this.organizarListaClientes();
+        return cliente2;
+    }
     // Organizar la lista (Para mantener un orden)
     public void organizarListaClientes() {
         TreeSet<Cliente> nuevo = new TreeSet<Cliente>();
@@ -185,20 +230,7 @@ public class ControlGaleria {
         this.listaClientes.addAll(nuevo);
         nuevo = null;
     }
-
-    // listaCompras
-    public HashSet<Compra> getListaCompras() {
-        return this.listaCompras;
-    }
-
-    public void setListaCompras(HashSet<Compra> listaCompras) {
-        this.listaCompras = listaCompras;
-    }
-
-    public HashSet<Obra> getListaObras() {
-        return this.listaObras;
-    }
-
+    //Obras
     // Buscar obra por titulo
     public void buscarObra(String titulo) {
         for (Obra obra : this.listaObras) {
@@ -331,15 +363,14 @@ public class ControlGaleria {
             System.err.println("No se encuentra la obra");
         }
     }
-
-    // Imprimir listaClientes
-    public void printClientes() {
-        System.out.println("Imprimiendo la lista de Clientes:");
-        for (Cliente cliente : this.listaClientes) {
-            System.out.println(cliente);
+    // Imprimir listaObras
+    public void printObras() {
+        System.out.println("Imprimiendo la lista de Obras:");
+        for (Obra obra : this.listaObras) {
+            System.out.println(obra);
         }
     }
-
+    //Compras
     public boolean existeCodCompra(long cod) {
         for (Compra compra : this.listaCompras) {
             if (compra.getCodigoCompra() == cod) {
@@ -417,23 +448,6 @@ public class ControlGaleria {
         comp.setObra(obr);
         this.listaCompras.add(comp);
     }
-
-    // Imprimir listaCompras
-    public void printCompras() {
-        System.out.println("Imprimiendo la lista de Compras:");
-        for (Compra compra : this.listaCompras) {
-            System.out.println(compra);
-        }
-    }
-
-    // Imprimir listaObras
-    public void printObras() {
-        System.out.println("Imprimiendo la lista de Obras:");
-        for (Obra obra : this.listaObras) {
-            System.out.println(obra);
-        }
-    }
-
     /*
      * 14. [5] Ver listado de Compras para un mes y año específico insertado por el
      * usuario a. Se debe solicitar mes y año al usuario y mostrar listado de Obras
@@ -449,7 +463,14 @@ public class ControlGaleria {
             }
         }
     }
-
+    // Imprimir listaCompras
+    public void printCompras() {
+        System.out.println("Imprimiendo la lista de Compras:");
+        for (Compra compra : this.listaCompras) {
+            System.out.println(compra);
+        }
+    }
+    //Artistas
     /*
      * 15. [5] Ver listado de Artistas más vendidos a. Mostrar los artistas más
      * vendidos ordenados de mayor a menor ventas
@@ -476,7 +497,6 @@ public class ControlGaleria {
          * new TreeMap<String, String>(unsortMap); printMap(treeMap);
          */
     }
-
     // Main (Solo para probar que todo funcione bien)
     public static void main(String[] args) {
         ControlGaleria controlGaleria = new ControlGaleria();
