@@ -78,7 +78,6 @@ public class ControlGaleria {
                 this.listaObras.add(c);
         }
     }
-    //Clientes
     
     // Buscar un cliente por cedula
     public Cliente buscarCliente(long cedula, String s) {
