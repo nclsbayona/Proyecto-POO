@@ -10,35 +10,13 @@ import poo.project.Model.Obra;// No deberia Existir esta coneccion
 public class PantallaGaleria {
 
     //Limpia la Pantalla
-    public static void clearScreen() {
+    public void clearScreen() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
 
-    //Incerta Clientes, Obras y Autores de prueba al sistema.
-    public static void prueba(ControlGaleria controlGaleria){
-
-        //Cliente pruebasClientes[] = new Cliente[4];
-        Obra obras[] = new Obra[3];
-
-        Calendar fecha = Calendar.getInstance();
-        fecha.set(2020, 11, 01);
-
-         //Creación de instancias
-        obras[0] = new Obra(1, "A", fecha, 20000, "20x5");
-        obras[1] = new Obra(2, "B", fecha, 20000, "10x8");
-        obras[2] = new Obra(3, "C", fecha, 15000, "10x2");
-
-        //Añadiendo Instancias
-        controlGaleria.getGestionObras().addObra(obras[0]);
-        controlGaleria.getGestionObras().addObra(obras[1]);
-        controlGaleria.getGestionObras().addObra(obras[2]);
-
-
-    }
-
     //Muestra el Menu al Usuario
-    public static void printMenu(){
+    public void printMenu(){
         clearScreen();//Limpia la Pantalla
 
         System.out.println("-----------------------------");
@@ -77,9 +55,10 @@ public class PantallaGaleria {
     }
 
     //Controla las deciciones del usuario
-    public static void controlMenu(Scanner entrada, ControlGaleria controlGaleria ){
+    public void controlMenu(Scanner entrada){
 
         //Variables internas
+        ControlGaleria controlGaleria=this.getControlGaleria();
         int opcionObras = 0;
         long buscarObraporCodigo = 0;
         Calendar buscarObraporFecha = null;
@@ -102,7 +81,7 @@ public class PantallaGaleria {
                 //Imprime por pantalla todas las obras Disponibles
                 System.out.println("Lista De Obras Disponibles: ");
                 System.out.println("---------------------------------");
-                controlGaleria.getGestionObras().listarObrasDisponibles();
+                controlGaleria.printObras();
                 System.out.println("---------------------------------");
                 break;
             }
@@ -135,7 +114,7 @@ public class PantallaGaleria {
 
                         System.out.println("--Obras del Titulo "+ buscarObraporTitulo);
 
-                        controlGaleria.getGestionObras().buscarObra(buscarObraporTitulo);
+                        controlGaleria.buscarObra(buscarObraporTitulo);
                         System.out.println("---------------------------------");
                         break;
                     }
@@ -150,7 +129,7 @@ public class PantallaGaleria {
 
                         System.out.println("--Obras del Autor "+ buscarObraporArtista);
 
-                        controlGaleria.getGestionObras().buscarObraporArtista(buscarObraporArtista);
+                        controlGaleria.buscarObraporArtista(buscarObraporArtista);
                         System.out.println("---------------------------------");
                         break;
 
@@ -166,7 +145,7 @@ public class PantallaGaleria {
 
                         System.out.println("--Obra del Codigo "+ buscarObraporCodigo);
 
-                        controlGaleria.getGestionObras().buscarObra(buscarObraporCodigo);
+                        controlGaleria.buscarObra(buscarObraporCodigo);
                         System.out.println("---------------------------------");
                         break;
                     }
@@ -181,7 +160,7 @@ public class PantallaGaleria {
 
                         System.out.println("--Obras de la Fecha "+ buscarObraporFecha);
 
-                        controlGaleria.getGestionObras().buscarObra(buscarObraporFecha);
+                        controlGaleria.buscarObra(buscarObraporFecha);
                         System.out.println("---------------------------------");
                         break;
                     }
@@ -190,7 +169,7 @@ public class PantallaGaleria {
                 break;//Case 2
             }
 
-            //Incerta Obra
+            //Inserta Obra
             case 3:{
                 System.out.println("Insertar Obra");
 
@@ -205,8 +184,8 @@ public class PantallaGaleria {
                 System.out.println("Modificar Obra");
 
                 System.out.println("Escribe el Codigo:");
-                buscarObraporCodigo= entrada.nextLong();
-                controlGaleria.getGestionObras().modificarObra(buscarObraporCodigo);
+                buscarObraporCodigo=entrada.nextLong();
+                controlGaleria.modificarObra(buscarObraporCodigo);
                 System.out.println("---------------------------------");
                 break;
             }
@@ -217,7 +196,7 @@ public class PantallaGaleria {
 
                 System.out.println("Escribe el Codigo:");
                 buscarObraporCodigo= entrada.nextLong();
-                controlGaleria.getGestionObras().eliminarObra(buscarObraporCodigo);
+                controlGaleria.eliminarObra(buscarObraporCodigo);
                 System.out.println("---------------------------------");
                 break;
             }
@@ -227,7 +206,7 @@ public class PantallaGaleria {
             case 6:{
                 System.out.println("Listar Cliente");
 
-                controlGaleria.getGestionObras().listarObrasDisponibles();
+                controlGaleria.printClientes();
 
                 System.out.println("---------------------------------");
                 break;
@@ -240,17 +219,34 @@ public class PantallaGaleria {
 
         //Creaciones de Objetos
         Scanner entrada = new Scanner(System.in);
-        ControlGaleria controlGaleria = new ControlGaleria();
-
-
+        Scanner entrada2Scanner = new Scanner(System.in);
+        entrada.useDelimiter("\\n");
+        PantallaGaleria pantallaGaleria=new PantallaGaleria();
+        Integer opc;
         //Incerta Clientes, Obras y Autores.
-        prueba(controlGaleria);
+        pantallaGaleria.getControlGaleria().startDay();
+        do{
+            //Muestra el Menu al Usuario
+            pantallaGaleria.printMenu();
+            //Controla las deciciones del usuario
+            pantallaGaleria.controlMenu(entrada);
+            System.out.println("Desea ingresar otra opción (1/0)");
+            opc=entrada2Scanner.nextInt();
+        }while (!(opc==0));
+    }
 
-        //Muestra el Menu al Usuario
-        printMenu();
+    private ControlGaleria controlGaleria;
 
-        //Controla las deciciones del usuario
-        controlMenu(entrada, controlGaleria);
+    public ControlGaleria getControlGaleria() {
+        return this.controlGaleria;
+    }
 
+    public void setControlGaleria(ControlGaleria controlGaleria) {
+        this.controlGaleria = controlGaleria;
+    }
+
+    public PantallaGaleria()
+    {
+        this.controlGaleria=new ControlGaleria();
     }
 }

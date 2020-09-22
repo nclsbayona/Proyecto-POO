@@ -1,8 +1,9 @@
 package poo.project.Control;
-
 import java.util.Calendar;
 import poo.project.Model.*;
 import java.util.HashSet;
+import java.util.TreeSet;
+import java.util.TreeMap;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -164,9 +165,16 @@ public class ControlGaleria {
         sc.close();
         return;
     }
+    //Este método añade Clientes, Obras y Compras a la galería
     public void startDay(){
-        this.listaClientes.addAll(this.gestionClientes.startClientes());
-        this.listaObras.addAll(this.gestionObras.startObras());
+        for (Cliente c:this.gestionClientes.startClientes()){
+            if(c!=null)
+                this.listaClientes.add(c);
+        }
+        for (Obra c:this.gestionObras.startObras()){
+            if(c!=null)
+                this.listaObras.add(c);
+        }
     }
 
     // Organizar la lista (Para mantener un orden)
@@ -252,15 +260,20 @@ public class ControlGaleria {
             System.out.println("4. Precio referencia: " + obra.getPrecioRef());
             System.out.println("5. Dimensiones del cuadro: " + obra.getDimensiones());
             System.out.println("Que opcion desea ingresar: ");
-            criterio = input.nextInt();
-
+            try{
+                criterio = input.nextInt();
+            }catch(Exception e)
+            {
+                return;
+            }
             switch (criterio) {
 
                 case 1: {
                     System.out.println("Ingrese el codigo nuevo: ");
                     long newCodigo = input.nextLong();
                     if (this.buscarObra(newCodigo) == null) {
-                        obra.setCodigoObra(newCodigo);
+                        if (!((Long.toString(newCodigo)).length()<7))
+                            obra.setCodigoObra(newCodigo);
                         System.out.println(obra + "   " + obra.getCodigoObra());
                         return;
                     } else {
