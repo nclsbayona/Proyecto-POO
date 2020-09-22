@@ -1,10 +1,6 @@
 package poo.project.Control;
 import poo.project.Model.Cliente;
-import poo.project.Model.Obra;
-
 import java.util.HashSet;
-import java.util.Scanner;
-import java.util.TreeSet;
 public class GestionClientes
 {
     //Accessors
