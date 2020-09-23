@@ -8,10 +8,10 @@ import java.util.HashSet;
 public class Obra{
 
     private HashSet<Artista> artistas;
-    private long codigoObra;
-    private String titulo;
     private Calendar fecha;
+    private String titulo;
     private float precioRef;
+    private long codigoObra;
     private boolean estado;
 
     Calendar cal = new GregorianCalendar();
