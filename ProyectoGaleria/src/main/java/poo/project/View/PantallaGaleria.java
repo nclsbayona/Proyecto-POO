@@ -19,7 +19,6 @@ public class PantallaGaleria {
     //Muestra el Menu al Usuario
     public void printMenu(){
         clearScreen();//Limpia la Pantalla
-
         System.out.println("-----------------------------");
         System.out.println("- Galeria de Arte Javeriana -");
         System.out.println("-----------------------------");
@@ -59,7 +58,8 @@ public class PantallaGaleria {
     public void controlMenu(){
 
         //Variables internas
-    	Scanner entrada=new Scanner(System.in);
+        Scanner entrada=new Scanner(System.in);
+        entrada.useDelimiter("\n");
         ControlGaleria controlGaleria=this.getControlGaleria();
         int opcionObras = 0;
         long buscarObraporCodigo = 0;
@@ -108,11 +108,10 @@ public class PantallaGaleria {
 
                     //Busqueda por Titulo
                     case 1:{
-                        entrada.nextLine();
 
                         System.out.println("Busca Obras por Titulo");
                         System.out.println("Escribe el Titulo:");
-                        buscarObraporTitulo= entrada.nextLine();
+                        buscarObraporTitulo= entrada.next();
 
                         System.out.println("--Obras del Titulo "+ buscarObraporTitulo);
 
@@ -123,11 +122,10 @@ public class PantallaGaleria {
 
                     //Busqueda Por Autor
                     case 2:{
-                        entrada.nextLine();
 
                         System.out.println("Busca Obras por Autor");
                         System.out.println("Escribe el Nombre:");
-                        buscarObraporArtista= entrada.nextLine();
+                        buscarObraporArtista= entrada.next();
 
                         System.out.println("--Obras del Autor "+ buscarObraporArtista);
 
@@ -139,7 +137,6 @@ public class PantallaGaleria {
 
                     //Busqueda Por Codigo
                     case 3:{
-                        entrada.nextLong();
 
                         System.out.println("Busca Obras por Codigo");
                         System.out.println("Escribe el Codigo:");
@@ -154,8 +151,6 @@ public class PantallaGaleria {
 
                     //Busqueda Por Fecha
                     case 4: {
-                        entrada.nextLine();
-
                         System.out.println("Busca Obras por Fecha");
                         System.out.println("Escribe la Fecha:");
                         buscarObraporFecha = null; // Ingresar Fecha

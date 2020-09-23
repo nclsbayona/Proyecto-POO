@@ -170,19 +170,19 @@ public class ControlGaleria {
                 case 3:
                     System.out.print("Ingrese el nombre nuevo: ");
                     sc.next();
-                    String nombre2 = sc.nextLine();
+                    String nombre2 = sc.next();
                     cliente.setNombre(nombre2);
                     break;
                 case 4:
                     System.out.print("Ingrese los apellidos nuevos: ");
                     sc.next();
-                    String apellidos2 = sc.nextLine();
+                    String apellidos2 = sc.next();
                     cliente.setApellidos(apellidos2);
                     break;
                 case 5:
                     System.out.print("Ingrese la direccion nueva: ");
                     sc.next();
-                    String direccion2 = sc.nextLine();
+                    String direccion2 = sc.next();
                     cliente.setDireccionEntrega(direccion2);
                     break;
                 case 6:
@@ -313,16 +313,15 @@ public class ControlGaleria {
                     break;
                 }
                 case 2: {
-                    input.nextLine();
                     System.out.println("Ingrese Titulo nuevo: ");
-                    String newTittle = input.nextLine();
+                    String newTittle = input.next();
                     obra.setTitulo(newTittle);
                     break;
                 }
                 // FALTA EL CASO 3
                 case 3: {
                     System.out.print("Ingrese la fecha nueva (YY/MM/DD): ");
-                    String fecha = input.nextLine();
+                    String fecha = input.next();
                     fecha.split("/");
                     break;
                 }
@@ -334,7 +333,7 @@ public class ControlGaleria {
                 }
                 case 5: {
                     System.out.println("Ingrese la dimension: ");
-                    String dimensiones = input.nextLine();
+                    String dimensiones = input.next();
                     obra.setDimensiones(dimensiones);
                     break;
                 }
