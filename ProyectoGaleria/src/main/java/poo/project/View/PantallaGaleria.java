@@ -240,7 +240,7 @@ public class PantallaGaleria {
         //Creaciones de Objetos
         Scanner entrada = new Scanner(System.in);
         Scanner entrada2Scanner = new Scanner(System.in);
-        entrada.useDelimiter("\\n");
+        entrada.useDelimiter("\n");
         PantallaGaleria pantallaGaleria=new PantallaGaleria();
         Integer opc;
 
