@@ -89,7 +89,7 @@ public class Obra{
     @Override
     public String toString() {
         String impresion;
-        impresion = '\t' + this.titulo + ":\t$" + this.precioRef + '\t' + this.dimensiones;
+        impresion = '\t' + this.titulo + '\t'+ this.fecha.get(Calendar.DATE)+'/'+this.fecha.get(Calendar.MONTH)+'/'+ this.fecha.get(Calendar.YEAR)+":\t$" + this.precioRef + '\t' + this.dimensiones;
         return impresion;
     }
     //Equals
