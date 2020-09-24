@@ -1,19 +1,18 @@
 package poo.project.Control;
-import java.util.Calendar;
-import poo.project.Model.*;
-import java.util.HashSet;
-import java.util.TreeSet;
-import java.util.TreeMap;
-import java.util.HashMap;
-import java.util.Scanner;
 
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Scanner;
+import java.util.TreeMap;
+import java.util.TreeSet;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import poo.project.Model.*;
 public class ControlGaleria {
     //Colecciones
     private HashSet<Obra> listaObras;
     private HashSet<Cliente> listaClientes;
-
-    
-
     private HashSet<Compra> listaCompras;
     private GestionObras gestionObras;
     private GestionClientes gestionClientes;
@@ -108,9 +107,7 @@ public class ControlGaleria {
             this.listaClientes.remove(cliente);
         }
         catch(Exception e){
-
         }
-        scan.close();
         this.organizarListaClientes();
     }
 
@@ -120,7 +117,44 @@ public class ControlGaleria {
         this.organizarListaClientes();
         return cliente;
     }
-
+    public void crearCliente(){
+        Scanner sc=new Scanner(System.in);
+        sc.useDelimiter("\n");
+        Cliente c;
+        String codigoCliente;
+        System.out.println("Ingrese el codigo del cliente");
+        codigoCliente=sc.next();
+        c=this.buscarCliente(Long.parseLong(codigoCliente));
+        if (c!=null){
+            System.out.println("Ya existe un cliente con este codigo");
+            return;
+        }
+        String cedula;
+        System.out.println("Ingrese la cedula del cliente");
+        cedula=sc.next();
+        c=this.buscarCliente(Long.parseLong(cedula), "cc");
+        if (c!=null){
+            System.out.println("Ya existe un cliente con esta cedula");
+            return;
+        }
+        String nombres;
+        System.out.println("Ingrese los nombres del cliente");
+        nombres=sc.next();
+        String apellidos;
+        System.out.println("Ingrese los apellidos del cliente");
+        apellidos=sc.next();
+        String direccionEntrega;
+        System.out.println("Ingrese la direccion de entrega del cliente");
+        direccionEntrega=sc.next();
+        String telefono;
+        System.out.println("Ingrese el telefono del cliente");
+        telefono=sc.next();
+        c=new Cliente(Long.parseLong(codigoCliente), Long.parseLong(cedula), nombres, apellidos, direccionEntrega, Long.parseLong(telefono));
+        c=this.addCliente(c);
+        this.printClientes();
+        this.organizarListaClientes();
+        this.printClientes();
+    }
     // Modificar Cliente
     public void modificarCliente() {
         Scanner sc = new Scanner(System.in);
@@ -143,26 +177,25 @@ public class ControlGaleria {
             switch (respuesta) {
                 case 1:
                     System.out.print("Ingrese el codigo nuevo: ");
-                    long codigoCliente2 = sc.nextLong();
-                    if (codigoCliente2<1)
+                    String codigoCliente2 = sc.next();
+                    
+                    if (Long.parseLong(codigoCliente2)<1)
                     {
                         System.err.println("Codigo invalido");
-                        sc.close();
                         return;
                     }
-                    if (this.buscarCliente(codigoCliente2) != null) {
+                    if (this.buscarCliente(Long.parseLong(codigoCliente2))!= null) {
                         System.out.println("Ya existe un cliente con ese codigo");
-                        sc.close();
                         return;
                     }
-                    cliente.setCodigoCliente(codigoCliente2);
+                    cliente.setCodigoCliente(Long.parseLong(codigoCliente2));
                     break;
                 case 2:
                     System.out.print("Ingrese la cedula nueva: ");
-                    long cedula2 = sc.nextLong();
+                    String cedula1=sc.next();
+                    long cedula2 = Long.parseLong(cedula1);
                     if (this.buscarCliente(cedula2, "cedula") != null) {
                         System.out.println("Ya existe un cliente con esa cedula");
-                        sc.close();
                         return;
                     }
                     cliente.setCedula(cedula2);
@@ -195,12 +228,8 @@ public class ControlGaleria {
                     System.err.println("Opcion invalida");
                     return;
             }
-            while (sc.hasNext()){
-                sc.next();
-            }
             this.organizarListaClientes();
         }
-        sc.close();
         return;
     }
     // Imprimir listaClientes
@@ -267,7 +296,33 @@ public class ControlGaleria {
             }
         }
     }
-
+    public void insertarObra()
+    {
+        Scanner sc=new Scanner(System.in);
+        sc.useDelimiter("\n");
+        String Titulo;
+        String precioRef;
+        String codigoObra;
+        String dimensiones; 
+        String fecString;
+        System.out.println("Insertar Obra");
+        System.out.println("Codigo de la obra:");
+        codigoObra=sc.next();
+        if (this.buscarObra(Long.parseLong(codigoObra))!=null){
+            System.out.println("Ya existe una obra con este codigo");
+            return;
+        }
+        System.out.println("Titulo: ");
+        Titulo=sc.next();
+        System.out.println("Fecha: ");
+        fecString=sc.next();
+        System.out.println("Precio de referencia: ");
+        precioRef=sc.next();
+        System.out.println("Dimensiones: ");
+        dimensiones=sc.next();
+        
+        this.addObra(new Obra(Long.parseLong(codigoObra), Titulo, Calendar.getInstance(), Float.parseFloat(precioRef), dimensiones));
+    }
     public Obra addObra(Obra obra) {
         if (this.buscarObra(obra.getCodigoObra()) == null) {
             this.listaObras.add(obra);
@@ -408,8 +463,9 @@ public class ControlGaleria {
         }
         System.out.println("Seguro? (0/1)");
         codigo = sc.nextLong();
-        if (codigo == 0)
+        if (codigo == 0){
             return null;
+        }
         this.listaCompras.remove(compra);
         return compra;
     }
@@ -425,8 +481,9 @@ public class ControlGaleria {
         System.out.println("Ingrese codigo del cliente");
         codigo = sc.nextLong();
         clien = this.buscarCliente(codigo);
-        if (clien == null)
+        if (clien == null){
             return;
+        }
         System.out.println("Ingrese codigo de la obra");
         codigo = sc.nextLong();
         obr = this.buscarObra(codigo);

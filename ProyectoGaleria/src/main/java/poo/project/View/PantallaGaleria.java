@@ -19,7 +19,7 @@ public class PantallaGaleria {
 
     //Muestra el Menu al Usuario
     public void printMenu(){
-        clearScreen();//Limpia la Pantalla
+        this.clearScreen();//Limpia la Pantalla
         System.out.println("-----------------------------");
         System.out.println("- Galeria de Arte Javeriana -");
         System.out.println("-----------------------------");
@@ -60,10 +60,9 @@ public class PantallaGaleria {
 
         //Variables internas
         Scanner entrada=new Scanner(System.in);
-        entrada.useDelimiter("\n");
         ControlGaleria controlGaleria=this.getControlGaleria();
-        int opcionObras = 0;
-        long buscarObraporCodigo = 0;
+        String opcionObras = "0";
+        String buscarObraporCodigo, buscarCliente, buscarClienteC;
         Calendar fecha =Calendar.getInstance();
         String buscarObraporArtista = " ";
         String buscarObraporTitulo =  " ";
@@ -71,17 +70,17 @@ public class PantallaGaleria {
 
         //Registra la decicion del Usuario
         System.out.println("Digita el Numero de la Opcion: ");
-        int opcionSeleect = entrada.nextInt();
+        String opcionSeleect = entrada.nextLine();
         System.out.println("---------------------------------");
         System.out.println(" ");
 
         // Procesa la decición del Usuario
-        switch (opcionSeleect) {
+        switch (Integer.parseInt(opcionSeleect)) {
 
             //Obras
             //Lista Obras
             case 1: {
-                clearScreen();//Limpia la Pantalla
+                this.clearScreen();//Limpia la Pantalla
 
                 //Imprime por pantalla todas las obras Disponibles
                 System.out.println("Lista De Obras Disponibles: ");
@@ -93,7 +92,7 @@ public class PantallaGaleria {
 
             //Busca obras por titulo, autor, fecha o codigo
             case 2: {
-                clearScreen();//Limpia la Pantalla
+                this.clearScreen();//Limpia la Pantalla
 
                 //Menu de Busqueda Interno para Obras
                 System.out.println("Menu Busca Obras por: ");
@@ -104,15 +103,15 @@ public class PantallaGaleria {
 
                 //Registra la decicion del Usuario
                 System.out.println("Selecciona la Opcion: ");
-                opcionObras=entrada.nextInt();
+                opcionObras=entrada.next();
                 System.out.println(" ");
 
                 //Procesa la Decición del Usuario
-                switch (opcionObras){
+                switch (Integer.parseInt(opcionObras)){
 
                     //Busqueda por Titulo
                     case 1:{
-                        clearScreen();//Limpia la Pantalla
+                        this.clearScreen();//Limpia la Pantalla
                         System.out.println("Busca Obras por Titulo");
                         System.out.println("Escribe el Titulo:");
                         buscarObraporTitulo= entrada.next();
@@ -126,7 +125,7 @@ public class PantallaGaleria {
 
                     //Busqueda Por Autor
                     case 2:{
-                        clearScreen();//Limpia la Pantalla
+                        this.clearScreen();//Limpia la Pantalla
                         System.out.println("Busca Obras por Autor");
                         System.out.println("Escribe el Nombre:");
                         buscarObraporArtista= entrada.next();
@@ -141,37 +140,25 @@ public class PantallaGaleria {
 
                     //Busqueda Por Codigo
                     case 3:{
-                        clearScreen();//Limpia la Pantalla
+                        this.clearScreen();//Limpia la Pantalla
                         System.out.println("Busca Obras por Codigo");
                         System.out.println("Escribe el Codigo:");
-                        buscarObraporCodigo= entrada.nextLong();
+                        buscarObraporCodigo=entrada.next();
 
                         System.out.println("--Obra del Codigo "+ buscarObraporCodigo);
-
-                        controlGaleria.buscarObra(buscarObraporCodigo);
+                        System.out.println(controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo)));
                         System.out.println("---------------------------------");
                         break;
                     }
 
-                    //Busqueda Por Fecha
+                    //Busqueda Por año
                     case 4: {
-                        clearScreen();//Limpia la Pantalla
+                        this.clearScreen();//Limpia la Pantalla
                         System.out.println("Busca Obras por Fecha");
-                        System.out.println("Escribe la Fecha:");
-                        System.out.println(" ");
-
                         System.out.println("Escribe el Año:");
-                        byte ano = entrada.nextByte();
-
-                        System.out.println("Escribe el Mes:");
-                        byte mes = entrada.nextByte();
-
-                        System.out.println("Escribe el Dia:");
-                        byte dia = entrada.nextByte();
-
-                        fecha.set(ano, mes, dia);
-                        System.out.println("--Obras de la Fecha "+ fecha);
-
+                        int ano = entrada.nextInt();
+                        fecha.set(ano,1,1);
+                        System.out.println("--Obras de la Fecha "+ fecha.get(Calendar.YEAR));
                         controlGaleria.buscarObra(fecha);
                         System.out.println("---------------------------------");
                         break;
@@ -183,38 +170,34 @@ public class PantallaGaleria {
 
             //Inserta Obra
             case 3:{
-                clearScreen();//Limpia la Pantalla
-
+                this.clearScreen();//Limpia la Pantalla
                 System.out.println("Insertar Obra");
-
-                //Metodo Crear Obra
-
-                //controlGaleria.getGestionObras().addObra(null);
+                controlGaleria.insertarObra();
                 System.out.println("---------------------------------");
                 break;
             }
             //Modifica Obra por Codigo
             case 4: {
-                clearScreen();//Limpia la Pantalla
+                this.clearScreen();//Limpia la Pantalla
 
                 System.out.println("Modificar Obra");
 
                 System.out.println("Escribe el Codigo:");
-                buscarObraporCodigo=entrada.nextLong();
-                controlGaleria.modificarObra(buscarObraporCodigo);
+                buscarObraporCodigo=entrada.next();
+                controlGaleria.modificarObra(Long.parseLong(buscarObraporCodigo));
                 System.out.println("---------------------------------");
                 break;
             }
 
             //Elimina Obra Por Codigo
             case 5:{
-                clearScreen();//Limpia la Pantalla
+                this.clearScreen();//Limpia la Pantalla
 
                 System.out.println("Eliminar Obra");
 
                 System.out.println("Escribe el Codigo:");
-                buscarObraporCodigo= entrada.nextLong();
-                controlGaleria.eliminarObra(buscarObraporCodigo);
+                buscarObraporCodigo=entrada.next();
+                controlGaleria.eliminarObra(Long.parseLong(buscarObraporCodigo));
                 System.out.println("---------------------------------");
                 break;
             }
@@ -222,15 +205,90 @@ public class PantallaGaleria {
             //Clientes
             //Lista Clientes Activos
             case 6:{
-                clearScreen();//Limpia la Pantalla
-
-                System.out.println("Listar Cliente");
-
+                this.clearScreen();//Limpia la Pantalla
+                System.out.println("Listar Clientes");
                 controlGaleria.printClientes();
-
                 System.out.println("---------------------------------");
                 break;
             }
+            //Lista Clientes Activos
+            case 7:{
+                this.clearScreen();//Limpia la Pantalla
+                System.out.println("Buscar Cliente");
+                //Aquí no entiendo que mondas, el pdf no dice, entonces ni idea
+                //Menu de Busqueda Interno para Obras
+                System.out.println("Menu Busca Clientes por: ");
+                System.out.println("1. CodigoCliente");
+                System.out.println("2. Cedula");
+                System.out.println();
+                buscarCliente=entrada.next();
+                switch(Integer.parseInt(buscarCliente)){
+                    case 1:
+                        System.out.println("Ingrese el codigo");
+                        buscarClienteC=entrada.next();
+                        System.out.println(controlGaleria.buscarCliente(Long.parseLong(buscarClienteC))!=null?controlGaleria.buscarCliente(Long.parseLong(buscarClienteC)):"");
+                        break;
+                    case 2:
+                        System.out.println("Ingrese la cedula");
+                        buscarClienteC=entrada.next();
+                        System.out.println(controlGaleria.buscarCliente(Long.parseLong(buscarClienteC), "cedula")!=null?controlGaleria.buscarCliente(Long.parseLong(buscarClienteC), "cedula"):"");
+                        break;
+                    default:
+                        break;
+                }
+                System.out.println("---------------------------------");
+                break;
+            }
+            //Insertar Cliente
+            case 8:{
+                this.clearScreen();//Limpia la Pantalla
+                System.out.println("Insertar clientes");
+                controlGaleria.crearCliente();
+                System.out.println("---------------------------------");
+                break;
+            }
+            //Modificar cliente
+            case 9:{
+                this.clearScreen();//Limpia la Pantalla
+                System.out.println("Modificar Cliente");
+                controlGaleria.modificarCliente();
+                System.out.println("---------------------------------");
+                break;
+            }
+            //Eliminar cliente
+            case 10:{
+                this.clearScreen();//Limpia la Pantalla
+                System.out.println("Eliminar Cliente");
+                controlGaleria.eliminarCliente();
+                System.out.println("---------------------------------");
+                break;
+            }
+            case 11:{
+                //11.Realizar compra de una Obra
+                break;
+            }
+            case 12:{
+                //12.Eliminar compra de obra 
+                break;
+            }
+            case 13:{
+                //13.Ver listado de Comprasexistentes
+                break;
+            }
+            case 14:{
+                //14.Ver listado de Compras para un mes y año específico insertado por el usuario
+                break;
+            }
+            case 15:{
+                //15.Ver listado de Artistas más vendidos
+                break;
+            }
+            case 16:{
+                //16. Salir
+                break;
+            }
+            default:
+                break;
         }
     }
 
@@ -239,26 +297,23 @@ public class PantallaGaleria {
 
         //Creaciones de Objetos
         Scanner entrada = new Scanner(System.in);
-        Scanner entrada2Scanner = new Scanner(System.in);
         entrada.useDelimiter("\n");
         PantallaGaleria pantallaGaleria=new PantallaGaleria();
-        Integer opc;
+        String opc;
 
-        //Incerta Clientes, Obras y Autores.
+        //Inserta Clientes, Obras y Autores.
         pantallaGaleria.getControlGaleria().startDay();
 
         do{
             //Muestra el Menu al Usuario
             pantallaGaleria.printMenu();
-
             //Controla las deciciones del usuario
             pantallaGaleria.controlMenu();
             System.out.println("Desea ingresar otra opción (1/0)");
-            opc=entrada2Scanner.nextInt();
+            opc=entrada.nextLine();
+            
+        }while (!(Integer.parseInt(opc)==0));
 
-        }while (!(opc==0));
-
-        entrada2Scanner.close();
     }
 
     public ControlGaleria getControlGaleria() {

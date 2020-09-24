@@ -1,8 +1,7 @@
 package poo.project.Model;
 
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
+import java.util.Calendar;
 import java.util.HashSet;
 
 public class Obra{
@@ -12,17 +11,7 @@ public class Obra{
     private String titulo;
     private float precioRef;
     private long codigoObra;
-    private boolean estado;
 
-    Calendar cal = new GregorianCalendar();
-
-    public boolean getEstado() {
-        return estado;
-    }
-
-    public void setEstado(boolean _estado) {
-        this.estado = _estado;
-    }
     private String dimensiones;
 
     // Métodos accesors->
@@ -37,7 +26,7 @@ public class Obra{
         return this.titulo;
     }
     public Calendar getFecha() {
-        return this.cal;
+        return this.fecha;
     }
     public float getPrecioRef() {
         return this.precioRef;
@@ -59,7 +48,8 @@ public class Obra{
     }
 
     public void setFecha(int YEAR, int MES) {
-        cal.set(YEAR, MES);
+        this.fecha.set(Calendar.YEAR, YEAR);
+        this.fecha.set(Calendar.MONTH, MES);
     }
 
     public void setPrecioRef(float _precioRef) {
@@ -77,6 +67,20 @@ public class Obra{
         this.codigoObra = _codigoObra;
         this.titulo = _titulo;
         this.fecha = _fecha;
+        this.precioRef = _precioRef;
+        this.dimensiones = _dimensiones;
+        this.artistas = new HashSet<Artista>();
+    }
+    // Constructor
+    public Obra(long _codigoObra, String _titulo, Date _fecha, float _precioRef, String _dimensiones) {
+        //El código de una obra tiene 7 números. Debe validar que nunca exista una obra con más o menos números
+        if (String.valueOf(_codigoObra).length() != 7) {
+            return;
+        }
+        this.codigoObra = _codigoObra;
+        this.titulo = _titulo;
+        this.fecha = Calendar.getInstance();
+        this.fecha.setTime(_fecha);
         this.precioRef = _precioRef;
         this.dimensiones = _dimensiones;
         this.artistas = new HashSet<Artista>();
