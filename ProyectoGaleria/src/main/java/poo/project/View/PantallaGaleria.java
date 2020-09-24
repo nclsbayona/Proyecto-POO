@@ -265,14 +265,23 @@ public class PantallaGaleria {
             }
             case 11:{
                 //11.Realizar compra de una Obra
+                System.out.println("Realizar compra de una Obra");
+                System.out.println("---------------------------------");
+                controlGaleria.realizarCompra();
                 break;
             }
             case 12:{
                 //12.Eliminar compra de obra 
+                System.out.println("Eliminar compra de una Obra");
+                System.out.println("---------------------------------");
+                controlGaleria.eliminCompra();
                 break;
             }
             case 13:{
-                //13.Ver listado de Comprasexistentes
+                //13.Ver listado de Compras existentes
+                System.out.println("Ver listado de Compras existentes");
+                System.out.println("---------------------------------");
+                controlGaleria.printCompras();
                 break;
             }
             case 14:{
