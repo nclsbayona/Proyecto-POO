@@ -322,7 +322,6 @@ public class PantallaGaleria {
 			pantallaGaleria.controlMenu();
 			System.out.println("Desea ingresar otra opción (1/0)");
 			opc = entrada.next();
-
 		} while (!opc.equals("0"));
 		entrada.close();
 	}

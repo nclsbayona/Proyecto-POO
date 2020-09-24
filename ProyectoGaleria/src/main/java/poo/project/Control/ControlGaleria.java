@@ -369,21 +369,20 @@ public class ControlGaleria {
 	}
 	public Artista leerArtista() {
 		Scanner sc = new Scanner(System.in);
+		sc.useDelimiter("\n");
 		System.out.println("_____Artista_____");
 		String cedula, nombre, apellido, telefono;
 		Calendar date = Calendar.getInstance();
 		System.out.println("Cedula: ");
 		cedula = sc.next();
-		sc.nextLine();
 		System.out.println("Nombre: ");
-		nombre = sc.nextLine();
+		nombre = sc.next();
 		System.out.println("Apellidos: ");
-		apellido = sc.nextLine();
+		apellido = sc.next();
 		System.out.println("Telefono: ");
-		telefono = sc.nextLine();
+		telefono = sc.next();
 		Artista art = new Artista(Long.parseLong(cedula), nombre, apellido, date, Long.parseLong(telefono));
 		this.agregarArtista(art);
-		sc.close();
 		return art;
 	}
 
