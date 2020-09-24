@@ -324,7 +324,7 @@ public class ControlGaleria {
 	}
 
 	public void insertarObra() {
-		Scanner sc = new Scanner(System.in);
+		/*Scanner sc = new Scanner(System.in);
 		String Titulo;
 		String precioRef;
 		String codigoObra;
@@ -340,6 +340,7 @@ public class ControlGaleria {
 			System.out.println("Codigo de la obra(7 digitos):");
 			codigoObra = sc.next();
 		} while (codigoObra.length() != 7);
+
 		if (this.buscarObra(Long.parseLong(codigoObra)) != null) {
 			System.out.println("Ya existe una obra con este codigo");
 			sc.close();
@@ -360,28 +361,30 @@ public class ControlGaleria {
 		System.out.println("Precio de referencia: ");
 		precioRef = sc.next();
 		System.out.println("Dimensiones: ");
-		dimensiones = sc.next();
-		System.out.println();
-		System.out.println("_____Artista_____");
-		String cedula,nombre,apellido,telefono;
-		Calendar date=Calendar.getInstance();
-		System.out.println("Cedula: ");
-		cedula=sc.next();
-		for(Artista artis:this.listaArtistas) {
-		if(artis.equals(Long.parseLong(cedula)))
-			System.out.println("Ya se encuentra la cedula en el sistema");
-			return;
+		dimensiones = sc.next();*/
+		if (this.leerArtista() != null) {
+			System.out.println("Se ha agregado el artista con exito");
 		}
+	//	sc.close();
+	}
+	public Artista leerArtista() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("_____Artista_____");
+		String cedula, nombre, apellido, telefono;
+		Calendar date = Calendar.getInstance();
+		System.out.println("Cedula: ");
+		cedula = sc.next();
+		sc.nextLine();
 		System.out.println("Nombre: ");
-		nombre=sc.nextLine();
+		nombre = sc.nextLine();
 		System.out.println("Apellidos: ");
-		apellido=sc.nextLine();
+		apellido = sc.nextLine();
 		System.out.println("Telefono: ");
-		telefono=sc.nextLine();
-		Artista art=new Artista(Long.parseLong(cedula),nombre,apellido,date,Long.parseLong(telefono));
-		this.listaArtistas.add(art);		
-		this.addObra(new Obra(Long.parseLong(codigoObra), Titulo, fecha, Float.parseFloat(precioRef), dimensiones));
+		telefono = sc.nextLine();
+		Artista art = new Artista(Long.parseLong(cedula), nombre, apellido, date, Long.parseLong(telefono));
+		this.agregarArtista(art);
 		sc.close();
+		return art;
 	}
 
 	public Obra addObra(Obra obra) {
