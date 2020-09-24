@@ -6,8 +6,6 @@ import java.util.HashSet;
 import java.util.Scanner;
 import java.util.TreeMap;
 import java.util.TreeSet;
-import java.util.Date;
-import java.text.SimpleDateFormat;
 import poo.project.Model.*;
 public class ControlGaleria {
     //Colecciones
