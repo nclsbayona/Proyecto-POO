@@ -84,6 +84,8 @@ public class Compra {
     public int hashCode(){
             return (int)this.codigoCompra;
 	}
-	
-
+	@Override
+	public String toString(){
+		return this.cliente.toString()+"\t"+this.obra.toString();
+	}
 }
