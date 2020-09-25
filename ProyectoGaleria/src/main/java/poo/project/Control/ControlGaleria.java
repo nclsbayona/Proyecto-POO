@@ -85,18 +85,18 @@ public class ControlGaleria {
 
 	// Este método añade Clientes, Obras y Compras a la galería
 	public void startDay() {
-		for (Cliente c : this.gestionClientes.startClientes()) {
+		for (Cliente c : this.gestionClientes.listaClientes()) {
 			if (c != null)
 				this.listaClientes.add(c);
-		}
-		for (Obra c : this.gestionObras.startObras()) {
-			if (c != null)
-				this.listaObras.add(c);
 		}
 		for (Artista c : this.gestionObras.startArtistas()) {
 			if (c != null) {
 				this.listaArtistas.add(c);
 			}
+		}
+		for (Obra c : this.gestionObras.listaObras()) {
+			if (c != null)
+				this.listaObras.add(c);
 		}
 	}
 
@@ -146,6 +146,10 @@ public class ControlGaleria {
 		String codigoCliente;
 		System.out.println("Ingrese el codigo del cliente");
 		codigoCliente = sc.next();
+		if (Integer.parseInt(codigoCliente) < 0) {
+			System.out.println("Codigo invalido");
+			return;
+		}
 		c = this.buscarCliente(Long.parseLong(codigoCliente));
 		if (c != null) {
 			System.out.println("Ya existe un cliente con este codigo");
@@ -154,6 +158,10 @@ public class ControlGaleria {
 		String cedula;
 		System.out.println("Ingrese la cedula del cliente");
 		cedula = sc.next();
+		if (codigoCliente.length() < 7) {
+			System.out.println("Cedula invalida");
+			return;
+		}
 		c = this.buscarCliente(Long.parseLong(cedula), "cc");
 		if (c != null) {
 			System.out.println("Ya existe un cliente con esta cedula");
@@ -174,9 +182,7 @@ public class ControlGaleria {
 		c = new Cliente(Long.parseLong(codigoCliente), Long.parseLong(cedula), nombres, apellidos, direccionEntrega,
 				Long.parseLong(telefono));
 		c = this.addCliente(c);
-		this.printClientes();
 		this.organizarListaClientes();
-		this.printClientes();
 	}
 
 	// Modificar Cliente
@@ -198,57 +204,57 @@ public class ControlGaleria {
 				respuesta = sc.nextInt();
 			} while (respuesta > 6 || respuesta < 0);
 			switch (respuesta) {
-			case 1:
-				System.out.print("Ingrese el codigo nuevo: ");
-				String codigoCliente2 = sc.next();
+				case 1:
+					System.out.print("Ingrese el codigo nuevo: ");
+					String codigoCliente2 = sc.next();
 
-				if (Long.parseLong(codigoCliente2) < 1) {
-					System.err.println("Codigo invalido");
+					if (Long.parseLong(codigoCliente2) < 1) {
+						System.err.println("Codigo invalido");
+						return;
+					}
+					if (this.buscarCliente(Long.parseLong(codigoCliente2)) != null) {
+						System.out.println("Ya existe un cliente con ese codigo");
+						return;
+					}
+					cliente.setCodigoCliente(Long.parseLong(codigoCliente2));
+					break;
+				case 2:
+					System.out.print("Ingrese la cedula nueva: ");
+					String cedula1 = sc.next();
+					long cedula2 = Long.parseLong(cedula1);
+					if (this.buscarCliente(cedula2, "cedula") != null) {
+						System.out.println("Ya existe un cliente con esa cedula");
+						return;
+					}
+					cliente.setCedula(cedula2);
+					break;
+				case 3:
+					System.out.print("Ingrese el nombre nuevo: ");
+					sc.next();
+					String nombre2 = sc.next();
+					cliente.setNombre(nombre2);
+					break;
+				case 4:
+					System.out.print("Ingrese los apellidos nuevos: ");
+					sc.next();
+					String apellidos2 = sc.next();
+					cliente.setApellidos(apellidos2);
+					break;
+				case 5:
+					System.out.print("Ingrese la direccion nueva: ");
+					sc.next();
+					String direccion2 = sc.next();
+					cliente.setDireccionEntrega(direccion2);
+					break;
+				case 6:
+					System.out.print("Ingrese el telefono nuevo: ");
+					sc.next();
+					long telefono2 = sc.nextLong();
+					cliente.setTelefono(telefono2);
+					break;
+				default:
+					System.err.println("Opcion invalida");
 					return;
-				}
-				if (this.buscarCliente(Long.parseLong(codigoCliente2)) != null) {
-					System.out.println("Ya existe un cliente con ese codigo");
-					return;
-				}
-				cliente.setCodigoCliente(Long.parseLong(codigoCliente2));
-				break;
-			case 2:
-				System.out.print("Ingrese la cedula nueva: ");
-				String cedula1 = sc.next();
-				long cedula2 = Long.parseLong(cedula1);
-				if (this.buscarCliente(cedula2, "cedula") != null) {
-					System.out.println("Ya existe un cliente con esa cedula");
-					return;
-				}
-				cliente.setCedula(cedula2);
-				break;
-			case 3:
-				System.out.print("Ingrese el nombre nuevo: ");
-				sc.next();
-				String nombre2 = sc.next();
-				cliente.setNombre(nombre2);
-				break;
-			case 4:
-				System.out.print("Ingrese los apellidos nuevos: ");
-				sc.next();
-				String apellidos2 = sc.next();
-				cliente.setApellidos(apellidos2);
-				break;
-			case 5:
-				System.out.print("Ingrese la direccion nueva: ");
-				sc.next();
-				String direccion2 = sc.next();
-				cliente.setDireccionEntrega(direccion2);
-				break;
-			case 6:
-				System.out.print("Ingrese el telefono nuevo: ");
-				sc.next();
-				long telefono2 = sc.nextLong();
-				cliente.setTelefono(telefono2);
-				break;
-			default:
-				System.err.println("Opcion invalida");
-				return;
 			}
 			this.organizarListaClientes();
 		}
@@ -289,7 +295,8 @@ public class ControlGaleria {
 	public void buscarObra(String titulo) {
 		for (Obra obra : this.listaObras) {
 			if (obra.getTitulo().equals(titulo)) {
-				System.out.println(obra);
+				if (!this.obraEnCompra(obra))
+					System.out.println(obra);
 			}
 		}
 	}
@@ -308,9 +315,19 @@ public class ControlGaleria {
 	public void buscarObra(Calendar fecha) {
 		for (Obra obra : this.listaObras) {
 			if (obra.getFecha().get(Calendar.YEAR) == fecha.get(Calendar.YEAR)) {
-				System.out.println(obra);
+				if (!this.obraEnCompra(obra))
+					System.out.println(obra);
 			}
 		}
+	}
+
+	public boolean obraEnCompra(Obra obra) {
+		for (Compra compra : this.listaCompras) {
+			if (compra.getObra().equals(obra)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public void buscarObraporArtista(String nombre_artista) {
@@ -359,11 +376,11 @@ public class ControlGaleria {
 		precioRef = sc.next();
 		System.out.println("Dimensiones: ");
 		dimensiones = sc.next();
-		Obra obra=new Obra(Long.parseLong(codigoObra), Titulo, fecha, Float.parseFloat(precioRef), dimensiones);
+		Obra obra = new Obra(Long.parseLong(codigoObra), Titulo, fecha, Float.parseFloat(precioRef), dimensiones);
 		System.out.println("Datos del artista");
 		System.out.println("Cedula:");
-		cedula=sc.next();
-		artista=this.buscarArtista(Long.parseLong(cedula));
+		cedula = sc.next();
+		artista = this.buscarArtista(Long.parseLong(cedula));
 		if (artista != null) {
 			artista.getObras().add(obra);
 			obra.getArtista().add(artista);
@@ -372,7 +389,7 @@ public class ControlGaleria {
 			System.out.println("Exito");
 			return;
 		}
-		artista=this.leerArtista(Long.parseLong(cedula));
+		artista = this.leerArtista(Long.parseLong(cedula));
 		artista.getObras().add(obra);
 		obra.getArtista().add(artista);
 		this.listaObras.add(obra);
@@ -380,14 +397,16 @@ public class ControlGaleria {
 		this.printArtistas();
 		return;
 	}
-	public Artista buscarArtista(long cedula){
-		Artista artista=null;
-		for (Artista a:this.listaArtistas){
-			if(artista==null&&a.getCedula()==cedula)
-				artista=a;
+
+	public Artista buscarArtista(long cedula) {
+		Artista artista = null;
+		for (Artista a : this.listaArtistas) {
+			if (artista == null && a.getCedula() == cedula)
+				artista = a;
 		}
 		return artista;
 	}
+
 	public Artista leerArtista(long cedula) {
 		Artista art;
 		Scanner sc = new Scanner(System.in);
@@ -405,12 +424,14 @@ public class ControlGaleria {
 		this.agregarArtista(art);
 		return art;
 	}
-	public void printArtistas(){
+
+	public void printArtistas() {
 		System.out.println("Lista de artistas:");
 		for (Artista artista : this.listaArtistas) {
 			System.out.println(artista);
 		}
 	}
+
 	public Obra addObra(Obra obra) {
 		if (this.buscarObra(obra.getCodigoObra()) == null) {
 			this.listaObras.add(obra);
@@ -442,46 +463,46 @@ public class ControlGaleria {
 			}
 			switch (criterio) {
 
-			case 1: {
-				System.out.println("Ingrese el codigo nuevo: ");
-				long newCodigo = input.nextLong();
-				if (this.buscarObra(newCodigo) == null) {
-					if (!((Long.toString(newCodigo)).length() < 7))
-						obra.setCodigoObra(newCodigo);
-					System.out.println(obra + "   " + obra.getCodigoObra());
-					return;
-				} else {
-					System.out.println("No se modifico");
+				case 1: {
+					System.out.println("Ingrese el codigo nuevo: ");
+					long newCodigo = input.nextLong();
+					if (this.buscarObra(newCodigo) == null) {
+						if (!((Long.toString(newCodigo)).length() < 7))
+							obra.setCodigoObra(newCodigo);
+						System.out.println(obra + "   " + obra.getCodigoObra());
+						return;
+					} else {
+						System.out.println("No se modifico");
+					}
+					break;
 				}
-				break;
-			}
-			case 2: {
-				System.out.println("Ingrese Titulo nuevo: ");
-				String newTittle = input.next();
-				obra.setTitulo(newTittle);
-				break;
-			}
-			// FALTA EL CASO 3
-			case 3: {
-				System.out.print("Ingrese la fecha nueva (YY/MM/DD): ");
-				String fecha = input.next();
-				fecha.split("/");
-				break;
-			}
-			case 4: {
-				System.out.println("Ingrese el nuevo precio de referencia: ");
-				float newPrecio = input.nextFloat();
-				obra.setPrecioRef(newPrecio);
-				break;
-			}
-			case 5: {
-				System.out.println("Ingrese la dimension: ");
-				String dimensiones = input.next();
-				obra.setDimensiones(dimensiones);
-				break;
-			}
-			default:
-				System.out.println("Shit2");
+				case 2: {
+					System.out.println("Ingrese Titulo nuevo: ");
+					String newTittle = input.next();
+					obra.setTitulo(newTittle);
+					break;
+				}
+				// FALTA EL CASO 3
+				case 3: {
+					System.out.print("Ingrese la fecha nueva (YY/MM/DD): ");
+					String fecha = input.next();
+					fecha.split("/");
+					break;
+				}
+				case 4: {
+					System.out.println("Ingrese el nuevo precio de referencia: ");
+					float newPrecio = input.nextFloat();
+					obra.setPrecioRef(newPrecio);
+					break;
+				}
+				case 5: {
+					System.out.println("Ingrese la dimension: ");
+					String dimensiones = input.next();
+					obra.setDimensiones(dimensiones);
+					break;
+				}
+				default:
+					System.out.println("Shit2");
 
 			}
 		} else {
@@ -489,38 +510,38 @@ public class ControlGaleria {
 		}
 	}
 
-	public void eliminarObra(long codigo) {
-		Scanner input = new Scanner(System.in);
+	public void eliminarObra() {
+		Scanner sc = new Scanner(System.in);
+		Strind codigo;
 		Obra obra;
-		obra = this.buscarObra(codigo);
+		System.out.println("Eliminar Obra");
+		System.out.println("Escribe el Codigo:");
+		codigo = sc.next();
+		obra = this.buscarObra(Long.parseLong(codigo));
 		if (obra != null) {
-			// RECTIFICAR QUE NO ESTE ASOCIADO A UNA COMPRA PARA ELIMINARLO(FALTA LA CLASE
-			// COMPRA)
-			/* INCOMPLETO-FALTA EL CONDICIONAL Y LUEGO SI ELIMINAR- */
-			if (this.listaObras.remove(obra)) {
+			if (!this.obraEnCompra(obra)) {
+				this.listaObras.remove(obra);
 				System.out.println("Se ha eliminado con exito la obra");
+				sc.close();
+				return;
 			}
 		} else {
 			System.err.println("No se encuentra la obra");
-		}
+			
+			}
 	}
 
 	// Imprimir listaObras
 	public void listaObras() {
 		System.out.println("Imprimiendo la lista de Obras:");
-		if (this.getListaCompras().isEmpty()) {
+		if (this.listaCompras.isEmpty()) {
+			for (Obra obra : this.listaObras) {
+				System.out.println(obra);
+			}
 			return;
 		} else {
-			HashSet<Obra> list = new HashSet<>();
 			for (Obra obra : this.listaObras) {
-				for (Compra compra : this.listaCompras) {
-					if (compra.getObra().equals(obra)) {
-						list.add(obra);
-					}
-				}
-			}
-			for (Obra obra : this.listaObras) {
-				if (!list.contains(obra))
+				if (!this.obraEnCompra(obra))
 					System.out.println(obra);
 			}
 		}
@@ -573,6 +594,15 @@ public class ControlGaleria {
 		return compra;
 	}
 
+	public boolean buscarObraEnCompras(Obra obra) {
+		boolean existe = false;
+		for (Compra c : this.listaCompras) {
+			if (!existe && c.getObra().getCodigoObra() == obra.getCodigoObra())
+				existe = false;
+		}
+		return existe;
+	}
+
 	// Realizar una compra
 	public void realizarCompra() {
 		Compra comp;
@@ -591,12 +621,16 @@ public class ControlGaleria {
 		System.out.println("Ingrese codigo de la obra");
 		codigo = sc.nextLong();
 		obr = this.buscarObra(codigo);
-		if (obr == null){
+		if (obr == null) {
 			System.out.println("No existe");
 			return;
 		}
 		if (this.buscarClienteYObraEnCompra(clien, obr)) {
 			System.out.println("Esta compra ya existe en el sistema");
+			return;
+		}
+		if (this.buscarObraEnCompras(obr)) {
+			System.out.println("Esta obra ya fue comprada");
 			return;
 		}
 		long cod;
@@ -615,12 +649,20 @@ public class ControlGaleria {
 	 * usuario a. Se debe solicitar mes y año al usuario y mostrar listado de Obras
 	 * que hayan sido compradas, cliente que la compró, fecha y precio.
 	 */
-	public void listadoDeCompra(int mes, int ano) {
+	public void listadoDeCompra() {
+
+		String mes, anio;
+		System.out.println("Mes");
+		mes = entrada.next();
+		System.out.println("Año");
+		anio = entrada.next();
 		for (Compra compra : this.listaCompras) {
-			if ((compra.getFecha().get(Calendar.YEAR) == ano) && (compra.getFecha().get(Calendar.MONTH) == mes)) {
+			if ((compra.getFecha().get(Calendar.YEAR) == Integer.parseInt(anio))
+					&& (compra.getFecha().get(Calendar.MONTH) == Integer.parseInt(mes))) {
 				System.out.println("Obra: " + compra.getObra().getTitulo());
 				System.out.println("Comprador: " + compra.getCliente().getNombre());
-				System.out.println("Fecha: " + compra.getFecha().get(Calendar.DATE)+'/'+compra.getFecha().get(Calendar.MONTH)+'/'+ compra.getFecha().get(Calendar.YEAR));
+				System.out.println("Fecha: " + compra.getFecha().get(Calendar.DATE) + '/'
+						+ compra.getFecha().get(Calendar.MONTH) + '/' + compra.getFecha().get(Calendar.YEAR));
 				System.out.println("Precio: " + compra.getObra().getPrecioRef());
 			}
 		}
@@ -661,6 +703,7 @@ public class ControlGaleria {
 		 * new TreeMap<String, String>(unsortMap); printMap(treeMap);
 		 */
 	}
+
 	// Constructor
 	public ControlGaleria() {
 		this.gestionClientes = new GestionClientes();
@@ -669,5 +712,6 @@ public class ControlGaleria {
 		this.listaClientes = new HashSet<Cliente>();
 		this.listaCompras = new HashSet<Compra>();
 		this.listaObras = new HashSet<Obra>();
+		this.startDay();
 	}
 }

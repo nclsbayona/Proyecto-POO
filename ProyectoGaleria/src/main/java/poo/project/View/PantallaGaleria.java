@@ -1,11 +1,7 @@
 package poo.project.View;
-
 import poo.project.Control.ControlGaleria;
 import java.util.Calendar;
 import java.util.Scanner;
-
-import poo.project.Model.Obra;// No deberia Existir esta coneccion
-
 //Boundary
 public class PantallaGaleria {
 
@@ -81,7 +77,6 @@ public class PantallaGaleria {
 		// Lista Obras
 		case 1: {
 			this.clearScreen();// Limpia la Pantalla
-
 			// Imprime por pantalla todas las obras Disponibles
 			System.out.println("Lista De Obras Disponibles: ");
 			System.out.println("---------------------------------");
@@ -100,71 +95,61 @@ public class PantallaGaleria {
 			System.out.println("2. Autor");
 			System.out.println("3. Codigo");
 			System.out.println("4. Fecha");
-
 			// Registra la decicion del Usuario
 			System.out.println("Selecciona la Opcion: ");
 			opcionObras = entrada.next();
 			System.out.println(" ");
-
 			// Procesa la Decición del Usuario
 			switch (Integer.parseInt(opcionObras)) {
-
-			// Busqueda por Titulo
-			case 1: {
-				this.clearScreen();// Limpia la Pantalla
-				System.out.println("Busca Obras por Titulo");
-				System.out.println("Escribe el Titulo:");
-				entrada.nextLine();
-				buscarObraporTitulo = entrada.nextLine();
-				System.out.println("--Obras del Titulo " + buscarObraporTitulo);
-				controlGaleria.buscarObra(buscarObraporTitulo);
-				System.out.println("---------------------------------");
-				break;
-			}
-
-			// Busqueda Por Autor
-			case 2: {
-				this.clearScreen();// Limpia la Pantalla
-				System.out.println("Busca Obras por Autor");
-				System.out.println("Escribe el Nombre:");
-				entrada.nextLine();
-				buscarObraporArtista = entrada.nextLine();
-				System.out.println("--Obras del Autor " + buscarObraporArtista);
-				controlGaleria.buscarObraporArtista(buscarObraporArtista);
-				System.out.println("---------------------------------");
-				break;
-
-			}
-
-			// Busqueda Por Codigo
-			case 3: {
-				this.clearScreen();// Limpia la Pantalla
-				System.out.println("Busca Obras por Codigo");
-				System.out.println("Escribe el Codigo:");
-				buscarObraporCodigo = entrada.next();
-				System.out.println("--Obra del Codigo " + buscarObraporCodigo);
-				System.out.println(controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo)));
-				System.out.println("---------------------------------");
-				break;
-			}
-
-			// Busqueda Por año
-			case 4: {
-				this.clearScreen();// Limpia la Pantalla
-				System.out.println("Busca Obras por Fecha");
-				System.out.println("Escribe el Año:");
-				int ano = entrada.nextInt();
-				fecha.set(ano, 1, 1);
-				System.out.println("--Obras de la Fecha " + fecha.get(Calendar.YEAR));
-				controlGaleria.buscarObra(fecha);
-				System.out.println("---------------------------------");
-				break;
-			}
-
+				// Busqueda por Titulo
+				case 1: {
+					this.clearScreen();// Limpia la Pantalla
+					System.out.println("Busca Obras por Titulo");
+					System.out.println("Escribe el Titulo:");
+					entrada.nextLine();
+					buscarObraporTitulo = entrada.nextLine();
+					System.out.println("--Obras del Titulo " + buscarObraporTitulo);
+					controlGaleria.buscarObra(buscarObraporTitulo);
+					System.out.println("---------------------------------");
+					break;
+				}
+				// Busqueda Por Autor
+				case 2: {
+					this.clearScreen();// Limpia la Pantalla
+					System.out.println("Busca Obras por Autor");
+					System.out.println("Escribe el Nombre:");
+					buscarObraporArtista = entrada.nextLine();
+					System.out.println("--Obras del Autor " + buscarObraporArtista);
+					controlGaleria.buscarObraporArtista(buscarObraporArtista);
+					System.out.println("---------------------------------");
+					break;
+				}
+				// Busqueda Por Codigo
+				case 3: {
+					this.clearScreen();// Limpia la Pantalla
+					System.out.println("Busca Obras por Codigo");
+					System.out.println("Escribe el Codigo:");
+					buscarObraporCodigo = entrada.next();
+					System.out.println("--Obra del Codigo " + buscarObraporCodigo);
+					System.out.println(controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo)));
+					System.out.println("---------------------------------");
+					break;
+				}
+				// Busqueda Por año
+				case 4: {
+					this.clearScreen();// Limpia la Pantalla
+					System.out.println("Busca Obras por Fecha");
+					System.out.println("Escribe el Año:");
+					int ano = entrada.nextInt();
+					fecha.set(ano, 1, 1);
+					System.out.println("--Obras de la Fecha " + fecha.get(Calendar.YEAR));
+					controlGaleria.buscarObra(fecha);
+					System.out.println("---------------------------------");
+					break;
+				}
 			}
 			break;// Case 2
 		}
-
 		// Inserta Obra
 		case 3: {
 			this.clearScreen();// Limpia la Pantalla
@@ -189,12 +174,7 @@ public class PantallaGaleria {
 		// Elimina Obra Por Codigo
 		case 5: {
 			this.clearScreen();// Limpia la Pantalla
-
-			System.out.println("Eliminar Obra");
-
-			System.out.println("Escribe el Codigo:");
-			buscarObraporCodigo = entrada.next();
-			controlGaleria.eliminarObra(Long.parseLong(buscarObraporCodigo));
+			controlGaleria.eliminarObra();
 			System.out.println("---------------------------------");
 			break;
 		}
@@ -317,10 +297,6 @@ public class PantallaGaleria {
 		Scanner entrada = new Scanner(System.in);
 		PantallaGaleria pantallaGaleria = new PantallaGaleria();
 		String opc;
-
-		// Inserta Clientes, Obras y Autores.
-		pantallaGaleria.getControlGaleria().startDay();
-
 		do {
 			// Muestra el Menu al Usuario
 			pantallaGaleria.printMenu();
