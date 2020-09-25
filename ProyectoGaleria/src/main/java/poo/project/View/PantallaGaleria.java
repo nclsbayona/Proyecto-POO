@@ -293,7 +293,7 @@ public class PantallaGaleria {
 			mes=entrada.next();
 			System.out.println("Año");
 			anio=entrada.next();
-			controlGaleria.listadoDeCompra(Integer.parseInt(mes), Integer.parseInt(anio));
+			controlGaleria.listadoDeCompra(Integer.parseInt(mes)-1, Integer.parseInt(anio));
 			break;
 		}
 		case 15: {

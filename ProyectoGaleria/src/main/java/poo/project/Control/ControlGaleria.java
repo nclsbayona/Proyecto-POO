@@ -623,7 +623,7 @@ public class ControlGaleria {
 			if ((compra.getFecha().get(Calendar.YEAR) == ano) && (compra.getFecha().get(Calendar.MONTH) == mes)) {
 				System.out.println("Obra: " + compra.getObra().getTitulo());
 				System.out.println("Comprador: " + compra.getCliente().getNombre());
-				System.out.println("Fecha: " + compra.getFecha());
+				System.out.println("Fecha: " + compra.getFecha().get(Calendar.DATE)+'/'+compra.getFecha().get(Calendar.MONTH)+'/'+ compra.getFecha().get(Calendar.YEAR));
 				System.out.println("Precio: " + compra.getObra().getPrecioRef());
 			}
 		}
