@@ -288,6 +288,12 @@ public class PantallaGaleria {
 		case 14: {
 			// 14.Ver listado de Compras para un mes y año específico insertado por el
 			// usuario
+			String mes, anio;
+			System.out.println("Mes");
+			mes=entrada.next();
+			System.out.println("Año");
+			anio=entrada.next();
+			controlGaleria.listadoDeCompra(Integer.parseInt(mes), Integer.parseInt(anio));
 			break;
 		}
 		case 15: {

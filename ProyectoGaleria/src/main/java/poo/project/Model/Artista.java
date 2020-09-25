@@ -23,7 +23,7 @@ public class Artista {
 	}
 
 	// Accessors de cedula
-	public long getCedulatista() {
+	public long getCedula() {
 		return this.cedula;
 	}
 

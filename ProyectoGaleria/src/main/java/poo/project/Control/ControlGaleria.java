@@ -324,35 +324,31 @@ public class ControlGaleria {
 	}
 
 	public void insertarObra() {
-		/*Scanner sc = new Scanner(System.in);
+		Scanner sc = new Scanner(System.in);
+		sc.useDelimiter("\n");
 		String Titulo;
-		String precioRef;
+		String precioRef, cedula;
 		String codigoObra;
 		String dimensiones;
+		Artista artista;
 		String ano, mes, dia;
-		System.out.println("Lista de artistas:");
-		for (Artista artista : this.listaArtistas) {
-			System.out.println(artista);
-		}
 		System.out.println();
 		System.out.println("______INSERTANDO OBRA_____");
 		do {
 			System.out.println("Codigo de la obra(7 digitos):");
 			codigoObra = sc.next();
 		} while (codigoObra.length() != 7);
-
 		if (this.buscarObra(Long.parseLong(codigoObra)) != null) {
 			System.out.println("Ya existe una obra con este codigo");
 			sc.close();
 			return;
 		}
 		System.out.println("Titulo: ");
-		sc.nextLine();
-		Titulo = sc.nextLine();
+		Titulo = sc.next();
 		System.out.println("_________Fecha__________ ");
 		System.out.println("Año:");
 		ano = sc.next();
-		System.out.println("Mes (0-11):");
+		System.out.println("Mes:");
 		mes = sc.next();
 		System.out.println("Dia:");
 		dia = sc.next();
@@ -361,31 +357,59 @@ public class ControlGaleria {
 		System.out.println("Precio de referencia: ");
 		precioRef = sc.next();
 		System.out.println("Dimensiones: ");
-		dimensiones = sc.next();*/
-		if (this.leerArtista() != null) {
-			System.out.println("Se ha agregado el artista con exito");
+		dimensiones = sc.next();
+		Obra obra=new Obra(Long.parseLong(codigoObra), Titulo, fecha, Float.parseFloat(precioRef), dimensiones);
+		System.out.println("Datos del artista");
+		System.out.println("Cedula:");
+		cedula=sc.next();
+		artista=this.buscarArtista(Long.parseLong(cedula));
+		if (artista != null) {
+			artista.getObras().add(obra);
+			obra.getArtista().add(artista);
+			this.listaArtistas.add(artista);
+			this.listaObras.add(obra);
+			System.out.println("Exito");
+			return;
 		}
-	//	sc.close();
+		artista=this.leerArtista(Long.parseLong(cedula));
+		artista.getObras().add(obra);
+		obra.getArtista().add(artista);
+		this.listaObras.add(obra);
+		System.out.println("Exito");
+		return;
 	}
-	public Artista leerArtista() {
+	public Artista buscarArtista(long cedula){
+		Artista artista=null;
+		for (Artista a:this.listaArtistas){
+			if(artista==null&&a.getCedula()==cedula)
+				artista=a;
+		}
+		return artista;
+	}
+	public Artista leerArtista(long cedula) {
+		Artista art;
 		Scanner sc = new Scanner(System.in);
 		sc.useDelimiter("\n");
-		System.out.println("_____Artista_____");
-		String cedula, nombre, apellido, telefono;
+		System.out.println("Artista");
+		String nombre, apellido, telefono;
 		Calendar date = Calendar.getInstance();
-		System.out.println("Cedula: ");
-		cedula = sc.next();
 		System.out.println("Nombre: ");
 		nombre = sc.next();
 		System.out.println("Apellidos: ");
 		apellido = sc.next();
 		System.out.println("Telefono: ");
 		telefono = sc.next();
-		Artista art = new Artista(Long.parseLong(cedula), nombre, apellido, date, Long.parseLong(telefono));
+		art = new Artista(cedula, nombre, apellido, date, Long.parseLong(telefono));
 		this.agregarArtista(art);
 		return art;
 	}
+	public void printArtistas(){
 
+		System.out.println("Lista de artistas:");
+		for (Artista artista : this.listaArtistas) {
+			System.out.println(artista);
+		}
+	}
 	public Obra addObra(Obra obra) {
 		if (this.buscarObra(obra.getCodigoObra()) == null) {
 			this.listaObras.add(obra);
@@ -530,13 +554,13 @@ public class ControlGaleria {
 	 * debe mostrar un mensaje de confirmación para eliminar la compra
 	 */
 	public Compra eliminCompra() {
-		long codigo;
+		String codigo;
 		Compra compra = null;
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Ingrese codigo de la compra");
-		codigo = sc.nextLong();
+		codigo = sc.next();
 		for (Compra c : this.listaCompras) {
-			if (c.getCodigoCompra() == codigo && compra == null)
+			if (c.getCodigoCompra() == Long.parseLong(codigo) && compra == null)
 				compra = c;
 		}
 		if (compra == null) {
@@ -544,8 +568,8 @@ public class ControlGaleria {
 			return compra;
 		}
 		System.out.println("Seguro? (0/1)");
-		codigo = sc.nextLong();
-		if (codigo == 0) {
+		codigo = sc.next();
+		if (Long.parseLong(codigo) == 0) {
 			return null;
 		}
 		this.listaCompras.remove(compra);
@@ -564,20 +588,22 @@ public class ControlGaleria {
 		codigo = sc.nextLong();
 		clien = this.buscarCliente(codigo);
 		if (clien == null) {
-			System.out.println("Entra");
+			System.out.println("No existe");
 			return;
 		}
 		System.out.println("Ingrese codigo de la obra");
 		codigo = sc.nextLong();
 		obr = this.buscarObra(codigo);
-		if (obr == null)
+		if (obr == null){
+			System.out.println("No existe");
 			return;
+		}
 		if (this.buscarClienteYObraEnCompra(clien, obr)) {
 			System.out.println("Esta compra ya existe en el sistema");
 			return;
 		}
 		long cod;
-		cod = this.listaCompras.size() - 1;
+		cod = this.listaCompras.size();
 		do {
 			cod += 1;
 		} while (this.existeCodCompra(cod));
