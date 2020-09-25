@@ -1,12 +1,20 @@
 package poo.project.Control;
 
 import java.util.Calendar;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
-import poo.project.Model.*;
+
+import poo.project.Model.Artista;
+import poo.project.Model.Cliente;
+import poo.project.Model.Compra;
+import poo.project.Model.Obra;
 
 public class ControlGaleria {
 	// Colecciones
@@ -339,7 +347,13 @@ public class ControlGaleria {
 			}
 		}
 	}
-
+	public void addCircObryArt(Obra o, Artista a){
+		System.out.println(o.toString()+a.toString());
+		o.getArtista().add(a);
+		System.out.println(o.toString()+a.toString());
+		a.getObras().add(o);
+		System.out.println(o.toString()+a.toString());
+	}
 	public void insertarObra() {
 		Scanner sc = new Scanner(System.in);
 		sc.useDelimiter("\n");
@@ -380,28 +394,26 @@ public class ControlGaleria {
 		System.out.println("Datos del artista");
 		System.out.println("Cedula:");
 		cedula = sc.next();
+		
 		artista = this.buscarArtista(Long.parseLong(cedula));
 		if (artista != null) {
-			artista.getObras().add(obra);
-			obra.getArtista().add(artista);
-			this.listaArtistas.add(artista);
+			this.addCircObryArt(obra, artista);
 			this.listaObras.add(obra);
 			System.out.println("Exito");
 			return;
+		} else {
+			artista = this.leerArtista(Long.parseLong(cedula));
+			this.addCircObryArt(obra, artista);
+			this.listaObras.add(obra);
+			System.out.println("Exito");
+			this.printArtistas();
 		}
-		artista = this.leerArtista(Long.parseLong(cedula));
-		artista.getObras().add(obra);
-		obra.getArtista().add(artista);
-		this.listaObras.add(obra);
-		System.out.println("Exito");
-		this.printArtistas();
 		return;
 	}
-
 	public Artista buscarArtista(long cedula) {
 		Artista artista = null;
 		for (Artista a : this.listaArtistas) {
-			if (artista == null && a.getCedula() == cedula)
+			if (a.getCedula() == cedula)
 				artista = a;
 		}
 		return artista;
@@ -502,7 +514,7 @@ public class ControlGaleria {
 					break;
 				}
 				default:
-					System.out.println("Shit2");
+					System.out.println("Opcion incorrecta");
 
 			}
 		} else {
@@ -512,7 +524,7 @@ public class ControlGaleria {
 
 	public void eliminarObra() {
 		Scanner sc = new Scanner(System.in);
-		Strind codigo;
+		String codigo;
 		Obra obra;
 		System.out.println("Eliminar Obra");
 		System.out.println("Escribe el Codigo:");
@@ -527,8 +539,8 @@ public class ControlGaleria {
 			}
 		} else {
 			System.err.println("No se encuentra la obra");
-			
-			}
+			sc.close();
+		}
 	}
 
 	// Imprimir listaObras
@@ -650,7 +662,7 @@ public class ControlGaleria {
 	 * que hayan sido compradas, cliente que la compró, fecha y precio.
 	 */
 	public void listadoDeCompra() {
-
+		Scanner entrada = new Scanner(System.in);
 		String mes, anio;
 		System.out.println("Mes");
 		mes = entrada.next();
@@ -682,13 +694,10 @@ public class ControlGaleria {
 	 * vendidos ordenados de mayor a menor ventas
 	 */
 	public void verListadoArtistas() {
-
 		HashMap<Artista, Integer> mapsold = new HashMap<Artista, Integer>();
-		HashSet<Artista> artistas;
-		TreeMap<Integer, Artista> sort = new TreeMap<Integer, Artista>();
+		HashSet<Artista> artistas = new HashSet<Artista>();
+		Map<Integer, Artista> sort = new TreeMap<Integer, Artista>(Collections.reverseOrder());
 		for (Compra compra : this.listaCompras) {
-			// Así busco un elemento un en el hashmap
-			// Si no lo encuentraS
 			artistas = compra.getObra().getArtista();
 			for (Artista art : artistas) {
 				if (mapsold.containsKey(art)) {
@@ -698,10 +707,16 @@ public class ControlGaleria {
 				}
 			}
 		}
-		/*
-		 * System.out.println("\nSorted Map......By Key"); Map<String, String> treeMap =
-		 * new TreeMap<String, String>(unsortMap); printMap(treeMap);
-		 */
+		for (Map.Entry<Artista, Integer> entry : mapsold.entrySet()) {
+			sort.put(entry.getValue(), entry.getKey());
+		}
+		System.out.println("Imprimiendo ");
+		// https://devqa.io/4-different-ways-iterate-map-java/
+		for (Artista a : sort.values()) {
+			System.out.println(a);
+		}
+		// https://howtodoinjava.com/java/sort/java-sort-map-by-key/
+		// https://es.stackoverflow.com/questions/2464/c%C3%B3mo-iterar-a-trav%C3%A9s-de-un-hashmap
 	}
 
 	// Constructor

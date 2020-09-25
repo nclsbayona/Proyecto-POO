@@ -192,8 +192,6 @@ public class PantallaGaleria {
 		case 7: {
 			this.clearScreen();// Limpia la Pantalla
 			System.out.println("Buscar Cliente");
-			// Aquí no entiendo que mondas, el pdf no dice, entonces ni idea
-			// Menu de Busqueda Interno para Obras
 			System.out.println("Menu Busca Clientes por: ");
 			System.out.println("1. CodigoCliente");
 			System.out.println("2. Cedula");
@@ -268,21 +266,13 @@ public class PantallaGaleria {
 		case 14: {
 			// 14.Ver listado de Compras para un mes y año específico insertado por el
 			// usuario
-			String mes, anio;
-			System.out.println("Mes");
-			mes=entrada.next();
-			System.out.println("Año");
-			anio=entrada.next();
-			controlGaleria.listadoDeCompra(Integer.parseInt(mes)-1, Integer.parseInt(anio));
+			controlGaleria.listadoDeCompra();
 			break;
 		}
 		case 15: {
 			// 15.Ver listado de Artistas más vendidos
+			controlGaleria.verListadoArtistas();
 			break;
-		}
-		case 16: {
-			// 16. Salir
-			return;
 		}
 		default:
 			System.out.println("Opcion incorrecta!");
