@@ -332,6 +332,7 @@ public class ControlGaleria {
 		String dimensiones;
 		Artista artista;
 		String ano, mes, dia;
+		this.printArtistas();
 		System.out.println();
 		System.out.println("______INSERTANDO OBRA_____");
 		do {
@@ -376,6 +377,7 @@ public class ControlGaleria {
 		obra.getArtista().add(artista);
 		this.listaObras.add(obra);
 		System.out.println("Exito");
+		this.printArtistas();
 		return;
 	}
 	public Artista buscarArtista(long cedula){
@@ -404,7 +406,6 @@ public class ControlGaleria {
 		return art;
 	}
 	public void printArtistas(){
-
 		System.out.println("Lista de artistas:");
 		for (Artista artista : this.listaArtistas) {
 			System.out.println(artista);
@@ -508,9 +509,6 @@ public class ControlGaleria {
 	public void listaObras() {
 		System.out.println("Imprimiendo la lista de Obras:");
 		if (this.getListaCompras().isEmpty()) {
-			for (Obra obra : this.listaObras) {
-				System.out.println(obra);
-			}
 			return;
 		} else {
 			HashSet<Obra> list = new HashSet<>();
@@ -525,7 +523,6 @@ public class ControlGaleria {
 				if (!list.contains(obra))
 					System.out.println(obra);
 			}
-
 		}
 	}
 
@@ -664,17 +661,6 @@ public class ControlGaleria {
 		 * new TreeMap<String, String>(unsortMap); printMap(treeMap);
 		 */
 	}
-
-//Main (Solo para probar que todo funcione bien)
-	/*
-	 * public static void main(String[] args) { ControlGaleria controlGaleria = new
-	 * ControlGaleria(); // Añado todo lo inicial controlGaleria.startDay();
-	 * controlGaleria.listaObras(); controlGaleria.modificarObra(123456);
-	 * controlGaleria.eliminarObra(765432); controlGaleria.listaObras();
-	 * System.err.println(); controlGaleria.printClientes();
-	 * controlGaleria.modificarCliente(); controlGaleria.eliminarCliente();
-	 * controlGaleria.printClientes(); }
-	 */
 	// Constructor
 	public ControlGaleria() {
 		this.gestionClientes = new GestionClientes();
