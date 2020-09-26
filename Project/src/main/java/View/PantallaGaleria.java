@@ -347,6 +347,9 @@ public class PantallaGaleria {
 			}
 			System.out.println("Seguro? (0/1)");
 			respuesta = entrada.next();
+			if (Integer.parseInt(respuesta)!=1){
+				break;
+			}
 			controlGaleria.eliminCompra(valor);
 			break;
 		}

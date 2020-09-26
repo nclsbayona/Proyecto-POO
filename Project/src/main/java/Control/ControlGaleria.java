@@ -570,13 +570,7 @@ public class ControlGaleria {
      * usuario a. Se debe solicitar mes y año al usuario y mostrar listado de Obras
      * que hayan sido compradas, cliente que la compró, fecha y precio.
      */
-    public void listadoDeCompra() {
-        Scanner entrada = new Scanner(System.in);
-        String mes, anio;
-        System.out.println("Mes");
-        mes = entrada.next();
-        System.out.println("Año");
-        anio = entrada.next();
+    public void listadoDeCompra(String mes, String anio) {
         for (Compra compra : this.listaCompras) {
             if ((compra.getFecha().get(Calendar.YEAR) == Integer.parseInt(anio))
                     && (compra.getFecha().get(Calendar.MONTH) == Integer.parseInt(mes))) {
