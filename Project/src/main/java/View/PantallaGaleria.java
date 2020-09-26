@@ -331,7 +331,42 @@ public class PantallaGaleria {
 		case 8: {
 			this.clearScreen();// Limpia la Pantalla
 			System.out.println("Insertar clientes");
-			controlGaleria.crearCliente();
+			System.out.println("Ingrese el codigo del cliente");
+			codigoCliente = entrada.next();
+			if (Integer.parseInt(codigoCliente) < 0) {
+				System.out.println("Codigo invalido");
+				return;
+			}
+			if (controlGaleria.buscarCliente(Integer.parseInt(codigoCliente))!=null)
+			{
+				System.out.println("Este cliente ya existe");
+				break;
+			}
+			do{
+				System.out.println("Ingrese la cedula del cliente");
+				valor = entrada.next();
+				if (valor.length() < 7) {
+					System.out.println("Cedula invalida");
+				}
+			}while(valor.length() < 7);
+			if (controlGaleria.buscarCliente(Long.parseLong(valor), "cedula")!=null)
+			{
+				System.out.println("Este cliente ya existe");
+				break;
+			}
+			String nombres;
+			System.out.println("Ingrese los nombres del cliente");
+			nombres = entrada.next();
+			String apellidos;
+			System.out.println("Ingrese los apellidos del cliente");
+			apellidos = entrada.next();
+			String direccionEntrega;
+			System.out.println("Ingrese la direccion de entrega del cliente");
+			direccionEntrega = entrada.next();
+			System.out.println("Ingrese el telefono del cliente");
+			telefono = entrada.next();
+			controlGaleria.crearCliente(Integer.parseInt(codigoCliente), Long.parseLong(valor), nombres, apellidos, direccionEntrega, Long.parseLong(telefono));
+			controlGaleria.organizarListaClientes();
 			System.out.println("---------------------------------");
 			break;
 		}

@@ -136,50 +136,9 @@ public class ControlGaleria {
         return cliente;
     }
     //Crear un cliente
-    public void crearCliente() {
-        Scanner sc = new Scanner(System.in);
-        sc.useDelimiter("\n");
-        Cliente c;
-        String codigoCliente;
-        System.out.println("Ingrese el codigo del cliente");
-        codigoCliente = sc.next();
-        if (Integer.parseInt(codigoCliente) < 0) {
-            System.out.println("Codigo invalido");
-            return;
-        }
-        c = this.buscarCliente(Long.parseLong(codigoCliente));
-        if (c != null) {
-            System.out.println("Ya existe un cliente con este codigo");
-            return;
-        }
-        String cedula;
-        System.out.println("Ingrese la cedula del cliente");
-        cedula = sc.next();
-        if (cedula.length() < 7) {
-            System.out.println("Cedula invalida");
-            return;
-        }
-        c = this.buscarCliente(Long.parseLong(cedula), "cc");
-        if (c != null) {
-            System.out.println("Ya existe un cliente con esta cedula");
-            return;
-        }
-        String nombres;
-        System.out.println("Ingrese los nombres del cliente");
-        nombres = sc.next();
-        String apellidos;
-        System.out.println("Ingrese los apellidos del cliente");
-        apellidos = sc.next();
-        String direccionEntrega;
-        System.out.println("Ingrese la direccion de entrega del cliente");
-        direccionEntrega = sc.next();
-        String telefono;
-        System.out.println("Ingrese el telefono del cliente");
-        telefono = sc.next();
-        c = new Cliente(Long.parseLong(codigoCliente), Long.parseLong(cedula), nombres, apellidos, direccionEntrega,
-                Long.parseLong(telefono));
+    public void crearCliente(int codigoC, long cedula, String nombre, String apellido, String direccion, long telefono) {
+        Cliente c=new Cliente(codigoC, cedula, nombre, apellido, direccion, telefono);
         c = this.addCliente(c);
-        this.organizarListaClientes();
     }
 
     // Modificar Cliente
