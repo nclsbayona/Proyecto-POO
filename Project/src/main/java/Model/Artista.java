@@ -85,7 +85,7 @@ public class Artista {
 		this.fechaNacimiento = fechaNa;
 		this.telefono = telefono;
 	}
-
+	//Constructor
 	public Artista(String nombre, String apellidos, long cedula, long codigoArtista) {
 		this.obras = new HashSet<Obra>();
 		this.nombre = nombre;
@@ -93,14 +93,13 @@ public class Artista {
 		this.cedula = cedula;
 		this.codigoArtista = codigoArtista;
 	}
-
 	// Argumentos con cedula y código
 	public Artista(long cedula, long codigoArtista) {
 		this.obras = new HashSet<Obra>();
 		this.cedula = cedula;
 		this.codigoArtista = codigoArtista;
 	}
-
+	//Verifica que no exista un artista con esa cédula para agregar uno nuevo
 	@Override
 	public boolean equals(Object obj) {
 		try {
@@ -110,11 +109,12 @@ public class Artista {
 			return false;
 		}
 	}
-
+	//Organizacion para la busqueda de elementos
 	@Override
 	public int hashCode() {
 		return (int) this.codigoArtista;
 	}
+	//Imprimir un artista
 	@Override
 	public String toString()
 	{
