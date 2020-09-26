@@ -278,6 +278,9 @@ public class PantallaGaleria {
 			controlGaleria.verListadoArtistas();
 			break;
 		}
+		case 16:{
+			break;
+		}
 		default:
 			System.out.println("Opcion incorrecta!");
 			break;

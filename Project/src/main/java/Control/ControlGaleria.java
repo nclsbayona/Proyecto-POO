@@ -309,7 +309,6 @@ public class ControlGaleria {
         }
         return null;
     }
-
     // BUSCAR SOLO POR AÑO
     public void buscarObra(Calendar fecha) {
         for (Obra obra : this.listaObras) {
@@ -319,7 +318,6 @@ public class ControlGaleria {
             }
         }
     }
-
     public boolean obraEnCompra(Obra obra) {
         for (Compra compra : this.listaCompras) {
             if (compra.getObra().equals(obra)) {
@@ -328,7 +326,6 @@ public class ControlGaleria {
         }
         return false;
     }
-
     public void buscarObraporArtista(String nombre_artista) {
         for (Obra obra : this.listaObras) {
             for (Artista artista : obra.getArtista()) {
