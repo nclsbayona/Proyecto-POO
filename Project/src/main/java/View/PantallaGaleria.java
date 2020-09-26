@@ -280,9 +280,11 @@ public class PantallaGaleria {
 		// Elimina Obra Por Codigo
 		case 5: {
 			this.clearScreen();
-			// Limpia la Pantalla
-			controlGaleria.eliminarObra();
-			System.out.println("---------------------------------");
+			String codigo;
+			System.out.println("Eliminar Obra");
+			System.out.println("Escribe el Codigo:");
+			codigo =entrada.next();
+			this.controlGaleria.eliminarObra(Long.parseLong(codigo));
 			break;
 		}
 

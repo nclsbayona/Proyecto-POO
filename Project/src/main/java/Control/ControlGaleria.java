@@ -423,6 +423,20 @@ public class ControlGaleria {
         }
         return false;
     }
+    public void eliminarObra(long codigo) {
+        Scanner sc = new Scanner(System.in);
+        Obra obra;
+        obra = this.buscarObra(codigo);
+        if (obra != null) {
+            if (!this.obraEnCompra(obra)) {
+                this.listaObras.remove(obra);
+                System.out.println("Se ha eliminado con exito la obra");
+                return;
+            }
+        } else {
+            System.err.println("No se encuentra la obra");
+        }
+    }
 
     /*
      * 12.[5]Eliminar compra de obra a.Solicitar el número de compra a eliminar, si
