@@ -43,6 +43,7 @@ public class PantallaGaleria {
 		System.out.println("13. Listar Compras");
 		System.out.println("14. Listar Compras Filtado");
 		System.out.println("15. Listar Artistas mas Vendidos");
+		System.out.println("16. Salir");
 		System.out.println("---------------------------------");
 		/*
 		 * System.out.println(" "); System.out.println("16. Salir");
