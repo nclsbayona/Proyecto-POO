@@ -338,15 +338,10 @@ public class ControlGaleria {
             }
         }
     }
-
     public void addCircObryArt(Obra o, Artista a) {
-        System.out.println(o.toString() + a.toString());
         o.getArtista().add(a);
-        System.out.println(o.toString() + a.toString());
         a.getObras().add(o);
-        System.out.println(o.toString() + a.toString());
     }
-
     public void insertarObra() {
         Scanner sc = new Scanner(System.in);
         sc.useDelimiter("\n");
@@ -386,7 +381,6 @@ public class ControlGaleria {
         System.out.println("Datos del artista");
         System.out.println("Cedula:");
         cedula = sc.next();
-
         artista = this.buscarArtista(Long.parseLong(cedula));
         if (artista != null) {
             this.addCircObryArt(obra, artista);
