@@ -704,7 +704,7 @@ public class ControlGaleria {
             artistas = compra.getObra().getArtista();
             for (Artista art : artistas) {
                 if (mapsold.containsKey(art)) {
-                    //mapsold.replace(art, mapsold.get(art) + 1);
+                    mapsold.put(art, mapsold.get(art) + 1);
                 } else {
                     mapsold.put(art, 1);
                 }
