@@ -115,20 +115,15 @@ public class ControlGaleria {
     }
 
     // Eliminar Cliente
-    public void eliminarCliente() {
-        Scanner scan = new Scanner(System.in);
-        scan.useDelimiter("\n");
+    public void eliminarCliente(long codigo) {
+        Cliente c=this.buscarCliente(codigo);
         try {
-            Cliente cliente;
-            long codigoCliente;
-            System.out.println("Ingrese el codigo del cliente a eliminar: ");
-            codigoCliente = scan.nextLong();
-            cliente = this.buscarCliente(codigoCliente);
-            if (cliente == null) {
+            
+            if (c == null) {
                 System.err.println("No existe");
                 return;
             }
-            this.listaClientes.remove(cliente);
+            this.listaClientes.remove(c);
         } catch (Exception e) {
         }
         this.organizarListaClientes();
@@ -188,73 +183,29 @@ public class ControlGaleria {
     }
 
     // Modificar Cliente
-    public void modificarCliente() {
-        Scanner sc = new Scanner(System.in);
-        sc.useDelimiter("\n");
-        Cliente cliente;
-        int respuesta;
+    public void modificarCliente(Cliente cliente, int respuesta, String valor) {
         System.out.println();
-        System.out.print("Ingrese el codigo del cliente a modificar: ");
-        respuesta = sc.nextInt();
-        cliente = this.buscarCliente(respuesta);
-        if (cliente == null) {
-            System.out.println("El cliente no existe");
-        } else {
-            cliente.printC();
-            do {
-                System.out.print("Ingrese numero de atributo a modificar: ");
-                respuesta = sc.nextInt();
-            } while (respuesta > 6 || respuesta < 0);
-            switch (respuesta) {
-                case 1:
-                    System.out.print("Ingrese el codigo nuevo: ");
-                    String codigoCliente2 = sc.next();
-
-                    if (Long.parseLong(codigoCliente2) < 1) {
-                        System.err.println("Codigo invalido");
-                        return;
-                    }
-                    if (this.buscarCliente(Long.parseLong(codigoCliente2)) != null) {
-                        System.out.println("Ya existe un cliente con ese codigo");
-                        return;
-                    }
-                    cliente.setCodigoCliente(Long.parseLong(codigoCliente2));
-                    break;
-                case 2:
-                    System.out.print("Ingrese la cedula nueva: ");
-                    String cedula1 = sc.next();
-                    long cedula2 = Long.parseLong(cedula1);
-                    if (this.buscarCliente(cedula2, "cedula") != null) {
-                        System.out.println("Ya existe un cliente con esa cedula");
-                        return;
-                    }
-                    cliente.setCedula(cedula2);
-                    break;
-                case 3:
-                    System.out.print("Ingrese el nombre nuevo: ");
-                    String nombre2 = sc.next();
-                    cliente.setNombre(nombre2);
-                    break;
-                case 4:
-                    System.out.print("Ingrese los apellidos nuevos: ");
-                    String apellidos2 = sc.next();
-                    cliente.setApellidos(apellidos2);
-                    break;
-                case 5:
-                    System.out.print("Ingrese la direccion nueva: ");
-                    String direccion2 = sc.next();
-                    cliente.setDireccionEntrega(direccion2);
-                    break;
-                case 6:
-                    System.out.print("Ingrese el telefono nuevo: ");
-                    String telefono2 = sc.next();
-                    cliente.setTelefono(Long.parseLong(telefono2));
-                    break;
-                default:
-                    System.err.println("Opcion invalida");
-                    return;
-            }
-            this.organizarListaClientes();
+        switch (respuesta){
+            case 1:
+                cliente.setCodigoCliente(Long.parseLong(valor));
+                break;
+            case 2:
+                cliente.setCedula(Long.parseLong(valor));
+                break;
+            case 3:
+                cliente.setNombre(valor);
+                break;
+            case 4:
+                cliente.setApellidos(valor);
+                break;
+            case 5:
+                cliente.setDireccionEntrega(valor);
+                break;
+            case 6:
+                cliente.setTelefono(Long.parseLong(valor));
+                break;
+            default:
+                break;
         }
         return;
     }
@@ -438,10 +389,7 @@ public class ControlGaleria {
         }
     }
     //Modifica una obra
-    public void modificarObra(long codigo) {
-        Scanner input = new Scanner(System.in);
-        Obra obra;
-        obra = this.buscarObra(codigo);
+    public void modificarObra(Obra obra) {
         int criterio = 1;
         if (obra != null) {
             System.out.println();
@@ -579,25 +527,16 @@ public class ControlGaleria {
      * este no existe, se debe mostrar un mensaje y volver al menú principal. b.Se
      * debe mostrar un mensaje de confirmación para eliminar la compra
      */
-    public Compra eliminCompra() {
-        String codigo;
-        Compra compra = null;
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Ingrese codigo de la compra");
-        codigo = sc.next();
+    public Compra buscarCompra(String codigo){
+        Compra compra=null;
         for (Compra c : this.listaCompras) {
             if (c.getCodigoCompra() == Long.parseLong(codigo) && compra == null)
                 compra = c;
         }
-        if (compra == null) {
-            System.out.println("La compra no existe");
-            return compra;
-        }
-        System.out.println("Seguro? (0/1)");
-        codigo = sc.next();
-        if (Long.parseLong(codigo) == 0) {
-            return null;
-        }
+        return compra;
+    }
+    public Compra eliminCompra(String codigo) {
+        Compra compra=this.buscarCompra(codigo);
         this.listaCompras.remove(compra);
         return compra;
     }
@@ -612,36 +551,10 @@ public class ControlGaleria {
     }
 
     // Realizar una compra
-    public void realizarCompra() {
+    public void realizarCompra(Cliente clien, Obra obr) {
         Compra comp;
-        Cliente clien;
-        long codigo;
-        Obra obr;
-        Calendar fecha = Calendar.getInstance();
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Ingrese codigo del cliente");
-        codigo = sc.nextLong();
-        clien = this.buscarCliente(codigo);
-        if (clien == null) {
-            System.out.println("No existe");
-            return;
-        }
-        System.out.println("Ingrese codigo de la obra");
-        codigo = sc.nextLong();
-        obr = this.buscarObra(codigo);
-        if (obr == null) {
-            System.out.println("No existe");
-            return;
-        }
-        if (this.buscarClienteYObraEnCompra(clien, obr)) {
-            System.out.println("Esta compra ya existe en el sistema");
-            return;
-        }
-        if (this.buscarObraEnCompras(obr)) {
-            System.out.println("Esta obra ya fue comprada");
-            return;
-        }
         long cod;
+        Calendar fecha = Calendar.getInstance();
         cod = this.listaCompras.size();
         do {
             cod += 1;

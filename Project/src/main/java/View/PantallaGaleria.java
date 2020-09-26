@@ -64,6 +64,9 @@ public class PantallaGaleria {
 		Calendar fecha = Calendar.getInstance();
 		String buscarObraporArtista = " ";
 		String buscarObraporTitulo = " ";
+		String codigoCliente;
+		String respuesta;
+		String valor;
 
 		// Registra la decicion del Usuario
 		System.out.println("Digita el Numero de la Opcion: ");
@@ -171,7 +174,9 @@ public class PantallaGaleria {
 
 			System.out.println("Escribe el Codigo:");
 			buscarObraporCodigo = entrada.next();
-			controlGaleria.modificarObra(Long.parseLong(buscarObraporCodigo));
+			if (controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo))!=null){
+
+			}
 			System.out.println("---------------------------------");
 			break;
 		}
@@ -235,15 +240,71 @@ public class PantallaGaleria {
 		case 9: {
 			this.clearScreen();// Limpia la Bundle
 			System.out.println("Modificar Cliente");
-			controlGaleria.modificarCliente();
+			System.out.print("Ingrese el codigo del cliente a modificar: ");
+			codigoCliente = entrada.next();
+			if (controlGaleria.buscarCliente(Long.parseLong(codigoCliente))==null){
+				System.out.println("No encontrado");
+				break;
+			}
+			controlGaleria.buscarCliente(Long.parseLong(codigoCliente)).printC();
+			do {
+                System.out.print("Ingrese numero de atributo a modificar: ");
+                respuesta = entrada.next();
+			} while (Integer.parseInt(respuesta) > 6 || Integer.parseInt(respuesta) < 0);
+			switch (Integer.parseInt(respuesta)) {
+                case 1:
+                    System.out.print("Ingrese el codigo nuevo: ");
+                    valor = entrada.next();
+
+                    if (Long.parseLong(valor) < 1) {
+                        System.err.println("Codigo invalido");
+                        return;
+                    }
+                    if (this.controlGaleria.buscarCliente(Long.parseLong(valor)) != null) {
+                        System.out.println("Ya existe un cliente con ese codigo");
+                        return;
+                    }
+                    break;
+                case 2:
+                    System.out.print("Ingrese la cedula nueva: ");
+                    valor = entrada.next();
+                    if (this.controlGaleria.buscarCliente(Long.parseLong(valor), "cedula") != null) {
+                        System.out.println("Ya existe un cliente con esa cedula");
+                        return;
+                    }
+                    break;
+                case 3:
+                    System.out.print("Ingrese el nombre nuevo: ");
+                    valor = entrada.next();
+                    break;
+                case 4:
+                    System.out.print("Ingrese los apellidos nuevos: ");
+                    valor = entrada.next();
+                    break;
+                case 5:
+                    System.out.print("Ingrese la direccion nueva: ");
+                    valor = entrada.next();
+                    break;
+                case 6:
+                    System.out.print("Ingrese el telefono nuevo: ");
+                    valor = entrada.next();
+                    break;
+                default:
+                    System.err.println("Opcion invalida");
+                    return;
+			}
+			controlGaleria.modificarCliente(controlGaleria.buscarCliente(Long.parseLong(codigoCliente)), Integer.parseInt(respuesta), valor);
+            this.controlGaleria.organizarListaClientes();
 			System.out.println("---------------------------------");
 			break;
 		}
 		// Eliminar cliente
 		case 10: {
 			this.clearScreen();// Limpia la Pantalla
+            System.out.println("Ingrese el codigo del cliente a eliminar: ");
+            codigoCliente = entrada.next();
+            this.controlGaleria.eliminarCliente(Long.parseLong(codigoCliente));
 			System.out.println("Eliminar Cliente");
-			controlGaleria.eliminarCliente();
 			System.out.println("---------------------------------");
 			break;
 		}
@@ -251,14 +312,42 @@ public class PantallaGaleria {
 			// 11.Realizar compra de una Obra
 			System.out.println("Realizar compra de una Obra");
 			System.out.println("---------------------------------");
-			controlGaleria.realizarCompra();
+			System.out.println("Ingrese codigo del cliente");
+        	valor = entrada.next();
+			if (controlGaleria.buscarCliente(Long.parseLong(valor)) == null) {
+				System.out.println("No existe");
+				return;
+			}
+			System.out.println("Ingrese codigo de la obra");
+			respuesta = entrada.next();
+			if (controlGaleria.buscarObra(Long.parseLong(respuesta)) == null) {
+				System.out.println("No existe la obra");
+				return;
+			}
+			if (controlGaleria.buscarClienteYObraEnCompra(controlGaleria.buscarCliente(Long.parseLong(valor)), controlGaleria.buscarObra(Long.parseLong(respuesta)))) {
+				System.out.println("Esta compra ya existe en el sistema");
+				return;
+			}
+			if (controlGaleria.buscarObraEnCompras(controlGaleria.buscarObra(Long.parseLong(respuesta)))) {
+				System.out.println("Esta obra ya fue comprada");
+				return;
+			}
+			controlGaleria.realizarCompra(controlGaleria.buscarCliente(Long.parseLong(valor)), controlGaleria.buscarObra(Long.parseLong(respuesta)));
 			break;
-		}
+			}
 		case 12: {
 			// 12.Eliminar compra de obra
 			System.out.println("Eliminar compra de una Obra");
 			System.out.println("---------------------------------");
-			controlGaleria.eliminCompra();
+			System.out.println("Ingrese codigo de la compra");
+			valor = entrada.next();
+			if (controlGaleria.buscarCompra(valor) == null) {
+				System.out.println("La compra no existe");
+				break;
+			}
+			System.out.println("Seguro? (0/1)");
+			respuesta = entrada.next();
+			controlGaleria.eliminCompra(valor);
 			break;
 		}
 		case 13: {
