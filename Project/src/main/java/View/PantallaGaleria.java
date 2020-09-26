@@ -65,7 +65,9 @@ public class PantallaGaleria {
 		String buscarObraporArtista = " ";
 		String buscarObraporTitulo = " ";
 		String codigoCliente;
-		String respuesta;
+		String Titulo, ano, mes, dia, precioRef, dimensiones;
+		String codigoObra;
+		String respuesta, nombre, apellido, telefono;
 		String valor;
 
 		// Registra la decicion del Usuario
@@ -148,8 +150,8 @@ public class PantallaGaleria {
 					this.clearScreen();// Limpia la Pantalla
 					System.out.println("Busca Obras por Fecha");
 					System.out.println("Escribe el Año:");
-					int ano = entrada.nextInt();
-					fecha.set(ano, 1, 1);
+					int anos = entrada.nextInt();
+					fecha.set(anos, 1, 1);
 					System.out.println("--Obras de la Fecha " + fecha.get(Calendar.YEAR));
 					controlGaleria.buscarObra(fecha);
 					System.out.println("---------------------------------");
@@ -162,28 +164,123 @@ public class PantallaGaleria {
 		case 3: {
 			this.clearScreen();// Limpia la Pantalla
 			System.out.println("Insertar Obra");
-			controlGaleria.insertarObra();
+			controlGaleria.printArtistas();
+			do {
+				System.out.println("Codigo de la obra(7 digitos):");
+				codigoObra = entrada.next();
+			} while (codigoObra.length() != 7);
+			if (controlGaleria.buscarObra(Long.parseLong(codigoObra)) != null) {
+				System.out.println("Ya existe una obra con este codigo");
+				break;
+			}
+			System.out.println("Titulo: ");
+			Titulo = entrada.next();
+			System.out.println("_________Fecha__________ ");
+			System.out.println("Año:");
+			ano = entrada.next();
+			System.out.println("Mes:");
+			mes = entrada.next();
+			System.out.println("Dia:");
+			dia = entrada.next();
+			System.out.println("Precio de referencia: ");
+			precioRef = entrada.next();
+			System.out.println("Dimensiones: ");
+			dimensiones = entrada.next();
+			System.out.println("Cedula:");
+        	valor = entrada.next();
+			if(controlGaleria.buscarArtista(Long.parseLong(valor))!=null){
+				controlGaleria.insertarObra(Titulo, precioRef, valor, codigoObra, dimensiones, ano, mes, dia, controlGaleria.buscarArtista(Long.parseLong(valor)));
+            	System.out.println("Se ha agregado con exito la obra al nuevo artista");
+			}
+			else{
+				System.out.println("Nombre: ");
+				nombre = entrada.next();
+				System.out.println("Apellidos: ");
+				apellido = entrada.next();
+				System.out.println("Telefono: ");
+				telefono = entrada.next();
+				controlGaleria.insertarObra(Titulo, precioRef, valor, codigoObra, dimensiones, ano, mes, dia, nombre, apellido, telefono);
+			}
 			System.out.println("---------------------------------");
 			break;
 		}
 		// Modifica Obra por Codigo
 		case 4: {
 			this.clearScreen();// Limpia la Pantalla
-
+			String criterio;
 			System.out.println("Modificar Obra");
-
 			System.out.println("Escribe el Codigo:");
 			buscarObraporCodigo = entrada.next();
-			if (controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo))!=null){
-
-			}
+			if (controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo)) != null) {
+				System.out.println();
+				System.out.println("\tModificando Obra *" + controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo)).getTitulo() + "*");
+				System.out.println();
+				System.out.println("1. Codigo: " + controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo)).getCodigoObra());
+				System.out.println("2. Titulo: " + controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo)).getTitulo());
+				System.out.println("3. Fecha: " + controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo)).getFecha().get(0) + " / " + controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo)).getFecha().get(2) + " / "
+						+ controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo)).getFecha().get(1));
+				System.out.println("4. Precio referencia: " + controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo)).getPrecioRef());
+				System.out.println("5. Dimensiones del cuadro: " + controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo)).getDimensiones());
+				System.out.println("6. No modificar ");
+				System.out.println();
+				System.out.println("Que opcion desea ingresar: ");
+				criterio = entrada.next();
+				switch (Integer.parseInt(criterio)) {
+					case 1: {
+						System.out.println("Ingrese el codigo nuevo: ");
+						String newCodigo = entrada.next();
+						this.controlGaleria.modificarObra(controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo)), Integer.parseInt(criterio), newCodigo);
+						break;
+					}
+					case 2: {
+						System.out.println("Ingrese Titulo nuevo: ");
+						entrada.nextLine();
+						String newTittle = entrada.nextLine();
+						this.controlGaleria.modificarObra(controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo)), Integer.parseInt(criterio), newTittle);
+						break;
+					}
+					// FALTA EL CASO 3
+					case 3: {
+						String fecha_;
+						System.out.println("\tFecha nueva (YY/MM/DD)");
+						System.out.println("Año:");
+						ano = entrada.next();
+						System.out.println("Mes:");
+						mes = entrada.next();
+						System.out.println("Dia:");
+						dia = entrada.next();
+						fecha_ = ano + "/" + mes + "/" + dia;
+						this.controlGaleria.modificarObra(controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo)), Integer.parseInt(criterio), fecha_);
+						break;
+					}
+					case 4: {
+						System.out.println("Ingrese el nuevo precio de referencia: ");
+						String newPrecio = entrada.next();
+						this.controlGaleria.modificarObra(controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo)), Integer.parseInt(criterio), newPrecio);
+						break;
+					}
+					case 5: {
+						System.out.println("Ingrese la dimension: ");
+						dimensiones = entrada.next();
+						this.controlGaleria.modificarObra(controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo)), Integer.parseInt(criterio),dimensiones);
+						break;
+					}
+					case 6: {
+						return;
+					}
+					default:
+						System.out.println("Opcion incorrecta");
+						// controlGaleria.modificarObra(Long.parseLong(buscarObraporCodigo));
+				}
+			} else
+				System.out.println("No se encontro el la obra");
 			System.out.println("---------------------------------");
 			break;
 		}
-
 		// Elimina Obra Por Codigo
 		case 5: {
-			this.clearScreen();// Limpia la Pantalla
+			this.clearScreen();
+			// Limpia la Pantalla
 			controlGaleria.eliminarObra();
 			System.out.println("---------------------------------");
 			break;
@@ -363,7 +460,6 @@ public class PantallaGaleria {
 		case 14: {
 			// 14.Ver listado de Compras para un mes y año específico insertado por el
 			// usuario
-
 			System.out.println("Mes");
 			valor = entrada.next();
 			System.out.println("Año");

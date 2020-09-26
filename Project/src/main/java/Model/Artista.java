@@ -85,6 +85,14 @@ public class Artista {
 		this.fechaNacimiento = fechaNa;
 		this.telefono = telefono;
 	}
+	// Todos los Argumentos
+	public Artista(long cedula, String nombre, String apellido, long telefono) {
+		this.obras = new HashSet<Obra>();
+		this.nombre = nombre;
+		this.apellidos = apellido;
+		this.cedula = cedula;
+		this.telefono = telefono;
+	}
 	//Constructor
 	public Artista(String nombre, String apellidos, long cedula, long codigoArtista) {
 		this.obras = new HashSet<Obra>();

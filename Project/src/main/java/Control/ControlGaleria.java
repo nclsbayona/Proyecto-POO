@@ -290,60 +290,35 @@ public class ControlGaleria {
     //Añade una obra a un artista y viceversa
     public void addCircObryArt(Obra o, Artista a) {
         o.getArtista().add(a);
+        this.listaObras.add(o);
         a.getObras().add(o);
+        this.listaArtistas.add(a);
     }
     //Insertar una obra
-    public void insertarObra() {
-        Scanner sc = new Scanner(System.in);
-        sc.useDelimiter("\n");
-        String Titulo;
-        String precioRef, cedula;
-        String codigoObra;
-        String dimensiones;
-        Artista artista;
-        String ano, mes, dia;
-        this.printArtistas();
-        System.out.println();
-        System.out.println("______INSERTANDO OBRA_____");
-        do {
-            System.out.println("Codigo de la obra(7 digitos):");
-            codigoObra = sc.next();
-        } while (codigoObra.length() != 7);
-        if (this.buscarObra(Long.parseLong(codigoObra)) != null) {
-            System.out.println("Ya existe una obra con este codigo");
-            return;
-        }
-        System.out.println("Titulo: ");
-        Titulo = sc.next();
-        System.out.println("_________Fecha__________ ");
-        System.out.println("Año:");
-        ano = sc.next();
-        System.out.println("Mes:");
-        mes = sc.next();
-        System.out.println("Dia:");
-        dia = sc.next();
+    public void insertarObra(String Titulo,
+    String precioRef, String cedula,
+    String codigoObra,
+    String dimensiones, String ano, String mes, String dia, Artista artista) {
+    System.out.println();
+        
+        
         Calendar fecha = Calendar.getInstance();
         fecha.set(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
-        System.out.println("Precio de referencia: ");
-        precioRef = sc.next();
-        System.out.println("Dimensiones: ");
-        dimensiones = sc.next();
         Obra obra = new Obra(Long.parseLong(codigoObra), Titulo, fecha, Float.parseFloat(precioRef), dimensiones);
-        System.out.println("Datos del artista");
-        System.out.println("Cedula:");
-        cedula = sc.next();
-        artista = this.buscarArtista(Long.parseLong(cedula));
-        if (artista != null) {
-            this.addCircObryArt(obra, artista);
-            this.listaObras.add(obra);
-            System.out.println("Se ha agregado con exito la obra al nuevo artista");
-            return;
-        } else {
-            artista = this.leerArtista(Long.parseLong(cedula));
-            this.addCircObryArt(obra, artista);
-            this.listaObras.add(obra);
-            System.out.println("Se ha agregado con exito la obra nueva al artista");
-        }
+        this.addCircObryArt(obra, artista);
+        this.printArtistas();
+    }
+    //Insertar una obra
+    public void insertarObra(String Titulo,
+    String precioRef, String cedula,
+    String codigoObra,
+    String dimensiones, String ano, String mes, String dia, String nombre, String apellido, String telefono) {
+        System.out.println();
+        Calendar fecha = Calendar.getInstance();
+        Artista artista=new Artista(Long.parseLong(cedula), nombre, apellido, Integer.parseInt(telefono));
+        fecha.set(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
+        Obra obra = new Obra(Long.parseLong(codigoObra), Titulo, fecha, Float.parseFloat(precioRef), dimensiones);
+        this.addCircObryArt(obra, artista);
         this.printArtistas();
     }
     //Busca un artista
@@ -353,24 +328,6 @@ public class ControlGaleria {
                 return a;
         }
         return null;
-    }
-    //Lee un artista
-    public Artista leerArtista(long cedula) {
-        Artista art;
-        Scanner sc = new Scanner(System.in);
-        sc.useDelimiter("\n");
-        System.out.println("Artista");
-        String nombre, apellido, telefono;
-        Calendar date = Calendar.getInstance();
-        System.out.println("Nombre: ");
-        nombre = sc.next();
-        System.out.println("Apellidos: ");
-        apellido = sc.next();
-        System.out.println("Telefono: ");
-        telefono = sc.next();
-        art = new Artista(cedula, nombre, apellido, date, Long.parseLong(telefono));
-        this.agregarArtista(art);
-        return art;
     }
     //Imprime los artistas
     public void printArtistas() {
@@ -389,104 +346,49 @@ public class ControlGaleria {
         }
     }
     //Modifica una obra
-    public void modificarObra(Obra obra) {
-        int criterio = 1;
-        if (obra != null) {
-            System.out.println();
-            System.out.println("\tModificando Obra *" + obra.getTitulo() + "*");
-            System.out.println();
-            System.out.println("1. Codigo: " + obra.getCodigoObra());
-            System.out.println("2. Titulo: " + obra.getTitulo());
-            System.out.println("3. Fecha: " + obra.getFecha().get(0) + " / " + obra.getFecha().get(2) + " / "
-                    + obra.getFecha().get(1));
-            System.out.println("4. Precio referencia: " + obra.getPrecioRef());
-            System.out.println("5. Dimensiones del cuadro: " + obra.getDimensiones());
-            System.out.println("6. No modificar ");
-            System.out.println();
-            System.out.println("Que opcion desea ingresar: ");
-            try {
-                criterio = input.nextInt();
-            } catch (Exception e) {
-                return;
-            }
-            switch (criterio) {
-                case 1: {
-                    System.out.println("Ingrese el codigo nuevo: ");
-                    long newCodigo = input.nextLong();
-                    if (this.buscarObra(newCodigo) == null) {
-                        if (!((Long.toString(newCodigo)).length() < 7))
-                            obra.setCodigoObra(newCodigo);
+    public void modificarObra(Obra obra, int criterio, String value) {
+
+        switch (criterio) {
+            case 1: {
+                if (this.buscarObra(Long.parseLong(value)) == null) {
+                    if (value.length() == 7) {
+                        obra.setCodigoObra(Long.parseLong(value));
                         System.out.println(obra + "   " + obra.getCodigoObra());
-                        return;
                     } else {
-                        System.out.println("No se modifico");
+                        System.out.println("No se modifico el tamaño del codigo debe ser de 7");
                     }
-                    break;
-                }
-                case 2: {
-                    System.out.println("Ingrese Titulo nuevo: ");
-                    input.nextLine();
-                    String newTittle = input.nextLine();
-                    obra.setTitulo(newTittle);
-                    break;
-                }
-                case 3: {
-                    String ano, dia, mes;
-                    System.out.println("\tFecha nueva (YY/MM/DD)");
-                    System.out.println("Año:");
-                    ano = input.next();
-                    System.out.println("Mes:");
-                    mes = input.next();
-                    System.out.println("Dia:");
-                    dia = input.next();
-                    obra.setFecha(Integer.parseInt(ano),Integer.parseInt(mes),Integer.parseInt(dia));
+                } else
+                    System.out.println("No se modifico");
 
-                    break;
-                }
-                case 4: {
-                    System.out.println("Ingrese el nuevo precio de referencia: ");
-                    float newPrecio = input.nextFloat();
-                    obra.setPrecioRef(newPrecio);
-                    break;
-                }
-                case 5: {
-                    System.out.println("Ingrese la dimension: ");
-                    String dimensiones = input.next();
-                    obra.setDimensiones(dimensiones);
-                    break;
-                }
-                case 6: {
-                    return;
-                }
-                default:
-                    System.out.println("Opcion incorrecta");
-
+                break;
             }
-        } else {
-            System.out.println("\nLa obra no existe");
-        }
-    }
-    //Elimina una obra
-    public void eliminarObra() {
-        Scanner sc = new Scanner(System.in);
-        String codigo;
-        Obra obra;
-        System.out.println("Eliminar Obra");
-        System.out.println("Escribe el Codigo:");
-        codigo = sc.next();
-        obra = this.buscarObra(Long.parseLong(codigo));
-        if (obra != null) {
-            if (!this.obraEnCompra(obra)) {
-                this.listaObras.remove(obra);
-                System.out.println("Se ha eliminado con exito la obra");
+            case 2: {
+                obra.setTitulo(value);
+                break;
+            }
+            case 3: {
+                String[] fecha;
+                fecha=value.split("/");
+                obra.setFecha(Integer.parseInt(fecha[0]),Integer.parseInt(fecha[1]),Integer.parseInt(fecha[2]));
+
+                break;
+            }
+            case 4: {
+                obra.setPrecioRef(Long.parseLong(value));
+                break;
+            }
+            case 5: {
+                obra.setDimensiones(value);
+                break;
+            }
+            case 6: {
                 return;
             }
-        } else {
-            System.err.println("No se encuentra la obra");
-            sc.close();
+            default:
+                System.out.println("Opcion incorrecta");
+
         }
     }
-
     // Imprimir listaObras
     public void listaObras() {
         System.out.println("Imprimiendo la lista de Obras:");
