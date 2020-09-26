@@ -17,10 +17,9 @@ public class ControlGaleria {
     private HashSet<Cliente> listaClientes;
     private HashSet<Compra> listaCompras;
     private HashSet<Artista> listaArtistas;
-
+    //Controladores
     private GestionObras gestionObras;
     private GestionClientes gestionClientes;
-
     // Métodos
     // Accessors
     // gestionObras
@@ -40,7 +39,7 @@ public class ControlGaleria {
     public void setListaArtistas(HashSet<Artista> listaArtistas) {
         this.listaArtistas = listaArtistas;
     }
-
+    //Agregar un artista
     public Artista agregarArtista(Artista artista) {
         for (Artista art : this.listaArtistas) {
             if (art.equals(artista))
@@ -141,7 +140,7 @@ public class ControlGaleria {
         this.organizarListaClientes();
         return cliente;
     }
-
+    //Crear un cliente
     public void crearCliente() {
         Scanner sc = new Scanner(System.in);
         sc.useDelimiter("\n");
@@ -280,7 +279,7 @@ public class ControlGaleria {
         return cliente2;
     }
 
-    // Organizar la lista (Para mantener un orden)
+    // Organizar la lista de clientes (Para mantener un orden)
     public void organizarListaClientes() {
         TreeSet<Cliente> nuevo = new TreeSet<Cliente>();
         nuevo.addAll(this.listaClientes);
@@ -318,6 +317,7 @@ public class ControlGaleria {
             }
         }
     }
+    //Ver si una obra ya fue comprada
     public boolean obraEnCompra(Obra obra) {
         for (Compra compra : this.listaCompras) {
             if (compra.getObra().equals(obra)) {
@@ -326,6 +326,7 @@ public class ControlGaleria {
         }
         return false;
     }
+    //Ver si una obra le pertenece a un artista
     public void buscarObraporArtista(String nombre_artista) {
         for (Obra obra : this.listaObras) {
             for (Artista artista : obra.getArtista()) {
@@ -335,10 +336,12 @@ public class ControlGaleria {
             }
         }
     }
+    //Añade una obra a un artista y viceversa
     public void addCircObryArt(Obra o, Artista a) {
         o.getArtista().add(a);
         a.getObras().add(o);
     }
+    //Insertar una obra
     public void insertarObra() {
         Scanner sc = new Scanner(System.in);
         sc.useDelimiter("\n");
@@ -392,7 +395,7 @@ public class ControlGaleria {
         }
         this.printArtistas();
     }
-
+    //Busca un artista
     public Artista buscarArtista(long cedula) {
         for (Artista a : this.listaArtistas) {
             if (a.getCedula() == cedula)
@@ -400,7 +403,7 @@ public class ControlGaleria {
         }
         return null;
     }
-
+    //Lee un artista
     public Artista leerArtista(long cedula) {
         Artista art;
         Scanner sc = new Scanner(System.in);
@@ -418,14 +421,14 @@ public class ControlGaleria {
         this.agregarArtista(art);
         return art;
     }
-
+    //Imprime los artistas
     public void printArtistas() {
         System.out.println("Lista de artistas:");
         for (Artista artista : this.listaArtistas) {
             System.out.println(artista);
         }
     }
-
+    //Añade una obra
     public Obra addObra(Obra obra) {
         if (this.buscarObra(obra.getCodigoObra()) == null) {
             this.listaObras.add(obra);
@@ -434,7 +437,7 @@ public class ControlGaleria {
             return null;
         }
     }
-
+    //Modifica una obra
     public void modificarObra(long codigo) {
         Scanner input = new Scanner(System.in);
         Obra obra;
@@ -479,7 +482,6 @@ public class ControlGaleria {
                     obra.setTitulo(newTittle);
                     break;
                 }
-                // FALTA EL CASO 3
                 case 3: {
                     String ano, dia, mes;
                     System.out.println("\tFecha nueva (YY/MM/DD)");
@@ -516,7 +518,7 @@ public class ControlGaleria {
             System.out.println("\nLa obra no existe");
         }
     }
-
+    //Elimina una obra
     public void eliminarObra() {
         Scanner sc = new Scanner(System.in);
         String codigo;
@@ -562,7 +564,7 @@ public class ControlGaleria {
         }
         return false;
     }
-
+    //Busca un cliente en las compras
     public boolean buscarClienteYObraEnCompra(Cliente cliente, Obra obra) {
         for (Compra compra : this.listaCompras) {
             if (compra.getCliente() == cliente && compra.getObra() == obra) {
@@ -599,7 +601,7 @@ public class ControlGaleria {
         this.listaCompras.remove(compra);
         return compra;
     }
-
+    //Busca una obra en las compras
     public boolean buscarObraEnCompras(Obra obra) {
         boolean existe = false;
         for (Compra c : this.listaCompras) {

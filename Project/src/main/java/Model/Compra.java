@@ -80,10 +80,12 @@ public class Compra {
             return false;
         }
 	}
+	//Organizar para busqueda
 	@Override
     public int hashCode(){
             return (int)this.codigoCompra;
 	}
+	//Imprimir
 	@Override
 	public String toString(){
 		return String.valueOf(this.codigoCompra)+": "+this.cliente.getNombre()+" "+this.cliente.getApellidos()+"->"+this.obra.getTitulo()+" "+ this.fecha.get(Calendar.DATE)+'/'+this.fecha.get(Calendar.MONTH)+'/'+ this.fecha.get(Calendar.YEAR)+":\t$" + this.obra.getPrecioRef();

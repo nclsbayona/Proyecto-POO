@@ -3,6 +3,7 @@ import Model.Cliente;
 import java.util.HashSet;
 public class GestionClientes
 {
+    //Retorna una lista de clientes para comenzar el dia
     public HashSet <Cliente> listaClientes()
     {
         HashSet <Cliente> clientes=new HashSet <Cliente> ();

@@ -98,6 +98,7 @@ public class Obra{
             return false;
         }
     }
+    //Organización del hash set
     @Override
     public int hashCode() {
         return (int) this.codigoObra;

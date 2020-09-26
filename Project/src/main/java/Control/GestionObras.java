@@ -6,7 +6,7 @@ import java.util.Calendar;
 
 public class GestionObras {
 
-
+    //Retorna una lista de obras para comenzar el dia
     public HashSet <Obra> listaObras(){
 
         HashSet <Obra> obras = new HashSet<Obra>();
@@ -31,6 +31,7 @@ public class GestionObras {
         obras.add(new Obra(7654321, "Machupichu", fecha5, 15000, "10x2"));
         return obras;
     }
+    //Retorna una lista de artistas para comenzar el dia
     public HashSet <Artista> startArtistas(){
     	Calendar fecha=Calendar.getInstance();
     	fecha.set(2001, 11, 11);

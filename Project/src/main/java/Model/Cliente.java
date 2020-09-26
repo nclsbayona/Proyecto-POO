@@ -53,12 +53,14 @@ public class Cliente implements Comparable<Cliente>
         this.direccionEntrega = direccionEntrega;
         this.telefono = telefono;
     }
+    //;Modificar cliente
     public void printC(){
         String retorno="1 CodigoCliente: "+String.valueOf(this.codigoCliente)+'\n';
         retorno+="2 Cedula: "+this.cedula+"\n3 Nombre: "+this.nombre+"\n4 Apellidos: "+this.Apellidos+"\n";
         retorno+="5 DireccionEntrega: "+this.direccionEntrega+"\n6 Telefono: "+this.telefono;
         System.out.println(retorno);
     }
+    //Imprimir cliente
     @Override
     public String toString()
     {
@@ -67,6 +69,7 @@ public class Cliente implements Comparable<Cliente>
         /*retorno+='\nLo acompañan: "+this.acompañantes+" personas\tTelefono: "+this.telefono*/;
         return retorno;
     }
+    //Organización
     @Override
     public boolean equals(Object obj){
         try{
@@ -76,6 +79,7 @@ public class Cliente implements Comparable<Cliente>
             return false;
         }
     }
+    //Para la búsqueda ewn hash Set
     @Override
     public int hashCode(){
         int a=(int)this.codigoCliente;

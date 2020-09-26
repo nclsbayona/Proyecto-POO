@@ -305,7 +305,7 @@ public class PantallaGaleria {
 		} while (!opc.equals("0"));
 		entrada.close();
 	}
-
+	//Accesors control galeria
 	public ControlGaleria getControlGaleria() {
 		return this.controlGaleria;
 	}
@@ -313,7 +313,7 @@ public class PantallaGaleria {
 	public void setControlGaleria(ControlGaleria controlGaleria) {
 		this.controlGaleria = controlGaleria;
 	}
-
+	//Constructor
 	public PantallaGaleria() {
 		this.controlGaleria = new ControlGaleria();
 	}
