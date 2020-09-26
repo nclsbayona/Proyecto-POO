@@ -132,7 +132,10 @@ public class PantallaGaleria {
 					System.out.println("Escribe el Codigo:");
 					buscarObraporCodigo = entrada.next();
 					System.out.println("--Obra del Codigo " + buscarObraporCodigo);
-					System.out.println(controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo)));
+					if(controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo))!=null)
+					{
+						System.out.println(controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo)));
+					}
 					System.out.println("---------------------------------");
 					break;
 				}
