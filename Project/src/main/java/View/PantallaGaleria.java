@@ -240,7 +240,6 @@ public class PantallaGaleria {
 						this.controlGaleria.modificarObra(controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo)), Integer.parseInt(criterio), newTittle);
 						break;
 					}
-					// FALTA EL CASO 3
 					case 3: {
 						String fecha_;
 						System.out.println("\tFecha nueva (YY/MM/DD)");
