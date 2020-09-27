@@ -273,7 +273,7 @@ public class ControlGaleria {
     String dimensiones, String ano, String mes, String dia, String nombre, String apellido, String telefono) {
         System.out.println();
         Calendar fecha = Calendar.getInstance();
-        Artista artista=new Artista(Long.parseLong(cedula), nombre, apellido, Integer.parseInt(telefono));
+        Artista artista=new Artista(Long.parseLong(cedula), nombre, apellido, Long.parseLong(telefono));
         fecha.set(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
         Obra obra = new Obra(Long.parseLong(codigoObra), Titulo, fecha, Float.parseFloat(precioRef), dimensiones);
         this.addCircObryArt(obra, artista);
