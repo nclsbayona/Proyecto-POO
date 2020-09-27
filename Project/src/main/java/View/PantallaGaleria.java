@@ -58,6 +58,7 @@ public class PantallaGaleria {
 
 		// Variables internas
 		Scanner entrada = new Scanner(System.in);
+		entrada.useDelimiter("\n");
 		ControlGaleria controlGaleria = this.getControlGaleria();
 		String opcionObras = "0";
 		String buscarObraporCodigo, buscarCliente, buscarClienteC;

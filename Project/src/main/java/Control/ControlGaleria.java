@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.Scanner;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
@@ -383,7 +382,6 @@ public class ControlGaleria {
         return false;
     }
     public void eliminarObra(long codigo) {
-        Scanner sc = new Scanner(System.in);
         Obra obra;
         obra = this.buscarObra(codigo);
         if (obra != null) {
