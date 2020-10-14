@@ -53,7 +53,7 @@ public class PantallaGaleria {
 
 	}
 
-	// Controla las deciciones del usuario
+	// Controla las decisiones del usuario
 	public void controlMenu() {
 
 		// Variables internas
