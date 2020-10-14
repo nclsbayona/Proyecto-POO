@@ -153,7 +153,51 @@ dirección y teléfono.
 
 **NOTA: debe probar todos los caminos de negocio.**
 
-:trident::trident::trident::trident::trident::trident::trident::trident::trident::trident:
+:trident: :trident: :trident: :trident: :trident: :trident: :trident: :trident: :trident: :trident:
+# Funcionalidades de la Entrega 2
+**1** .[15] Para esta entrega se deben ajustar las funcionalidades implementadas en la entrega 1 para ajustarlas a las nuevas condiciones especificadas en el diagrama de clases: 
+
+    a)Ver listado de Obras disponibles
+    b)Buscar una Obra por título,artista o año
+    c)Insertar una Obra
+    d)Modificar una Obra
+    e)Eliminar una Obra
+    f)Ver listado de Clientes registrados en el sistema
+    g)Buscar un Cliente
+    h)Insertar Cliente
+    i)Modificar datos de Cliente
+    j)Eliminar un Cliente
+    k)Realizar compra de una Obra
+    l)Eliminar compra de obra 
+    m)Ver listado de Compras existentes
+    n)Ver listado de Compras para un mes y año específico insertado por el usuario
+    o)Ver listado de Artistas más vendidos
+    p)Salir
+## Creación de Objetos
+**2** .[10] Al iniciar la aplicación se debe:
+
+    a)Crear el mapa de artistas llamado listaArtistas(método en el controlador que crea instancias de Artista y llena el mapa de artistas de la clase ControlGalería. 
+    b)Crear el mapa de clientes llamada listaClientes (métodoen el controlador que crea instancias de Cliente y llena el mapa de clientes de la clase ControlGalería. 
+    c)Crear las listas de obras y compras. 
+    d)Finalmente, la clase PantallaGalería debe usar las funcionalidades del controlador para poblar las colecciones con varios objetos de prueba de cada clase.Incluyendo las nuevas clases de la jerarquía.
+### NOTA: Para los métodos anteriores los objetos se crean con valores literalesen la clase de interfaz. Enla tercera entrega de este proyecto, se usarán archivos del sistema. ###
+## Enumerados
+**3** .[10]Una nueva clase de Obra es Cuadro. Esta clase tiene un atributo Clasificación que se puede ser de dos tipos, Obra Maestra u Obra Representativa. Maneje esta información a través de una enumeración asociada a un tipo de dato de la clase Cuadro.
+## Herencia y Polimorfismo
+**4** .[25]La clase Obra ahora se puede extender en tres tipos: Cuadro, Escultura e Instalación. Para esto, se deben implementar las clases con el método calcularPrecio de la siguiente manera
+
+    a.En el Cuadro, el método calcularPrecio utiliza la Clasificación de la Obra para calcular el precio. Si es una Obra Maestra, al precio de referencia se le añade un 5% y si es un Obra Representativa se le añade un 3%.
+    b.En la Escultura, el método calcularPrecio utiliza el peso de la escultura, si la escultura pesa menos de 10Kg, el precio es el mismo que el precio de referencia, si pesa más de 10Kg, se le añade un 1%del precio de referenciapor cada Kg adicional.
+    c.En la Instalación, el método calcularPrecio tienen en cuenta la cantidad de materiales diferentes utilizadosen la Instalación, por cada material diferente utilizado, se añade al precio final un 5% del precio de referencia.
+## Interacción de Objetos
+**5** .[20]Cree los métodos descritos a continuación e invóquelos desde la interfaz
+
+    a.Defina un método en la clase ControlGaleria que retorne todos las Obras de tipo Escultura
+    b.Defina un método en la clase ControlGaleria que permita filtrar todas las compras que estén asociadas a Obras de tipo Cuadro. 
+    c.Defina un método que permita calcular el precio total de todas las obras que han sido compradas, para conocer la ganancia total obtenida.
+## Pruebas
+**6** .[20] Cree archivos de pruebas unitarias para el controlador del negocio (en el diagrama se llama “ControlGaleriaTest”)
+    a.Por cada método expuesto en la fachada(Controlador)debe crear un método de prueba b.En cada prueba de cada método se debe crear una prueba exitosa y otra no exitosa
 
 ## Usage
 First Download Java SE 11 
