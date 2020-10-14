@@ -3,6 +3,7 @@ import Model.Artista;
 import Model.Obra;
 import java.util.HashSet;
 import java.util.Calendar;
+import java.util.HashMap;
 
 public class GestionObras {
 
@@ -32,12 +33,12 @@ public class GestionObras {
         return obras;
     }
     //Retorna una lista de artistas para comenzar el dia
-    public HashSet <Artista> startArtistas(){
+    public HashMap <Long, Artista> startArtistas(){
     	Calendar fecha=Calendar.getInstance();
     	fecha.set(2001, 11, 11);
-    	HashSet<Artista>artistas=new HashSet<Artista>();
-        artistas.add(new Artista(1000471976,"Sebastian","Herrera Guaitero",fecha,350612646));
-        artistas.add(new Artista(1000512331,"Natalia","Castro Sepulveda",fecha,314231233));
+    	HashMap<Long, Artista>artistas=new HashMap<Long, Artista>();
+        artistas.put(Long.valueOf(1000471976), new Artista(1000471976,"Sebastian","Herrera Guaitero",fecha,350612646));
+        artistas.put(Long.valueOf(1000471976), new Artista(1000512331,"Natalia","Castro Sepulveda",fecha,314231233));
         return artistas;
     }
 }

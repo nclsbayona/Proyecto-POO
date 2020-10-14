@@ -13,9 +13,9 @@ import Model.*;
 public class ControlGaleria {
     // Colecciones
     private HashSet<Obra> listaObras;
-    private HashSet<Cliente> listaClientes;
+    private HashMap<Long, Cliente> listaClientes;
     private HashSet<Compra> listaCompras;
-    private HashSet<Artista> listaArtistas;
+    private HashMap<Long, Artista> listaArtistas;
     //Controladores
     private GestionObras gestionObras;
     private GestionClientes gestionClientes;
@@ -31,20 +31,20 @@ public class ControlGaleria {
     }
 
     // Lista Artistas
-    public HashSet<Artista> getListaArtistas() {
+    public HashMap<Long, Artista> getListaArtistas() {
         return listaArtistas;
     }
 
-    public void setListaArtistas(HashSet<Artista> listaArtistas) {
+    public void setListaArtistas(HashMap<Long, Artista> listaArtistas) {
         this.listaArtistas = listaArtistas;
     }
     //Agregar un artista
     public Artista agregarArtista(Artista artista) {
-        for (Artista art : this.listaArtistas) {
+        for (Artista art : this.listaArtistas.values()) {
             if (art.equals(artista))
                 return null;
         }
-        this.listaArtistas.add(artista);
+        this.listaArtistas.put(artista.getCedula(), artista);
         return artista;
     }
 
@@ -76,23 +76,23 @@ public class ControlGaleria {
     }
 
     // listaClientes
-    public HashSet<Cliente> getListaClientes() {
+    public HashMap<Long, Cliente> getListaClientes() {
         return this.listaClientes;
     }
 
-    public void setListaClientes(HashSet<Cliente> listaClientes) {
+    public void setListaClientes(HashMap<Long, Cliente> listaClientes) {
         this.listaClientes = listaClientes;
     }
 
     // Este método añade Clientes, Obras y Compras a la galería
     public void startDay() {
-        for (Cliente c : this.gestionClientes.listaClientes()) {
+        for (Cliente c : this.gestionClientes.listaClientes().values()) {
             if (c != null)
-                this.listaClientes.add(c);
+                this.listaClientes.put(c.getCedula(), c);
         }
-        for (Artista c : this.gestionObras.startArtistas()) {
+        for (Artista c : this.gestionObras.startArtistas().values()) {
             if (c != null) {
-                this.listaArtistas.add(c);
+                this.listaArtistas.put(c.getCedula(), c);
             }
         }
         for (Obra c : this.gestionObras.listaObras()) {
@@ -104,7 +104,7 @@ public class ControlGaleria {
     // Buscar un cliente por cedula
     public Cliente buscarCliente(long cedula, String s) {
         Cliente cliente2 = null;
-        for (Cliente cliente : this.listaClientes) {
+        for (Cliente cliente : this.listaClientes.values()) {
             if (cliente.getCedula() == cedula) {
                 cliente2 = cliente;
             }
@@ -122,7 +122,7 @@ public class ControlGaleria {
                 System.err.println("No existe");
                 return;
             }
-            this.listaClientes.remove(c);
+            this.listaClientes.remove(c.getCedula());
         } catch (Exception e) {
         }
         this.organizarListaClientes();
@@ -130,7 +130,7 @@ public class ControlGaleria {
 
     // Agregar Cliente
     public Cliente addCliente(Cliente cliente) {
-        this.listaClientes.add(cliente);
+        this.listaClientes.put(cliente.getCedula(), cliente);
         this.organizarListaClientes();
         return cliente;
     }
@@ -171,7 +171,7 @@ public class ControlGaleria {
     // Imprimir listaClientes
     public void printClientes() {
         System.out.println("Imprimiendo la lista de Clientes:");
-        for (Cliente cliente : this.listaClientes) {
+        for (Cliente cliente : this.listaClientes.values()) {
             System.out.println(cliente);
         }
     }
@@ -179,7 +179,7 @@ public class ControlGaleria {
     // Buscar un cliente
     public Cliente buscarCliente(long codigoCliente) {
         Cliente cliente2 = null;
-        for (Cliente cliente : this.listaClientes) {
+        for (Cliente cliente : this.listaClientes.values()) {
             if (cliente.getCodigoCliente() == codigoCliente) {
                 cliente2 = cliente;
             }
@@ -190,10 +190,10 @@ public class ControlGaleria {
 
     // Organizar la lista de clientes (Para mantener un orden)
     public void organizarListaClientes() {
-        TreeSet<Cliente> nuevo = new TreeSet<Cliente>();
-        nuevo.addAll(this.listaClientes);
+        TreeMap<Long, Cliente> nuevo = new TreeMap<Long, Cliente>();
+        nuevo.putAll(this.listaClientes);
         this.listaClientes.clear();
-        this.listaClientes.addAll(nuevo);
+        this.listaClientes.putAll(nuevo);
         nuevo = null;
     }
 
@@ -250,16 +250,14 @@ public class ControlGaleria {
         o.getArtista().add(a);
         this.listaObras.add(o);
         a.getObras().add(o);
-        this.listaArtistas.add(a);
+        this.listaArtistas.put(a.getCedula(), a);
     }
     //Insertar una obra
     public void insertarObra(String Titulo,
     String precioRef, String cedula,
     String codigoObra,
     String dimensiones, String ano, String mes, String dia, Artista artista) {
-    System.out.println();
-        
-        
+        System.out.println();
         Calendar fecha = Calendar.getInstance();
         fecha.set(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
         Obra obra = new Obra(Long.parseLong(codigoObra), Titulo, fecha, Float.parseFloat(precioRef), dimensiones);
@@ -281,7 +279,7 @@ public class ControlGaleria {
     }
     //Busca un artista
     public Artista buscarArtista(long cedula) {
-        for (Artista a : this.listaArtistas) {
+        for (Artista a : this.listaArtistas.values()) {
             if (a.getCedula() == cedula)
                 return a;
         }
@@ -290,7 +288,7 @@ public class ControlGaleria {
     //Imprime los artistas
     public void printArtistas() {
         System.out.println("Lista de artistas:");
-        for (Artista artista : this.listaArtistas) {
+        for (Artista artista : this.listaArtistas.values()) {
             System.out.println(artista);
         }
     }
@@ -499,8 +497,8 @@ public class ControlGaleria {
     public ControlGaleria() {
         this.gestionClientes = new GestionClientes();
         this.gestionObras = new GestionObras();
-        this.listaArtistas = new HashSet<Artista>();
-        this.listaClientes = new HashSet<Cliente>();
+        this.listaArtistas = new HashMap<Long, Artista>();
+        this.listaClientes = new HashMap<Long, Cliente>();
         this.listaCompras = new HashSet<Compra>();
         this.listaObras = new HashSet<Obra>();
         this.startDay();

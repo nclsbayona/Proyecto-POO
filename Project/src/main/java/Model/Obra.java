@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.Calendar;
 import java.util.HashSet;
 
-public class Obra{
+public abstract class Obra{
 
     private HashSet<Artista> artistas;
     private Calendar fecha;
