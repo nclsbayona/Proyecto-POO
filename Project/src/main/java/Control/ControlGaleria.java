@@ -349,6 +349,12 @@ public class ControlGaleria {
                 esculturas.add(o);
         return esculturas;
     }
+    //Imprime el metodo de arriba
+    public void imprimirEsculturas(){
+        HashSet<Obra> esculturas=this.buscarEsculturas();
+        for (Obra o:esculturas)
+            System.out.println(o);
+    }
     //Retorna todas las compras asociadas a una Obra tipo Cuadro en el sistema
     public HashSet <Compra> comprasAsociadasACuadro(){
         HashSet<Compra> compras=new HashSet<Compra>();
@@ -357,12 +363,22 @@ public class ControlGaleria {
                 compras.add(c);
         return compras;
     }
+    //Imprimir el de arriba
+    public void imprimirAsociadasCuadro(){
+        HashSet<Compra> compras=this.comprasAsociadasACuadro();
+        for (Compra c:compras)
+            System.out.println(c);
+    }
     //Retorna el precio total de todas las obras en el sistema
     public double calcularPrecioTotal(){
         double precio=0;
         for (Obra o:this.listaObras)
             precio+=o.calcularPrecio();
         return precio;
+    }
+    //Imprime el de arriba
+    public void imprimirTotal(){
+        System.out.println("El precio de todas las obras en el sistema es: $"+this.calcularPrecioTotal());
     }
     //Busca un artista
     public Artista buscarArtista(long cedula) {
