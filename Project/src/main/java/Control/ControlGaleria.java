@@ -1,12 +1,10 @@
 package Control;
-
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.TreeSet;
 
 import Model.*;
 
@@ -252,19 +250,7 @@ public class ControlGaleria {
         a.getObras().add(o);
         this.listaArtistas.put(a.getCedula(), a);
     }
-    //Insertar una obra
-    public void insertarObra(String Titulo,
-    String precioRef, String cedula,
-    String codigoObra,
-    String dimensiones, String ano, String mes, String dia, Artista artista) {
-        System.out.println();
-        Calendar fecha = Calendar.getInstance();
-        fecha.set(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
-        Obra obra = new Obra(Long.parseLong(codigoObra), Titulo, fecha, Float.parseFloat(precioRef), dimensiones);
-        this.addCircObryArt(obra, artista);
-        this.printArtistas();
-    }
-    //Insertar una obra
+    /*//Insertar una obra
     public void insertarObra(String Titulo,
     String precioRef, String cedula,
     String codigoObra,
@@ -274,6 +260,87 @@ public class ControlGaleria {
         Artista artista=new Artista(Long.parseLong(cedula), nombre, apellido, Long.parseLong(telefono));
         fecha.set(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
         Obra obra = new Obra(Long.parseLong(codigoObra), Titulo, fecha, Float.parseFloat(precioRef), dimensiones);
+        this.addCircObryArt(obra, artista);
+        this.printArtistas();
+    }*/
+    //Insertar un cuadro
+    //Revisar este, porque no esta llamado en la pantalla. IDK
+    //Recibe artista
+    public void insertarObra(String Titulo,
+    String precioRef, String cedula,
+    String codigoObra,
+    String dimensiones, String ano, String mes, String dia, Artista artista, String tema, String tecnica) {
+        System.out.println();
+        Calendar fecha = Calendar.getInstance();
+        fecha.set(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
+        Obra obra = new Cuadro(Long.parseLong(codigoObra), Titulo, fecha.getTime(), Float.parseFloat(precioRef), dimensiones, tema, tecnica);
+        this.addCircObryArt(obra, artista);
+        this.printArtistas();
+    }
+    //Crea artista
+    public void insertarObra(String Titulo,
+    String precioRef, String cedula,
+    String codigoObra,
+    String dimensiones, String ano, String mes, String dia, String nombre, String apellido, String telefono, String tema, String tecnica) {
+        System.out.println();
+        Calendar fecha = Calendar.getInstance();
+        Artista artista=new Artista(Long.parseLong(cedula), nombre, apellido, Long.parseLong(telefono));
+        fecha.set(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
+        Obra obra = new Cuadro(Long.parseLong(codigoObra), Titulo, fecha.getTime(), Float.parseFloat(precioRef), dimensiones, tema, tecnica);
+        this.addCircObryArt(obra, artista);
+        this.printArtistas();
+    }
+    //Insertar una instalacion
+    //Revisar este, porque no esta llamado en la pantalla. IDK
+    //Recibe artista
+    public void insertarObra(String Titulo,
+    String precioRef, String cedula,
+    String codigoObra,
+    String dimensiones, String ano, String mes, String dia, Artista artista, String descripcion) {
+        System.out.println();
+        Calendar fecha = Calendar.getInstance();
+        fecha.set(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
+        Obra obra = new Instalacion(Long.parseLong(codigoObra), Titulo, fecha.getTime(), Float.parseFloat(precioRef), dimensiones, descripcion);
+        this.addCircObryArt(obra, artista);
+        this.printArtistas();
+    }
+    //Crea artista
+    public void insertarObra(String Titulo,
+    String precioRef, String cedula,
+    String codigoObra,
+    String dimensiones, String ano, String mes, String dia, String nombre, String apellido, String telefono, String descripcion) {
+        System.out.println();
+        Calendar fecha = Calendar.getInstance();
+        Artista artista=new Artista(Long.parseLong(cedula), nombre, apellido, Long.parseLong(telefono));
+        fecha.set(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
+        Obra obra = new Instalacion(Long.parseLong(codigoObra), Titulo, fecha.getTime(), Float.parseFloat(precioRef), dimensiones, descripcion);
+        this.addCircObryArt(obra, artista);
+        this.printArtistas();
+    }
+    //Insertar una escultura
+    //Revisar este, porque no esta llamado en la pantalla. IDK
+    //Recibe artista
+    public void insertarObra(String Titulo,
+    String precioRef, String cedula,
+    String codigoObra,
+    String dimensiones, String ano, String mes, String dia, Artista artista, String material, double peso) {
+        System.out.println();
+        Calendar fecha = Calendar.getInstance();
+        fecha.set(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
+        Obra obra = new Escultura(Long.parseLong(codigoObra), Titulo, fecha.getTime(), Float.parseFloat(precioRef), dimensiones, material, peso);
+        this.addCircObryArt(obra, artista);
+        this.printArtistas();
+    }
+    //Crea artista
+    public void insertarObra(String Titulo,
+    String precioRef, String cedula,
+    String codigoObra,
+    String dimensiones, String ano, String mes, String dia, String nombre, String apellido, String telefono, String material, double peso) {
+        System.out.println();
+        Calendar fecha = Calendar.getInstance();
+        Artista artista=new Artista(Long.parseLong(cedula), nombre, apellido, Long.parseLong(telefono));
+        fecha.set(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
+        Obra obra = new Escultura(Long.parseLong(codigoObra), Titulo, fecha.getTime(), Float.parseFloat(precioRef), dimensiones, material, peso);
         this.addCircObryArt(obra, artista);
         this.printArtistas();
     }

@@ -1,20 +1,25 @@
 package View;
 import Control.ControlGaleria;
+import Model.Material;
+
 import java.util.Calendar;
 import java.util.Scanner;
 //Boundary
-public class PantallaGaleria {
+public class PantallaGaleria 
+{
 
 	private ControlGaleria controlGaleria;
 
 	// Limpia la Pantalla
-	public void clearScreen() {
+	public void clearScreen() 
+	{
 		System.out.print("\033[H\033[2J");
 		System.out.flush();
 	}
 
 	// Muestra el Menu al Usuario
-	public void printMenu() {
+	public void printMenu() 
+	{
 		this.clearScreen();// Limpia la Pantalla
 		System.out.println("-----------------------------");
 		System.out.println("- Galeria de Arte Javeriana -");
@@ -28,7 +33,6 @@ public class PantallaGaleria {
 		System.out.println("4. Modificar Obra");
 		System.out.println("5. Eliminar Obra");
 		System.out.println(" ");
-
 		System.out.println("-- Clientes ----------------");
 		System.out.println("6. Listar Clientes");
 		System.out.println("7. Buscar Cliente");
@@ -36,7 +40,6 @@ public class PantallaGaleria {
 		System.out.println("9. Modificar Cliente");
 		System.out.println("10. Eliminar Cliente");
 		System.out.println(" ");
-
 		System.out.println("-- Compras ------------------");
 		System.out.println("11. Compra de Obra");
 		System.out.println("12. Eliminar Compra");
@@ -54,23 +57,17 @@ public class PantallaGaleria {
 	}
 
 	// Controla las decisiones del usuario
-	public void controlMenu() {
-
+	public void controlMenu() 
+	{
 		// Variables internas
 		Scanner entrada = new Scanner(System.in);
 		entrada.useDelimiter("\n");
 		ControlGaleria controlGaleria = this.getControlGaleria();
-		String opcionObras = "0";
-		String buscarObraporCodigo, buscarCliente, buscarClienteC;
+		String opcionObras="0", buscarObraporCodigo, buscarCliente, buscarClienteC, buscarObraporArtista=" ";
 		Calendar fecha = Calendar.getInstance();
-		String buscarObraporArtista = " ";
-		String buscarObraporTitulo = " ";
-		String codigoCliente;
-		String Titulo, ano, mes, dia, precioRef, dimensiones;
-		String codigoObra;
-		String respuesta, nombre, apellido, telefono;
-		String valor;
-
+		String buscarObraporTitulo=" ", codigoCliente, Titulo, ano, mes, dia, precioRef, dimensiones;
+		String codigoObra, respuesta, nombre, apellido, telefono, valor, tema, tecnica, descripcion, seleObra;
+		String material, peso;
 		// Registra la decicion del Usuario
 		System.out.println("Digita el Numero de la Opcion: ");
 		String opcionSeleect = entrada.nextLine();
@@ -163,9 +160,13 @@ public class PantallaGaleria {
 		}
 		// Inserta Obra
 		case 3: {
+			//Falta arreglar esta parte
 			this.clearScreen();// Limpia la Pantalla
 			System.out.println("Insertar Obra");
 			controlGaleria.printArtistas();
+			
+			System.out.print("1. Cuadro\n2. Instalación\n3. Escultura\nIngrese eleccion: ");
+			seleObra=entrada.next();
 			do {
 				System.out.println("Codigo de la obra(7 digitos):");
 				codigoObra = entrada.next();
@@ -187,20 +188,77 @@ public class PantallaGaleria {
 			precioRef = entrada.next();
 			System.out.println("Dimensiones: ");
 			dimensiones = entrada.next();
-			System.out.println("Cedula:");
-        	valor = entrada.next();
-			if(controlGaleria.buscarArtista(Long.parseLong(valor))!=null){
-				controlGaleria.insertarObra(Titulo, precioRef, valor, codigoObra, dimensiones, ano, mes, dia, controlGaleria.buscarArtista(Long.parseLong(valor)));
-            	System.out.println("Se ha agregado con exito la obra al nuevo artista");
-			}
-			else{
-				System.out.println("Nombre: ");
-				nombre = entrada.next();
-				System.out.println("Apellidos: ");
-				apellido = entrada.next();
-				System.out.println("Telefono: ");
-				telefono = entrada.next();
-				controlGaleria.insertarObra(Titulo, precioRef, valor, codigoObra, dimensiones, ano, mes, dia, nombre, apellido, telefono);
+			switch(Integer.valueOf(seleObra))
+			{
+				case 1:
+					//Cuadro
+					System.out.println("Tema:");
+					tema=entrada.next();
+					System.out.println("Tecnica:");
+					tecnica=entrada.next();
+					System.out.println("Artista");
+					System.out.println("Cedula:");
+					valor = entrada.next();
+					if(controlGaleria.buscarArtista(Long.parseLong(valor))!=null){
+						controlGaleria.insertarObra(Titulo, precioRef, valor, codigoObra, dimensiones, ano, mes, dia, controlGaleria.buscarArtista(Long.parseLong(valor)), tema, tecnica);
+						System.out.println("Se ha agregado con exito la obra al nuevo artista");
+					}
+					else{
+						System.out.println("Nombre: ");
+						nombre = entrada.next();
+						System.out.println("Apellidos: ");
+						apellido = entrada.next();
+						System.out.println("Telefono: ");
+						telefono = entrada.next();
+						controlGaleria.insertarObra(Titulo, precioRef, valor, codigoObra, dimensiones, ano, mes, dia, nombre, apellido, telefono, tema, tecnica);
+					}
+					break;
+				case 2:
+					//Instalacion
+					System.out.println("Descripcion:");
+					descripcion=entrada.next();
+					System.out.println("Artista");
+					System.out.println("Cedula:");
+					valor = entrada.next();
+					if(controlGaleria.buscarArtista(Long.parseLong(valor))!=null){
+						controlGaleria.insertarObra(Titulo, precioRef, valor, codigoObra, dimensiones, ano, mes, dia, controlGaleria.buscarArtista(Long.parseLong(valor)), descripcion);
+						System.out.println("Se ha agregado con exito la obra al nuevo artista");
+					}
+					else{
+						System.out.println("Nombre: ");
+						nombre = entrada.next();
+						System.out.println("Apellidos: ");
+						apellido = entrada.next();
+						System.out.println("Telefono: ");
+						telefono = entrada.next();
+						controlGaleria.insertarObra(Titulo, precioRef, valor, codigoObra, dimensiones, ano, mes, dia, nombre, apellido, telefono, descripcion);
+					}
+					break;
+				case 3:
+					//Escultura
+					System.out.println("Material:");
+					material=entrada.next();
+					System.out.println("Peso:");
+					peso=entrada.next();
+					System.out.println("Artista");
+					System.out.println("Cedula:");
+					valor = entrada.next();
+					if(controlGaleria.buscarArtista(Long.parseLong(valor))!=null){
+						controlGaleria.insertarObra(Titulo, precioRef, valor, codigoObra, dimensiones, ano, mes, dia, controlGaleria.buscarArtista(Long.parseLong(valor)), material, Double.valueOf(peso));
+						System.out.println("Se ha agregado con exito la obra al nuevo artista");
+					}
+					else{
+						System.out.println("Nombre: ");
+						nombre = entrada.next();
+						System.out.println("Apellidos: ");
+						apellido = entrada.next();
+						System.out.println("Telefono: ");
+						telefono = entrada.next();
+						controlGaleria.insertarObra(Titulo, precioRef, valor, codigoObra, dimensiones, ano, mes, dia, nombre, apellido, telefono, material, Double.valueOf(peso));
+					}
+					break;
+				default:
+					break;
 			}
 			System.out.println("---------------------------------");
 			break;
