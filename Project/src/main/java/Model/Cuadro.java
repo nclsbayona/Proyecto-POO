@@ -54,7 +54,7 @@ public class Cuadro extends Obra
     @Override
     public String toString()
     {
-        return super.toString()+"\n\tCuadro\n\tTema: "+this.tema+" -- Tecnica: "+this.tecnica+" -- Clasificacion: "+this.clasificacion.toString()+'\n';
+        return super.toString()+"\n\tCuadro\n\tTema: "+this.tema+" -- Tecnica: "+this.tecnica+" -- Clasificacion: "+this.clasificacion.toString();
     }
 
     @Override

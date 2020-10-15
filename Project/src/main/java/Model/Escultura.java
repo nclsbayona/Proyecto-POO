@@ -43,7 +43,7 @@ public class Escultura extends Obra
     @Override
     public String toString()
     {
-        return super.toString()+"\n\tEscultura\n\tMaterial: "+this.material+" -- Peso: "+this.peso+'\n';
+        return super.toString()+"\n\tEscultura\n\tMaterial: "+this.material+" -- Peso: "+this.peso+" kg\n";
     }
 
     @Override
