@@ -32,10 +32,28 @@ public class Cuadro extends Obra
         this.clasificacion = clasificacion;
     }
 
-    public Cuadro(long _codigoObra, String _titulo, Date _fecha, float _precioRef, String _dimensiones, String tema, String tecnica) 
+    public Cuadro(long _codigoObra, String _titulo, Date _fecha, float _precioRef, String _dimensiones, String tema, String tecnica, int valorA) 
     {
         super(_codigoObra, _titulo, _fecha, _precioRef, _dimensiones);
         this.tema=tema;
         this.tecnica=tecnica;
+        //Decidimos luego esto como lo manejamos, sinceramente no lo se
+        //Puse un atríbuto ahí para poner si obra maestra o representativa, no se
+        switch (valorA)
+        {
+            case 1:{
+                this.clasificacion=Clasificacion.OBRA_MAESTRA;
+                break;
+            }
+            case 2:{
+                this.clasificacion=Clasificacion.OBRA_REPRESENTATIVA;
+                break;
+            }
+        }
     }    
+    @Override
+    public String toString()
+    {
+        return super.toString()+"\n\tCuadro\n\tTema: "+this.tema+" -- Tecnica: "+this.tecnica+" -- Clasificacion: "+this.clasificacion.toString()+'\n';
+    }
 }

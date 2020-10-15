@@ -40,4 +40,9 @@ public class Escultura extends Obra
         this.peso=peso;
         this.materiales=new HashSet<Material>();
     }
+    @Override
+    public String toString()
+    {
+        return super.toString()+"\n\tEscultura\n\tMaterial: "+this.material+" -- Peso: "+this.peso+'\n';
+    }
 }

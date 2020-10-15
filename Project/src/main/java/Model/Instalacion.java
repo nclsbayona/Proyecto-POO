@@ -30,4 +30,9 @@ public class Instalacion extends Obra
         this.descripcion=descripcion;
         this.materiales=new HashSet<Material>();
     }
+    @Override
+    public String toString()
+    {
+        return super.toString()+"\n\tInstalacion\n\tDescripcion: "+this.descripcion+'\n';
+    }
 }

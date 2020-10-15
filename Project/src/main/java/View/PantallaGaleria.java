@@ -1,6 +1,5 @@
 package View;
 import Control.ControlGaleria;
-import Model.Material;
 
 import java.util.Calendar;
 import java.util.Scanner;
@@ -196,11 +195,14 @@ public class PantallaGaleria
 					tema=entrada.next();
 					System.out.println("Tecnica:");
 					tecnica=entrada.next();
+					System.out.println("Clasificación:");
+					System.out.println("1. Obra maestra\n2. Obra representativa");
+					buscarClienteC=entrada.next();
 					System.out.println("Artista");
 					System.out.println("Cedula:");
 					valor = entrada.next();
 					if(controlGaleria.buscarArtista(Long.parseLong(valor))!=null){
-						controlGaleria.insertarObra(Titulo, precioRef, valor, codigoObra, dimensiones, ano, mes, dia, controlGaleria.buscarArtista(Long.parseLong(valor)), tema, tecnica);
+						controlGaleria.insertarObra(Titulo, precioRef, valor, codigoObra, dimensiones, ano, mes, dia, controlGaleria.buscarArtista(Long.parseLong(valor)), tema, tecnica, Integer.valueOf(buscarClienteC));
 						System.out.println("Se ha agregado con exito la obra al nuevo artista");
 					}
 					else{
@@ -210,7 +212,7 @@ public class PantallaGaleria
 						apellido = entrada.next();
 						System.out.println("Telefono: ");
 						telefono = entrada.next();
-						controlGaleria.insertarObra(Titulo, precioRef, valor, codigoObra, dimensiones, ano, mes, dia, nombre, apellido, telefono, tema, tecnica);
+						controlGaleria.insertarObra(Titulo, precioRef, valor, codigoObra, dimensiones, ano, mes, dia, nombre, apellido, telefono, tema, tecnica, Integer.valueOf(buscarClienteC));
 					}
 					break;
 				case 2:

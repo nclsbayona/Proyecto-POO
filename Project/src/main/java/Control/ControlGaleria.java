@@ -269,11 +269,11 @@ public class ControlGaleria {
     public void insertarObra(String Titulo,
     String precioRef, String cedula,
     String codigoObra,
-    String dimensiones, String ano, String mes, String dia, Artista artista, String tema, String tecnica) {
+    String dimensiones, String ano, String mes, String dia, Artista artista, String tema, String tecnica, int valorA) {
         System.out.println();
         Calendar fecha = Calendar.getInstance();
         fecha.set(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
-        Obra obra = new Cuadro(Long.parseLong(codigoObra), Titulo, fecha.getTime(), Float.parseFloat(precioRef), dimensiones, tema, tecnica);
+        Obra obra = new Cuadro(Long.parseLong(codigoObra), Titulo, fecha.getTime(), Float.parseFloat(precioRef), dimensiones, tema, tecnica, valorA);
         this.addCircObryArt(obra, artista);
         this.printArtistas();
     }
@@ -281,12 +281,12 @@ public class ControlGaleria {
     public void insertarObra(String Titulo,
     String precioRef, String cedula,
     String codigoObra,
-    String dimensiones, String ano, String mes, String dia, String nombre, String apellido, String telefono, String tema, String tecnica) {
+    String dimensiones, String ano, String mes, String dia, String nombre, String apellido, String telefono, String tema, String tecnica, int valorA) {
         System.out.println();
         Calendar fecha = Calendar.getInstance();
         Artista artista=new Artista(Long.parseLong(cedula), nombre, apellido, Long.parseLong(telefono));
         fecha.set(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
-        Obra obra = new Cuadro(Long.parseLong(codigoObra), Titulo, fecha.getTime(), Float.parseFloat(precioRef), dimensiones, tema, tecnica);
+        Obra obra = new Cuadro(Long.parseLong(codigoObra), Titulo, fecha.getTime(), Float.parseFloat(precioRef), dimensiones, tema, tecnica, valorA);
         this.addCircObryArt(obra, artista);
         this.printArtistas();
     }
