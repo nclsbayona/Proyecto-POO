@@ -1,4 +1,4 @@
-# Project P.O.O 2020-3
+# _ Project P.O.O 2020-3_
 
 Pontificia Universidad Javeriana Bogotá D.C 
 
@@ -37,7 +37,7 @@ registrado.
 15. Ver listado de Artistas más vendidos
 16. Salir
 
-**Funcionalidades:**
+**Funcionalidades de la entrega 1**
 
 Para este proyecto se solicita implementar las siguientes funcionalidades:
 
@@ -153,8 +153,9 @@ dirección y teléfono.
 
 **NOTA: debe probar todos los caminos de negocio.**
 
-:trident: :trident: :trident: :trident: :trident: :trident: :trident: :trident: :trident: :trident:
-# Funcionalidades de la Entrega 2
+# Entrega 2
+![UML](:trident: :trident: :trident: :trident: :trident: :trident: :trident: :trident: :trident: :trident:)
+** Funcionalidades de la Entrega 2**
 **1** .[15] Para esta entrega se deben ajustar las funcionalidades implementadas en la entrega 1 para ajustarlas a las nuevas condiciones especificadas en el diagrama de clases: 
 
     a)Ver listado de Obras disponibles
