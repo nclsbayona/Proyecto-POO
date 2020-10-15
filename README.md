@@ -155,7 +155,9 @@ dirección y teléfono.
 
 ## Entrega 2
 ![UML](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.q-ZHBxnKVfq7CuJarPcg5wHaEK%26pid%3DApi&f=1)
-** Funcionalidades de la Entrega 2**
+
+**Funcionalidades de la Entrega 2**
+
 **1** .[15] Para esta entrega se deben ajustar las funcionalidades implementadas en la entrega 1 para ajustarlas a las nuevas condiciones especificadas en el diagrama de clases: 
 
     a)Ver listado de Obras disponibles
