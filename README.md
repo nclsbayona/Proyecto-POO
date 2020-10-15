@@ -154,7 +154,7 @@ dirección y teléfono.
 **NOTA: debe probar todos los caminos de negocio.**
 
 ## Entrega 2
-![UML](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.q-ZHBxnKVfq7CuJarPcg5wHaEK%26pid%3DApi&f=1)
+![UML](https://ibb.co/kQDp48X)
 
 **Funcionalidades de la Entrega 2**
 
