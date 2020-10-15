@@ -1,8 +1,8 @@
-# _ Project P.O.O 2020-3_
+# *Object Oriented Programming  Project 2020-3*
 
 Pontificia Universidad Javeriana Bogotá D.C 
 
-## About the Control System of an Art Gallery
+# #About the Control System of an Art Gallery
 **El Sistema**
 
 1. Se requiere hacer un programa orientado a objetos que funcionará en una galería de arte.
@@ -17,25 +17,25 @@ registrado.
 4. En el diagrama de clases UML que se muestra a continuación se observan las clases que intervienen en el problema:
 
  ![UML](https://i.ibb.co/4NFhFCJ/image.png)
-
+## Entrega1
 **Menu Funcional:**
 
-1. Ver listado de Obras disponibles
-2. Buscar una Obra por título, artista o año
-3. Insertar una Obra
-4. Modificar una Obra
-5. Eliminar una Obra
-6. Ver listado de Clientes registrados en el sistema
-7. Buscar un Cliente
-8. Insertar Cliente
-9. Modificar datos de Cliente
-10. Eliminar un Cliente
-11. Realizar compra de una Obra
-12. Eliminar compra de obra
-13. Ver listado de Compras existentes
-14. Ver listado de Compras para un mes y año específico insertado por el usuario
-15. Ver listado de Artistas más vendidos
-16. Salir
+    1. Ver listado de Obras disponibles
+    2. Buscar una Obra por título, artista o año
+    3. Insertar una Obra
+    4. Modificar una Obra
+    5. Eliminar una Obra
+    6. Ver listado de Clientes registrados en el sistema
+    7. Buscar un Cliente
+    8. Insertar Cliente
+    9. Modificar datos de Cliente
+    10. Eliminar un Cliente
+    11. Realizar compra de una Obra
+    12. Eliminar compra de obra
+    13. Ver listado de Compras existentes
+    14. Ver listado de Compras para un mes y año específico insertado por el usuario
+    15. Ver listado de Artistas más vendidos
+    16. Salir
 
 **Funcionalidades de la entrega 1**
 
@@ -153,8 +153,8 @@ dirección y teléfono.
 
 **NOTA: debe probar todos los caminos de negocio.**
 
-# Entrega 2
-![UML](:trident: :trident: :trident: :trident: :trident: :trident: :trident: :trident: :trident: :trident:)
+## Entrega 2
+![UML](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.q-ZHBxnKVfq7CuJarPcg5wHaEK%26pid%3DApi&f=1)
 ** Funcionalidades de la Entrega 2**
 **1** .[15] Para esta entrega se deben ajustar las funcionalidades implementadas en la entrega 1 para ajustarlas a las nuevas condiciones especificadas en el diagrama de clases: 
 
@@ -174,33 +174,38 @@ dirección y teléfono.
     n)Ver listado de Compras para un mes y año específico insertado por el usuario
     o)Ver listado de Artistas más vendidos
     p)Salir
-## Creación de Objetos
+    
+### Creación de Objetos
 **2** .[10] Al iniciar la aplicación se debe:
 
     a)Crear el mapa de artistas llamado listaArtistas(método en el controlador que crea instancias de Artista y llena el mapa de artistas de la clase ControlGalería. 
     b)Crear el mapa de clientes llamada listaClientes (métodoen el controlador que crea instancias de Cliente y llena el mapa de clientes de la clase ControlGalería. 
     c)Crear las listas de obras y compras. 
     d)Finalmente, la clase PantallaGalería debe usar las funcionalidades del controlador para poblar las colecciones con varios objetos de prueba de cada clase.Incluyendo las nuevas clases de la jerarquía.
-### NOTA: Para los métodos anteriores los objetos se crean con valores literalesen la clase de interfaz. Enla tercera entrega de este proyecto, se usarán archivos del sistema. ###
-## Enumerados
+#### NOTA: Para los métodos anteriores los objetos se crean con valores literalesen la clase de interfaz. Enla tercera entrega de este proyecto, se usarán archivos del sistema. ###
+
+### Enumerados
 **3** .[10]Una nueva clase de Obra es Cuadro. Esta clase tiene un atributo Clasificación que se puede ser de dos tipos, Obra Maestra u Obra Representativa. Maneje esta información a través de una enumeración asociada a un tipo de dato de la clase Cuadro.
-## Herencia y Polimorfismo
+
+### Herencia y Polimorfismo
 **4** .[25]La clase Obra ahora se puede extender en tres tipos: Cuadro, Escultura e Instalación. Para esto, se deben implementar las clases con el método calcularPrecio de la siguiente manera
 
     a.En el Cuadro, el método calcularPrecio utiliza la Clasificación de la Obra para calcular el precio. Si es una Obra Maestra, al precio de referencia se le añade un 5% y si es un Obra Representativa se le añade un 3%.
     b.En la Escultura, el método calcularPrecio utiliza el peso de la escultura, si la escultura pesa menos de 10Kg, el precio es el mismo que el precio de referencia, si pesa más de 10Kg, se le añade un 1%del precio de referenciapor cada Kg adicional.
     c.En la Instalación, el método calcularPrecio tienen en cuenta la cantidad de materiales diferentes utilizadosen la Instalación, por cada material diferente utilizado, se añade al precio final un 5% del precio de referencia.
-## Interacción de Objetos
+
+### Interacción de Objetos
 **5** .[20]Cree los métodos descritos a continuación e invóquelos desde la interfaz
 
     a.Defina un método en la clase ControlGaleria que retorne todos las Obras de tipo Escultura
     b.Defina un método en la clase ControlGaleria que permita filtrar todas las compras que estén asociadas a Obras de tipo Cuadro. 
     c.Defina un método que permita calcular el precio total de todas las obras que han sido compradas, para conocer la ganancia total obtenida.
-## Pruebas
+
+### Pruebas
 **6** .[20] Cree archivos de pruebas unitarias para el controlador del negocio (en el diagrama se llama “ControlGaleriaTest”)
     a.Por cada método expuesto en la fachada(Controlador)debe crear un método de prueba b.En cada prueba de cada método se debe crear una prueba exitosa y otra no exitosa
 
-## Usage
+# Usage
 First Download Java SE 11 
 
 That is a Maven Project
@@ -210,13 +215,13 @@ That is a Maven Project
 4. Run.
 5. You can also execute the whole project at the same time, in order to do this, you will need to run the command **"mvn exec:java -Dexec.mainClass="View.PantallaGaleria"** inside the [Project](https://github.com/bayona-n/Proyecto-POO/tree/master/Project) package. **Note that you'll need to have Maven installed to be able to perform this**.
 
-## Main Contributors
-**Alejandro Sacristan** &  **Nicolás Bayona**  & **Juan S. Herrera** &  **Andrés R. Porras.** & **_**
+# Main Contributors
+**Alejandro Sacristan** &  **Nicolás Bayona**  & **Juan S. Herrera** &  **Andrés R. Porras.**
 
-## Contributing
+# Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 Please make sure to update tests as appropriate.
 
-## License
+# License
 [MIT](https://choosealicense.com/licenses/mit/)
