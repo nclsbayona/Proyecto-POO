@@ -154,7 +154,7 @@ dirección y teléfono.
 **NOTA: debe probar todos los caminos de negocio.**
 
 ## Entrega 2
-![UML](https://ibb.co/kQDp48X)
+![UML](https://i.ibb.co/9s4JbTW/p.png)
 
 **Funcionalidades de la Entrega 2**
 
