@@ -264,7 +264,6 @@ public class ControlGaleria {
         this.printArtistas();
     }*/
     //Insertar un cuadro
-    //Revisar este, porque no esta llamado en la pantalla. IDK
     //Recibe artista
     public void insertarObra(String Titulo,
     String precioRef, String cedula,
@@ -291,7 +290,6 @@ public class ControlGaleria {
         this.printArtistas();
     }
     //Insertar una instalacion
-    //Revisar este, porque no esta llamado en la pantalla. IDK
     //Recibe artista
     public void insertarObra(String Titulo,
     String precioRef, String cedula,
@@ -318,7 +316,6 @@ public class ControlGaleria {
         this.printArtistas();
     }
     //Insertar una escultura
-    //Revisar este, porque no esta llamado en la pantalla. IDK
     //Recibe artista
     public void insertarObra(String Titulo,
     String precioRef, String cedula,
@@ -343,6 +340,29 @@ public class ControlGaleria {
         Obra obra = new Escultura(Long.parseLong(codigoObra), Titulo, fecha.getTime(), Float.parseFloat(precioRef), dimensiones, material, peso);
         this.addCircObryArt(obra, artista);
         this.printArtistas();
+    }
+    //Retorna todas las esculturas en el sistema
+    public HashSet <Obra> buscarEsculturas(){
+        HashSet<Obra> esculturas=new HashSet<Obra>();
+        for (Obra o:this.listaObras)
+            if (o instanceof Escultura)
+                esculturas.add(o);
+        return esculturas;
+    }
+    //Retorna todas las compras asociadas a una Obra tipo Cuadro en el sistema
+    public HashSet <Compra> comprasAsociadasACuadro(){
+        HashSet<Compra> compras=new HashSet<Compra>();
+        for (Compra c:this.listaCompras)
+            if (c.getObra() instanceof Cuadro)
+                compras.add(c);
+        return compras;
+    }
+    //Retorna el precio total de todas las obras en el sistema
+    public double calcularPrecioTotal(){
+        double precio=0;
+        for (Obra o:this.listaObras)
+            precio+=o.calcularPrecio();
+        return precio;
     }
     //Busca un artista
     public Artista buscarArtista(long cedula) {
