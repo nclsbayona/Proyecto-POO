@@ -56,4 +56,20 @@ public class Cuadro extends Obra
     {
         return super.toString()+"\n\tCuadro\n\tTema: "+this.tema+" -- Tecnica: "+this.tecnica+" -- Clasificacion: "+this.clasificacion.toString()+'\n';
     }
+
+    @Override
+    public double calcularPrecio() {
+        double precio=super.getPrecioRef();
+        switch(clasificacion.ordinal()){
+            case 0:{
+                precio*=1.05;
+                break;
+            }
+            case 1:{
+                precio*=1.03;
+                break;
+            }
+        }
+        return precio;
+    }
 }

@@ -103,4 +103,6 @@ public abstract class Obra{
     public int hashCode() {
         return (int) this.codigoObra;
     }
+    //Abstracto
+    public abstract double calcularPrecio();
 }

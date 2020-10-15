@@ -35,4 +35,13 @@ public class Instalacion extends Obra
     {
         return super.toString()+"\n\tInstalacion\n\tDescripcion: "+this.descripcion+'\n';
     }
+
+    @Override
+    public double calcularPrecio() {
+        int numMateriales=this.materiales.size();
+        double precio=this.getPrecioRef();
+        double add=0.05*this.getPrecioRef();
+        precio+=(add*numMateriales);
+        return precio;
+    }
 }

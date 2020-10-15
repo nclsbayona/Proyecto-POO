@@ -45,4 +45,13 @@ public class Escultura extends Obra
     {
         return super.toString()+"\n\tEscultura\n\tMaterial: "+this.material+" -- Peso: "+this.peso+'\n';
     }
+
+    @Override
+    public double calcularPrecio() {
+        double precio=super.getPrecioRef();
+        double add=0.01*precio;
+        if(this.peso>10)
+            precio+=(Math.ceil(this.peso-10)*add);
+        return precio;
+    }
 }
