@@ -594,17 +594,17 @@ public class PantallaGaleria
 			controlGaleria.verListadoArtistas();
 			break;
 		}
-		case 19:{
-			retornar=19;
-			//Salir
-			break;
-		}
 		case 18:{
 			retornar=18;
 			//Compras asociadas a un Cuadro
 			System.out.println("Compras asociadas a un cuadro: ");
 			controlGaleria.imprimirAsociadasCuadro();
 			System.out.println("---------------------------------");
+			break;
+		}
+		case 19:{
+			retornar=19;
+			//Salir
 			break;
 		}
 		default:
@@ -621,7 +621,7 @@ public class PantallaGaleria
 		Scanner entrada = new Scanner(System.in);
 		PantallaGaleria pantallaGaleria = new PantallaGaleria();
 		String opc="0";
-		int eleccion=0,salir=16;
+		int eleccion=0,salir=19;
 		do {
 			// Muestra el Menu al Usuario
 			pantallaGaleria.printMenu();
