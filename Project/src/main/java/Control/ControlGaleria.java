@@ -268,7 +268,7 @@ public class ControlGaleria {
     public void insertarObra(String Titulo,
     String precioRef, String cedula,
     String codigoObra,
-    String dimensiones, String ano, String mes, String dia, Artista artista, String tema, String tecnica, int valorA) {
+    String dimensiones, String ano, String mes, String dia, Artista artista, String tema, String tecnica, Clasificacion valorA) {
         System.out.println();
         Calendar fecha = Calendar.getInstance();
         fecha.set(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
@@ -280,7 +280,7 @@ public class ControlGaleria {
     public void insertarObra(String Titulo,
     String precioRef, String cedula,
     String codigoObra,
-    String dimensiones, String ano, String mes, String dia, String nombre, String apellido, String telefono, String tema, String tecnica, int valorA) {
+    String dimensiones, String ano, String mes, String dia, String nombre, String apellido, String telefono, String tema, String tecnica, Clasificacion valorA) {
         System.out.println();
         Calendar fecha = Calendar.getInstance();
         Artista artista=new Artista(Long.parseLong(cedula), nombre, apellido, Long.parseLong(telefono));
@@ -356,22 +356,6 @@ public class ControlGaleria {
             if (c.getObra() instanceof Cuadro)
                 compras.add(c);
         return compras;
-    }
-    //Imprime el metodo de esculturas
-    public void imprimirEsculturas(){
-        HashSet<Obra> esculturas=this.buscarEsculturas();
-        for (Obra o:esculturas)
-            System.out.println(o);
-    }
-    //Imprimir asociadas a un cuadro
-    public void imprimirAsociadasCuadro(){
-        HashSet<Compra> compras=this.comprasAsociadasACuadro();
-        for (Compra c:compras)
-            System.out.println(c);
-    }
-    //Imprime el total
-    public void imprimirTotal(){
-        System.out.println("El precio de todas las obras en el sistema es: $"+this.calcularPrecioTotal());
     }
     //Retorna el precio total de todas las obras en el sistema
     public double calcularPrecioTotal(){

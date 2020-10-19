@@ -1,8 +1,12 @@
 package View;
 
 import Control.ControlGaleria;
+import Model.Clasificacion;
+import Model.Compra;
+import Model.Obra;
 
 import java.util.Calendar;
+import java.util.HashSet;
 import java.util.Scanner;
 
 //Boundary
@@ -15,7 +19,22 @@ public class PantallaGaleria {
 		System.out.print("\033[H\033[2J");
 		System.out.flush();
 	}
-
+	//Imprime el metodo de esculturas
+    public void imprimirEsculturas(){
+        HashSet<Obra> esculturas=this.controlGaleria.buscarEsculturas();
+        for (Obra o:esculturas)
+            System.out.println(o);
+    }
+    //Imprimir asociadas a un cuadro
+    public void imprimirAsociadasCuadro(){
+        HashSet<Compra> compras=this.controlGaleria.comprasAsociadasACuadro();
+        for (Compra c:compras)
+            System.out.println(c);
+    }
+    //Imprime el total
+    public void imprimirTotal(){
+        System.out.println("El precio de todas las obras en el sistema es: $"+this.controlGaleria.calcularPrecioTotal());
+    }
 	// Muestra el Menu al Usuario
 	public void printMenu() {
 		this.clearScreen();// Limpia la Pantalla
@@ -63,6 +82,7 @@ public class PantallaGaleria {
 		String buscarObraporTitulo = " ", codigoCliente, Titulo, ano, mes, dia, precioRef, dimensiones;
 		String codigoObra, respuesta, nombre, apellido, telefono, valor, tema, tecnica, descripcion, seleObra;
 		String material, peso, codigo;
+		Clasificacion clasificacion=null;
 		// Registra la decicion del Usuario
 		System.out.println("Digita el Numero de la Opcion: ");
 		String opcionSeleect = entrada.nextLine();
@@ -158,7 +178,9 @@ public class PantallaGaleria {
 				controlGaleria.printArtistas();
 
 				System.out.print("1. Cuadro\n2. Instalación\n3. Escultura\nIngrese eleccion: ");
-				seleObra = entrada.next();
+				do{
+					seleObra = entrada.next();
+				}while (!(seleObra.equals("1")||seleObra.equals("2")||seleObra.equals("3")));
 				do {
 					System.out.println("Codigo de la obra(7 digitos):");
 					codigoObra = entrada.next();
@@ -192,13 +214,17 @@ public class PantallaGaleria {
 							System.out.println("1. Obra maestra\n2. Obra representativa");
 							buscarClienteC = entrada.next();
 						} while (!(buscarClienteC.equals("1") || buscarClienteC.equals("2")));
+						if (Integer.valueOf(buscarClienteC)==1)
+								clasificacion=Clasificacion.OBRA_MAESTRA;
+						else
+								clasificacion=Clasificacion.OBRA_REPRESENTATIVA;
 						System.out.println("Artista");
 						System.out.println("Cedula:");
 						valor = entrada.next();
 						if (controlGaleria.buscarArtista(Long.parseLong(valor)) != null) {
 							controlGaleria.insertarObra(Titulo, precioRef, valor, codigoObra, dimensiones, ano, mes,
 									dia, controlGaleria.buscarArtista(Long.parseLong(valor)), tema, tecnica,
-									Integer.valueOf(buscarClienteC));
+									clasificacion);
 						} else {
 							System.out.println("Nombre: ");
 							nombre = entrada.next();
@@ -207,7 +233,7 @@ public class PantallaGaleria {
 							System.out.println("Telefono: ");
 							telefono = entrada.next();
 							controlGaleria.insertarObra(Titulo, precioRef, valor, codigoObra, dimensiones, ano, mes,
-									dia, nombre, apellido, telefono, tema, tecnica, Integer.valueOf(buscarClienteC));
+									dia, nombre, apellido, telefono, tema, tecnica, clasificacion);
 							System.out.println("Se ha agregado con exito la obra al nuevo artista");
 						}
 						break;
@@ -368,7 +394,7 @@ public class PantallaGaleria {
 				retornar = 6;
 				// Imprimir obras de tipo escultura
 				System.out.println("Obras de tipo escultura: ");
-				controlGaleria.imprimirEsculturas();
+				this.imprimirEsculturas();
 				System.out.println("---------------------------------");
 				break;
 			}
@@ -376,7 +402,7 @@ public class PantallaGaleria {
 				retornar = 7;
 				// Imprimir valor total de todas las obras
 				System.out.println("Valor total de todas las obras: ");
-				controlGaleria.imprimirTotal();
+				this.imprimirTotal();
 				System.out.println("---------------------------------");
 				break;
 			}
@@ -619,7 +645,7 @@ public class PantallaGaleria {
 				retornar = 18;
 				// Compras asociadas a un Cuadro
 				System.out.println("Compras asociadas a un cuadro: ");
-				controlGaleria.imprimirAsociadasCuadro();
+				this.imprimirAsociadasCuadro();
 				System.out.println("---------------------------------");
 				break;
 			}
