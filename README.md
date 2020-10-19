@@ -2,7 +2,7 @@
 
 Pontificia Universidad Javeriana Bogotá D.C 
 
-# #About the Control System of an Art Gallery
+## About the Control System of an Art Gallery
 **El Sistema**
 
 1. Se requiere hacer un programa orientado a objetos que funcionará en una galería de arte.
