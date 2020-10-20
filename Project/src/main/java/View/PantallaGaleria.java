@@ -1,9 +1,7 @@
 package View;
 
 import Control.ControlGaleria;
-import Model.Clasificacion;
-import Model.Compra;
-import Model.Obra;
+import Model.*;
 
 import java.util.Calendar;
 import java.util.HashSet;
@@ -34,7 +32,15 @@ public class PantallaGaleria {
     //Imprime el total
     public void imprimirTotal(){
         System.out.println("El precio de todas las obras en el sistema es: $"+this.controlGaleria.calcularPrecioTotal());
+	}
+	// Imprimir listaClientes
+    public void printClientes() {
+        System.out.println("Imprimiendo la lista de Clientes:");
+        for (Cliente cliente : this.controlGaleria.getListaClientes().values()) {
+            System.out.println(cliente);
+        }
     }
+
 	// Muestra el Menu al Usuario
 	public void printMenu() {
 		this.clearScreen();// Limpia la Pantalla
@@ -412,7 +418,7 @@ public class PantallaGaleria {
 				retornar = 8;
 				this.clearScreen();// Limpia la Pantalla
 				System.out.println("Listar Clientes");
-				controlGaleria.printClientes();
+				this.printClientes();
 				System.out.println("---------------------------------");
 				break;
 			}

@@ -82,12 +82,13 @@ public class ControlGaleria {
         this.listaClientes = listaClientes;
     }
 
-    // Este método añade Clientes, Obras y Compras a la galería
+    // Este método añade Clientes, Obras y Artistas a la galería
     public void startDay() {
         for (Cliente c : this.gestionClientes.listaClientes().values()) {
             if (c != null)
                 this.listaClientes.put(c.getCedula(), c);
         }
+        this.organizarListaClientes();
         for (Artista c : this.gestionObras.startArtistas().values()) {
             if (c != null) {
                 this.listaArtistas.put(c.getCedula(), c);
@@ -166,15 +167,7 @@ public class ControlGaleria {
         return;
     }
 
-    // Imprimir listaClientes
-    public void printClientes() {
-        System.out.println("Imprimiendo la lista de Clientes:");
-        for (Cliente cliente : this.listaClientes.values()) {
-            System.out.println(cliente);
-        }
-    }
-
-    // Buscar un cliente
+        // Buscar un cliente
     public Cliente buscarCliente(long codigoCliente) {
         Cliente cliente2 = null;
         for (Cliente cliente : this.listaClientes.values()) {
