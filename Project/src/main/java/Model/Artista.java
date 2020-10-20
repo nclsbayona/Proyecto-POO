@@ -1,4 +1,5 @@
 package Model;
+
 import java.util.Calendar;
 import java.util.HashSet;
 
@@ -85,6 +86,7 @@ public class Artista {
 		this.fechaNacimiento = fechaNa;
 		this.telefono = telefono;
 	}
+
 	// Todos los Argumentos
 	public Artista(long cedula, String nombre, String apellido, long telefono) {
 		this.obras = new HashSet<Obra>();
@@ -93,7 +95,8 @@ public class Artista {
 		this.cedula = cedula;
 		this.telefono = telefono;
 	}
-	//Constructor
+
+	// Constructor
 	public Artista(String nombre, String apellidos, long cedula, long codigoArtista) {
 		this.obras = new HashSet<Obra>();
 		this.nombre = nombre;
@@ -101,13 +104,15 @@ public class Artista {
 		this.cedula = cedula;
 		this.codigoArtista = codigoArtista;
 	}
+
 	// Argumentos con cedula y código
 	public Artista(long cedula, long codigoArtista) {
 		this.obras = new HashSet<Obra>();
 		this.cedula = cedula;
 		this.codigoArtista = codigoArtista;
 	}
-	//Verifica que no exista un artista con esa cédula para agregar uno nuevo
+
+	// Verifica que no exista un artista con esa cédula para agregar uno nuevo
 	@Override
 	public boolean equals(Object obj) {
 		try {
@@ -117,15 +122,16 @@ public class Artista {
 			return false;
 		}
 	}
-	//Organizacion para la busqueda de elementos
+
+	// Organizacion para la busqueda de elementos
 	@Override
 	public int hashCode() {
 		return (int) this.codigoArtista;
 	}
-	//Imprimir un artista
+
+	// Imprimir un artista
 	@Override
-	public String toString()
-	{
-		return this.cedula +"\t"+this.nombre+" "+this.apellidos;
+	public String toString() {
+		return this.cedula + "\t" + this.nombre + " " + this.apellidos;
 	}
 }

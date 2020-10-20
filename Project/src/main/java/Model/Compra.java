@@ -1,4 +1,5 @@
 package Model;
+
 import java.util.Calendar;
 
 public class Compra {
@@ -9,8 +10,8 @@ public class Compra {
 	private Calendar fecha;
 	private boolean pagado;
 
-	//Accessors
-	//Cliente
+	// Accessors
+	// Cliente
 	public Cliente getCliente() {
 		return this.cliente;
 	}
@@ -18,76 +19,80 @@ public class Compra {
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
-	//Obra
+
+	// Obra
 	public Obra getObra() {
 		return this.obra;
 	}
 
 	public void setObra(Obra obra) {
 		this.obra = obra;
-	}	
-	//Codigo compra
-	public long getCodigoCompra()
-	{
+	}
+
+	// Codigo compra
+	public long getCodigoCompra() {
 		return this.codigoCompra;
 	}
 
-	public void setCodigoCompra(long codigoCompra) 
-	{
+	public void setCodigoCompra(long codigoCompra) {
 		this.codigoCompra = codigoCompra;
 	}
 
-	//Fecha
-	public Calendar getFecha() 
-	{
+	// Fecha
+	public Calendar getFecha() {
 		return this.fecha;
 	}
-	public void setFecha(Calendar fecha)
-	{
+
+	public void setFecha(Calendar fecha) {
 		this.fecha = fecha;
 	}
 
-	//Pagado
-	public boolean getPagado()
-	{
+	// Pagado
+	public boolean getPagado() {
 		return this.pagado;
 	}
-	public void setPagado(boolean pagado)
-	{
+
+	public void setPagado(boolean pagado) {
 		this.pagado = pagado;
 	}
 
-	//Constructores
+	// Constructores
 	public Compra(long codigoCompra, Calendar fecha, boolean pagado) {
 		this.codigoCompra = codigoCompra;
 		this.fecha = fecha;
 		this.pagado = pagado;
 	}
 
-	//Argumento Compra solo con codigoCompra
+	// Argumento Compra solo con codigoCompra
 
 	public Compra(long codigoCompra) {
 
-		this.codigoCompra=codigoCompra;
+		this.codigoCompra = codigoCompra;
 	}
-	//Equals
-    @Override
-    public boolean equals(Object obj){
-        try{
-            Compra o=(Compra)(obj);
-            return (this.codigoCompra==o.codigoCompra)?true:false;
-        }catch(Exception e){
-            return false;
-        }
-	}
-	//Organizar para busqueda
+
+	// Equals
 	@Override
-    public int hashCode(){
-            return (int)this.codigoCompra;
+	public boolean equals(Object obj) {
+		try {
+			Compra o = (Compra) (obj);
+			return (this.codigoCompra == o.codigoCompra) ? true : false;
+		} catch (Exception e) {
+			return false;
+		}
 	}
-	//Imprimir
+
+	// Organizar para busqueda
 	@Override
-	public String toString(){
-		return String.valueOf(this.codigoCompra)+": "+this.cliente.getNombre()+" "+this.cliente.getApellidos()+"->"+this.obra.getTitulo()+" "+ this.fecha.get(Calendar.DATE)+'/'+this.fecha.get(Calendar.MONTH)+'/'+ this.fecha.get(Calendar.YEAR)+":\t$" + this.obra.getPrecioRef();
+	public int hashCode() {
+		return (int) this.codigoCompra;
+	}
+
+	// Imprimir
+	@Override
+	public String toString() {
+		return String.valueOf(this.codigoCompra) + ": " + this.cliente.getNombre() + " " + this.cliente.getApellidos()
+				+ "->" + this.obra.getTitulo() + " " + this.fecha.get(Calendar.DATE) + '/'
+				+ this.fecha.get(Calendar.MONTH) + '/' + this.fecha.get(Calendar.YEAR) + ":\t$"
+				+ this.obra.getPrecioRef();
 	}
 }

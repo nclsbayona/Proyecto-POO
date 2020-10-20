@@ -1,4 +1,5 @@
 package Control;
+
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;
@@ -14,9 +15,10 @@ public class ControlGaleria {
     private HashMap<Long, Cliente> listaClientes;
     private HashSet<Compra> listaCompras;
     private HashMap<Long, Artista> listaArtistas;
-    //Controladores
+    // Controladores
     private GestionObras gestionObras;
     private GestionClientes gestionClientes;
+
     // Métodos
     // Accessors
     // gestionObras
@@ -36,7 +38,8 @@ public class ControlGaleria {
     public void setListaArtistas(HashMap<Long, Artista> listaArtistas) {
         this.listaArtistas = listaArtistas;
     }
-    //Agregar un artista
+
+    // Agregar un artista
     public Artista agregarArtista(Artista artista) {
         for (Artista art : this.listaArtistas.values()) {
             if (art.equals(artista))
@@ -114,9 +117,9 @@ public class ControlGaleria {
 
     // Eliminar Cliente
     public void eliminarCliente(long codigo) {
-        Cliente c=this.buscarCliente(codigo);
+        Cliente c = this.buscarCliente(codigo);
         try {
-            
+
             if (c == null) {
                 return;
             }
@@ -132,15 +135,17 @@ public class ControlGaleria {
         this.organizarListaClientes();
         return cliente;
     }
-    //Crear un cliente
-    public void crearCliente(int codigoC, long cedula, String nombre, String apellido, String direccion, long telefono) {
-        Cliente c=new Cliente(codigoC, cedula, nombre, apellido, direccion, telefono);
+
+    // Crear un cliente
+    public void crearCliente(int codigoC, long cedula, String nombre, String apellido, String direccion,
+            long telefono) {
+        Cliente c = new Cliente(codigoC, cedula, nombre, apellido, direccion, telefono);
         c = this.addCliente(c);
     }
 
     // Modificar Cliente
     public void modificarCliente(Cliente cliente, int respuesta, String valor) {
-        switch (respuesta){
+        switch (respuesta) {
             case 1:
                 cliente.setCodigoCliente(Long.parseLong(valor));
                 break;
@@ -165,7 +170,7 @@ public class ControlGaleria {
         return;
     }
 
-        // Buscar un cliente
+    // Buscar un cliente
     public Cliente buscarCliente(long codigoCliente) {
         Cliente cliente2 = null;
         for (Cliente cliente : this.listaClientes.values()) {
@@ -189,7 +194,7 @@ public class ControlGaleria {
     // Obras
     // Buscar obra por titulo
     public HashSet<Obra> buscarObra(String titulo) {
-        HashSet<Obra> obras=new HashSet<>();
+        HashSet<Obra> obras = new HashSet<>();
         for (Obra obra : this.listaObras) {
             if (obra.getTitulo().equals(titulo)) {
                 if (!this.obraEnCompra(obra))
@@ -208,9 +213,10 @@ public class ControlGaleria {
         }
         return null;
     }
+
     // BUSCAR SOLO POR AÑO
     public HashSet<Obra> buscarObra(Calendar fecha) {
-        HashSet<Obra> obras=new HashSet<>();
+        HashSet<Obra> obras = new HashSet<>();
         for (Obra obra : this.listaObras) {
             if (obra.getFecha().get(Calendar.YEAR) == fecha.get(Calendar.YEAR)) {
                 if (!this.obraEnCompra(obra))
@@ -219,7 +225,8 @@ public class ControlGaleria {
         }
         return obras;
     }
-    //Ver si una obra ya fue comprada
+
+    // Ver si una obra ya fue comprada
     public boolean obraEnCompra(Obra obra) {
         for (Compra compra : this.listaCompras) {
             if (compra.getObra().equals(obra)) {
@@ -228,9 +235,10 @@ public class ControlGaleria {
         }
         return false;
     }
-    //Ver si una obra le pertenece a un artista
+
+    // Ver si una obra le pertenece a un artista
     public HashSet<Obra> buscarObraporArtista(String nombre_artista) {
-        HashSet<Obra> obras=new HashSet<>();
+        HashSet<Obra> obras = new HashSet<>();
         for (Obra obra : this.listaObras) {
             for (Artista artista : obra.getArtista()) {
                 if (artista.getNombre().equals(nombre_artista)) {
@@ -240,122 +248,127 @@ public class ControlGaleria {
         }
         return obras;
     }
-    //Añade una obra a un artista y viceversa
+
+    // Añade una obra a un artista y viceversa
     public void addCircObryArt(Obra o, Artista a) {
         o.getArtista().add(a);
         this.listaObras.add(o);
         a.getObras().add(o);
         this.listaArtistas.put(a.getCedula(), a);
     }
-    /*//Insertar una obra
-    public void insertarObra(String Titulo,
-    String precioRef, String cedula,
-    String codigoObra,
-    String dimensiones, String ano, String mes, String dia, String nombre, String apellido, String telefono) {
-        System.out.println();
-        Calendar fecha = Calendar.getInstance();
-        Artista artista=new Artista(Long.parseLong(cedula), nombre, apellido, Long.parseLong(telefono));
-        fecha.set(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
-        Obra obra = new Obra(Long.parseLong(codigoObra), Titulo, fecha, Float.parseFloat(precioRef), dimensiones);
-        this.addCircObryArt(obra, artista);
-        this.printArtistas();
-    }*/
-    //Insertar un cuadro
-    //Recibe artista
-    public void insertarObra(String Titulo,
-    String precioRef, String cedula,
-    String codigoObra,
-    String dimensiones, String ano, String mes, String dia, Artista artista, String tema, String tecnica, Clasificacion valorA) {
-    
+
+    /*
+     * //Insertar una obra public void insertarObra(String Titulo, String precioRef,
+     * String cedula, String codigoObra, String dimensiones, String ano, String mes,
+     * String dia, String nombre, String apellido, String telefono) {
+     * System.out.println(); Calendar fecha = Calendar.getInstance(); Artista
+     * artista=new Artista(Long.parseLong(cedula), nombre, apellido,
+     * Long.parseLong(telefono)); fecha.set(Integer.parseInt(ano),
+     * Integer.parseInt(mes), Integer.parseInt(dia)); Obra obra = new
+     * Obra(Long.parseLong(codigoObra), Titulo, fecha, Float.parseFloat(precioRef),
+     * dimensiones); this.addCircObryArt(obra, artista); this.printArtistas(); }
+     */
+    // Insertar un cuadro
+    // Recibe artista
+    public void insertarObra(String Titulo, String precioRef, String cedula, String codigoObra, String dimensiones,
+            String ano, String mes, String dia, Artista artista, String tema, String tecnica, Clasificacion valorA) {
+
         Calendar fecha = Calendar.getInstance();
         fecha.set(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
-        Obra obra = new Cuadro(Long.parseLong(codigoObra), Titulo, fecha.getTime(), Float.parseFloat(precioRef), dimensiones, tema, tecnica, valorA);
+        Obra obra = new Cuadro(Long.parseLong(codigoObra), Titulo, fecha.getTime(), Float.parseFloat(precioRef),
+                dimensiones, tema, tecnica, valorA);
         this.addCircObryArt(obra, artista);
     }
-    //Crea artista
-    public void insertarObra(String Titulo,
-    String precioRef, String cedula,
-    String codigoObra,
-    String dimensiones, String ano, String mes, String dia, String nombre, String apellido, String telefono, String tema, String tecnica, Clasificacion valorA) {
-        
+
+    // Crea artista
+    public void insertarObra(String Titulo, String precioRef, String cedula, String codigoObra, String dimensiones,
+            String ano, String mes, String dia, String nombre, String apellido, String telefono, String tema,
+            String tecnica, Clasificacion valorA) {
+
         Calendar fecha = Calendar.getInstance();
-        Artista artista=new Artista(Long.parseLong(cedula), nombre, apellido, Long.parseLong(telefono));
+        Artista artista = new Artista(Long.parseLong(cedula), nombre, apellido, Long.parseLong(telefono));
         fecha.set(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
-        Obra obra = new Cuadro(Long.parseLong(codigoObra), Titulo, fecha.getTime(), Float.parseFloat(precioRef), dimensiones, tema, tecnica, valorA);
+        Obra obra = new Cuadro(Long.parseLong(codigoObra), Titulo, fecha.getTime(), Float.parseFloat(precioRef),
+                dimensiones, tema, tecnica, valorA);
         this.addCircObryArt(obra, artista);
     }
-    //Insertar una instalacion
-    //Recibe artista
-    public void insertarObra(String Titulo,
-    String precioRef, String cedula,
-    String codigoObra,
-    String dimensiones, String ano, String mes, String dia, Artista artista, String descripcion) {
-        
+
+    // Insertar una instalacion
+    // Recibe artista
+    public void insertarObra(String Titulo, String precioRef, String cedula, String codigoObra, String dimensiones,
+            String ano, String mes, String dia, Artista artista, String descripcion) {
+
         Calendar fecha = Calendar.getInstance();
         fecha.set(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
-        Obra obra = new Instalacion(Long.parseLong(codigoObra), Titulo, fecha.getTime(), Float.parseFloat(precioRef), dimensiones, descripcion);
+        Obra obra = new Instalacion(Long.parseLong(codigoObra), Titulo, fecha.getTime(), Float.parseFloat(precioRef),
+                dimensiones, descripcion);
         this.addCircObryArt(obra, artista);
     }
-    //Crea artista
-    public void insertarObra(String Titulo,
-    String precioRef, String cedula,
-    String codigoObra,
-    String dimensiones, String ano, String mes, String dia, String nombre, String apellido, String telefono, String descripcion) {
-        
+
+    // Crea artista
+    public void insertarObra(String Titulo, String precioRef, String cedula, String codigoObra, String dimensiones,
+            String ano, String mes, String dia, String nombre, String apellido, String telefono, String descripcion) {
+
         Calendar fecha = Calendar.getInstance();
-        Artista artista=new Artista(Long.parseLong(cedula), nombre, apellido, Long.parseLong(telefono));
+        Artista artista = new Artista(Long.parseLong(cedula), nombre, apellido, Long.parseLong(telefono));
         fecha.set(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
-        Obra obra = new Instalacion(Long.parseLong(codigoObra), Titulo, fecha.getTime(), Float.parseFloat(precioRef), dimensiones, descripcion);
+        Obra obra = new Instalacion(Long.parseLong(codigoObra), Titulo, fecha.getTime(), Float.parseFloat(precioRef),
+                dimensiones, descripcion);
         this.addCircObryArt(obra, artista);
     }
-    //Insertar una escultura
-    //Recibe artista
-    public void insertarObra(String Titulo,
-    String precioRef, String cedula,
-    String codigoObra,
-    String dimensiones, String ano, String mes, String dia, Artista artista, String material, double peso) {
-        
+
+    // Insertar una escultura
+    // Recibe artista
+    public void insertarObra(String Titulo, String precioRef, String cedula, String codigoObra, String dimensiones,
+            String ano, String mes, String dia, Artista artista, String material, double peso) {
+
         Calendar fecha = Calendar.getInstance();
         fecha.set(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
-        Obra obra = new Escultura(Long.parseLong(codigoObra), Titulo, fecha.getTime(), Float.parseFloat(precioRef), dimensiones, material, peso);
+        Obra obra = new Escultura(Long.parseLong(codigoObra), Titulo, fecha.getTime(), Float.parseFloat(precioRef),
+                dimensiones, material, peso);
         this.addCircObryArt(obra, artista);
     }
-    //Crea artista
-    public void insertarObra(String Titulo,
-    String precioRef, String cedula,
-    String codigoObra,
-    String dimensiones, String ano, String mes, String dia, String nombre, String apellido, String telefono, String material, double peso) {
-        
+
+    // Crea artista
+    public void insertarObra(String Titulo, String precioRef, String cedula, String codigoObra, String dimensiones,
+            String ano, String mes, String dia, String nombre, String apellido, String telefono, String material,
+            double peso) {
+
         Calendar fecha = Calendar.getInstance();
-        Artista artista=new Artista(Long.parseLong(cedula), nombre, apellido, Long.parseLong(telefono));
+        Artista artista = new Artista(Long.parseLong(cedula), nombre, apellido, Long.parseLong(telefono));
         fecha.set(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
-        Obra obra = new Escultura(Long.parseLong(codigoObra), Titulo, fecha.getTime(), Float.parseFloat(precioRef), dimensiones, material, peso);
+        Obra obra = new Escultura(Long.parseLong(codigoObra), Titulo, fecha.getTime(), Float.parseFloat(precioRef),
+                dimensiones, material, peso);
         this.addCircObryArt(obra, artista);
     }
-    //Retorna todas las esculturas en el sistema
-    public HashSet <Obra> buscarEsculturas(){
-        HashSet<Obra> esculturas=new HashSet<Obra>();
-        for (Obra o:this.listaObras)
+
+    // Retorna todas las esculturas en el sistema
+    public HashSet<Obra> buscarEsculturas() {
+        HashSet<Obra> esculturas = new HashSet<Obra>();
+        for (Obra o : this.listaObras)
             if (o instanceof Escultura)
                 esculturas.add(o);
         return esculturas;
     }
-    //Retorna todas las compras asociadas a una Obra tipo Cuadro en el sistema
-    public HashSet <Compra> comprasAsociadasACuadro(){
-        HashSet<Compra> compras=new HashSet<Compra>();
-        for (Compra c:this.listaCompras)
+
+    // Retorna todas las compras asociadas a una Obra tipo Cuadro en el sistema
+    public HashSet<Compra> comprasAsociadasACuadro() {
+        HashSet<Compra> compras = new HashSet<Compra>();
+        for (Compra c : this.listaCompras)
             if (c.getObra() instanceof Cuadro)
                 compras.add(c);
         return compras;
     }
-    //Retorna el precio total de todas las obras en el sistema
-    public double calcularPrecioTotal(){
-        double precio=0;
-        for (Obra o:this.listaObras)
-            precio+=o.calcularPrecio();
+
+    // Retorna el precio total de todas las obras en el sistema
+    public double calcularPrecioTotal() {
+        double precio = 0;
+        for (Obra o : this.listaObras)
+            precio += o.calcularPrecio();
         return precio;
     }
-    //Busca un artista
+
+    // Busca un artista
     public Artista buscarArtista(long cedula) {
         for (Artista a : this.listaArtistas.values()) {
             if (a.getCedula() == cedula)
@@ -363,8 +376,8 @@ public class ControlGaleria {
         }
         return null;
     }
-    
-    //Añade una obra
+
+    // Añade una obra
     public Obra addObra(Obra obra) {
         if (this.buscarObra(obra.getCodigoObra()) == null) {
             this.listaObras.add(obra);
@@ -373,7 +386,8 @@ public class ControlGaleria {
             return null;
         }
     }
-    //Modifica una obra
+
+    // Modifica una obra
     public void modificarObra(Obra obra, int criterio, String value) {
 
         switch (criterio) {
@@ -396,8 +410,8 @@ public class ControlGaleria {
             }
             case 3: {
                 String[] fecha;
-                fecha=value.split("/");
-                obra.setFecha(Integer.parseInt(fecha[0]),Integer.parseInt(fecha[1]),Integer.parseInt(fecha[2]));
+                fecha = value.split("/");
+                obra.setFecha(Integer.parseInt(fecha[0]), Integer.parseInt(fecha[1]), Integer.parseInt(fecha[2]));
 
                 break;
             }
@@ -427,7 +441,8 @@ public class ControlGaleria {
         }
         return false;
     }
-    //Busca un cliente en las compras
+
+    // Busca un cliente en las compras
     public boolean buscarClienteYObraEnCompra(Cliente cliente, Obra obra) {
         for (Compra compra : this.listaCompras) {
             if (compra.getCliente() == cliente && compra.getObra() == obra) {
@@ -436,6 +451,7 @@ public class ControlGaleria {
         }
         return false;
     }
+
     public void eliminarObra(long codigo) {
         Obra obra;
         obra = this.buscarObra(codigo);
@@ -455,20 +471,22 @@ public class ControlGaleria {
      * este no existe, se debe mostrar un mensaje y volver al menú principal. b.Se
      * debe mostrar un mensaje de confirmación para eliminar la compra
      */
-    public Compra buscarCompra(String codigo){
-        Compra compra=null;
+    public Compra buscarCompra(String codigo) {
+        Compra compra = null;
         for (Compra c : this.listaCompras) {
             if (c.getCodigoCompra() == Long.parseLong(codigo) && compra == null)
                 compra = c;
         }
         return compra;
     }
+
     public Compra eliminCompra(String codigo) {
-        Compra compra=this.buscarCompra(codigo);
+        Compra compra = this.buscarCompra(codigo);
         this.listaCompras.remove(compra);
         return compra;
     }
-    //Busca una obra en las compras
+
+    // Busca una obra en las compras
     public boolean buscarObraEnCompras(Obra obra) {
         boolean existe = false;
         for (Compra c : this.listaCompras) {
@@ -535,11 +553,11 @@ public class ControlGaleria {
             sort.put(entry.getValue(), entry.getKey());
         }
         return sort;
-        //System.out.println("Imprimiendo ");
+        // System.out.println("Imprimiendo ");
         // https://devqa.io/4-different-ways-iterate-map-java/
-        /*for (Artista a : sort.values()) {
-            System.out.println(a);
-        }*/
+        /*
+         * for (Artista a : sort.values()) { System.out.println(a); }
+         */
         // https://howtodoinjava.com/java/sort/java-sort-map-by-key/
         // https://es.stackoverflow.com/questions/2464/c%C3%B3mo-iterar-a-trav%C3%A9s-de-un-hashmap
     }

@@ -2,8 +2,7 @@ package Model;
 
 import java.util.Date;
 
-public class Cuadro extends Obra 
-{
+public class Cuadro extends Obra {
     private String tema;
     private String tecnica;
     private Clasificacion clasificacion;
@@ -32,31 +31,32 @@ public class Cuadro extends Obra
         this.clasificacion = clasificacion;
     }
 
-    public Cuadro(long _codigoObra, String _titulo, Date _fecha, float _precioRef, String _dimensiones, String tema, String tecnica, Clasificacion valorA) 
-    {
+    public Cuadro(long _codigoObra, String _titulo, Date _fecha, float _precioRef, String _dimensiones, String tema,
+            String tecnica, Clasificacion valorA) {
         super(_codigoObra, _titulo, _fecha, _precioRef, _dimensiones);
-        this.tema=tema;
-        this.tecnica=tecnica;
-        //Decidimos luego esto como lo manejamos, sinceramente no lo se
-        //Puse un atríbuto ahí para poner si obra maestra o representativa, no se
-        this.clasificacion=valorA;
-    }    
+        this.tema = tema;
+        this.tecnica = tecnica;
+        // Decidimos luego esto como lo manejamos, sinceramente no lo se
+        // Puse un atríbuto ahí para poner si obra maestra o representativa, no se
+        this.clasificacion = valorA;
+    }
+
     @Override
-    public String toString()
-    {
-        return super.toString()+"\n\tCuadro\n\tTema: "+this.tema+" -- Tecnica: "+this.tecnica+" -- Clasificacion: "+this.clasificacion.toString();
+    public String toString() {
+        return super.toString() + "\n\tCuadro\n\tTema: " + this.tema + " -- Tecnica: " + this.tecnica
+                + " -- Clasificacion: " + this.clasificacion.toString();
     }
 
     @Override
     public double calcularPrecio() {
-        double precio=super.getPrecioRef();
-        switch(clasificacion.ordinal()){
-            case 0:{
-                precio*=1.05;
+        double precio = super.getPrecioRef();
+        switch (clasificacion.ordinal()) {
+            case 0: {
+                precio *= 1.05;
                 break;
             }
-            case 1:{
-                precio*=1.03;
+            case 1: {
+                precio *= 1.03;
                 break;
             }
         }

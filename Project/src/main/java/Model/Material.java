@@ -1,13 +1,13 @@
 package Model;
 
-public class Material 
-{
+public class Material {
     private long codigo;
     private String nombre;
     private String descripcion;
-    //Metodos
-    //Accesors
-    //Codigo
+
+    // Metodos
+    // Accesors
+    // Codigo
     public long getCodigo() {
         return this.codigo;
     }
@@ -15,7 +15,8 @@ public class Material
     public void setCodigo(long codigo) {
         this.codigo = codigo;
     }
-    //Nombre
+
+    // Nombre
     public String getNombre() {
         return this.nombre;
     }
@@ -23,7 +24,8 @@ public class Material
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    //Descripcion
+
+    // Descripcion
     public String getDescripcion() {
         return this.descripcion;
     }
@@ -31,11 +33,11 @@ public class Material
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    //Constructor
-    public Material(long cod, String nom, String desc) 
-    {
-        this.codigo=cod;
-        this.nombre=nom;
-        this.descripcion=desc;
+
+    // Constructor
+    public Material(long cod, String nom, String desc) {
+        this.codigo = cod;
+        this.nombre = nom;
+        this.descripcion = desc;
     }
 }
