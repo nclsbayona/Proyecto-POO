@@ -17,6 +17,13 @@ public class PantallaGaleria {
 		System.out.print("\033[H\033[2J");
 		System.out.flush();
 	}
+	//Imprime los artistas
+    public void printArtistas() {
+        System.out.println("Lista de artistas:");
+        for (Artista artista : this.controlGaleria.getListaArtistas().values()) {
+            System.out.println(artista);
+        }
+    }
 	//Imprime el metodo de esculturas
     public void imprimirEsculturas(){
         HashSet<Obra> esculturas=this.controlGaleria.buscarEsculturas();
@@ -41,6 +48,30 @@ public class PantallaGaleria {
         }
     }
 
+	// Imprimir listaObras
+    public void listaObras() {
+        System.out.println("Imprimiendo la lista de Obras:");
+        if (this.controlGaleria.getListaCompras().isEmpty()) {
+            for (Obra obra : this.controlGaleria.getListaObras()) {
+                System.out.println(obra);
+            }
+            return;
+        } else {
+            for (Obra obra : this.controlGaleria.getListaObras()) {
+                if (!this.controlGaleria.obraEnCompra(obra))
+                    System.out.println(obra);
+            }
+        }
+	}
+	
+	// Imprimir listaCompras
+    public void printCompras() {
+        System.out.println("Imprimiendo la lista de Compras:");
+        for (Compra compra : this.controlGaleria.getListaCompras()) {
+            System.out.println(compra);
+        }
+	}
+	
 	// Muestra el Menu al Usuario
 	public void printMenu() {
 		this.clearScreen();// Limpia la Pantalla
@@ -105,7 +136,7 @@ public class PantallaGaleria {
 				this.clearScreen();// Limpia la Pantalla
 				// Imprime por pantalla todas las obras Disponibles
 				System.out.println("Lista De Obras Disponibles: ");
-				controlGaleria.listaObras();
+				this.listaObras();
 				System.out.println("---------------------------------");
 				break;
 			}
@@ -134,7 +165,7 @@ public class PantallaGaleria {
 						entrada.nextLine();
 						buscarObraporTitulo = entrada.nextLine();
 						System.out.println("--Obras del Titulo " + buscarObraporTitulo);
-						controlGaleria.buscarObra(buscarObraporTitulo);
+						System.out.println(controlGaleria.buscarObra(buscarObraporTitulo));
 						break;
 					}
 					// Busqueda Por Autor
@@ -145,7 +176,9 @@ public class PantallaGaleria {
 						entrada.nextLine();
 						buscarObraporArtista = entrada.nextLine();
 						System.out.println("--Obras del Autor " + buscarObraporArtista);
-						controlGaleria.buscarObraporArtista(buscarObraporArtista);
+						for(Obra o:controlGaleria.buscarObraporArtista(buscarObraporArtista)){
+							System.out.println(o);
+						}
 						break;
 					}
 					// Busqueda Por Codigo
@@ -168,7 +201,9 @@ public class PantallaGaleria {
 						int anos = entrada.nextInt();
 						fecha.set(anos, 1, 1);
 						System.out.println("--Obras de la Fecha " + fecha.get(Calendar.YEAR));
-						controlGaleria.buscarObra(fecha);
+						for(Obra o:controlGaleria.buscarObra(fecha)){
+							System.out.println(o);
+						}
 						break;
 					}
 				}
@@ -181,7 +216,7 @@ public class PantallaGaleria {
 				// Falta arreglar esta parte
 				this.clearScreen();// Limpia la Pantalla
 				System.out.println("Insertar Obra");
-				controlGaleria.printArtistas();
+				this.printArtistas();
 
 				System.out.print("1. Cuadro\n2. Instalación\n3. Escultura\nIngrese eleccion: ");
 				do{
@@ -626,7 +661,7 @@ public class PantallaGaleria {
 				retornar = 15;
 				// Ver listado de Compras existentes
 				System.out.println("Ver listado de Compras existentes");
-				controlGaleria.printCompras();
+				this.printCompras();
 				System.out.println("---------------------------------");
 				break;
 			}
@@ -644,7 +679,8 @@ public class PantallaGaleria {
 			case 17: {
 				retornar = 17;
 				// Ver listado de Artistas más vendidos
-				controlGaleria.verListadoArtistas();
+				for (Artista a: controlGaleria.verListadoArtistas().values())
+					System.out.println(a);
 				break;
 			}
 			case 18: {
