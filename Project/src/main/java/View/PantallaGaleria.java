@@ -165,7 +165,9 @@ public class PantallaGaleria {
 						entrada.nextLine();
 						buscarObraporTitulo = entrada.nextLine();
 						System.out.println("--Obras del Titulo " + buscarObraporTitulo);
-						System.out.println(controlGaleria.buscarObra(buscarObraporTitulo));
+						for(Obra o:controlGaleria.buscarObra(buscarObraporTitulo)){
+							System.out.println(o);
+						}
 						break;
 					}
 					// Busqueda Por Autor
@@ -288,7 +290,6 @@ public class PantallaGaleria {
 						if (controlGaleria.buscarArtista(Long.parseLong(valor)) != null) {
 							controlGaleria.insertarObra(Titulo, precioRef, valor, codigoObra, dimensiones, ano, mes,
 									dia, controlGaleria.buscarArtista(Long.parseLong(valor)), descripcion);
-							System.out.println("Se ha agregado con exito la obra al nuevo artista");
 						} else {
 							System.out.println("Nombre: ");
 							nombre = entrada.next();
@@ -298,6 +299,7 @@ public class PantallaGaleria {
 							telefono = entrada.next();
 							controlGaleria.insertarObra(Titulo, precioRef, valor, codigoObra, dimensiones, ano, mes,
 									dia, nombre, apellido, telefono, descripcion);
+							System.out.println("Se ha agregado con exito la obra al nuevo artista");
 						}
 						break;
 					case 3:
@@ -313,7 +315,6 @@ public class PantallaGaleria {
 							controlGaleria.insertarObra(Titulo, precioRef, valor, codigoObra, dimensiones, ano, mes,
 									dia, controlGaleria.buscarArtista(Long.parseLong(valor)), material,
 									Double.valueOf(peso));
-							System.out.println("Se ha agregado con exito la obra al nuevo artista");
 						} else {
 							System.out.println("Nombre: ");
 							nombre = entrada.next();
@@ -323,6 +324,7 @@ public class PantallaGaleria {
 							telefono = entrada.next();
 							controlGaleria.insertarObra(Titulo, precioRef, valor, codigoObra, dimensiones, ano, mes,
 									dia, nombre, apellido, telefono, material, Double.valueOf(peso));
+							System.out.println("Se ha agregado con exito la obra al nuevo artista");
 						}
 						break;
 					default:

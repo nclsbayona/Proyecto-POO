@@ -140,7 +140,6 @@ public class ControlGaleria {
 
     // Modificar Cliente
     public void modificarCliente(Cliente cliente, int respuesta, String valor) {
-        System.out.println();
         switch (respuesta){
             case 1:
                 cliente.setCodigoCliente(Long.parseLong(valor));
