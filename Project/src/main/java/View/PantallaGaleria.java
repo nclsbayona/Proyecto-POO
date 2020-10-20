@@ -124,8 +124,9 @@ public class PantallaGaleria {
 		Calendar fecha = Calendar.getInstance();
 		String buscarObraporTitulo = " ", codigoCliente, Titulo, ano, mes, dia, precioRef, dimensiones;
 		String codigoObra, respuesta, nombre, apellido, telefono, valor, tema, tecnica, descripcion, seleObra;
-		String material, peso, codigo;
+		String material, peso, codigo, newCodigo;
 		Clasificacion clasificacion = null;
+		boolean modObra;
 		// Registra la decicion del Usuario
 		System.out.println("Digita el Numero de la Opcion: ");
 		String opcionSeleect = entrada.nextLine();
@@ -368,11 +369,15 @@ public class PantallaGaleria {
 					System.out.println();
 					System.out.println("Que opcion desea ingresar: ");
 					criterio = entrada.next();
+					modObra=false;
 					switch (Integer.parseInt(criterio)) {
 						case 1: {
 							System.out.println("Ingrese el codigo nuevo: ");
-							String newCodigo = entrada.next();
-							this.controlGaleria.modificarObra(
+							do{
+								System.out.print("El codigo debe tener 7 caracteres: ");
+								newCodigo = entrada.next();
+							}while(newCodigo.length()!=7);
+							modObra=this.controlGaleria.modificarObra(
 									controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo)),
 									Integer.parseInt(criterio), newCodigo);
 							break;
@@ -381,7 +386,7 @@ public class PantallaGaleria {
 							System.out.println("Ingrese Titulo nuevo: ");
 							entrada.nextLine();
 							String newTittle = entrada.nextLine();
-							this.controlGaleria.modificarObra(
+							modObra=this.controlGaleria.modificarObra(
 									controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo)),
 									Integer.parseInt(criterio), newTittle);
 							break;
@@ -396,7 +401,7 @@ public class PantallaGaleria {
 							System.out.println("Dia:");
 							dia = entrada.next();
 							fecha_ = ano + "/" + mes + "/" + dia;
-							this.controlGaleria.modificarObra(
+							modObra=this.controlGaleria.modificarObra(
 									controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo)),
 									Integer.parseInt(criterio), fecha_);
 							break;
@@ -404,7 +409,7 @@ public class PantallaGaleria {
 						case 4: {
 							System.out.println("Ingrese el nuevo precio de referencia: ");
 							String newPrecio = entrada.next();
-							this.controlGaleria.modificarObra(
+							modObra=this.controlGaleria.modificarObra(
 									controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo)),
 									Integer.parseInt(criterio), newPrecio);
 							break;
@@ -412,7 +417,7 @@ public class PantallaGaleria {
 						case 5: {
 							System.out.println("Ingrese la dimension: ");
 							dimensiones = entrada.next();
-							this.controlGaleria.modificarObra(
+							modObra=this.controlGaleria.modificarObra(
 									controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo)),
 									Integer.parseInt(criterio), dimensiones);
 							break;
@@ -423,8 +428,12 @@ public class PantallaGaleria {
 						default:
 							System.out.println("Opcion incorrecta");
 					}
+					if (modObra)
+						System.out.println("La obra se modificó correctamente");
+					else
+						System.out.println("La obra no se modifico correctamente");
 				} else
-					System.out.println("No se encontro el la obra");
+					System.out.println("No se encontro la obra");
 				System.out.println("---------------------------------");
 				break;
 			}

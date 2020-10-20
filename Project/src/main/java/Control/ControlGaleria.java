@@ -388,48 +388,44 @@ public class ControlGaleria {
     }
 
     // Modifica una obra
-    public void modificarObra(Obra obra, int criterio, String value) {
-
+    public boolean modificarObra(Obra obra, int criterio, String value) {
+        boolean retornar=false;
         switch (criterio) {
             case 1: {
                 if (this.buscarObra(Long.parseLong(value)) == null) {
                     if (value.length() == 7) {
                         obra.setCodigoObra(Long.parseLong(value));
-                        System.out.println(obra + "   " + obra.getCodigoObra());
-                    } else {
-                        System.out.println("No se modifico el tamaño del codigo debe ser de 7");
+                        retornar=true;
                     }
                 } else
-                    System.out.println("No se modifico");
+                    retornar=false;
 
                 break;
             }
             case 2: {
                 obra.setTitulo(value);
+                retornar=true;
                 break;
             }
             case 3: {
                 String[] fecha;
                 fecha = value.split("/");
                 obra.setFecha(Integer.parseInt(fecha[0]), Integer.parseInt(fecha[1]), Integer.parseInt(fecha[2]));
-
+                retornar=true;
                 break;
             }
             case 4: {
                 obra.setPrecioRef(Long.parseLong(value));
+                retornar=true;
                 break;
             }
             case 5: {
                 obra.setDimensiones(value);
+                retornar=true;
                 break;
             }
-            case 6: {
-                return;
-            }
-            default:
-                System.out.println("Opcion incorrecta");
-
         }
+        return retornar;
     }
 
     // Compras
