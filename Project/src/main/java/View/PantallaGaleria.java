@@ -444,7 +444,11 @@ public class PantallaGaleria {
 				System.out.println("Eliminar Obra");
 				System.out.println("Escribe el Codigo:");
 				codigo = entrada.next();
-				this.controlGaleria.eliminarObra(Long.parseLong(codigo));
+				boolean mensaje=this.controlGaleria.eliminarObra(Long.parseLong(codigo));
+				if (mensaje)
+					System.out.println("Eliminado con exito");
+				else
+					System.out.println("No se pudo eliminar");
 				System.out.println("---------------------------------");
 				break;
 			}
@@ -690,7 +694,8 @@ public class PantallaGaleria {
 				valor = entrada.next();
 				System.out.println("Año");
 				respuesta = entrada.next();
-				controlGaleria.listadoDeCompra(valor, respuesta);
+				for (String s:controlGaleria.listadoDeCompra(valor, respuesta))
+					System.out.println(s);
 				break;
 			}
 			case 17: {

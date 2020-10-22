@@ -389,39 +389,39 @@ public class ControlGaleria {
 
     // Modifica una obra
     public boolean modificarObra(Obra obra, int criterio, String value) {
-        boolean retornar=false;
+        boolean retornar = false;
         switch (criterio) {
             case 1: {
                 if (this.buscarObra(Long.parseLong(value)) == null) {
                     if (value.length() == 7) {
                         obra.setCodigoObra(Long.parseLong(value));
-                        retornar=true;
+                        retornar = true;
                     }
                 } else
-                    retornar=false;
+                    retornar = false;
 
                 break;
             }
             case 2: {
                 obra.setTitulo(value);
-                retornar=true;
+                retornar = true;
                 break;
             }
             case 3: {
                 String[] fecha;
                 fecha = value.split("/");
                 obra.setFecha(Integer.parseInt(fecha[0]), Integer.parseInt(fecha[1]), Integer.parseInt(fecha[2]));
-                retornar=true;
+                retornar = true;
                 break;
             }
             case 4: {
                 obra.setPrecioRef(Long.parseLong(value));
-                retornar=true;
+                retornar = true;
                 break;
             }
             case 5: {
                 obra.setDimensiones(value);
-                retornar=true;
+                retornar = true;
                 break;
             }
         }
@@ -448,18 +448,17 @@ public class ControlGaleria {
         return false;
     }
 
-    public void eliminarObra(long codigo) {
+    public boolean eliminarObra(long codigo) {
+        boolean f = false;
         Obra obra;
         obra = this.buscarObra(codigo);
         if (obra != null) {
             if (!this.obraEnCompra(obra)) {
                 this.listaObras.remove(obra);
-                System.out.println("Se ha eliminado con exito la obra");
-                return;
+                f = true;
             }
-        } else {
-            System.err.println("No se encuentra la obra");
         }
+        return f;
     }
 
     /*
@@ -512,17 +511,22 @@ public class ControlGaleria {
      * usuario a. Se debe solicitar mes y año al usuario y mostrar listado de Obras
      * que hayan sido compradas, cliente que la compró, fecha y precio.
      */
-    public void listadoDeCompra(String mes, String anio) {
+    public HashSet<String> listadoDeCompra(String mes, String anio) {
+        HashSet<String> retornar = new HashSet<>();
+        String append;
         for (Compra compra : this.listaCompras) {
             if ((compra.getFecha().get(Calendar.YEAR) == Integer.parseInt(anio))
                     && (compra.getFecha().get(Calendar.MONTH) == Integer.parseInt(mes))) {
-                System.out.println("Obra: " + compra.getObra().getTitulo());
-                System.out.println("Comprador: " + compra.getCliente().getNombre());
-                System.out.println("Fecha: " + compra.getFecha().get(Calendar.DATE) + '/'
-                        + compra.getFecha().get(Calendar.MONTH) + '/' + compra.getFecha().get(Calendar.YEAR));
-                System.out.println("Precio: " + compra.getObra().getPrecioRef());
+                append = "";
+                append += "Obra: " + compra.getObra().getTitulo();
+                append += "\nComprador: " + compra.getCliente().getNombre();
+                append += "\nFecha: " + compra.getFecha().get(Calendar.DATE) + '/'
+                        + compra.getFecha().get(Calendar.MONTH) + '/' + compra.getFecha().get(Calendar.YEAR);
+                append += "\nPrecio: " + compra.getObra().getPrecioRef();
+                retornar.add(append);
             }
         }
+        return retornar;
     }
 
     // Artistas
@@ -549,11 +553,7 @@ public class ControlGaleria {
             sort.put(entry.getValue(), entry.getKey());
         }
         return sort;
-        // System.out.println("Imprimiendo ");
         // https://devqa.io/4-different-ways-iterate-map-java/
-        /*
-         * for (Artista a : sort.values()) { System.out.println(a); }
-         */
         // https://howtodoinjava.com/java/sort/java-sort-map-by-key/
         // https://es.stackoverflow.com/questions/2464/c%C3%B3mo-iterar-a-trav%C3%A9s-de-un-hashmap
     }
