@@ -45,7 +45,7 @@ Para este proyecto se solicita implementar las siguientes funcionalidades:
 
    **a.** Crear la colección de Obras llamada listaObras (método en el controlador ‘GestionObras’ que crea instancias de Obra y llena la lista de obras de la clase ControlGaleria. 
 
-   Esta clase sólo existe para no tener que ingresar datos por pantalla de las obras y facilitar la prueba del programa. No obstante, las funcionalidades para insertar, modificar y eliminar una obra deben programarse y funcionar correctamente.
+   #### Esta clase sólo existe para no tener que ingresar datos por pantalla de las obras y facilitar la prueba del programa. No obstante, las funcionalidades para insertar, modificar y eliminar una obra deben programarse y funcionar correctamente.
 
    **b.** La clase GestiónObras también puede llenar la lista de Artistas.
    **c.** Crear la colección de clientes llamada listaClientes (método en el controlador ‘GestionCliente’ que crea instancias de Cliente y llena la lista de clientes de la clase  ControlGaleria. Esta clase sólo existe para no tener que ingresar datos por pantalla de clientes y facilitar la prueba del programa. No obstante, las funcionalidades para insertar, modificar y eliminar un cliente deben programarse.
@@ -70,17 +70,13 @@ Para este proyecto se solicita implementar las siguientes funcionalidades:
    <li> [5] Modificar una Obra:
 
    **a.** Se debe solicitar el código de la obra a modificar, si este no existe, se debe mostrar un mensaje y volver al menú principal.
-
    **b**. Si existe, se deben mostrar los datos de la obra, enumerados, y solicitar el dato que se quiere modificar.
-
    **c.** No se puede asignar un código de una obra que ya exista, si esto ocurre se muestra un mensaje y no se modifica la obra.
 
    <li> [5] Eliminar una Obra:
 
    **a.** Solicitar el código de la obra a eliminar, si este no existe, se debe mostrar un mensaje y volver al menú principal.
-
    **b.** No se puede permitir eliminar una obra que esté asociado a una compra.
-
    **c.** Se debe mostrar un mensaje de confirmación para eliminar la obra.
 
    <li> [5] Ver listado de Clientes registrados en el sistema:
@@ -90,35 +86,28 @@ Para este proyecto se solicita implementar las siguientes funcionalidades:
    <li> [5] Insertar Cliente:
 
    **a.** Se debe permitir insertar un nuevo cliente en la lista de clientes de la clase ControlGaleria. Para ello debe apoyarse en los métodos necesarios de la clase Cliente.
-
    **b.** No se puede crear un cliente con el mismo código de identificación de uno que ya exista.
 
    <li> [10] Modificar datos de Cliente:
 
    **a.** Se debe solicitar el código de identificación del cliente a modificar, si este no existe, se debe mostrar un mensaje y volver al menú principal.                      
-
    **b.** Si existe, se deben mostrar los datos del cliente, enumerados, y solicitar el dato que se quiere modificar. 
-
    **c.** No se puede asignar un número de identificación de un cliente que ya exista, si esto ocurre se muestra un mensaje y no se modifica el cliente.
 
   <li> [5] Eliminar un cliente:
 
    **a.** Solicitar el número de identificación del cliente a eliminar, si este no existe, se debe mostrar un mensaje y volver al menú principal.
-
    **b.** No se puede permitir eliminar un cliente que esté asociado a una compra.
-
    **c.** Se debe mostrar un mensaje de confirmación para eliminar el cliente.
 
   <li> [20] Realizar compra de una Obra
 
    **a.** Para comprar una obra ya deben existir la obra y el cliente, estos datos se van a solicitar usando los códigos de ambos. Se debe autogenerar un código de compra que no exista previamente.
-
    **b.** Se debe solicitar toda la información de la compra y validar que no exista una compra de ese cliente para esa obra. Si es así mostrar mensaje de error.
 
   <li> [5] Eliminar compra de obra
 
    **a.** Solicitar el número de compra a eliminar, si este no existe, se debe mostrar un mensaje y volver al menú principal.
-
    **b.** Se debe mostrar un mensaje de confirmación para eliminar la compra.
 
   <li> [5] Ver listado de Compras existentes:
@@ -130,9 +119,11 @@ Para este proyecto se solicita implementar las siguientes funcionalidades:
    **a.** Se debe solicitar mes y año al usuario y mostrar listado de Obras que hayan sido compradas, cliente que la compró, fecha y precio.
   
   <li> [5] Ver listado de Artistas más vendidos
+    
    **a.** Mostrar los artistas más vendidos ordenados de mayor a menor ventas
 
-    <li> Se debe crear en el main de la clase ‘PantallaGaleria’ métodos que permitan invocar e imprimir el resultado (valor de retorno) de cada una de las funcionalidades del controlador de ‘ControlGaleria’, usted debe:
+  ##### Se debe crear en el main de la clase ‘PantallaGaleria’ métodos que permitan invocar e imprimir el resultado (valor de retorno) de cada una de las funcionalidades del controlador de ‘ControlGaleria’, usted debe:
+    
    **a.** proveer de manera literal los valores de prueba
 
    **b.** solicitar por pantalla los valores:
