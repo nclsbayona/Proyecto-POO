@@ -33,14 +33,16 @@ class ControlGaleriaTest {
 	}
 
 	/**
-	 * No hemos solucionado addCliente() crearCliente() modificarCliente()
+	 * No hemos solucionado addCliente() modificarCliente()
 	 * ComprasAsociadosACuadro() modificarObra() 
 	 */
 	//
 	/**
-	 * Hacer crear Cliente y modificar cliente
+	 * Hacer modificar cliente
 	 * Hacer addCircObrayArtista
 	 * Hacer insertarObra
+	 * Hacer modificarObra
+	 * Hacer realizar compra
 	 */
 	@Test
 	// Buscar cliente mal , por cedula
@@ -54,6 +56,42 @@ class ControlGaleriaTest {
 		Cliente client = new Cliente(1, Long.valueOf(1422373), "Alfredo", "Santamaria", "2085 NW Traverse Street",
 				6543212);
 		assertEquals(client, this.controlGaleria.buscarCliente(1422373, ""));
+	}
+
+	@Test
+	// Crear cliente mal , por cedula
+	void testCrearCliente() {
+		assertFalse(this.controlGaleria.crearCliente(2, 9253620, "Nicolas", "Bayona", "Calle 4-43-60", 34251653));
+	}
+
+	@Test
+	// Crear cliente bien , por cedula
+	void testCrearCliente2() {
+		assertTrue(this.controlGaleria.crearCliente(101, Long.valueOf(1001191743), "Lucas", "Ramirez", "Diagonal 68 #78-03", 3208426));
+	}
+
+	@Test
+	// Add cliente mal , por codigo
+	void testAddCliente() {
+		Cliente client = new Cliente(1, Long.valueOf(114223731), "Alfredo", "Santamaria", "2085 NW Traverse Street",
+				6543212);
+		assertNull(this.controlGaleria.addCliente(client));
+	}
+
+	@Test
+	// Add cliente mal , por cedula
+	void testAddCliente1() {
+		Cliente client = new Cliente(231, Long.valueOf(1183937), "Alfredo", "Santamaria", "2085 NW Traverse Street",
+				6543212);
+		assertNull(this.controlGaleria.addCliente(client));
+	}
+
+	@Test
+	// Add cliente bien , por cedula
+	void testAddCliente2() {
+		Cliente client = new Cliente(231, Long.valueOf(1001191582), "Alfredo", "Santamaria", "2085 NW Traverse Street",
+				6543212);
+		assertEquals(client, this.controlGaleria.addCliente(client));
 	}
 
 	@Test

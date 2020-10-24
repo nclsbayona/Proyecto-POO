@@ -131,17 +131,30 @@ public class ControlGaleria {
 
     // Agregar Cliente
     public Cliente addCliente(Cliente cliente) {
-        this.listaClientes.put(cliente.getCedula(), cliente);
-        this.organizarListaClientes();
-        return cliente;
+        try {
+            if (this.buscarCliente(cliente.getCodigoCliente()) != null
+                    || this.buscarCliente(cliente.getCedula(), "") != null)
+                throw new IllegalAccessException();
+            this.listaClientes.put(cliente.getCedula(), cliente);
+            this.organizarListaClientes();
+            return cliente;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     // Crear un cliente
     public boolean crearCliente(int codigoC, long cedula, String nombre, String apellido, String direccion,
             long telefono) {
         try {
+            if (this.buscarCliente(codigoC) != null)
+                throw new IllegalAccessException();
+            if (this.buscarCliente(cedula, "") != null)
+                throw new IllegalAccessException();
             Cliente c = new Cliente(codigoC, cedula, nombre, apellido, direccion, telefono);
             c = this.addCliente(c);
+            if (c == null)
+                throw new IllegalAccessException();
             return true;
         } catch (Exception e) {
             return false;
@@ -437,42 +450,47 @@ public class ControlGaleria {
     // Modifica una obra
     public boolean modificarObra(Obra obra, int criterio, String value) {
         boolean retornar = false;
-        switch (criterio) {
-            case 1: {
-                if (this.buscarObra(Long.parseLong(value)) == null) {
-                    if (value.length() == 7) {
-                        obra.setCodigoObra(Long.parseLong(value));
-                        retornar = true;
-                    }
-                } else
-                    retornar = false;
+        try {
+            switch (criterio) {
+                case 1: {
+                    if (this.buscarObra(Long.parseLong(value)) == null) {
+                        if (value.length() == 7) {
+                            obra.setCodigoObra(Long.parseLong(value));
+                            retornar = true;
+                        } else
+                            retornar = false;
+                    } else
+                        retornar = false;
 
-                break;
+                    break;
+                }
+                case 2: {
+                    obra.setTitulo(value);
+                    retornar = true;
+                    break;
+                }
+                case 3: {
+                    String[] fecha;
+                    fecha = value.split("/");
+                    obra.setFecha(Integer.parseInt(fecha[0]), Integer.parseInt(fecha[1]), Integer.parseInt(fecha[2]));
+                    retornar = true;
+                    break;
+                }
+                case 4: {
+                    obra.setPrecioRef(Long.parseLong(value));
+                    retornar = true;
+                    break;
+                }
+                case 5: {
+                    obra.setDimensiones(value);
+                    retornar = true;
+                    break;
+                }
             }
-            case 2: {
-                obra.setTitulo(value);
-                retornar = true;
-                break;
-            }
-            case 3: {
-                String[] fecha;
-                fecha = value.split("/");
-                obra.setFecha(Integer.parseInt(fecha[0]), Integer.parseInt(fecha[1]), Integer.parseInt(fecha[2]));
-                retornar = true;
-                break;
-            }
-            case 4: {
-                obra.setPrecioRef(Long.parseLong(value));
-                retornar = true;
-                break;
-            }
-            case 5: {
-                obra.setDimensiones(value);
-                retornar = true;
-                break;
-            }
+            return retornar;
+        } catch (Exception e) {
+            return false;
         }
-        return retornar;
     }
 
     // Compras
@@ -539,18 +557,23 @@ public class ControlGaleria {
     }
 
     // Realizar una compra
-    public void realizarCompra(Cliente clien, Obra obr) {
-        Compra comp;
-        long cod;
-        Calendar fecha = Calendar.getInstance();
-        cod = this.listaCompras.size();
-        do {
-            cod += 1;
-        } while (this.existeCodCompra(cod));
-        comp = new Compra(cod, fecha, true);
-        comp.setCliente(clien);
-        comp.setObra(obr);
-        this.listaCompras.add(comp);
+    public boolean realizarCompra(Cliente clien, Obra obr) {
+        try {
+            Compra comp;
+            long cod;
+            Calendar fecha = Calendar.getInstance();
+            cod = this.listaCompras.size();
+            do {
+                cod += 1;
+            } while (this.existeCodCompra(cod));
+            comp = new Compra(cod, fecha, true);
+            comp.setCliente(clien);
+            comp.setObra(obr);
+            this.listaCompras.add(comp);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     /*
