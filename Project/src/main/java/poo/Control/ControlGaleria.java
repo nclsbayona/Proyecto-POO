@@ -119,10 +119,8 @@ public class ControlGaleria {
     public boolean eliminarCliente(long codigo) {
         Cliente c = this.buscarCliente(codigo);
         try {
-
-            if (c == null) {
+            if (c == null)
                 return false;
-            }
             this.listaClientes.remove(c.getCedula());
         } catch (Exception e) {
             return false;
@@ -139,37 +137,46 @@ public class ControlGaleria {
     }
 
     // Crear un cliente
-    public void crearCliente(int codigoC, long cedula, String nombre, String apellido, String direccion,
+    public boolean crearCliente(int codigoC, long cedula, String nombre, String apellido, String direccion,
             long telefono) {
-        Cliente c = new Cliente(codigoC, cedula, nombre, apellido, direccion, telefono);
-        c = this.addCliente(c);
+        try {
+            Cliente c = new Cliente(codigoC, cedula, nombre, apellido, direccion, telefono);
+            c = this.addCliente(c);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     // Modificar Cliente
-    public void modificarCliente(Cliente cliente, int respuesta, String valor) {
-        switch (respuesta) {
-            case 1:
-                cliente.setCodigoCliente(Long.parseLong(valor));
-                break;
-            case 2:
-                cliente.setCedula(Long.parseLong(valor));
-                break;
-            case 3:
-                cliente.setNombre(valor);
-                break;
-            case 4:
-                cliente.setApellidos(valor);
-                break;
-            case 5:
-                cliente.setDireccionEntrega(valor);
-                break;
-            case 6:
-                cliente.setTelefono(Long.parseLong(valor));
-                break;
-            default:
-                break;
+    public boolean modificarCliente(Cliente cliente, int respuesta, String valor) {
+        try {
+            switch (respuesta) {
+                case 1:
+                    cliente.setCodigoCliente(Long.parseLong(valor));
+                    break;
+                case 2:
+                    cliente.setCedula(Long.parseLong(valor));
+                    break;
+                case 3:
+                    cliente.setNombre(valor);
+                    break;
+                case 4:
+                    cliente.setApellidos(valor);
+                    break;
+                case 5:
+                    cliente.setDireccionEntrega(valor);
+                    break;
+                case 6:
+                    cliente.setTelefono(Long.parseLong(valor));
+                    break;
+                default:
+                    break;
+            }
+            return true;
+        } catch (Exception e) {
+            return false;
         }
-        return;
     }
 
     // Buscar un cliente
@@ -187,7 +194,9 @@ public class ControlGaleria {
     // Organizar la lista de clientes (Para mantener un orden)
     public void organizarListaClientes() {
         TreeMap<Long, Cliente> nuevo = new TreeMap<Long, Cliente>();
-        nuevo.putAll(this.listaClientes);
+        // nuevo.putAll(this.listaClientes);
+        for (Cliente c : this.listaClientes.values())
+            nuevo.put(c.getCodigoCliente(), c);
         this.listaClientes.clear();
         this.listaClientes.putAll(nuevo);
         nuevo = null;
@@ -252,11 +261,16 @@ public class ControlGaleria {
     }
 
     // Añade una obra a un artista y viceversa
-    public void addCircObryArt(Obra o, Artista a) {
-        o.getArtista().add(a);
-        this.listaObras.add(o);
-        a.getObras().add(o);
-        this.listaArtistas.put(a.getCedula(), a);
+    public boolean addCircObryArt(Obra o, Artista a) {
+        try {
+            o.getArtista().add(a);
+            this.listaObras.add(o);
+            a.getObras().add(o);
+            this.listaArtistas.put(a.getCedula(), a);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     /*
@@ -274,74 +288,105 @@ public class ControlGaleria {
     // Recibe artista
     public boolean insertarObra(String Titulo, String precioRef, String cedula, String codigoObra, String dimensiones,
             String ano, String mes, String dia, Artista artista, String tema, String tecnica, Clasificacion valorA) {
-        Calendar fecha = Calendar.getInstance();
-        fecha.set(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
-        Obra obra = new Cuadro(Long.parseLong(codigoObra), Titulo, fecha.getTime(), Float.parseFloat(precioRef),
-                dimensiones, tema, tecnica, valorA);
-        this.addCircObryArt(obra, artista);
-        return true;
+        try {
+            Calendar fecha = Calendar.getInstance();
+            fecha.set(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
+            Obra obra = new Cuadro(Long.parseLong(codigoObra), Titulo, fecha.getTime(), Float.parseFloat(precioRef),
+                    dimensiones, tema, tecnica, valorA);
+            if (!this.addCircObryArt(obra, artista))
+                throw new IllegalAccessError();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     // Crea artista
-    public void insertarObra(String Titulo, String precioRef, String cedula, String codigoObra, String dimensiones,
+    public boolean insertarObra(String Titulo, String precioRef, String cedula, String codigoObra, String dimensiones,
             String ano, String mes, String dia, String nombre, String apellido, String telefono, String tema,
             String tecnica, Clasificacion valorA) {
+        try {
+            Calendar fecha = Calendar.getInstance();
+            Artista artista = new Artista(Long.parseLong(cedula), nombre, apellido, Long.parseLong(telefono));
+            fecha.set(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
+            Obra obra = new Cuadro(Long.parseLong(codigoObra), Titulo, fecha.getTime(), Float.parseFloat(precioRef),
+                    dimensiones, tema, tecnica, valorA);
+            if (!this.addCircObryArt(obra, artista))
+                throw new IllegalAccessError();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
 
-        Calendar fecha = Calendar.getInstance();
-        Artista artista = new Artista(Long.parseLong(cedula), nombre, apellido, Long.parseLong(telefono));
-        fecha.set(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
-        Obra obra = new Cuadro(Long.parseLong(codigoObra), Titulo, fecha.getTime(), Float.parseFloat(precioRef),
-                dimensiones, tema, tecnica, valorA);
-        this.addCircObryArt(obra, artista);
     }
 
     // Insertar una instalacion
     // Recibe artista
-    public void insertarObra(String Titulo, String precioRef, String cedula, String codigoObra, String dimensiones,
+    public boolean insertarObra(String Titulo, String precioRef, String cedula, String codigoObra, String dimensiones,
             String ano, String mes, String dia, Artista artista, String descripcion) {
-
-        Calendar fecha = Calendar.getInstance();
-        fecha.set(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
-        Obra obra = new Instalacion(Long.parseLong(codigoObra), Titulo, fecha.getTime(), Float.parseFloat(precioRef),
-                dimensiones, descripcion);
-        this.addCircObryArt(obra, artista);
+        try {
+            Calendar fecha = Calendar.getInstance();
+            fecha.set(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
+            Obra obra = new Instalacion(Long.parseLong(codigoObra), Titulo, fecha.getTime(),
+                    Float.parseFloat(precioRef), dimensiones, descripcion);
+            if (!this.addCircObryArt(obra, artista))
+                throw new IllegalAccessError();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     // Crea artista
-    public void insertarObra(String Titulo, String precioRef, String cedula, String codigoObra, String dimensiones,
+    public boolean insertarObra(String Titulo, String precioRef, String cedula, String codigoObra, String dimensiones,
             String ano, String mes, String dia, String nombre, String apellido, String telefono, String descripcion) {
-
-        Calendar fecha = Calendar.getInstance();
-        Artista artista = new Artista(Long.parseLong(cedula), nombre, apellido, Long.parseLong(telefono));
-        fecha.set(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
-        Obra obra = new Instalacion(Long.parseLong(codigoObra), Titulo, fecha.getTime(), Float.parseFloat(precioRef),
-                dimensiones, descripcion);
-        this.addCircObryArt(obra, artista);
+        try {
+            Calendar fecha = Calendar.getInstance();
+            Artista artista = new Artista(Long.parseLong(cedula), nombre, apellido, Long.parseLong(telefono));
+            fecha.set(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
+            Obra obra = new Instalacion(Long.parseLong(codigoObra), Titulo, fecha.getTime(),
+                    Float.parseFloat(precioRef), dimensiones, descripcion);
+            if (!this.addCircObryArt(obra, artista))
+                throw new IllegalAccessError();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     // Insertar una escultura
     // Recibe artista
-    public void insertarObra(String Titulo, String precioRef, String cedula, String codigoObra, String dimensiones,
+    public boolean insertarObra(String Titulo, String precioRef, String cedula, String codigoObra, String dimensiones,
             String ano, String mes, String dia, Artista artista, String material, double peso) {
-
-        Calendar fecha = Calendar.getInstance();
-        fecha.set(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
-        Obra obra = new Escultura(Long.parseLong(codigoObra), Titulo, fecha.getTime(), Float.parseFloat(precioRef),
-                dimensiones, material, peso);
-        this.addCircObryArt(obra, artista);
+        try {
+            Calendar fecha = Calendar.getInstance();
+            fecha.set(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
+            Obra obra = new Escultura(Long.parseLong(codigoObra), Titulo, fecha.getTime(), Float.parseFloat(precioRef),
+                    dimensiones, material, peso);
+            if (!this.addCircObryArt(obra, artista))
+                throw new IllegalAccessError();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     // Crea artista
-    public void insertarObra(String Titulo, String precioRef, String cedula, String codigoObra, String dimensiones,
+    public boolean insertarObra(String Titulo, String precioRef, String cedula, String codigoObra, String dimensiones,
             String ano, String mes, String dia, String nombre, String apellido, String telefono, String material,
             double peso) {
-
-        Calendar fecha = Calendar.getInstance();
-        Artista artista = new Artista(Long.parseLong(cedula), nombre, apellido, Long.parseLong(telefono));
-        fecha.set(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
-        Obra obra = new Escultura(Long.parseLong(codigoObra), Titulo, fecha.getTime(), Float.parseFloat(precioRef),
-                dimensiones, material, peso);
-        this.addCircObryArt(obra, artista);
+        try {
+            Calendar fecha = Calendar.getInstance();
+            Artista artista = new Artista(Long.parseLong(cedula), nombre, apellido, Long.parseLong(telefono));
+            fecha.set(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
+            Obra obra = new Escultura(Long.parseLong(codigoObra), Titulo, fecha.getTime(), Float.parseFloat(precioRef),
+                    dimensiones, material, peso);
+            if (!this.addCircObryArt(obra, artista))
+                throw new IllegalAccessError();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     // Retorna todas las esculturas en el sistema

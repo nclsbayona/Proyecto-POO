@@ -36,7 +36,12 @@ class ControlGaleriaTest {
 	 * No hemos solucionado addCliente() crearCliente() modificarCliente()
 	 * ComprasAsociadosACuadro() modificarObra() 
 	 */
-
+	//
+	/**
+	 * Hacer crear Cliente y modificar cliente
+	 * Hacer addCircObrayArtista
+	 * Hacer insertarObra
+	 */
 	@Test
 	// Buscar cliente mal , por cedula
 	void testBuscarCliente() {
