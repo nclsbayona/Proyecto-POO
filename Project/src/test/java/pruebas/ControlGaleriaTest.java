@@ -1,5 +1,11 @@
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Calendar;
+
+import poo.Control.ControlGaleria;
+import poo.Model.Cliente;
+import poo.Model.Obra;
+
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -7,6 +13,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ControlGaleriaTest {
+
+	ControlGaleria controlGaleria = new ControlGaleria();
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -25,243 +33,56 @@ class ControlGaleriaTest {
 	}
 
 	@Test
-	void testStartDay() {
-		fail("Not yet implemented"); // TODO
+	// Busca una obra que ya deberia estar
+	void testBuscarObraCodigo() {
+		Calendar fecha3 = Calendar.getInstance();
+		Obra expected = new Obra(1234567, "Michuelo", fecha3, 20000, "20x5");
+		assertEquals(expected, this.controlGaleria.buscarObra(1234567));
 	}
 
 	@Test
-	void testBuscarClienteLongString() {
-		fail("Not yet implemented"); // TODO
+	// Busca una obra que no se encuentra en la lista
+	void testBuscarObraCodigo2() {
+		assertNull(this.controlGaleria.buscarObra(7918273));
 	}
 
 	@Test
-	void testEliminarCliente() {
-		fail("Not yet implemented"); // TODO
+	// Mirar si una obra ya fue comprada,no deberia estar
+	void testObreEnCompra() {
+		boolean expected = false;
+		Obra obra = this.controlGaleria.buscarObra(1234567);
+		assertEquals(expected, this.controlGaleria.obraEnCompra(obra));
 	}
 
 	@Test
-	void testAddCliente() {
-		fail("Not yet implemented"); // TODO
+	// Agregar obra a la lista
+	void testAnadirObra() {
+		Calendar fecha3 = Calendar.getInstance();
+		Obra expected = new Obra(1111111, "Prueba", fecha3, 20000, "20x5");
+		assertEquals(expected, this.controlGaleria.addObra(expected));
 	}
 
 	@Test
-	void testCrearCliente() {
-		fail("Not yet implemented"); // TODO
+	// Agregar repetida a la lista
+	void testAnadirObra2() {
+		Calendar fecha3 = Calendar.getInstance();
+		Obra expected = new Obra(1234567, "Prueba", fecha3, 20000, "20x5");
+		assertNull(this.controlGaleria.addObra(expected));
 	}
 
 	@Test
-	void testModificarCliente() {
-		fail("Not yet implemented"); // TODO
+	// Rectificar si existe compra, en este caso deberia ser falso
+	void existeCodCompra() {
+		assertFalse(this.controlGaleria.existeCodCompra(1));
 	}
 
 	@Test
-	void testBuscarClienteLong() {
-		fail("Not yet implemented"); // TODO
-	}
+	// Busca un cliente en las compras
+	void buscarClienteYObraEnCompra() {
+		Calendar fecha3 = Calendar.getInstance();
+		Obra o = new Obra(1234567, "Michuelo", fecha3, 20000, "20x5");
+		Cliente c = new Cliente(2, 1293723, "Fred", "Jones", "20822 SW Luxury Park", 98765432);
 
-	@Test
-	void testOrganizarListaClientes() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	void testBuscarObraString() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	void testBuscarObraLong() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	void testBuscarObraCalendar() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	void testObraEnCompra() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	void testBuscarObraporArtista() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	void testAddCircObryArt() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	void testInsertarObraStringStringStringStringStringStringStringStringArtistaStringStringClasificacion() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	void testInsertarObraStringStringStringStringStringStringStringStringStringStringStringStringStringClasificacion() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	void testInsertarObraStringStringStringStringStringStringStringStringArtistaString() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	void testInsertarObraStringStringStringStringStringStringStringStringStringStringStringString() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	void testInsertarObraStringStringStringStringStringStringStringStringArtistaStringDouble() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	void testInsertarObraStringStringStringStringStringStringStringStringStringStringStringStringDouble() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	void testBuscarEsculturas() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	void testComprasAsociadasACuadro() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	void testCalcularPrecioTotal() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	void testBuscarArtista() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	void testAddObra() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	void testModificarObra() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	void testExisteCodCompra() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	void testBuscarClienteYObraEnCompra() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	void testEliminarObra() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	void testBuscarCompra() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	void testEliminCompra() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	void testBuscarObraEnCompras() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	void testRealizarCompra() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	void testListadoDeCompra() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	void testVerListadoArtistas() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	void testControlGaleria() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	void testObject() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	void testGetClass() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	void testHashCode() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	void testEquals() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	void testClone() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	void testToString() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	void testNotify() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	void testNotifyAll() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	void testWait() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	void testWaitLong() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	void testWaitLongInt() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	void testFinalize() {
-		fail("Not yet implemented"); // TODO
 	}
 
 }
