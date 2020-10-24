@@ -40,8 +40,8 @@ registrado.
 **Funcionalidades de la entrega 1**
 
 Para este proyecto se solicita implementar las siguientes funcionalidades:
-
-    **1.** [5] Al iniciar el día se debe:
+<ol>
+    <li>**1.** [5] Al iniciar el día se debe:
 
     **a.** Crear la colección de Obras llamada listaObras (método en el controlador ‘GestionObras’ que crea instancias de Obra y llena la lista de obras de la clase ControlGaleria. 
 
@@ -50,7 +50,7 @@ Para este proyecto se solicita implementar las siguientes funcionalidades:
     **b.** La clase GestiónObras también puede llenar la lista de Artistas.
     **c.** Crear la colección de clientes llamada listaClientes (método en el controlador ‘GestionCliente’ que crea instancias de Cliente y llena la lista de clientes de la clase  ControlGaleria. Esta clase sólo existe para no tener que ingresar datos por pantalla de clientes y facilitar la prueba del programa. No obstante, las funcionalidades para insertar, modificar y eliminar un cliente deben programarse.
     **d.** La clase ControlGaleria debe invocar en su constructor los métodos anteriores.
-
+</ol>
 **NOTA** : Para los métodos anteriores los objetos se pueden crear con valores literales; en la siguiente entrega esto se cambiará por un acceso a archivos del sistema.**
 
     **2.** [5] Ver listado de Obras disponibles
