@@ -36,8 +36,6 @@ public class Cuadro extends Obra {
         super(_codigoObra, _titulo, _fecha, _precioRef, _dimensiones);
         this.tema = tema;
         this.tecnica = tecnica;
-        // Decidimos luego esto como lo manejamos, sinceramente no lo se
-        // Puse un atríbuto ahí para poner si obra maestra o representativa, no se
         this.clasificacion = valorA;
     }
 

@@ -116,17 +116,19 @@ public class ControlGaleria {
     }
 
     // Eliminar Cliente
-    public void eliminarCliente(long codigo) {
+    public boolean eliminarCliente(long codigo) {
         Cliente c = this.buscarCliente(codigo);
         try {
 
             if (c == null) {
-                return;
+                return false;
             }
             this.listaClientes.remove(c.getCedula());
         } catch (Exception e) {
+            return false;
         }
         this.organizarListaClientes();
+        return true;
     }
 
     // Agregar Cliente
@@ -270,14 +272,14 @@ public class ControlGaleria {
      */
     // Insertar un cuadro
     // Recibe artista
-    public void insertarObra(String Titulo, String precioRef, String cedula, String codigoObra, String dimensiones,
+    public boolean insertarObra(String Titulo, String precioRef, String cedula, String codigoObra, String dimensiones,
             String ano, String mes, String dia, Artista artista, String tema, String tecnica, Clasificacion valorA) {
-
         Calendar fecha = Calendar.getInstance();
         fecha.set(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
         Obra obra = new Cuadro(Long.parseLong(codigoObra), Titulo, fecha.getTime(), Float.parseFloat(precioRef),
                 dimensiones, tema, tecnica, valorA);
         this.addCircObryArt(obra, artista);
+        return true;
     }
 
     // Crea artista

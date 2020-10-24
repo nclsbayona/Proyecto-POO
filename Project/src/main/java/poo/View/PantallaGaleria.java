@@ -226,11 +226,9 @@ public class PantallaGaleria {
 			// Inserta Obra
 			case 3: {
 				retornar = 3;
-				// Falta arreglar esta parte
 				this.clearScreen();// Limpia la Pantalla
 				System.out.println("Insertar Obra");
 				this.printArtistas();
-
 				System.out.print("1. Cuadro\n2. Instalación\n3. Escultura\nIngrese eleccion: ");
 				do {
 					seleObra = entrada.next();
@@ -240,7 +238,7 @@ public class PantallaGaleria {
 					codigoObra = entrada.next();
 				} while (codigoObra.length() != 7);
 				if (controlGaleria.buscarObra(Long.parseLong(codigoObra)) != null) {
-					System.out.println("Ya existe una obra con este codigo");
+					System.out.println("Ya existe una obra con este codigo");				
 					break;
 				}
 				System.out.println("Titulo: ");
