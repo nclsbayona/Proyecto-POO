@@ -1,10 +1,10 @@
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Calendar;
+import java.util.Date;
 
 import poo.Control.ControlGaleria;
-import poo.Model.Cliente;
-import poo.Model.Obra;
+import poo.Model.*;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -36,7 +36,7 @@ class ControlGaleriaTest {
 	// Busca una obra que ya deberia estar
 	void testBuscarObraCodigo() {
 		Calendar fecha3 = Calendar.getInstance();
-		Obra expected = new Obra(1234567, "Michuelo", fecha3, 20000, "20x5");
+		Obra expected = new Instalacion(1234567, "Michuelo", fecha3.getTime(), 20000, "20x5", "Esta es otra prueba");
 		assertEquals(expected, this.controlGaleria.buscarObra(1234567));
 	}
 
@@ -58,7 +58,7 @@ class ControlGaleriaTest {
 	// Agregar obra a la lista
 	void testAnadirObra() {
 		Calendar fecha3 = Calendar.getInstance();
-		Obra expected = new Obra(1111111, "Prueba", fecha3, 20000, "20x5");
+		Obra expected = new Escultura(1111111, "Prueba", fecha3.getTime(), 20000, "20x5", "Hola", 2019);
 		assertEquals(expected, this.controlGaleria.addObra(expected));
 	}
 
@@ -66,7 +66,7 @@ class ControlGaleriaTest {
 	// Agregar repetida a la lista
 	void testAnadirObra2() {
 		Calendar fecha3 = Calendar.getInstance();
-		Obra expected = new Obra(1234567, "Prueba", fecha3, 20000, "20x5");
+		Obra expected = new Instalacion(1234567, "Prueba", fecha3.getTime(), 20000, "20x5", "Hola");
 		assertNull(this.controlGaleria.addObra(expected));
 	}
 
@@ -80,9 +80,10 @@ class ControlGaleriaTest {
 	// Busca un cliente en las compras
 	void buscarClienteYObraEnCompra() {
 		Calendar fecha3 = Calendar.getInstance();
-		Obra o = new Obra(1234567, "Michuelo", fecha3, 20000, "20x5");
+		Obra o = new Cuadro(1234567, "Michuelo", fecha3.getTime(), 20000, "20x5", "Cubismo", "Pastel",
+                Clasificacion.OBRA_REPRESENTATIVA);
 		Cliente c = new Cliente(2, 1293723, "Fred", "Jones", "20822 SW Luxury Park", 98765432);
-
+		assertFalse(this.controlGaleria.buscarClienteYObraEnCompra(c, o));
 	}
 
 }
