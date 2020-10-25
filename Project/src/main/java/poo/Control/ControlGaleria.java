@@ -164,11 +164,18 @@ public class ControlGaleria {
     // Modificar Cliente
     public boolean modificarCliente(Cliente cliente, int respuesta, String valor) {
         try {
+            if (this.buscarCliente(cliente.getCodigoCliente()) == null
+                    || this.buscarCliente(cliente.getCedula(), "") == null)
+                throw new IllegalAccessException();
             switch (respuesta) {
                 case 1:
+                    if (this.buscarCliente(Long.parseLong(valor)) != null)
+                        throw new IllegalAccessException();
                     cliente.setCodigoCliente(Long.parseLong(valor));
                     break;
                 case 2:
+                    if (this.buscarCliente(Long.parseLong(valor), "") != null)
+                        throw new IllegalAccessException();
                     cliente.setCedula(Long.parseLong(valor));
                     break;
                 case 3:
@@ -184,7 +191,7 @@ public class ControlGaleria {
                     cliente.setTelefono(Long.parseLong(valor));
                     break;
                 default:
-                    break;
+                    throw new IllegalAccessException();
             }
             return true;
         } catch (Exception e) {
@@ -276,6 +283,8 @@ public class ControlGaleria {
     // Añade una obra a un artista y viceversa
     public boolean addCircObryArt(Obra o, Artista a) {
         try {
+            if (this.buscarObra(o.getCodigoObra())!=null)
+                throw new IllegalAccessException();
             o.getArtista().add(a);
             this.listaObras.add(o);
             a.getObras().add(o);
@@ -307,7 +316,7 @@ public class ControlGaleria {
             Obra obra = new Cuadro(Long.parseLong(codigoObra), Titulo, fecha.getTime(), Float.parseFloat(precioRef),
                     dimensiones, tema, tecnica, valorA);
             if (!this.addCircObryArt(obra, artista))
-                throw new IllegalAccessError();
+                throw new IllegalAccessException();
             return true;
         } catch (Exception e) {
             return false;
@@ -325,7 +334,7 @@ public class ControlGaleria {
             Obra obra = new Cuadro(Long.parseLong(codigoObra), Titulo, fecha.getTime(), Float.parseFloat(precioRef),
                     dimensiones, tema, tecnica, valorA);
             if (!this.addCircObryArt(obra, artista))
-                throw new IllegalAccessError();
+                throw new IllegalAccessException();
             return true;
         } catch (Exception e) {
             return false;
@@ -343,7 +352,7 @@ public class ControlGaleria {
             Obra obra = new Instalacion(Long.parseLong(codigoObra), Titulo, fecha.getTime(),
                     Float.parseFloat(precioRef), dimensiones, descripcion);
             if (!this.addCircObryArt(obra, artista))
-                throw new IllegalAccessError();
+                throw new IllegalAccessException();
             return true;
         } catch (Exception e) {
             return false;
@@ -360,7 +369,7 @@ public class ControlGaleria {
             Obra obra = new Instalacion(Long.parseLong(codigoObra), Titulo, fecha.getTime(),
                     Float.parseFloat(precioRef), dimensiones, descripcion);
             if (!this.addCircObryArt(obra, artista))
-                throw new IllegalAccessError();
+                throw new IllegalAccessException();
             return true;
         } catch (Exception e) {
             return false;
@@ -377,7 +386,7 @@ public class ControlGaleria {
             Obra obra = new Escultura(Long.parseLong(codigoObra), Titulo, fecha.getTime(), Float.parseFloat(precioRef),
                     dimensiones, material, peso);
             if (!this.addCircObryArt(obra, artista))
-                throw new IllegalAccessError();
+                throw new IllegalAccessException();
             return true;
         } catch (Exception e) {
             return false;
@@ -395,7 +404,7 @@ public class ControlGaleria {
             Obra obra = new Escultura(Long.parseLong(codigoObra), Titulo, fecha.getTime(), Float.parseFloat(precioRef),
                     dimensiones, material, peso);
             if (!this.addCircObryArt(obra, artista))
-                throw new IllegalAccessError();
+                throw new IllegalAccessException();
             return true;
         } catch (Exception e) {
             return false;
@@ -451,6 +460,8 @@ public class ControlGaleria {
     public boolean modificarObra(Obra obra, int criterio, String value) {
         boolean retornar = false;
         try {
+            if (obra==null)
+                throw new IllegalAccessException();
             switch (criterio) {
                 case 1: {
                     if (this.buscarObra(Long.parseLong(value)) == null) {
@@ -477,6 +488,8 @@ public class ControlGaleria {
                     break;
                 }
                 case 4: {
+                    if (this.buscarObraEnCompras(obra))
+                        throw new IllegalAccessException();
                     obra.setPrecioRef(Long.parseLong(value));
                     retornar = true;
                     break;
@@ -559,6 +572,8 @@ public class ControlGaleria {
     // Realizar una compra
     public boolean realizarCompra(Cliente clien, Obra obr) {
         try {
+            if (this.buscarObra(obr.getCodigoObra())==null||obr==null||clien==null)
+                throw new IllegalAccessException();
             Compra comp;
             long cod;
             Calendar fecha = Calendar.getInstance();
@@ -566,6 +581,8 @@ public class ControlGaleria {
             do {
                 cod += 1;
             } while (this.existeCodCompra(cod));
+            if (this.buscarClienteYObraEnCompra(clien, obr))
+                throw new IllegalAccessException();
             comp = new Compra(cod, fecha, true);
             comp.setCliente(clien);
             comp.setObra(obr);

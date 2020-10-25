@@ -496,7 +496,7 @@ public class PantallaGaleria {
 						buscarClienteC = entrada.next();
 						System.out.println(controlGaleria.buscarCliente(Long.parseLong(buscarClienteC)) != null
 								? controlGaleria.buscarCliente(Long.parseLong(buscarClienteC))
-								: "");
+								: "No se encuentra un cliente con ese codigo");
 						break;
 					case 2:
 						System.out.println("Ingrese la cedula");
@@ -504,7 +504,7 @@ public class PantallaGaleria {
 						System.out
 								.println(controlGaleria.buscarCliente(Long.parseLong(buscarClienteC), "cedula") != null
 										? controlGaleria.buscarCliente(Long.parseLong(buscarClienteC), "cedula")
-										: "");
+										: "No se encuentra un cliente con esa cedula");
 						break;
 					default:
 						break;
@@ -629,7 +629,7 @@ public class PantallaGaleria {
 				System.out.println("Eliminar Cliente");
 				System.out.println("Ingrese el codigo del cliente a eliminar: ");
 				codigoCliente = entrada.next();
-				this.controlGaleria.eliminarCliente(Long.parseLong(codigoCliente));
+				System.out.println((this.controlGaleria.eliminarCliente(Long.parseLong(codigoCliente))==true)?"Eliminado":"No se elimino el cliente");
 				System.out.println("---------------------------------");
 				break;
 			}

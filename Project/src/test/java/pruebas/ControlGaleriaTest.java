@@ -32,18 +32,6 @@ class ControlGaleriaTest {
 	void tearDown() throws Exception {
 	}
 
-	/**
-	 * No hemos solucionado addCliente() modificarCliente()
-	 * ComprasAsociadosACuadro() modificarObra() 
-	 */
-	//
-	/**
-	 * Hacer modificar cliente
-	 * Hacer addCircObrayArtista
-	 * Hacer insertarObra
-	 * Hacer modificarObra
-	 * Hacer realizar compra
-	 */
 	@Test
 	// Buscar cliente mal , por cedula
 	void testBuscarCliente() {
@@ -67,7 +55,8 @@ class ControlGaleriaTest {
 	@Test
 	// Crear cliente bien , por cedula
 	void testCrearCliente2() {
-		assertTrue(this.controlGaleria.crearCliente(101, Long.valueOf(1001191743), "Lucas", "Ramirez", "Diagonal 68 #78-03", 3208426));
+		assertTrue(this.controlGaleria.crearCliente(101, Long.valueOf(1001191743), "Lucas", "Ramirez",
+				"Diagonal 68 #78-03", 3208426));
 	}
 
 	@Test
@@ -193,7 +182,7 @@ class ControlGaleriaTest {
 		assertNull(this.controlGaleria.addObra(expected));
 	}
 
-@Test
+	@Test
 	// Rectificar si existe compra, en este caso deberia ser verdadero
 	void existeCodCompra() {
 		Obra obra = this.controlGaleria.buscarObra(1234567);
@@ -208,8 +197,6 @@ class ControlGaleriaTest {
 		assertFalse(this.controlGaleria.existeCodCompra(1));
 	}
 
-
-	
 	@Test
 	// Busca un cliente en las compras
 	void buscarClienteYObraEnCompra() {
@@ -301,19 +288,23 @@ class ControlGaleriaTest {
 
 	// Funciona
 	@Test
-	void testAddObra(){
-		Calendar fecha=Calendar.getInstance();
-		 fecha.set(2020, 11, 01);
-        Obra o=new Instalacion(1111111, "Probando", fecha.getTime(), 20000, "20x5", "Prueba de instalacion");
-	  assertEquals(o,this.controlGaleria.addObra(new Instalacion(1111111, "Probando", fecha.getTime(), 20000, "20x5", "Prueba de instalacion")));
-		
+	void testAddObra() {
+		Calendar fecha = Calendar.getInstance();
+		fecha.set(2020, 11, 01);
+		Obra o = new Instalacion(1111111, "Probando", fecha.getTime(), 20000, "20x5", "Prueba de instalacion");
+		assertEquals(o, this.controlGaleria.addObra(
+				new Instalacion(1111111, "Probando", fecha.getTime(), 20000, "20x5", "Prueba de instalacion")));
+
 	}
-	//No funciona
+
+	// No funciona
 	@Test
-	void testAddObra2(){
-		Calendar fecha2 =  Calendar.getInstance();
-		assertNull(this.controlGaleria.addObra(new Escultura(3456789, "Sociopata", fecha2.getTime(), 15000, "10x2", "Cemento", 2084)));
+	void testAddObra2() {
+		Calendar fecha2 = Calendar.getInstance();
+		assertNull(this.controlGaleria
+				.addObra(new Escultura(3456789, "Sociopata", fecha2.getTime(), 15000, "10x2", "Cemento", 2084)));
 	}
+
 	@Test
 	// Eliminar obra, debe eliminarlo
 	void testEliminarObra() {
@@ -325,6 +316,7 @@ class ControlGaleriaTest {
 	void testEliminarObra2() {
 		assertFalse(this.controlGaleria.eliminarObra(Long.valueOf("9991872")));
 	}
+
 	@Test
 	// Buscar compra, debe encontrarlo
 	void testBuscarCompra() {
@@ -333,7 +325,8 @@ class ControlGaleriaTest {
 				Clasificacion.OBRA_REPRESENTATIVA);
 		Cliente c = new Cliente(2, 1293723, "Fred", "Jones", "20822 SW Luxury Park", 98765432);
 		this.controlGaleria.realizarCompra(c, o);
-		assertEquals(this.controlGaleria.buscarCompra("1"), this.controlGaleria.buscarCompra("1"));;
+		assertEquals(this.controlGaleria.buscarCompra("1"), this.controlGaleria.buscarCompra("1"));
+		;
 	}
 
 	@Test
@@ -341,7 +334,7 @@ class ControlGaleriaTest {
 	void testBuscarCompra2() {
 		assertNull(this.controlGaleria.buscarCompra("0"));
 	}
-	
+
 	@Test
 	// Eliminar compra, debe encontrarlo
 	void testEliminarCompra() {
@@ -358,5 +351,94 @@ class ControlGaleriaTest {
 	void testEliminarCompra2() {
 		assertNull(this.controlGaleria.eliminCompra("0"));
 	}
-				
+
+	@Test
+	// Modificar cliente caso positivo
+	void testModificarCliente() {
+		Cliente c = this.controlGaleria.buscarCliente(1);
+		assertTrue(this.controlGaleria.modificarCliente(c, 1, "1347291"));
+
+	}
+
+	@Test
+	// Modificar cliente caso cedula repetida
+	void testModificarCliente3() {
+		Cliente c = this.controlGaleria.buscarCliente(1);
+		assertFalse(this.controlGaleria.modificarCliente(c, 2, "1422373"));
+	}
+
+	@Test
+	// Modificar cliente caso falso
+	void testModificarCliente2() {
+		assertFalse(this.controlGaleria.modificarCliente(this.controlGaleria.buscarCliente(1), 0, "2"));
+	}
+
+	@Test
+	//Modificar Obra caso positivo
+	void testModificarObra() {
+	Obra o=this.controlGaleria.buscarObra(1234567);
+	assertTrue(this.controlGaleria.modificarObra(o,1,"1031456"));
+
+	}
+
+	@Test
+	// Modificar obra caso codigo repetido
+	void testModificarObra2() {
+		Obra o=this.controlGaleria.buscarObra(1234567);
+		assertFalse(this.controlGaleria.modificarObra(o,1,"1234567"));
+	}
+
+	@Test
+	// Modificar obra valor mal insertado
+	void testModificarObra3() {
+		Obra o=this.controlGaleria.buscarObra(123457);
+		assertFalse(this.controlGaleria.modificarObra(o,1,"123"));
+	}
+
+	@Test
+	//addCircObrayArtista Caso verdadero
+	void testaddCircObrayArtista(){
+		Calendar fecha = Calendar.getInstance();
+		assertTrue(this.controlGaleria.addCircObryArt(new Instalacion(1342573, "La gorda", fecha.getTime(), 20000, "20x5", "Prueba de instalacion"), new Artista(1000512331, "Natalia", "Castro Sepulveda", fecha, 314231233)));
+ 	}
+
+	 @Test
+	 // insertarObra caso falso
+		void testAddCircObraYArtista2() {
+			Calendar fecha = Calendar.getInstance();
+			assertFalse(this.controlGaleria.addCircObryArt(
+					new Instalacion(1234567, "La gorda", fecha.getTime(), 20000, "20x5", "Prueba de instalacion"),
+					new Artista(1000512331, "Natalia", "Castro Sepulveda", fecha, 314231233)));
+		}
+
+
+	@Test
+	// insertarObra caso verdadero
+	void testInsertarObra() {
+		Artista a=this.controlGaleria.buscarArtista(1000512331);
+		assertTrue(this.controlGaleria.insertarObra("Hola", "30000", "1000512331", "2001009", "20x20", "1999", "11", "24", a, "Hola2"));
+	}
+
+	@Test
+	// Realizar compra caso falso
+	void testInsertarObra2(){
+		Artista a=this.controlGaleria.buscarArtista(1000512331);
+		assertFalse(this.controlGaleria.insertarObra(
+			"Hola", "30000", "1000512331", "200009", "20x20", "1999", "11", "24", a, "Hola"));
+	}
+
+	
+	@Test
+	//Realizar compra caso verdadero
+	void testRealizarCompra() {
+		Calendar fecha = Calendar.getInstance();
+		assertTrue(this.controlGaleria.realizarCompra(new Cliente(3, Long.valueOf(9253620), "Lucas", "Ramirez", "Diagonal 68 #78-03", 3208426), new Escultura(1234567, "Machupichu", fecha.getTime(), 15000, "10x2", "Marmol", 1550)));
+	}
+
+	@Test
+	//Realizar compra caso falso
+	void testRealizarCompra2() {
+		Calendar fecha = Calendar.getInstance();
+		assertFalse(this.controlGaleria.realizarCompra(new Cliente(3, Long.valueOf(9253620), "Lucas", "Ramirez", "Diagonal 68 #78-03", 3208426), new Escultura(726382, "Machupichu", fecha.getTime(), 15000, "10x2", "Marmol", 1550)));
+	}
 }
