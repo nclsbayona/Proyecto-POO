@@ -1,12 +1,11 @@
 package poo.Model;
 
 import java.util.Date;
-import java.util.HashSet;
 
 public class Escultura extends Obra {
     private String material;
     private double peso;
-    private HashSet<Material> materiales;
+    private Material materiales;
 
     public String getMaterial() {
         return this.material;
@@ -24,11 +23,11 @@ public class Escultura extends Obra {
         this.peso = peso;
     }
 
-    public HashSet<Material> getMateriales() {
+    public Material getMateriales() {
         return this.materiales;
     }
 
-    public void setMateriales(HashSet<Material> materiales) {
+    public void setMateriales(Material materiales) {
         this.materiales = materiales;
     }
 
@@ -37,7 +36,6 @@ public class Escultura extends Obra {
         super(_codigoObra, _titulo, _fecha, _precioRef, _dimensiones);
         this.material = material;
         this.peso = peso;
-        this.materiales = new HashSet<Material>();
     }
 
     @Override
