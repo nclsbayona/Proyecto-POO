@@ -16,6 +16,7 @@
     <maven.compiler.target>11</maven.compiler.target>
     <openjfx.version>0.0.5</openjfx.version>
     <jfx.version>13</jfx.version>
+    <mainClass>view.PantallaGaleria</mainClass>
   </properties>
 
   <dependencies>
@@ -38,6 +39,24 @@
         <version>5.7.0</version>
         <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.openjfx</groupId>
+      <artifactId>javafx-graphics</artifactId>
+      <version>${javafx.version}</version>
+      <classifier>win</classifier>
+  </dependency>
+  <dependency>
+      <groupId>org.openjfx</groupId>
+      <artifactId>javafx-graphics</artifactId>
+      <version>${javafx.version}</version>
+      <classifier>linux</classifier>
+  </dependency>
+  <dependency>
+      <groupId>org.openjfx</groupId>
+      <artifactId>javafx-graphics</artifactId>
+      <version>${javafx.version}</version>
+      <classifier>mac</classifier>
+  </dependency>
   </dependencies>
 
   <build>
@@ -63,7 +82,7 @@
                       <transformers>
                           <transformer implementation=
                                                "org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                              <mainClass>hellofx.Launcher</mainClass>
+                              <mainClass>${mainClass}</mainClass>
                           </transformer>
                       </transformers>
                   </configuration>
