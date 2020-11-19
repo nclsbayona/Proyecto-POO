@@ -1,4 +1,4 @@
-package poo.Model;
+package model;
 
 public class Cliente implements Comparable<Cliente> {
     private long codigoCliente;

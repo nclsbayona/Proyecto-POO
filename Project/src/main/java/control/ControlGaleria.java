@@ -1,4 +1,4 @@
-package poo.Control;
+package control;
 
 import java.util.Calendar;
 import java.util.Collections;
@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.TreeMap;
 
-import poo.Model.*;
+import model.*;
 
 public class ControlGaleria {
     // Colecciones

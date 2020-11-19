@@ -1,15 +1,11 @@
-package poo.View;
+package view;
 
 import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Scanner;
 
-import poo.Control.ControlGaleria;
-import poo.Model.Artista;
-import poo.Model.Clasificacion;
-import poo.Model.Cliente;
-import poo.Model.Compra;
-import poo.Model.Obra;
+import control.ControlGaleria;
+import model.*;
 
 //Boundary
 public class PantallaGaleria {
@@ -731,7 +727,6 @@ public class PantallaGaleria {
 
 	// Main Boundary del Sistema
 	public static void main(String[] args) {
-
 		// Creaciones de Objetos
 		Scanner entrada = new Scanner(System.in);
 		PantallaGaleria pantallaGaleria = new PantallaGaleria();

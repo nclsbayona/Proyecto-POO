@@ -7,11 +7,12 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import poo.Model.Material;
-import poo.Model.Clasificacion;
-import poo.Model.Cuadro;
-import poo.Model.Escultura;
-import poo.Model.Instalacion;
+
+import model.Clasificacion;
+import model.Cuadro;
+import model.Escultura;
+import model.Instalacion;
+import model.Material;
 
 class CuadroTest {
 

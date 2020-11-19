@@ -1,4 +1,4 @@
-package poo.Model;
+package model;
 
 public enum Clasificacion {
 

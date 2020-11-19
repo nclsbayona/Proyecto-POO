@@ -1,13 +1,14 @@
-package poo.Control;
-
-import poo.Model.Obra;
-import poo.Model.Cuadro;
-import poo.Model.Instalacion;
-import poo.Model.Escultura;
-import poo.Model.Artista;
-import poo.Model.Clasificacion;
+package control;
 
 import java.util.HashSet;
+
+import model.Artista;
+import model.Clasificacion;
+import model.Cuadro;
+import model.Escultura;
+import model.Instalacion;
+import model.Obra;
+
 import java.util.Calendar;
 import java.util.HashMap;
 

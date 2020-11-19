@@ -1,7 +1,7 @@
-package poo.Control;
-import poo.Model.Cliente;
-
+package control;
 import java.util.HashMap;
+
+import model.Cliente;
 public class GestionClientes
 {
     //Retorna una lista de clientes para comenzar el dia

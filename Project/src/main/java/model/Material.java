@@ -1,4 +1,4 @@
-package poo.Model;
+package model;
 
 public class Material {
     private long codigo;

@@ -3,22 +3,35 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-
-  <groupId>Galeria</groupId>
+  <groupId>poo.project</groupId>
   <artifactId>Project</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-
+  <packaging>jar</packaging>
   <name>Project</name>
-  <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
+    <openjfx.version>0.0.5</openjfx.version>
+    <jfx.version>13</jfx.version>
   </properties>
 
   <dependencies>
+
+    <dependency>
+      <groupId>org.openjfx</groupId>
+      <artifactId>javafx-fxml</artifactId>
+      <version>${jfx.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.openjfx</groupId>
+      <artifactId>javafx-controls</artifactId>
+      <version>${jfx.version}</version>
+    </dependency>
+
     <dependency>
         <groupId>org.junit.jupiter</groupId>
         <artifactId>junit-jupiter-engine</artifactId>
@@ -33,6 +46,36 @@
             <artifactId>maven-surefire-plugin</artifactId>
             <version>3.0.0-M5</version>
         </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-shade-plugin</artifactId>
+          <version>3.2.0</version>
+          <executions>
+              <execution>
+                  <phase>package</phase>
+                  <goals>
+                      <goal>shade</goal>
+                  </goals>
+                  <configuration>
+                      <shadedArtifactAttached>true</shadedArtifactAttached>
+                      <shadedClassifierName>project-classifier</shadedClassifierName>
+                      <outputFile>shade\${project.artifactId}.jar</outputFile>
+                      <transformers>
+                          <transformer implementation=
+                                               "org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                              <mainClass>hellofx.Launcher</mainClass>
+                          </transformer>
+                      </transformers>
+                  </configuration>
+              </execution>
+          </executions>
+      </plugin>
     </plugins>
+    <resources>
+      <resource>
+          <filtering>false</filtering>
+          <directory>${basedir}/src/main/resources</directory>
+      </resource>
+  </resources>
   </build>
 </project>

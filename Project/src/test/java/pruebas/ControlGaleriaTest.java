@@ -3,8 +3,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.Calendar;
 import java.util.HashSet;
 
-import poo.Control.ControlGaleria;
-import poo.Model.*;
+import control.ControlGaleria;
+import model.*;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
