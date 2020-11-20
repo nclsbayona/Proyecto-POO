@@ -625,7 +625,7 @@ public class PantallaGaleria {
 				System.out.println("Eliminar Cliente");
 				System.out.println("Ingrese el codigo del cliente a eliminar: ");
 				codigoCliente = entrada.next();
-				System.out.println((this.controlGaleria.eliminarCliente(Long.parseLong(codigoCliente))==true)?"Eliminado":"No se elimino el cliente");
+				System.out.println((this.controlGaleria.eliminarCliente(Long.parseLong(codigoCliente)))?"Eliminado":"No se elimino el cliente");
 				System.out.println("---------------------------------");
 				break;
 			}

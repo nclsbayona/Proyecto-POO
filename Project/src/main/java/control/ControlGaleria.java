@@ -90,6 +90,7 @@ public class ControlGaleria {
         for (Cliente c : this.gestionClientes.listaClientes().values()) {
             if (c != null)
                 this.listaClientes.put(c.getCedula(), c);
+                
         }
         this.organizarListaClientes();
         for (Artista c : this.gestionObras.startArtistas().values()) {
@@ -121,7 +122,7 @@ public class ControlGaleria {
         try {
             if (c == null)
                 return false;
-            this.listaClientes.remove(c.getCedula());
+                this.listaClientes.remove(c.getCedula());
         } catch (Exception e) {
             return false;
         }
@@ -216,7 +217,7 @@ public class ControlGaleria {
         TreeMap<Long, Cliente> nuevo = new TreeMap<Long, Cliente>();
         // nuevo.putAll(this.listaClientes);
         for (Cliente c : this.listaClientes.values())
-            nuevo.put(c.getCodigoCliente(), c);
+            nuevo.put(c.getCedula(), c);
         this.listaClientes.clear();
         this.listaClientes.putAll(nuevo);
         nuevo = null;
