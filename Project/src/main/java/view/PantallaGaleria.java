@@ -733,6 +733,7 @@ public class PantallaGaleria {
 		String opc = "0";
 		int eleccion = 0, salir = 19;
 		do {
+			pantallaGaleria.clearScreen();
 			// Muestra el Menu al Usuario
 			pantallaGaleria.printMenu();
 			// Controla las deciciones del usuario
