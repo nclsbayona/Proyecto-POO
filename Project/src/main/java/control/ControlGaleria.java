@@ -206,8 +206,8 @@ public class ControlGaleria {
     // Retorna el precio total de todas las obras en el sistema
     public double calcularPrecioTotal() {
         double precio = 0;
-        for (Obra o : this.listaObras)
-            precio += o.calcularPrecio();
+        for (Compra co : this.listaCompras)
+            precio += co.getObra().calcularPrecio();
         return precio;
     }
 
@@ -656,4 +656,6 @@ public class ControlGaleria {
         // https://howtodoinjava.com/java/sort/java-sort-map-by-key/
         // https://es.stackoverflow.com/questions/2464/c%C3%B3mo-iterar-a-trav%C3%A9s-de-un-hashmap
     }
+    //Exportar a xml ?
+    //public bool exportarReporte
 }

@@ -416,7 +416,7 @@ class ControlGaleriaTest {
 	// Funciona
 	@Test
 	void testPrecioTotal() {
-		double expected = 653700;
+		double expected = 0;
 		assertEquals(expected, this.controlGaleria.calcularPrecioTotal());
 
 	}
