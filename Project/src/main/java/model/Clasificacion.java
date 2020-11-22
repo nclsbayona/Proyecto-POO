@@ -6,16 +6,16 @@ public enum Clasificacion {
 
     private String nombre;
 
+    private Clasificacion(String nombre) {
+        this.nombre = nombre;
+    }
+
     public Object getOBRA_MAESTRA() {
         return Clasificacion.OBRA_MAESTRA;
     }
 
     public Object getOBRA_REPRESENTATIVA() {
         return Clasificacion.OBRA_REPRESENTATIVA;
-    }
-
-    private Clasificacion(String nombre) {
-        this.nombre = nombre;
     }
 
     @Override

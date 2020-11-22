@@ -12,68 +12,11 @@ public class Artista {
 	private Calendar fechaNacimiento;
 	private long telefono;
 
-	// Métodos
-	// Accessors de setDeObras
-	public HashSet<Obra> getObras() {
-		return this.obras;
-	}
-
-	public void setObras(HashSet<Obra> obras) {
-		this.obras = obras;
-	}
-
-	// Accessors de cedula
-	public long getCedula() {
-		return this.cedula;
-	}
-
-	public void setCedula(long cedula) {
+	// Argumentos con cedula y código
+	public Artista(long cedula, long codigoArtista) {
+		this.obras = new HashSet<Obra>();
 		this.cedula = cedula;
-	}
-
-	// Accessors de codigoArtista
-	public long getCodigoArtista() {
-		return this.codigoArtista;
-	}
-
-	public void setCodigoArtista(long codigoArtista) {
 		this.codigoArtista = codigoArtista;
-	}
-
-	// Accessors de telefono
-	public long getTelefono() {
-		return this.telefono;
-	}
-
-	public void setTelefono(long telefono) {
-		this.telefono = telefono;
-	}
-
-	// Accessors de nombre
-	public String getNombre() {
-		return this.nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	// Accessors de apellidos
-	public String getApellidos() {
-		return this.apellidos;
-	}
-
-	public void getApellidos(String apellidos) {
-		this.apellidos = apellidos;
-	}
-
-	// Accessors de fechaNacimento
-	public Calendar getFechaNacimiento() {
-		return this.fechaNacimiento;
-	}
-
-	public void setFechaNacimiento(Calendar fechaNacimiento) {
-		this.fechaNacimiento = fechaNacimiento;
 	}
 
 	// Constructores
@@ -105,13 +48,6 @@ public class Artista {
 		this.codigoArtista = codigoArtista;
 	}
 
-	// Argumentos con cedula y código
-	public Artista(long cedula, long codigoArtista) {
-		this.obras = new HashSet<Obra>();
-		this.cedula = cedula;
-		this.codigoArtista = codigoArtista;
-	}
-
 	// Verifica que no exista un artista con esa cédula para agregar uno nuevo
 	@Override
 	public boolean equals(Object obj) {
@@ -123,10 +59,74 @@ public class Artista {
 		}
 	}
 
+	// Accessors de apellidos
+	public String getApellidos() {
+		return this.apellidos;
+	}
+
+	public void getApellidos(String apellidos) {
+		this.apellidos = apellidos;
+	}
+
+	// Accessors de cedula
+	public long getCedula() {
+		return this.cedula;
+	}
+
+	// Accessors de codigoArtista
+	public long getCodigoArtista() {
+		return this.codigoArtista;
+	}
+
+	// Accessors de fechaNacimento
+	public Calendar getFechaNacimiento() {
+		return this.fechaNacimiento;
+	}
+
+	// Accessors de nombre
+	public String getNombre() {
+		return this.nombre;
+	}
+
+	// Métodos
+	// Accessors de setDeObras
+	public HashSet<Obra> getObras() {
+		return this.obras;
+	}
+
+	// Accessors de telefono
+	public long getTelefono() {
+		return this.telefono;
+	}
+
 	// Organizacion para la busqueda de elementos
 	@Override
 	public int hashCode() {
 		return (int) this.codigoArtista;
+	}
+
+	public void setCedula(long cedula) {
+		this.cedula = cedula;
+	}
+
+	public void setCodigoArtista(long codigoArtista) {
+		this.codigoArtista = codigoArtista;
+	}
+
+	public void setFechaNacimiento(Calendar fechaNacimiento) {
+		this.fechaNacimiento = fechaNacimiento;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public void setObras(HashSet<Obra> obras) {
+		this.obras = obras;
+	}
+
+	public void setTelefono(long telefono) {
+		this.telefono = telefono;
 	}
 
 	// Imprimir un artista

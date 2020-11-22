@@ -2,5 +2,13 @@
     "cSpell.words": [
         "Galeria"
     ],
-    "java.configuration.updateBuildConfiguration": "automatic"
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "java.project.referencedLibraries": {
+        "include": [
+            "lib/**/*.jar"
+        ],
+        "exclude": [
+            "/Project/src/test/java/pruebas/ControlGaleriaTest.java"
+        ]
+    }
 }

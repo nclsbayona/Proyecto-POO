@@ -10,107 +10,38 @@ import model.*;
 //Boundary
 public class PantallaGaleria {
 
+	// Main Boundary del Sistema
+	public static void main(String[] args) {
+		// Creaciones de Objetos
+		Scanner entrada = new Scanner(System.in);
+		PantallaGaleria pantallaGaleria = new PantallaGaleria();
+		String opc = "0";
+		int eleccion = 0, salir = 19;
+		do {
+			pantallaGaleria.clearScreen();
+			// Muestra el Menu al Usuario
+			pantallaGaleria.printMenu();
+			// Controla las deciciones del usuario
+			eleccion = pantallaGaleria.controlMenu();
+			if (eleccion != salir) {
+				System.out.println("Desea ingresar otra opción (1/0)");
+				opc = entrada.next();
+			}
+		} while (!opc.equals("0") && eleccion != salir);
+		entrada.close();
+	}
+
 	private ControlGaleria controlGaleria;
+
+	// Constructor
+	public PantallaGaleria() {
+		this.controlGaleria = new ControlGaleria();
+	}
 
 	// Limpia la Pantalla
 	public void clearScreen() {
 		System.out.print("\033[H\033[2J");
 		System.out.flush();
-	}
-
-	// Imprime los artistas
-	public void printArtistas() {
-		System.out.println("Lista de artistas:");
-		for (Artista artista : this.controlGaleria.getListaArtistas().values()) {
-			System.out.println(artista);
-		}
-	}
-
-	// Imprime el metodo de esculturas
-	public void imprimirEsculturas() {
-		HashSet<Obra> esculturas = this.controlGaleria.buscarEsculturas();
-		for (Obra o : esculturas)
-			System.out.println(o);
-	}
-
-	// Imprimir asociadas a un cuadro
-	public void imprimirAsociadasCuadro() {
-		HashSet<Compra> compras = this.controlGaleria.comprasAsociadasACuadro();
-		for (Compra c : compras)
-			System.out.println(c);
-	}
-
-	// Imprime el total
-	public void imprimirTotal() {
-		System.out.println(
-				"El precio de todas las obras en el sistema es: $" + this.controlGaleria.calcularPrecioTotal());
-	}
-
-	// Imprimir listaClientes
-	public void printClientes() {
-		System.out.println("Imprimiendo la lista de Clientes:");
-		for (Cliente cliente : this.controlGaleria.getListaClientes().values()) {
-			System.out.println(cliente);
-		}
-	}
-
-	// Imprimir listaObras
-	public void listaObras() {
-		System.out.println("Imprimiendo la lista de Obras:");
-		if (this.controlGaleria.getListaCompras().isEmpty()) {
-			for (Obra obra : this.controlGaleria.getListaObras()) {
-				System.out.println(obra);
-			}
-			return;
-		} else {
-			for (Obra obra : this.controlGaleria.getListaObras()) {
-				if (!this.controlGaleria.obraEnCompra(obra))
-					System.out.println(obra);
-			}
-		}
-	}
-
-	// Imprimir listaCompras
-	public void printCompras() {
-		System.out.println("Imprimiendo la lista de Compras:");
-		for (Compra compra : this.controlGaleria.getListaCompras()) {
-			System.out.println(compra);
-		}
-	}
-
-	// Muestra el Menu al Usuario
-	public void printMenu() {
-		this.clearScreen();// Limpia la Pantalla
-		System.out.println("-----------------------------");
-		System.out.println("- Galeria de Arte Javeriana -");
-		System.out.println("-----------------------------");
-		System.out.println(" ");
-		System.out.println("----------- Menu ------------");
-		System.out.println("-- Obras ------------------");
-		System.out.println("1. Listar Obras Disponibles");
-		System.out.println("2. Buscar Obra");
-		System.out.println("3. Insertar Obra");
-		System.out.println("4. Modificar Obra");
-		System.out.println("5. Eliminar Obra");
-		System.out.println("6. Imprimir obras de tipo escultura");
-		System.out.println("7. Imprimir valor total de todas las obras");
-		System.out.println(" ");
-		System.out.println("-- Clientes ----------------");
-		System.out.println("8. Listar Clientes");
-		System.out.println("9. Buscar Cliente");
-		System.out.println("10. Insertar Cliente");
-		System.out.println("11. Modificar Cliente");
-		System.out.println("12. Eliminar Cliente");
-		System.out.println(" ");
-		System.out.println("-- Compras ------------------");
-		System.out.println("13. Compra de Obra");
-		System.out.println("14. Eliminar Compra");
-		System.out.println("15. Listar Compras");
-		System.out.println("16. Listar Compras Filtado");
-		System.out.println("17. Listar Artistas mas Vendidos");
-		System.out.println("18. Compras asociadas a un Cuadro");
-		System.out.println("19. Salir");
-		System.out.println("---------------------------------");
 	}
 
 	// Controla las decisiones del usuario
@@ -725,38 +656,107 @@ public class PantallaGaleria {
 		return retornar;
 	}
 
-	// Main Boundary del Sistema
-	public static void main(String[] args) {
-		// Creaciones de Objetos
-		Scanner entrada = new Scanner(System.in);
-		PantallaGaleria pantallaGaleria = new PantallaGaleria();
-		String opc = "0";
-		int eleccion = 0, salir = 19;
-		do {
-			pantallaGaleria.clearScreen();
-			// Muestra el Menu al Usuario
-			pantallaGaleria.printMenu();
-			// Controla las deciciones del usuario
-			eleccion = pantallaGaleria.controlMenu();
-			if (eleccion != salir) {
-				System.out.println("Desea ingresar otra opción (1/0)");
-				opc = entrada.next();
-			}
-		} while (!opc.equals("0") && eleccion != salir);
-		entrada.close();
-	}
-
 	// Accesors control galeria
 	public ControlGaleria getControlGaleria() {
 		return this.controlGaleria;
 	}
 
-	public void setControlGaleria(ControlGaleria controlGaleria) {
-		this.controlGaleria = controlGaleria;
+	// Imprimir asociadas a un cuadro
+	public void imprimirAsociadasCuadro() {
+		HashSet<Compra> compras = this.controlGaleria.comprasAsociadasACuadro();
+		for (Compra c : compras)
+			System.out.println(c);
 	}
 
-	// Constructor
-	public PantallaGaleria() {
-		this.controlGaleria = new ControlGaleria();
+	// Imprime el metodo de esculturas
+	public void imprimirEsculturas() {
+		HashSet<Obra> esculturas = this.controlGaleria.buscarEsculturas();
+		for (Obra o : esculturas)
+			System.out.println(o);
+	}
+
+	// Imprime el total
+	public void imprimirTotal() {
+		System.out.println(
+				"El precio de todas las obras en el sistema es: $" + this.controlGaleria.calcularPrecioTotal());
+	}
+
+	// Imprimir listaObras
+	public void listaObras() {
+		System.out.println("Imprimiendo la lista de Obras:");
+		if (this.controlGaleria.getListaCompras().isEmpty()) {
+			for (Obra obra : this.controlGaleria.getListaObras()) {
+				System.out.println(obra);
+			}
+			return;
+		} else {
+			for (Obra obra : this.controlGaleria.getListaObras()) {
+				if (!this.controlGaleria.obraEnCompra(obra))
+					System.out.println(obra);
+			}
+		}
+	}
+
+	// Imprime los artistas
+	public void printArtistas() {
+		System.out.println("Lista de artistas:");
+		for (Artista artista : this.controlGaleria.getListaArtistas().values()) {
+			System.out.println(artista);
+		}
+	}
+
+	// Imprimir listaClientes
+	public void printClientes() {
+		System.out.println("Imprimiendo la lista de Clientes:");
+		for (Cliente cliente : this.controlGaleria.getListaClientes().values()) {
+			System.out.println(cliente);
+		}
+	}
+
+	// Imprimir listaCompras
+	public void printCompras() {
+		System.out.println("Imprimiendo la lista de Compras:");
+		for (Compra compra : this.controlGaleria.getListaCompras()) {
+			System.out.println(compra);
+		}
+	}
+
+	// Muestra el Menu al Usuario
+	public void printMenu() {
+		this.clearScreen();// Limpia la Pantalla
+		System.out.println("-----------------------------");
+		System.out.println("- Galeria de Arte Javeriana -");
+		System.out.println("-----------------------------");
+		System.out.println(" ");
+		System.out.println("----------- Menu ------------");
+		System.out.println("-- Obras ------------------");
+		System.out.println("1. Listar Obras Disponibles");
+		System.out.println("2. Buscar Obra");
+		System.out.println("3. Insertar Obra");
+		System.out.println("4. Modificar Obra");
+		System.out.println("5. Eliminar Obra");
+		System.out.println("6. Imprimir obras de tipo escultura");
+		System.out.println("7. Imprimir valor total de todas las obras");
+		System.out.println(" ");
+		System.out.println("-- Clientes ----------------");
+		System.out.println("8. Listar Clientes");
+		System.out.println("9. Buscar Cliente");
+		System.out.println("10. Insertar Cliente");
+		System.out.println("11. Modificar Cliente");
+		System.out.println("12. Eliminar Cliente");
+		System.out.println(" ");
+		System.out.println("-- Compras ------------------");
+		System.out.println("13. Compra de Obra");
+		System.out.println("14. Eliminar Compra");
+		System.out.println("15. Listar Compras");
+		System.out.println("16. Listar Compras Filtado");
+		System.out.println("17. Listar Artistas mas Vendidos");
+		System.out.println("18. Compras asociadas a un Cuadro");
+		System.out.println("19. Salir");
+		System.out.println("---------------------------------");
+	}
+
+	public void setControlGaleria(ControlGaleria controlGaleria) {
+		this.controlGaleria = controlGaleria;
 	}
 }

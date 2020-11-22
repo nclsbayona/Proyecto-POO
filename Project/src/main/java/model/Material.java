@@ -5,6 +5,13 @@ public class Material {
     private String nombre;
     private String descripcion;
 
+    // Constructor
+    public Material(long cod, String nom, String desc) {
+        this.codigo = cod;
+        this.nombre = nom;
+        this.descripcion = desc;
+    }
+
     // Metodos
     // Accesors
     // Codigo
@@ -12,8 +19,9 @@ public class Material {
         return this.codigo;
     }
 
-    public void setCodigo(long codigo) {
-        this.codigo = codigo;
+    // Descripcion
+    public String getDescripcion() {
+        return this.descripcion;
     }
 
     // Nombre
@@ -21,23 +29,15 @@ public class Material {
         return this.nombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    // Descripcion
-    public String getDescripcion() {
-        return this.descripcion;
+    public void setCodigo(long codigo) {
+        this.codigo = codigo;
     }
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
 
-    // Constructor
-    public Material(long cod, String nom, String desc) {
-        this.codigo = cod;
-        this.nombre = nom;
-        this.descripcion = desc;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 }

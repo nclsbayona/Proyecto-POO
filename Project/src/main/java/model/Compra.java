@@ -10,50 +10,9 @@ public class Compra {
 	private Calendar fecha;
 	private boolean pagado;
 
-	// Accessors
-	// Cliente
-	public Cliente getCliente() {
-		return this.cliente;
-	}
+	public Compra(long codigoCompra) {
 
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
-
-	// Obra
-	public Obra getObra() {
-		return this.obra;
-	}
-
-	public void setObra(Obra obra) {
-		this.obra = obra;
-	}
-
-	// Codigo compra
-	public long getCodigoCompra() {
-		return this.codigoCompra;
-	}
-
-	public void setCodigoCompra(long codigoCompra) {
 		this.codigoCompra = codigoCompra;
-	}
-
-	// Fecha
-	public Calendar getFecha() {
-		return this.fecha;
-	}
-
-	public void setFecha(Calendar fecha) {
-		this.fecha = fecha;
-	}
-
-	// Pagado
-	public boolean getPagado() {
-		return this.pagado;
-	}
-
-	public void setPagado(boolean pagado) {
-		this.pagado = pagado;
 	}
 
 	// Constructores
@@ -61,13 +20,6 @@ public class Compra {
 		this.codigoCompra = codigoCompra;
 		this.fecha = fecha;
 		this.pagado = pagado;
-	}
-
-	// Argumento Compra solo con codigoCompra
-
-	public Compra(long codigoCompra) {
-
-		this.codigoCompra = codigoCompra;
 	}
 
 	// Equals
@@ -81,10 +33,58 @@ public class Compra {
 		}
 	}
 
+	// Accessors
+	// Cliente
+	public Cliente getCliente() {
+		return this.cliente;
+	}
+
+	// Codigo compra
+	public long getCodigoCompra() {
+		return this.codigoCompra;
+	}
+
+	// Fecha
+	public Calendar getFecha() {
+		return this.fecha;
+	}
+
+	// Obra
+	public Obra getObra() {
+		return this.obra;
+	}
+
+	// Pagado
+	public boolean getPagado() {
+		return this.pagado;
+	}
+
 	// Organizar para busqueda
 	@Override
 	public int hashCode() {
 		return (int) this.codigoCompra;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+	public void setCodigoCompra(long codigoCompra) {
+		this.codigoCompra = codigoCompra;
+	}
+
+	// Argumento Compra solo con codigoCompra
+
+	public void setFecha(Calendar fecha) {
+		this.fecha = fecha;
+	}
+
+	public void setObra(Obra obra) {
+		this.obra = obra;
+	}
+
+	public void setPagado(boolean pagado) {
+		this.pagado = pagado;
 	}
 
 	// Imprimir
