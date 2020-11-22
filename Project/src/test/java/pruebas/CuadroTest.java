@@ -48,15 +48,15 @@ class CuadroTest {
 
 	@Test
 	void testProbarEscultura() {
-		Escultura e = new Escultura((long) (123), "titulo creado", Calendar.getInstance().getTime(), 10000, "10X10",
-				"Cuarzo", (double) (2));
+		Escultura e = new Escultura((123), "titulo creado", Calendar.getInstance().getTime(), 10000, "10X10",
+				"Cuarzo", (2));
 		assertFalse(e.getPeso() >= 10);
 	}
 
 	@Test
 	void testProbarEscultura2() {
-		Escultura e = new Escultura((long) (123), "titulo creado", Calendar.getInstance().getTime(), 10000, "10X10",
-				"Cuarzo", (double) (12));
+		Escultura e = new Escultura((123), "titulo creado", Calendar.getInstance().getTime(), 10000, "10X10",
+				"Cuarzo", (12));
 		assertFalse(e.getPeso() <= 10);
 	}
 
