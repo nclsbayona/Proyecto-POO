@@ -656,6 +656,6 @@ public class ControlGaleria {
         // https://howtodoinjava.com/java/sort/java-sort-map-by-key/
         // https://es.stackoverflow.com/questions/2464/c%C3%B3mo-iterar-a-trav%C3%A9s-de-un-hashmap
     }
-    //Exportar a xml ?
+//Exportar a xml ?
     //public bool exportarReporte
 }
