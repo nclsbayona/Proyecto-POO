@@ -1,13 +1,19 @@
 package control;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.TreeMap;
 
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.Marshaller;
 import model.*;
+import model.excepciones.TypoException;
 
 public class ControlGaleria {
     // Colecciones
@@ -33,7 +39,7 @@ public class ControlGaleria {
     // Añade una obra a un artista y viceversa
     public boolean addCircObryArt(Obra o, Artista a) {
         try {
-            if (this.buscarObra(o.getCodigoObra())!=null)
+            if (this.buscarObra(o.getCodigoObra()) != null)
                 throw new IllegalAccessException();
             o.getArtista().add(a);
             this.listaObras.add(o);
@@ -52,7 +58,6 @@ public class ControlGaleria {
                     || this.buscarCliente(cliente.getCedula(), "") != null)
                 throw new IllegalAccessException();
             this.listaClientes.put(cliente.getCedula(), cliente);
-            this.organizarListaClientes();
             return cliente;
         } catch (Exception e) {
             return null;
@@ -96,7 +101,6 @@ public class ControlGaleria {
                 cliente2 = cliente;
             }
         }
-        this.organizarListaClientes();
         return cliente2;
     }
 
@@ -108,7 +112,6 @@ public class ControlGaleria {
                 cliente2 = cliente;
             }
         }
-        this.organizarListaClientes();
         return cliente2;
     }
 
@@ -244,11 +247,10 @@ public class ControlGaleria {
         try {
             if (c == null)
                 return false;
-                this.listaClientes.remove(c.getCedula());
+            this.listaClientes.remove(c.getCedula());
         } catch (Exception e) {
             return false;
         }
-        this.organizarListaClientes();
         return true;
     }
 
@@ -494,7 +496,7 @@ public class ControlGaleria {
     public boolean modificarObra(Obra obra, int criterio, String value) {
         boolean retornar = false;
         try {
-            if (obra==null)
+            if (obra == null)
                 throw new IllegalAccessException();
             switch (criterio) {
                 case 1: {
@@ -550,21 +552,10 @@ public class ControlGaleria {
         return false;
     }
 
-    // Organizar la lista de clientes (Para mantener un orden)
-    public void organizarListaClientes() {
-        TreeMap<Long, Cliente> nuevo = new TreeMap<Long, Cliente>();
-        // nuevo.putAll(this.listaClientes);
-        for (Cliente c : this.listaClientes.values())
-            nuevo.put(c.getCedula(), c);
-        this.listaClientes.clear();
-        this.listaClientes.putAll(nuevo);
-        nuevo = null;
-    }
-
     // Realizar una compra
     public boolean realizarCompra(Cliente clien, Obra obr) {
         try {
-            if (this.buscarObra(obr.getCodigoObra())==null||obr==null||clien==null)
+            if (this.buscarObra(obr.getCodigoObra()) == null || obr == null || clien == null)
                 throw new IllegalAccessException();
             Compra comp;
             long cod;
@@ -614,9 +605,8 @@ public class ControlGaleria {
         for (Cliente c : this.gestionClientes.listaClientes().values()) {
             if (c != null)
                 this.listaClientes.put(c.getCedula(), c);
-                
+
         }
-        this.organizarListaClientes();
         for (Artista c : this.gestionObras.startArtistas().values()) {
             if (c != null) {
                 this.listaArtistas.put(c.getCedula(), c);
@@ -656,6 +646,38 @@ public class ControlGaleria {
         // https://howtodoinjava.com/java/sort/java-sort-map-by-key/
         // https://es.stackoverflow.com/questions/2464/c%C3%B3mo-iterar-a-trav%C3%A9s-de-un-hashmap
     }
-//Exportar a xml ?
-    //public bool exportarReporte
+
+    private BufferedWriter newBufferedWriter(String route) throws IllegalAccessException {
+        FileWriter fw;
+        try {
+            fw = new FileWriter(route);
+        } catch (Exception e) {
+            throw new IllegalAccessException("Problem with file");
+        }
+        return new BufferedWriter(fw);
+    }
+
+    // Exportar a xml ?
+    public boolean exportarReporteCliente(String route, Collection clientes) throws TypoException {
+        Class <model.Cliente> clase=model.Cliente.class;
+        boolean logrado = true;
+        int counter = 0;
+        BufferedWriter bw = null;
+        while ((bw == null) && (counter++ < 3)) {
+            try {
+                bw = this.newBufferedWriter(route);
+            } catch (IllegalAccessException e) {
+                //Error abriendo el archivo
+            }
+        }
+        if (bw==null){
+            logrado=false;
+            throw new TypoException("ruta");
+        }
+        /*
+            JAXBContext context=JAXBContext.newInstance(clase);
+            Marshaller m=context.createMarshaller();
+        */
+        return logrado;
+    }
 }

@@ -480,7 +480,6 @@ public class PantallaGaleria {
 				agregado=controlGaleria.crearCliente(Integer.parseInt(codigoCliente), Long.parseLong(valor), nombres, apellidos,
 						direccionEntrega, Long.parseLong(telefono));
 				System.out.println((agregado)?"Cliente agregado con exito":"Ocurrio un error");
-				controlGaleria.organizarListaClientes();
 				System.out.println("---------------------------------");
 				break;
 			}
@@ -544,7 +543,6 @@ public class PantallaGaleria {
 				}
 				System.out.println((controlGaleria.modificarCliente(controlGaleria.buscarCliente(Long.parseLong(codigoCliente)),
 				Integer.parseInt(respuesta), valor))?"Modificado con exito":"Ocurrio un error");
-				this.controlGaleria.organizarListaClientes();
 				System.out.println("---------------------------------");
 				break;
 			}
