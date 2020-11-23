@@ -40,11 +40,9 @@ public class ControlGaleria {
     }
 
     // Añade una obra a un artista y viceversa
-    public boolean addCircObryArt(Obra o, Artista a) {
-        if (this.buscarObra(o.getCodigoObra()) != null)
-            o.getArtista().add(a);
-        else
-            return false;
+    public boolean addCircObryArt(Obra o, Artista a) throws ArtworkDoesntExistException {
+        this.buscarObra(o.getCodigoObra());
+        o.getArtista().add(a);
         this.listaObras.add(o);
         a.getObras().add(o);
         this.listaArtistas.put(a.getCedula(), a);
@@ -52,7 +50,7 @@ public class ControlGaleria {
     }
 
     // Agregar Cliente
-    public Cliente addCliente(Cliente cliente) throws ClientExistsException {
+    public Cliente addCliente(Cliente cliente) throws ClientExistsException, ClientNotFoundException {
         try {
             this.buscarCliente(cliente.retCodigoCliente());
         } catch (ClientNotFoundException e) {
@@ -60,7 +58,7 @@ public class ControlGaleria {
         }
         try {
             this.buscarCliente(cliente.retCedula(), "");
-        } catch (ClientNotFoundException e) {
+        } catch (Exception e) {
             throw new ClientExistsException(String.valueOf(cliente.retCedula()));
         }
         this.listaClientes.put(cliente.retCedula(), cliente);
@@ -68,13 +66,10 @@ public class ControlGaleria {
     }
 
     // Añade una obra
-    public Obra addObra(Obra obra) {
-        if (this.buscarObra(obra.getCodigoObra()) == null) {
-            this.listaObras.add(obra);
-            return obra;
-        } else {
-            return null;
-        }
+    public Obra addObra(Obra obra) throws ArtworkDoesntExistException {
+        this.buscarObra(obra.getCodigoObra());
+        this.listaObras.add(obra);
+        return obra;
     }
 
     // Agregar un artista
@@ -114,25 +109,31 @@ public class ControlGaleria {
     }
 
     // Buscar un cliente por cedula
-    public Cliente buscarCliente(long cedula, String s) throws ClientNotFoundException{
-        try{
+    public Cliente buscarCliente(long cedula, String s) throws ClientNotFoundException {
+        try {
             for (Cliente cliente : this.listaClientes.values()) {
                 if (cliente.retCedula() == cedula) {
                     return cliente;
                 }
+            }
+        } catch (Exception e) {
         }
-        }catch(Exception e){}
         throw new ClientNotFoundException(String.valueOf(cedula));
     }
 
     // Busca un cliente en las compras
-    public boolean buscarClienteYObraEnCompra(Cliente cliente, Obra obra) {
-        for (Compra compra : this.listaCompras) {
-            if (compra.getCliente() == cliente && compra.getObra() == obra) {
-                return true;
+    public boolean buscarClienteYObraEnCompra(Cliente cliente, Obra obra)
+            throws EmptyPurchasesListException, PurchaseNotFoundException {
+        try {
+            for (Compra compra : this.listaCompras) {
+                if (compra.getCliente() == cliente && compra.getObra() == obra) {
+                    return true;
+                }
             }
+        } catch (Exception e) {
+            throw new EmptyPurchasesListException();
         }
-        return false;
+        throw new PurchaseNotFoundException();
     }
 
     /*
@@ -140,13 +141,16 @@ public class ControlGaleria {
      * este no existe, se debe mostrar un mensaje y volver al menú principal. b.Se
      * debe mostrar un mensaje de confirmación para eliminar la compra
      */
-    public Compra buscarCompra(String codigo) {
-        Compra compra = null;
-        for (Compra c : this.listaCompras) {
-            if (c.getCodigoCompra() == Long.parseLong(codigo) && compra == null)
-                compra = c;
+    public Compra buscarCompra(String codigo) throws EmptyPurchasesListException, PurchaseNotFoundException {
+        try {
+            for (Compra c : this.listaCompras) {
+                if (c.getCodigoCompra() == Long.parseLong(codigo))
+                    return c;
+            }
+        } catch (Exception e) {
+            throw new EmptyPurchasesListException();
         }
-        return compra;
+        throw new PurchaseNotFoundException();
     }
 
     // Retorna todas las esculturas en el sistema
@@ -171,13 +175,13 @@ public class ControlGaleria {
     }
 
     // Buscar obra por código
-    public Obra buscarObra(long codigo) {
+    public Obra buscarObra(long codigo) throws ArtworkDoesntExistException {
         for (Obra obra : this.listaObras) {
             if (obra.getCodigoObra() == codigo) {
                 return obra;
             }
         }
-        return null;
+        throw new ArtworkDoesntExistException(String.valueOf(codigo));
     }
 
     // Obras
@@ -194,13 +198,12 @@ public class ControlGaleria {
     }
 
     // Busca una obra en las compras
-    public boolean buscarObraEnCompras(Obra obra) {
-        boolean existe = false;
+    public boolean buscarObraEnCompras(Obra obra) throws ArtworkNotPurchasedException {
         for (Compra c : this.listaCompras) {
-            if (!existe && c.getObra().getCodigoObra() == obra.getCodigoObra())
-                existe = false;
+            if (c.getObra().getCodigoObra() == obra.getCodigoObra())
+                return true;
         }
-        return existe;
+        throw new ArtworkNotPurchasedException(String.valueOf(obra.getCodigoObra()));
     }
 
     // Ver si una obra le pertenece a un artista
@@ -235,20 +238,12 @@ public class ControlGaleria {
 
     // Crear un cliente
     public boolean crearCliente(int codigoC, long cedula, String nombre, String apellido, String direccion,
-            long telefono) {
-        try {
-            if (this.buscarCliente(codigoC) != null)
-                throw new IllegalAccessException();
-            if (this.buscarCliente(cedula, "") != null)
-                throw new IllegalAccessException();
-            Cliente c = new Cliente(codigoC, cedula, nombre, apellido, direccion, telefono);
-            c = this.addCliente(c);
-            if (c == null)
-                throw new IllegalAccessException();
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+            long telefono) throws ClientNotFoundException, ClientExistsException, CodeSizeException {
+        this.buscarCliente(codigoC);
+        this.buscarCliente(cedula, "");
+        Cliente c = new Cliente(codigoC, cedula, nombre, apellido, direccion, telefono);
+        c = this.addCliente(c);
+        return true;
     }
 
     // Eliminar Cliente
@@ -258,33 +253,32 @@ public class ControlGaleria {
         return true;
     }
 
-    public boolean eliminarObra(long codigo) {
-        boolean f = false;
+    public boolean eliminarObra(long codigo) throws ArtworkDoesntExistException {
         Obra obra;
         obra = this.buscarObra(codigo);
         if (obra != null) {
             if (!this.obraEnCompra(obra)) {
                 this.listaObras.remove(obra);
-                f = true;
+                return true;
             }
         }
-        return f;
+        throw new ArtworkDoesntExistException(String.valueOf(codigo));
     }
 
-    public Compra eliminCompra(String codigo) {
+    public Compra eliminCompra(String codigo) throws EmptyPurchasesListException, PurchaseNotFoundException {
         Compra compra = this.buscarCompra(codigo);
         this.listaCompras.remove(compra);
         return compra;
     }
 
     // Compras
-    public boolean existeCodCompra(long cod) {
+    public boolean existeCodCompra(long cod) throws PurchaseExistsException {
         for (Compra compra : this.listaCompras) {
             if (compra.getCodigoCompra() == cod) {
                 return true;
             }
         }
-        return false;
+        throw new PurchaseExistsException(String.valueOf(cod));
     }
 
     // gestionClientes
@@ -318,39 +312,54 @@ public class ControlGaleria {
     public HashSet<Obra> getListaObras() {
         return this.listaObras;
     }
+    public void setGestionClientes(GestionClientes gestionClientes) {
+        this.gestionClientes = gestionClientes;
+    }
+
+    public void setGestionObras(GestionObras gestionObras) {
+        this.gestionObras = gestionObras;
+    }
+
+    public void setListaArtistas(HashMap<Long, Artista> listaArtistas) {
+        this.listaArtistas = listaArtistas;
+    }
+
+    public void setListaClientes(HashMap<Long, Cliente> listaClientes) {
+        this.listaClientes = listaClientes;
+    }
+
+    public void setListaCompras(HashSet<Compra> listaCompras) {
+        this.listaCompras = listaCompras;
+    }
+
+    public void setListaObras(HashSet<Obra> listaObras) {
+        this.listaObras = listaObras;
+    }
 
     // Insertar una instalacion
     // Recibe artista
     public boolean insertarObra(String Titulo, String precioRef, String cedula, String codigoObra, String dimensiones,
-            String ano, String mes, String dia, Artista artista, String descripcion) {
-        try {
-            Calendar fecha = Calendar.getInstance();
-            fecha.set(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
-            Obra obra = new Instalacion(Long.parseLong(codigoObra), Titulo, fecha.getTime(),
-                    Float.parseFloat(precioRef), dimensiones, descripcion);
-            if (!this.addCircObryArt(obra, artista))
-                throw new IllegalAccessException();
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+            String ano, String mes, String dia, Artista artista, String descripcion)
+            throws ArtworkDoesntExistException {
+        Calendar fecha = Calendar.getInstance();
+        fecha.set(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
+        Obra obra = new Instalacion(Long.parseLong(codigoObra), Titulo, fecha.getTime(), Float.parseFloat(precioRef),
+                dimensiones, descripcion);
+        this.addCircObryArt(obra, artista);
+        return true;
     }
 
     // Insertar una escultura
     // Recibe artista
     public boolean insertarObra(String Titulo, String precioRef, String cedula, String codigoObra, String dimensiones,
-            String ano, String mes, String dia, Artista artista, String material, double peso) {
-        try {
-            Calendar fecha = Calendar.getInstance();
-            fecha.set(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
-            Obra obra = new Escultura(Long.parseLong(codigoObra), Titulo, fecha.getTime(), Float.parseFloat(precioRef),
-                    dimensiones, material, peso);
-            if (!this.addCircObryArt(obra, artista))
-                throw new IllegalAccessException();
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+            String ano, String mes, String dia, Artista artista, String material, double peso)
+            throws ArtworkDoesntExistException {
+        Calendar fecha = Calendar.getInstance();
+        fecha.set(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
+        Obra obra = new Escultura(Long.parseLong(codigoObra), Titulo, fecha.getTime(), Float.parseFloat(precioRef),
+                dimensiones, material, peso);
+        this.addCircObryArt(obra, artista);
+        return true;
     }
 
     /*
@@ -367,71 +376,55 @@ public class ControlGaleria {
     // Insertar un cuadro
     // Recibe artista
     public boolean insertarObra(String Titulo, String precioRef, String cedula, String codigoObra, String dimensiones,
-            String ano, String mes, String dia, Artista artista, String tema, String tecnica, Clasificacion valorA) {
-        try {
-            Calendar fecha = Calendar.getInstance();
-            fecha.set(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
-            Obra obra = new Cuadro(Long.parseLong(codigoObra), Titulo, fecha.getTime(), Float.parseFloat(precioRef),
-                    dimensiones, tema, tecnica, valorA);
-            if (!this.addCircObryArt(obra, artista))
-                throw new IllegalAccessException();
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+            String ano, String mes, String dia, Artista artista, String tema, String tecnica, Clasificacion valorA)
+            throws ArtworkDoesntExistException {
+
+        Calendar fecha = Calendar.getInstance();
+        fecha.set(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
+        Obra obra = new Cuadro(Long.parseLong(codigoObra), Titulo, fecha.getTime(), Float.parseFloat(precioRef),
+                dimensiones, tema, tecnica, valorA);
+        this.addCircObryArt(obra, artista);
+        return true;
     }
 
     // Crea artista
     public boolean insertarObra(String Titulo, String precioRef, String cedula, String codigoObra, String dimensiones,
-            String ano, String mes, String dia, String nombre, String apellido, String telefono, String descripcion) {
-        try {
-            Calendar fecha = Calendar.getInstance();
-            Artista artista = new Artista(Long.parseLong(cedula), nombre, apellido, Long.parseLong(telefono));
-            fecha.set(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
-            Obra obra = new Instalacion(Long.parseLong(codigoObra), Titulo, fecha.getTime(),
-                    Float.parseFloat(precioRef), dimensiones, descripcion);
-            if (!this.addCircObryArt(obra, artista))
-                throw new IllegalAccessException();
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+            String ano, String mes, String dia, String nombre, String apellido, String telefono, String descripcion)
+            throws ArtworkDoesntExistException {
+
+        Calendar fecha = Calendar.getInstance();
+        Artista artista = new Artista(Long.parseLong(cedula), nombre, apellido, Long.parseLong(telefono));
+        fecha.set(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
+        Obra obra = new Instalacion(Long.parseLong(codigoObra), Titulo, fecha.getTime(), Float.parseFloat(precioRef),
+                dimensiones, descripcion);
+        this.addCircObryArt(obra, artista);
+        return true;
     }
 
     // Crea artista
     public boolean insertarObra(String Titulo, String precioRef, String cedula, String codigoObra, String dimensiones,
             String ano, String mes, String dia, String nombre, String apellido, String telefono, String material,
-            double peso) {
-        try {
-            Calendar fecha = Calendar.getInstance();
-            Artista artista = new Artista(Long.parseLong(cedula), nombre, apellido, Long.parseLong(telefono));
-            fecha.set(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
-            Obra obra = new Escultura(Long.parseLong(codigoObra), Titulo, fecha.getTime(), Float.parseFloat(precioRef),
-                    dimensiones, material, peso);
-            if (!this.addCircObryArt(obra, artista))
-                throw new IllegalAccessException();
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+            double peso) throws ArtworkDoesntExistException {
+        Calendar fecha = Calendar.getInstance();
+        Artista artista = new Artista(Long.parseLong(cedula), nombre, apellido, Long.parseLong(telefono));
+        fecha.set(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
+        Obra obra = new Escultura(Long.parseLong(codigoObra), Titulo, fecha.getTime(), Float.parseFloat(precioRef),
+                dimensiones, material, peso);
+        this.addCircObryArt(obra, artista);
+        return true;
     }
 
     // Crea artista
     public boolean insertarObra(String Titulo, String precioRef, String cedula, String codigoObra, String dimensiones,
             String ano, String mes, String dia, String nombre, String apellido, String telefono, String tema,
-            String tecnica, Clasificacion valorA) {
-        try {
-            Calendar fecha = Calendar.getInstance();
-            Artista artista = new Artista(Long.parseLong(cedula), nombre, apellido, Long.parseLong(telefono));
-            fecha.set(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
-            Obra obra = new Cuadro(Long.parseLong(codigoObra), Titulo, fecha.getTime(), Float.parseFloat(precioRef),
-                    dimensiones, tema, tecnica, valorA);
-            if (!this.addCircObryArt(obra, artista))
-                throw new IllegalAccessException();
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+            String tecnica, Clasificacion valorA) throws ArtworkDoesntExistException {
+        Calendar fecha = Calendar.getInstance();
+        Artista artista = new Artista(Long.parseLong(cedula), nombre, apellido, Long.parseLong(telefono));
+        fecha.set(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
+        Obra obra = new Cuadro(Long.parseLong(codigoObra), Titulo, fecha.getTime(), Float.parseFloat(precioRef),
+                dimensiones, tema, tecnica, valorA);
+        this.addCircObryArt(obra, artista);
+        return true;
 
     }
 
@@ -459,91 +452,81 @@ public class ControlGaleria {
     }
 
     // Modificar Cliente
-    public boolean modificarCliente(Cliente cliente, int respuesta, String valor) {
-        try {
-            if (this.buscarCliente(cliente.retCodigoCliente()) == null
-                    || this.buscarCliente(cliente.retCedula(), "") == null)
-                throw new IllegalAccessException();
-            switch (respuesta) {
-                case 1:
-                    if (this.buscarCliente(Long.parseLong(valor)) != null)
-                        throw new IllegalAccessException();
-                    cliente.addCodigoCliente(Long.parseLong(valor));
-                    break;
-                case 2:
-                    if (this.buscarCliente(Long.parseLong(valor), "") != null)
-                        throw new IllegalAccessException();
-                    cliente.addCedula(Long.parseLong(valor));
-                    break;
-                case 3:
-                    cliente.addNombre(valor);
-                    break;
-                case 4:
-                    cliente.addApellidos(valor);
-                    break;
-                case 5:
-                    cliente.addDireccionEntrega(valor);
-                    break;
-                case 6:
-                    cliente.addTelefono(Long.parseLong(valor));
-                    break;
-                default:
-                    throw new IllegalAccessException();
-            }
-            return true;
-        } catch (Exception e) {
-            return false;
+    public boolean modificarCliente(Cliente cliente, int respuesta, String valor)
+            throws NumberFormatException, ClientNotFoundException, TypoException {
+        this.buscarCliente(cliente.retCodigoCliente());
+        this.buscarCliente(cliente.retCedula(), "");
+        switch (respuesta) {
+            case 1:
+                this.buscarCliente(Long.parseLong(valor));
+                cliente.addCodigoCliente(Long.parseLong(valor));
+                break;
+            case 2:
+                this.buscarCliente(Long.parseLong(valor), "");
+                cliente.addCedula(Long.parseLong(valor));
+                break;
+            case 3:
+                cliente.addNombre(valor);
+                break;
+            case 4:
+                cliente.addApellidos(valor);
+                break;
+            case 5:
+                cliente.addDireccionEntrega(valor);
+                break;
+            case 6:
+                cliente.addTelefono(Long.parseLong(valor));
+                break;
+            default:
+                throw new TypoException("campo");
         }
+        return true;
     }
 
     // Modifica una obra
-    public boolean modificarObra(Obra obra, int criterio, String value) {
+    public boolean modificarObra(Obra obra, int criterio, String value)
+            throws ArtworkDoesntExistException, CodeSizeException, TypoException, ArtworkNotPurchasedException {
         boolean retornar = false;
-        try {
-            if (obra == null)
-                throw new IllegalAccessException();
-            switch (criterio) {
-                case 1: {
-                    if (this.buscarObra(Long.parseLong(value)) == null) {
-                        if (value.length() == 7) {
-                            obra.setCodigoObra(Long.parseLong(value));
-                            retornar = true;
-                        } else
-                            retornar = false;
-                    } else
-                        retornar = false;
+        if (obra == null)
+            throw new ArtworkDoesntExistException();
+        switch (criterio) {
+            case 1: {
+                this.buscarObra(Long.parseLong(value));
+                if (value.length() == 7) {
+                    obra.setCodigoObra(Long.parseLong(value));
+                    retornar = true;
+                } else
+                    throw new CodeSizeException();
 
-                    break;
-                }
-                case 2: {
-                    obra.setTitulo(value);
-                    retornar = true;
-                    break;
-                }
-                case 3: {
-                    String[] fecha;
-                    fecha = value.split("/");
-                    obra.setFecha(Integer.parseInt(fecha[0]), Integer.parseInt(fecha[1]), Integer.parseInt(fecha[2]));
-                    retornar = true;
-                    break;
-                }
-                case 4: {
-                    if (this.buscarObraEnCompras(obra))
-                        throw new IllegalAccessException();
-                    obra.setPrecioRef(Long.parseLong(value));
-                    retornar = true;
-                    break;
-                }
-                case 5: {
-                    obra.setDimensiones(value);
-                    retornar = true;
-                    break;
-                }
+                break;
             }
-            return retornar;
-        } catch (Exception e) {
-            return false;
+            case 2: {
+                obra.setTitulo(value);
+                retornar = true;
+                break;
+            }
+            case 3: {
+                String[] fecha;
+                fecha = value.split("/");
+                obra.setFecha(Integer.parseInt(fecha[0]), Integer.parseInt(fecha[1]), Integer.parseInt(fecha[2]));
+                retornar = true;
+                break;
+            }
+            case 4: {
+                this.buscarObraEnCompras(obra);
+                obra.setPrecioRef(Long.parseLong(value));
+                retornar = true;
+                break;
+            }
+            case 5: {
+                obra.setDimensiones(value);
+                retornar = true;
+                break;
+            }
+            default:
+                throw new TypoException("campo");
         }
+        return retornar;
     }
 
     // Ver si una obra ya fue comprada
@@ -557,52 +540,36 @@ public class ControlGaleria {
     }
 
     // Realizar una compra
-    public boolean realizarCompra(Cliente clien, Obra obr) {
-        try {
-            if (this.buscarObra(obr.getCodigoObra()) == null || obr == null || clien == null)
-                throw new IllegalAccessException();
-            Compra comp;
-            long cod;
-            Calendar fecha = Calendar.getInstance();
-            cod = this.listaCompras.size();
-            do {
-                cod += 1;
-            } while (this.existeCodCompra(cod));
-            if (this.buscarClienteYObraEnCompra(clien, obr))
-                throw new IllegalAccessException();
-            comp = new Compra(cod, fecha, true);
-            comp.setCliente(clien);
-            comp.setObra(obr);
-            this.listaCompras.add(comp);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+    public boolean realizarCompra(Cliente clien, Obra obr) throws ArtworkDoesntExistException,ClientDoesntExistException,
+            EmptyPurchasesListException, PurchaseNotFoundException {
+        
+        if (obr == null)
+            throw new ArtworkDoesntExistException();
+        if(clien == null)
+            throw new ClientDoesntExistException();
+        this.buscarObra(obr.getCodigoObra());
+        Compra comp;
+        long cod;
+        Calendar fecha = Calendar.getInstance();
+        cod = this.listaCompras.size();
+        boolean ac=true;
+        do {
+            cod += 1;
+            try{
+                this.existeCodCompra(cod);
+            }catch(PurchaseExistsException w){
+                ac=false;
+            }
+        } while (ac);
+        this.buscarClienteYObraEnCompra(clien, obr);
+        comp = new Compra(cod, fecha, true);
+        comp.setCliente(clien);
+        comp.setObra(obr);
+        this.listaCompras.add(comp);
+        return true;
     }
 
-    public void setGestionClientes(GestionClientes gestionClientes) {
-        this.gestionClientes = gestionClientes;
-    }
-
-    public void setGestionObras(GestionObras gestionObras) {
-        this.gestionObras = gestionObras;
-    }
-
-    public void setListaArtistas(HashMap<Long, Artista> listaArtistas) {
-        this.listaArtistas = listaArtistas;
-    }
-
-    public void setListaClientes(HashMap<Long, Cliente> listaClientes) {
-        this.listaClientes = listaClientes;
-    }
-
-    public void setListaCompras(HashSet<Compra> listaCompras) {
-        this.listaCompras = listaCompras;
-    }
-
-    public void setListaObras(HashSet<Obra> listaObras) {
-        this.listaObras = listaObras;
-    }
+ 
 
     // Este método añade Clientes, Obras y Artistas a la galería
     public void startDay() {
@@ -627,11 +594,11 @@ public class ControlGaleria {
      * 15. [5] Ver listado de Artistas más vendidos a. Mostrar los artistas más
      * vendidos ordenados de mayor a menor ventas
      */
-    public Map<Integer, Artista> verListadoArtistas() {
+    public Map<Integer, Artista> verListadoArtistas() throws EmptyPurchasesListException {
         HashMap<Artista, Integer> mapsold = new HashMap<Artista, Integer>();
         HashSet<Artista> artistas = new HashSet<Artista>();
         Map<Integer, Artista> sort = new TreeMap<Integer, Artista>(Collections.reverseOrder());
-        for (Compra compra : this.listaCompras) {
+        try{        for (Compra compra : this.listaCompras) {
             artistas = compra.getObra().getArtista();
             for (Artista art : artistas) {
                 if (mapsold.containsKey(art)) {
@@ -640,6 +607,9 @@ public class ControlGaleria {
                     mapsold.put(art, 1);
                 }
             }
+        }
+        }catch(NullPointerException e){
+            throw new EmptyPurchasesListException();
         }
         artistas.clear();
         for (Map.Entry<Artista, Integer> entry : mapsold.entrySet()) {
@@ -724,7 +694,6 @@ public class ControlGaleria {
             try {
                 m.marshal(t, bw);
             } catch (Exception e) {
-                e.printStackTrace();
             }
         }
         return logrado;

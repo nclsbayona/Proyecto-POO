@@ -659,7 +659,6 @@ public class PantallaGaleria {
 			return retornar;
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			e.printStackTrace();
 			return -1;
 		}
 	}
