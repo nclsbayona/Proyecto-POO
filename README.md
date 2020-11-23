@@ -231,6 +231,15 @@ uncionalidades de la Entrega 3
         <li>A continuación,se muestra un ejemplo básico de diseño de pantallas para que pueda guiarse, sin embargo el equipo tiene total libertad de diseñar la interfaz siempre que cumpla con los principios de usabilidad.
         <li>Todas las clases relacionadas con interfazde usuario deben estar en un paquete, y en las clases entity y control no debe existir nada relacionado con interacción e interfaz de usuario.
     </ol>
+    <li>[15%] Manejo de errores y excepciones.
+    <bold>a.</bold>Se deben mostrar mensajes de error para los diferentes escenarios. Estos mensajes de error deben ser generados con Exceptions (o Exceptions usando herencia) Por ejemplo agregar clientes repetidos, eliminar elementos que no existen, añadir comprasa clientes que no existen, y todas las validaciones que están definidas desde el comienzo del proyecto.
+    <li>[15%] Guardar la información en archivos XML:
+    <bold>a.</bold>Todos los reportes deben dar la opción de guardar sus resultados en un archivo XML. Puede definir su propio formato para cada reporte.
+    <li>[15%] Pruebas Unitarias:
+    <bold>a.</bold>Todos  los  métodos  públicosde GestionGaleria  deben tener2  pruebas  unitarias.  Una  con un comportamiento normal y otra con un comportamientoanormal.Las clases de pruebas deben iniciar con el prefijo Test.
+    <li>[15%] Sustentación Final:
+    <bold>a.</bold>Cada equipo debe presentar la totalidad de las funcionalidades en la sustentación final.
+    <bold>b.</bold>Todos los miembros del equipo deben estar preparados para responder preguntas sobre el proyecto.
 ### Pruebas
 **6** .[20] Cree archivos de pruebas unitarias para el controlador del negocio (en el diagrama se llama “ControlGaleriaTest”)
     a.Por cada método expuesto en la fachada(Controlador)debe crear un método de prueba b.En cada prueba de cada método se debe crear una prueba exitosa y otra no exitosa
