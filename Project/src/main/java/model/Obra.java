@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.Calendar;
 import java.util.HashSet;
 
+import excepciones.CodeSizeException;
+
 public abstract class Obra {
 
     private HashSet<Artista> artistas;
@@ -15,9 +17,12 @@ public abstract class Obra {
     private String dimensiones;
 
     // Constructor
-    public Obra(long _codigoObra, String _titulo, Calendar _fecha, float _precioRef, String _dimensiones) {
+    public Obra(long _codigoObra, String _titulo, Calendar _fecha, float _precioRef, String _dimensiones)
+            throws CodeSizeException {
         // El código de una obra tiene 7 números. Debe validar que nunca exista una obra
         // con más o menos números
+        if (String.valueOf(codigoObra).length()!=7)
+            throw new CodeSizeException();
         this.codigoObra = _codigoObra;
         this.titulo = _titulo;
         this.fecha = _fecha;

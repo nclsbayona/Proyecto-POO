@@ -22,8 +22,6 @@ public class Cliente implements Comparable<Cliente> {
     // Costructor del Cliente
     public Cliente(long codigoCliente, long cedula, String nombre, String Apellidos, String direccionEntrega,
             long telefono) throws CodeSizeException {
-        if (String.valueOf(codigoCliente).length()!=7)
-            throw new CodeSizeException();
         this.codigoCliente = codigoCliente;
         this.cedula = cedula;
         this.nombre = nombre;
