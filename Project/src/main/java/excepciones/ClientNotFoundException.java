@@ -1,4 +1,4 @@
-package model.excepciones;
+package excepciones;
 
 public class ClientNotFoundException extends Exception{
 

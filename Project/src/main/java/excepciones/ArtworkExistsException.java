@@ -1,4 +1,4 @@
-package model.excepciones;
+package excepciones;
 
 public class ArtworkExistsException extends Exception{
     private static final long serialVersionUID = 1L;

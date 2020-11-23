@@ -16,7 +16,7 @@ import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Marshaller;
 import jakarta.xml.bind.PropertyException;
 import model.*;
-import model.excepciones.TypoException;
+import excepciones.TypoException;
 
 public class ControlGaleria {
     // Colecciones

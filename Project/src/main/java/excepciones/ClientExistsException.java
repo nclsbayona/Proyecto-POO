@@ -1,4 +1,4 @@
-package model.excepciones;
+package excepciones;
 
 public class ClientExistsException extends Exception {
     private static final long serialVersionUID = 1L;

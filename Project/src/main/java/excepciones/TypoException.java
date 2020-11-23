@@ -1,4 +1,4 @@
-package model.excepciones;
+package excepciones;
 
 public class TypoException extends Exception{
     private static final long serialVersionUID = 1L;
@@ -11,3 +11,4 @@ public class TypoException extends Exception{
     }
     
 }
+
