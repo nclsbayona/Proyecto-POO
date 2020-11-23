@@ -632,7 +632,7 @@ public class ControlGaleria {
     }
 
     // Exportar a xml
-    public <T> boolean exportarReporteXML(String route, Class<T> clase, Collection<T> collection) throws TypoException {
+    public <T> boolean exportarReporteXML(String route, Class <T> clase, Collection <T> collection) throws TypoException {
         boolean logrado = true;
         int counter = 0;
         System.err.println(clase);
