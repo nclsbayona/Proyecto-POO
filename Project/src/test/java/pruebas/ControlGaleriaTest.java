@@ -8,9 +8,7 @@ import control.ControlGaleria;
 import model.*;
 
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ControlGaleriaTest {
@@ -59,14 +57,6 @@ class ControlGaleriaTest {
 	// Rectificar si existe compra, en este caso deberia ser falso
 	void existeCodCompra2() {
 		assertFalse(this.controlGaleria.existeCodCompra(1));
-	}
-
-	@BeforeEach
-	void setUp() throws Exception {
-	}
-
-	@AfterEach
-	void tearDown() throws Exception {
 	}
 
 	@Test

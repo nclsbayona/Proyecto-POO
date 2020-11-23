@@ -199,6 +199,38 @@ Para este proyecto se solicita implementar las siguientes funcionalidades:
     b.Defina un método en la clase ControlGaleria que permita filtrar todas las compras que estén asociadas a Obras de tipo Cuadro. 
     c.Defina un método que permita calcular el precio total de todas las obras que han sido compradas, para conocer la ganancia total obtenida.
 
+## Entrega 3
+uncionalidades de la Entrega 3
+<ol>
+    <li>[20] Para esta entrega se deben corregir los errores identificados en la entrega anterior y agregar lo que sea necesario para ajustarlas a las nuevas condiciones especificadas en la entrega: 
+    <ol>
+        <li>Ver listado de Obras disponibles
+        <li>Buscar una Obra por título, artista o año
+        <li>Insertar una Obra
+        <li>Modificar una Obra
+        <li>Eliminar una Obra
+        <li>Ver listado de Clientes registrados en el sistema
+        <li>Buscar un Cliente
+        <li>Insertar Cliente
+        <li>Modificar datos de Cliente
+        <li>Eliminar un Clientek.Realizar compra de una Obra
+        <li>Eliminar compra de obra
+        <li>Ver listado de Compras existentes
+        <li>Ver listado de Compras para un mes y año específico insertado por el usuario
+        <li>Ver listado de Artistas más vendidos
+        <li>Ver Obras tipo Escultura
+        <li>Ver Compras de Obras tipo Cuadro
+        <li>Ver ganancia total de compras de obras
+        <li>Salir
+    </ol>
+    <li>[20%] Diseño e implementación de interfaces visuales: 
+    <bold>Usted debe proveer las interfaces visuales para realizar todas  las  opciones  del  sistema.  Tanto  para  la  inserción,  modificación  y  eliminación  de  datos,  como  para  los reportes.</bold>
+    <ol>
+        <li>Cree su propia interfaz, en la que se puedan separar los elementos gráficos de acuerdo a los tres tipos generales de entidades que hay: Obras (con sus tipos), Cliente y Compra.
+        <li>Su diseño debe ser intuitivo y sencillo de usar, es decir que, para resolver cada requisito funcional descrito previamente, no se deberían hacer más de tres clics.
+        <li>A continuación,se muestra un ejemplo básico de diseño de pantallas para que pueda guiarse, sin embargo el equipo tiene total libertad de diseñar la interfaz siempre que cumpla con los principios de usabilidad.
+        <li>Todas las clases relacionadas con interfazde usuario deben estar en un paquete, y en las clases entity y control no debe existir nada relacionado con interacción e interfaz de usuario.
+    </ol>
 ### Pruebas
 **6** .[20] Cree archivos de pruebas unitarias para el controlador del negocio (en el diagrama se llama “ControlGaleriaTest”)
     a.Por cada método expuesto en la fachada(Controlador)debe crear un método de prueba b.En cada prueba de cada método se debe crear una prueba exitosa y otra no exitosa
@@ -209,9 +241,9 @@ First Download Java SE 11
 That is a Maven Project
 1. Clone and open with Eclipse IDE or Intellij IDE.
 2. Configure the project structure to compile on java 11.
-3. Go to src/main/java/poo/project/Control/main.java
+3. Go to src/main/java/view/PantallaGaleria and run
 4. Run.
-5. You can also execute the whole project at the same time, in order to do this, you will need to run the command **"mvn exec:java -Dexec.mainClass="View.PantallaGaleria"** inside the [Project](https://github.com/bayona-n/Proyecto-POO/tree/master/Project) package. **Note that you'll need to have Maven installed to be able to perform this**.
+5. You can also execute the whole project at the same time, in order to do this, you will need to run the command **"mvn exec:java -Dexec.mainClass="view.PantallaGaleria"** inside the [Project](https://github.com/bayona-n/Proyecto-POO/tree/master/Project) package. **Note that you'll need to have Maven installed to be able to perform this**.
 
 # Main Contributors
 **Alejandro Sacristan** &  **Nicolás Bayona**  & **Juan S. Herrera** &  **Andrés R. Porras.**
