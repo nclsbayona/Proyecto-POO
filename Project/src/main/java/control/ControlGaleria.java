@@ -2,6 +2,7 @@ package control;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
@@ -11,7 +12,9 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Marshaller;
+import jakarta.xml.bind.PropertyException;
 import model.*;
 import model.excepciones.TypoException;
 
@@ -54,10 +57,10 @@ public class ControlGaleria {
     // Agregar Cliente
     public Cliente addCliente(Cliente cliente) {
         try {
-            if (this.buscarCliente(cliente.getCodigoCliente()) != null
-                    || this.buscarCliente(cliente.getCedula(), "") != null)
+            if (this.buscarCliente(cliente.retCodigoCliente()) != null
+                    || this.buscarCliente(cliente.retCedula(), "") != null)
                 throw new IllegalAccessException();
-            this.listaClientes.put(cliente.getCedula(), cliente);
+            this.listaClientes.put(cliente.retCedula(), cliente);
             return cliente;
         } catch (Exception e) {
             return null;
@@ -97,7 +100,7 @@ public class ControlGaleria {
     public Cliente buscarCliente(long codigoCliente) {
         Cliente cliente2 = null;
         for (Cliente cliente : this.listaClientes.values()) {
-            if (cliente.getCodigoCliente() == codigoCliente) {
+            if (cliente.retCodigoCliente() == codigoCliente) {
                 cliente2 = cliente;
             }
         }
@@ -108,7 +111,7 @@ public class ControlGaleria {
     public Cliente buscarCliente(long cedula, String s) {
         Cliente cliente2 = null;
         for (Cliente cliente : this.listaClientes.values()) {
-            if (cliente.getCedula() == cedula) {
+            if (cliente.retCedula() == cedula) {
                 cliente2 = cliente;
             }
         }
@@ -247,7 +250,7 @@ public class ControlGaleria {
         try {
             if (c == null)
                 return false;
-            this.listaClientes.remove(c.getCedula());
+            this.listaClientes.remove(c.retCedula());
         } catch (Exception e) {
             return false;
         }
@@ -444,7 +447,7 @@ public class ControlGaleria {
                     && (compra.getFecha().get(Calendar.MONTH) == Integer.parseInt(mes))) {
                 append = "";
                 append += "Obra: " + compra.getObra().getTitulo();
-                append += "\nComprador: " + compra.getCliente().getNombre();
+                append += "\nComprador: " + compra.getCliente().retNombre();
                 append += "\nFecha: " + compra.getFecha().get(Calendar.DATE) + '/'
                         + compra.getFecha().get(Calendar.MONTH) + '/' + compra.getFecha().get(Calendar.YEAR);
                 append += "\nPrecio: " + compra.getObra().getPrecioRef();
@@ -457,31 +460,31 @@ public class ControlGaleria {
     // Modificar Cliente
     public boolean modificarCliente(Cliente cliente, int respuesta, String valor) {
         try {
-            if (this.buscarCliente(cliente.getCodigoCliente()) == null
-                    || this.buscarCliente(cliente.getCedula(), "") == null)
+            if (this.buscarCliente(cliente.retCodigoCliente()) == null
+                    || this.buscarCliente(cliente.retCedula(), "") == null)
                 throw new IllegalAccessException();
             switch (respuesta) {
                 case 1:
                     if (this.buscarCliente(Long.parseLong(valor)) != null)
                         throw new IllegalAccessException();
-                    cliente.setCodigoCliente(Long.parseLong(valor));
+                    cliente.addCodigoCliente(Long.parseLong(valor));
                     break;
                 case 2:
                     if (this.buscarCliente(Long.parseLong(valor), "") != null)
                         throw new IllegalAccessException();
-                    cliente.setCedula(Long.parseLong(valor));
+                    cliente.addCedula(Long.parseLong(valor));
                     break;
                 case 3:
-                    cliente.setNombre(valor);
+                    cliente.addNombre(valor);
                     break;
                 case 4:
-                    cliente.setApellidos(valor);
+                    cliente.addApellidos(valor);
                     break;
                 case 5:
-                    cliente.setDireccionEntrega(valor);
+                    cliente.addDireccionEntrega(valor);
                     break;
                 case 6:
-                    cliente.setTelefono(Long.parseLong(valor));
+                    cliente.addTelefono(Long.parseLong(valor));
                     break;
                 default:
                     throw new IllegalAccessException();
@@ -604,7 +607,7 @@ public class ControlGaleria {
     public void startDay() {
         for (Cliente c : this.gestionClientes.listaClientes().values()) {
             if (c != null)
-                this.listaClientes.put(c.getCedula(), c);
+                this.listaClientes.put(c.retCedula(), c);
 
         }
         for (Artista c : this.gestionObras.startArtistas().values()) {
@@ -657,27 +660,72 @@ public class ControlGaleria {
         return new BufferedWriter(fw);
     }
 
-    // Exportar a xml ?
-    public boolean exportarReporteCliente(String route, Collection clientes) throws TypoException {
-        Class <model.Cliente> clase=model.Cliente.class;
+    // Exportar a xml
+    public <T> boolean exportarReporteXML(String route, Class<T> clase, Collection<T> collection) throws TypoException {
         boolean logrado = true;
         int counter = 0;
+        System.err.println(clase);
         BufferedWriter bw = null;
         while ((bw == null) && (counter++ < 3)) {
             try {
                 bw = this.newBufferedWriter(route);
-            } catch (IllegalAccessException e) {
-                //Error abriendo el archivo
+            } catch (Exception e) {
+                // Error abriendo el archivo
+                if (bw != null) {
+                    try {
+                        bw.close();
+                    } catch (IOException e1) {
+                        // No debería
+                    }
+                }
             }
         }
-        if (bw==null){
-            logrado=false;
+        if (bw == null) {
+            logrado = false;
             throw new TypoException("ruta");
         }
-        /*
-            JAXBContext context=JAXBContext.newInstance(clase);
-            Marshaller m=context.createMarshaller();
-        */
+        JAXBContext context = null;
+        try {
+            context = JAXBContext.newInstance(clase);
+        } catch (JAXBException e) {
+            logrado = false;
+            if (bw != null) {
+                try {
+                    bw.close();
+                } catch (IOException e1) {
+                    // No debería
+                }
+            }
+            e.printStackTrace();
+            throw new TypoException("clase");
+        }
+        Marshaller m = null;
+        try {
+            m = context.createMarshaller();
+        } catch (JAXBException e) {
+            logrado = false;
+            if (bw != null) {
+                try {
+                    bw.close();
+                } catch (IOException e1) {
+                    // No debería
+                }
+            }
+            e.printStackTrace();
+            throw new TypoException("marshaller");
+        }
+        try {
+            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+        } catch (PropertyException e1) {
+            e1.printStackTrace();
+        }
+        for (T t:collection){
+            try{
+                m.marshal(t, bw);
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        }
         return logrado;
     }
 }

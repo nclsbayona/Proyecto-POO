@@ -1,11 +1,21 @@
 package model;
 
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class Cliente implements Comparable<Cliente> {
+    @XmlElement
     private long codigoCliente;
+    @XmlElement
     private long cedula;
+    @XmlElement
     private String nombre;
-    private String Apellidos;
+    @XmlElement
+    private String apellidos;
+    @XmlElement
     private String direccionEntrega;
+    @XmlElement
     private long telefono;
 
     // Costructor del Cliente
@@ -15,7 +25,7 @@ public class Cliente implements Comparable<Cliente> {
         this.codigoCliente = codigoCliente;
         this.cedula = cedula;
         this.nombre = nombre;
-        this.Apellidos = Apellidos;
+        this.apellidos = Apellidos;
         this.direccionEntrega = direccionEntrega;
         this.telefono = telefono;
     }
@@ -30,8 +40,8 @@ public class Cliente implements Comparable<Cliente> {
          */
         int a = -1;
         try {
-            a = (this.codigoCliente < cliente.getCodigoCliente()) ? -1
-                    : (this.codigoCliente == cliente.getCodigoCliente()) ? 0 : 1;
+            a = (this.codigoCliente < cliente.retCodigoCliente()) ? -1
+                    : (this.codigoCliente == cliente.retCodigoCliente()) ? 0 : 1;
         } catch (Exception e) {
             a = -1;
         }
@@ -43,34 +53,34 @@ public class Cliente implements Comparable<Cliente> {
     public boolean equals(Object obj) {
         try {
             Cliente c = (Cliente) (obj);
-            return (this.codigoCliente == c.getCodigoCliente() || this.cedula == c.getCedula()) ? true : false;
+            return (this.codigoCliente == c.retCodigoCliente() || this.cedula == c.retCedula()) ? true : false;
         } catch (Exception e) {
             return false;
         }
     }
-
-    public String getApellidos() {
-        return Apellidos;
+    
+    public String retApellidos() {
+        return this.apellidos;
     }
 
-    public long getCedula() {
-        return cedula;
+    public long retCedula() {
+        return this.cedula;
     }
 
     // Getters
-    public long getCodigoCliente() {
-        return codigoCliente;
+    public long retCodigoCliente() {
+        return this.codigoCliente;
     }
 
-    public String getDireccionEntrega() {
+    public String retDireccionEntrega() {
         return direccionEntrega;
     }
 
-    public String getNombre() {
+    public String retNombre() {
         return nombre;
     }
 
-    public long getTelefono() {
+    public long retTelefono() {
         return telefono;
     }
 
@@ -84,34 +94,34 @@ public class Cliente implements Comparable<Cliente> {
     // ;Modificar cliente
     public void printC() {
         String retorno = "1 CodigoCliente: " + String.valueOf(this.codigoCliente) + '\n';
-        retorno += "2 Cedula: " + this.cedula + "\n3 Nombre: " + this.nombre + "\n4 Apellidos: " + this.Apellidos
+        retorno += "2 Cedula: " + this.cedula + "\n3 Nombre: " + this.nombre + "\n4 Apellidos: " + this.apellidos
                 + "\n";
         retorno += "5 DireccionEntrega: " + this.direccionEntrega + "\n6 Telefono: " + this.telefono;
         System.out.println(retorno);
     }
 
-    public void setApellidos(String apellidos) {
-        Apellidos = apellidos;
+    public void addApellidos(String apellidos) {
+        this.apellidos = apellidos;
     }
 
-    public void setCedula(long cedula) {
+    public void addCedula(long cedula) {
         this.cedula = cedula;
     }
 
     // Setters
-    public void setCodigoCliente(long codigoCliente) {
+    public void addCodigoCliente(long codigoCliente) {
         this.codigoCliente = codigoCliente;
     }
 
-    public void setDireccionEntrega(String direccionEntrega) {
+    public void addDireccionEntrega(String direccionEntrega) {
         this.direccionEntrega = direccionEntrega;
     }
 
-    public void setNombre(String nombre) {
+    public void addNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    public void setTelefono(long telefono) {
+    public void addTelefono(long telefono) {
         this.telefono = telefono;
     }
 
@@ -121,11 +131,15 @@ public class Cliente implements Comparable<Cliente> {
         // identificación, nombre completo, cantidad de personas que lo acompañan y
         // teléfono.
         String retorno = String.valueOf(this.codigoCliente) + ' ' + this.cedula + "\t\t" + this.nombre + ' '
-                + this.Apellidos + "\t" + this.direccionEntrega + " -- " + this.telefono;
+                + this.apellidos + "\t" + this.direccionEntrega + " -- " + this.telefono;
         /*
          * retorno+='\nLo acompañan: "+this.acompañantes+" personas\tTelefono:
          * "+this.telefono
          */;
         return retorno;
     }
+
+    public Cliente() {
+    }
+
 }

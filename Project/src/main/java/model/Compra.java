@@ -90,7 +90,7 @@ public class Compra {
 	// Imprimir
 	@Override
 	public String toString() {
-		return String.valueOf(this.codigoCompra) + ": " + this.cliente.getNombre() + " " + this.cliente.getApellidos()
+		return String.valueOf(this.codigoCompra) + ": " + this.cliente.retNombre() + " " + this.cliente.retApellidos()
 				+ "->" + this.obra.getTitulo() + " " + this.fecha.get(Calendar.DATE) + '/'
 				+ this.fecha.get(Calendar.MONTH) + '/' + this.fecha.get(Calendar.YEAR) + ":\t$"
 				+ this.obra.getPrecioRef();
