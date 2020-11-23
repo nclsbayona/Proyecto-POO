@@ -1,23 +1,28 @@
 # *Object Oriented Programming  Project 2020-3*
 
-Pontificia Universidad Javeriana Bogotá D.C 
+Pontificia Universidad Javeriana Bogotá D.C
 
 ## About the Control System of an Art Gallery
+
 **El Sistema**
 
-1. Se requiere hacer un programa orientado a objetos que funcionará en una galería de arte.
+<ol>
+    <li>Se requiere hacer un programa orientado a objetos que funcionará en una galería de arte.
 
-2. La galería tiene un catálogo de obras artísticas disponibles para la venta. Cuando se compra una obra, esta se le reserva
-al cliente y se paga en la galería y hay que registrarlo en el sistema.
+    <li>La galería tiene un catálogo de obras artísticas disponibles para la venta. Cuando se compra una obra, esta se le reserva
+    al cliente y se paga en la galería y hay que registrarlo en el sistema.
 
-3. El sistema controla la información de las obras disponibles, la información de los clientes que realizan una compra, y
-la información de la compra en si. El pago se realiza físicamente en la galería pero en el sistema debe quedar
-registrado.
+    <li>El sistema controla la información de las obras disponibles, la información de los clientes que realizan una compra, y
+    la información de la compra en si. El pago se realiza físicamente en la galería pero en el sistema debe quedar
+    registrado.
 
-4. En el diagrama de clases UML que se muestra a continuación se observan las clases que intervienen en el problema:
+    <li>En el diagrama de clases UML que se muestra a continuación se observan las clases que intervienen en el problema:
+</ol>
 
-## Entrega1
+## Entrega 1
+
 ![UML](https://i.ibb.co/4NFhFCJ/image.png)
+
 **Menu Funcional:**
 
     1. Ver listado de Obras disponibles
@@ -200,54 +205,72 @@ Para este proyecto se solicita implementar las siguientes funcionalidades:
     c.Defina un método que permita calcular el precio total de todas las obras que han sido compradas, para conocer la ganancia total obtenida.
 
 ## Entrega 3
-uncionalidades de la Entrega 3
+
+Funcionalidades de la Entrega 3
+
 <ol>
-    <li>[20] Para esta entrega se deben corregir los errores identificados en la entrega anterior y agregar lo que sea necesario para ajustarlas a las nuevas condiciones especificadas en la entrega: 
-    <ol>
-        <li>Ver listado de Obras disponibles
-        <li>Buscar una Obra por título, artista o año
-        <li>Insertar una Obra
-        <li>Modificar una Obra
-        <li>Eliminar una Obra
-        <li>Ver listado de Clientes registrados en el sistema
-        <li>Buscar un Cliente
-        <li>Insertar Cliente
-        <li>Modificar datos de Cliente
-        <li>Eliminar un Clientek.Realizar compra de una Obra
-        <li>Eliminar compra de obra
-        <li>Ver listado de Compras existentes
-        <li>Ver listado de Compras para un mes y año específico insertado por el usuario
-        <li>Ver listado de Artistas más vendidos
-        <li>Ver Obras tipo Escultura
-        <li>Ver Compras de Obras tipo Cuadro
-        <li>Ver ganancia total de compras de obras
-        <li>Salir
-    </ol>
-    <li>[20%] Diseño e implementación de interfaces visuales: 
-    **Usted debe proveer las interfaces visuales para realizar todas  las  opciones  del  sistema.  Tanto  para  la  inserción,  modificación  y  eliminación  de  datos,  como  para  los reportes**
+
+    <li>[20] Para esta entrega se deben corregir los errores identificados en la entrega anterior y agregar lo que sea necesario para ajustarlas a las nuevas condiciones especificadas en la entrega
+
+        <ol>
+            <li>Ver listado de Obras disponibles
+            <li>Buscar una Obra por título, artista o año
+            <li>Insertar una Obra
+            <li>Modificar una Obra
+            <li>Eliminar una Obra
+            <li>Ver listado de Clientes registrados en el sistema
+            <li>Buscar un Cliente
+            <li>Insertar Cliente
+            <li>Modificar datos de Cliente
+            <li>Eliminar un Clientek.Realizar compra de una Obra
+            <li>Eliminar compra de obra
+            <li>Ver listado de Compras existentes
+            <li>Ver listado de Compras para un mes y año específico insertado por el usuario
+            <li>Ver listado de Artistas más vendidos
+            <li>Ver Obras tipo Escultura
+            <li>Ver Compras de Obras tipo Cuadro
+            <li>Ver ganancia total de compras de obras
+            <li>Salir
+        </ol>
+
+    <li>[20%] Diseño e implementación de interfaces visuales
+    <span>Usted debe proveer las interfaces visuales para realizar todas  las  opciones  del  sistema.  Tanto  para  la  inserción,  modificación  y  eliminación  de  datos,  como  para  los reportes</span>
     <ol>
         <li>Cree su propia interfaz, en la que se puedan separar los elementos gráficos de acuerdo a los tres tipos generales de entidades que hay: Obras (con sus tipos), Cliente y Compra.
         <li>Su diseño debe ser intuitivo y sencillo de usar, es decir que, para resolver cada requisito funcional descrito previamente, no se deberían hacer más de tres clics.
         <li>A continuación,se muestra un ejemplo básico de diseño de pantallas para que pueda guiarse, sin embargo el equipo tiene total libertad de diseñar la interfaz siempre que cumpla con los principios de usabilidad.
         <li>Todas las clases relacionadas con interfazde usuario deben estar en un paquete, y en las clases entity y control no debe existir nada relacionado con interacción e interfaz de usuario.
     </ol>
+    
     <li>[15%] Manejo de errores y excepciones.
+
     **a** Se deben mostrar mensajes de error para los diferentes escenarios. Estos mensajes de error deben ser generados con Exceptions (o Exceptions usando herencia) Por ejemplo agregar clientes repetidos, eliminar elementos que no existen, añadir comprasa clientes que no existen, y todas las validaciones que están definidas desde el comienzo del proyecto.
+    
     <li>[15%] Guardar la información en archivos XML:
-    **a** Todos los reportes deben dar la opción de guardar sus resultados en un archivo XML. Puede definir su propio formato para cada reporte.
+
+**a** Todos los reportes deben dar la opción de guardar sus resultados en un archivo XML. Puede definir su propio formato para cada reporte.
+
     <li>[15%] Pruebas Unitarias:
-    **a** Todos  los  métodos  públicosde GestionGaleria  deben tener2  pruebas  unitarias.  Una  con un comportamiento normal y otra con un comportamientoanormal.Las clases de pruebas deben iniciar con el prefijo Test.
+
+**a** Todos  los  métodos  públicosde GestionGaleria  deben tener2  pruebas  unitarias.  Una  con un comportamiento normal y otra con un comportamientoanormal.Las clases de pruebas deben iniciar con el prefijo Test.
+
     <li>[15%] Sustentación Final:
-    **a** Cada equipo debe presentar la totalidad de las funcionalidades en la sustentación final.
-    **b** Todos los miembros del equipo deben estar preparados para responder preguntas sobre el proyecto.
+
+**a** Cada equipo debe presentar la totalidad de las funcionalidades en la sustentación final.
+
+**b** Todos los miembros del equipo deben estar preparados para responder preguntas sobre el proyecto.
+
     <li>[20] Cree archivos de pruebas unitarias para el controlador del negocio (en el diagrama se llama “ControlGaleriaTest”)
-    **a** Por cada método expuesto en la fachada(Controlador)debe crear un método de prueba b.En cada prueba de cada método se debe crear una prueba exitosa y otra no exitosa
+**a** Por cada método expuesto en la fachada(Controlador)debe crear un método de prueba b.En cada prueba de cada método se debe crear una prueba exitosa y otra no exitosa
+
 </ol>
 
 # Usage
-First Download Java SE 11 
+
+First Download Java SE 11
 
 That is a Maven Project
+
 1. Clone and open with Eclipse IDE or Intellij IDE.
 2. Configure the project structure to compile on java 11.
 3. Go to src/main/java/view/PantallaGaleria and run
