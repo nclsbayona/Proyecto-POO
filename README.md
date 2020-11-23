@@ -240,6 +240,7 @@ uncionalidades de la Entrega 3
     <li>[15%] Sustentación Final:
     **a.**Cada equipo debe presentar la totalidad de las funcionalidades en la sustentación final.
     **b.**Todos los miembros del equipo deben estar preparados para responder preguntas sobre el proyecto.
+</ol>
 ### Pruebas
 **6** .[20] Cree archivos de pruebas unitarias para el controlador del negocio (en el diagrama se llama “ControlGaleriaTest”)
     a.Por cada método expuesto en la fachada(Controlador)debe crear un método de prueba b.En cada prueba de cada método se debe crear una prueba exitosa y otra no exitosa
