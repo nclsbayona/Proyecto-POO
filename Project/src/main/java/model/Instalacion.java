@@ -3,8 +3,12 @@ package model;
 import java.util.Date;
 import java.util.HashSet;
 
+@XmlRootElement
 public class Instalacion extends Obra {
+
+    @XmlElement
     private String descripcion;
+    @XmlElement
     private HashSet<Material> materiales;
 
     public Instalacion(long _codigoObra, String _titulo, Date _fecha, float _precioRef, String _dimensiones,

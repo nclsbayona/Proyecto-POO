@@ -3,13 +3,21 @@ package model;
 import java.util.Calendar;
 import java.util.HashSet;
 
+@XmlRootElement
 public class Artista {
+	@XmlElement
 	private HashSet<Obra> obras;
+	@XmlElement
 	private long codigoArtista;
+	@XmlElement
 	private long cedula;
+	@XmlElement
 	private String nombre;
+	@XmlElement
 	private String apellidos;
+	@XmlElement
 	private Calendar fechaNacimiento;
+	@XmlElement
 	private long telefono;
 
 	// Argumentos con cedula y código

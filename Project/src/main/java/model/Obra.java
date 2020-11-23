@@ -6,14 +6,20 @@ import java.util.HashSet;
 
 import excepciones.CodeSizeException;
 
+@XmlRootElement
 public abstract class Obra {
 
+    @XmlElement
     private HashSet<Artista> artistas;
+    @XmlElement
     private Calendar fecha;
+    @XmlElement
     private String titulo;
+    @XmlElement
     private float precioRef;
+    @XmlElement
     private long codigoObra;
-
+    @XmlElement
     private String dimensiones;
 
     // Constructor

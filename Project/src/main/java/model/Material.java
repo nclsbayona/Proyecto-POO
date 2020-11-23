@@ -1,8 +1,12 @@
 package model;
 
+@XmlRootElement
 public class Material {
+    @XmlElement
     private long codigo;
+    @XmlElement
     private String nombre;
+    @XmlElement
     private String descripcion;
 
     // Constructor

@@ -2,12 +2,18 @@ package model;
 
 import java.util.Calendar;
 
+@XmlRootElement
 public class Compra {
 
+	@XmlElement
 	private Cliente cliente;
+	@XmlElement
 	private Obra obra;
+	@XmlElement
 	private long codigoCompra;
+	@XmlElement
 	private Calendar fecha;
+	@XmlElement
 	private boolean pagado;
 
 	public Compra(long codigoCompra) {

@@ -2,9 +2,14 @@ package model;
 
 import java.util.Date;
 
+@XmlRootElement
 public class Cuadro extends Obra {
+
+    @XmlElement
     private String tema;
+    @XmlElement
     private String tecnica;
+    @XmlElement
     private Clasificacion clasificacion;
 
     public Cuadro(long _codigoObra, String _titulo, Date _fecha, float _precioRef, String _dimensiones, String tema,

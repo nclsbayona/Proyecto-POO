@@ -2,9 +2,14 @@ package model;
 
 import java.util.Date;
 
+@XmlRootElement
 public class Escultura extends Obra {
+
+    @XmlElement
     private String material;
+    @XmlElement
     private double peso;
+    @XmlElement
     private Material materiales;
 
     public Escultura(long _codigoObra, String _titulo, Date _fecha, float _precioRef, String _dimensiones,

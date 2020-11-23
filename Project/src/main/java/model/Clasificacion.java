@@ -1,10 +1,14 @@
 package model;
 
+@XmlRootElement
 public enum Clasificacion {
-
+    @XmlElement
     OBRA_MAESTRA("Obra maestra"), OBRA_REPRESENTATIVA("Obra representativa");
-
+    @XmlElement
     private String nombre;
+
+
+
 
     private Clasificacion(String nombre) {
         this.nombre = nombre;
