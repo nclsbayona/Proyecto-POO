@@ -224,7 +224,7 @@ uncionalidades de la Entrega 3
         <li>Salir
     </ol>
     <li>[20%] Diseño e implementación de interfaces visuales: 
-    <bold>Usted debe proveer las interfaces visuales para realizar todas  las  opciones  del  sistema.  Tanto  para  la  inserción,  modificación  y  eliminación  de  datos,  como  para  los reportes.</bold>
+    **Usted debe proveer las interfaces visuales para realizar todas  las  opciones  del  sistema.  Tanto  para  la  inserción,  modificación  y  eliminación  de  datos,  como  para  los reportes.**
     <ol>
         <li>Cree su propia interfaz, en la que se puedan separar los elementos gráficos de acuerdo a los tres tipos generales de entidades que hay: Obras (con sus tipos), Cliente y Compra.
         <li>Su diseño debe ser intuitivo y sencillo de usar, es decir que, para resolver cada requisito funcional descrito previamente, no se deberían hacer más de tres clics.
@@ -236,7 +236,7 @@ uncionalidades de la Entrega 3
     <li>[15%] Guardar la información en archivos XML:
     **a.**Todos los reportes deben dar la opción de guardar sus resultados en un archivo XML. Puede definir su propio formato para cada reporte.
     <li>[15%] Pruebas Unitarias:
-    <bold>a.</bold>Todos  los  métodos  públicosde GestionGaleria  deben tener2  pruebas  unitarias.  Una  con un comportamiento normal y otra con un comportamientoanormal.Las clases de pruebas deben iniciar con el prefijo Test.
+    **a.**Todos  los  métodos  públicosde GestionGaleria  deben tener2  pruebas  unitarias.  Una  con un comportamiento normal y otra con un comportamientoanormal.Las clases de pruebas deben iniciar con el prefijo Test.
     <li>[15%] Sustentación Final:
     **a.**Cada equipo debe presentar la totalidad de las funcionalidades en la sustentación final.
     **b.**Todos los miembros del equipo deben estar preparados para responder preguntas sobre el proyecto.
