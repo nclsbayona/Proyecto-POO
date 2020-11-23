@@ -16,7 +16,7 @@ import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Marshaller;
 import jakarta.xml.bind.PropertyException;
 import model.*;
-import excepciones.TypoException;
+import excepciones.*;
 
 public class ControlGaleria {
     // Colecciones
@@ -41,30 +41,30 @@ public class ControlGaleria {
 
     // Añade una obra a un artista y viceversa
     public boolean addCircObryArt(Obra o, Artista a) {
-        try {
-            if (this.buscarObra(o.getCodigoObra()) != null)
-                throw new IllegalAccessException();
+        if (this.buscarObra(o.getCodigoObra()) != null)
             o.getArtista().add(a);
-            this.listaObras.add(o);
-            a.getObras().add(o);
-            this.listaArtistas.put(a.getCedula(), a);
-            return true;
-        } catch (Exception e) {
+        else
             return false;
-        }
+        this.listaObras.add(o);
+        a.getObras().add(o);
+        this.listaArtistas.put(a.getCedula(), a);
+        return true;
     }
 
     // Agregar Cliente
-    public Cliente addCliente(Cliente cliente) {
+    public Cliente addCliente(Cliente cliente) throws ClientExistsException {
         try {
-            if (this.buscarCliente(cliente.retCodigoCliente()) != null
-                    || this.buscarCliente(cliente.retCedula(), "") != null)
-                throw new IllegalAccessException();
-            this.listaClientes.put(cliente.retCedula(), cliente);
-            return cliente;
-        } catch (Exception e) {
-            return null;
+            this.buscarCliente(cliente.retCodigoCliente());
+        } catch (ClientNotFoundException e) {
+            throw new ClientExistsException(String.valueOf(cliente.retCodigoCliente()));
         }
+        try {
+            this.buscarCliente(cliente.retCedula(), "");
+        } catch (ClientNotFoundException e) {
+            throw new ClientExistsException(String.valueOf(cliente.retCedula()));
+        }
+        this.listaClientes.put(cliente.retCedula(), cliente);
+        return cliente;
     }
 
     // Añade una obra
@@ -88,34 +88,41 @@ public class ControlGaleria {
     }
 
     // Busca un artista
-    public Artista buscarArtista(long cedula) {
-        for (Artista a : this.listaArtistas.values()) {
-            if (a.getCedula() == cedula)
-                return a;
+    public Artista buscarArtista(long cedula) throws EmptyArtistListException, ArtistNotFoundException {
+        try {
+            for (Artista a : this.listaArtistas.values()) {
+                if (a.getCedula() == cedula)
+                    return a;
+            }
+        } catch (NullPointerException e) {
+            throw new EmptyArtistListException();
         }
-        return null;
+        throw new ArtistNotFoundException(String.valueOf(cedula));
     }
 
     // Buscar un cliente
-    public Cliente buscarCliente(long codigoCliente) {
-        Cliente cliente2 = null;
-        for (Cliente cliente : this.listaClientes.values()) {
-            if (cliente.retCodigoCliente() == codigoCliente) {
-                cliente2 = cliente;
+    public Cliente buscarCliente(long codigoCliente) throws ClientNotFoundException {
+        try {
+            for (Cliente cliente : this.listaClientes.values()) {
+                if (cliente.retCodigoCliente() == codigoCliente) {
+                    return cliente;
+                }
             }
+        } catch (NullPointerException e) {
         }
-        return cliente2;
+        throw new ClientNotFoundException(String.valueOf(codigoCliente));
     }
 
     // Buscar un cliente por cedula
-    public Cliente buscarCliente(long cedula, String s) {
-        Cliente cliente2 = null;
-        for (Cliente cliente : this.listaClientes.values()) {
-            if (cliente.retCedula() == cedula) {
-                cliente2 = cliente;
-            }
+    public Cliente buscarCliente(long cedula, String s) throws ClientNotFoundException{
+        try{
+            for (Cliente cliente : this.listaClientes.values()) {
+                if (cliente.retCedula() == cedula) {
+                    return cliente;
+                }
         }
-        return cliente2;
+        }catch(Exception e){}
+        throw new ClientNotFoundException(String.valueOf(cedula));
     }
 
     // Busca un cliente en las compras
@@ -245,15 +252,9 @@ public class ControlGaleria {
     }
 
     // Eliminar Cliente
-    public boolean eliminarCliente(long codigo) {
+    public boolean eliminarCliente(long codigo) throws ClientNotFoundException {
         Cliente c = this.buscarCliente(codigo);
-        try {
-            if (c == null)
-                return false;
-            this.listaClientes.remove(c.retCedula());
-        } catch (Exception e) {
-            return false;
-        }
+        this.listaClientes.remove(c.retCedula());
         return true;
     }
 
@@ -719,10 +720,10 @@ public class ControlGaleria {
         } catch (PropertyException e1) {
             e1.printStackTrace();
         }
-        for (T t:collection){
-            try{
+        for (T t : collection) {
+            try {
                 m.marshal(t, bw);
-            }catch(Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
