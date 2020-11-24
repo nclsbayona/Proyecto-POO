@@ -52,16 +52,9 @@ public class Cliente implements Comparable<Cliente> {
         }
     }
     
-    @XmlElement
-    public String getApellidos() {
-        return this.apellidos;
-    }
+    
 
-    @XmlElement
-    public long getCedula() {
-        return this.cedula;
-    }
-
+    
     // Getters
     @XmlElement
     public long getCodigoCliente() {
@@ -69,14 +62,26 @@ public class Cliente implements Comparable<Cliente> {
     }
 
     @XmlElement
-    public String getDireccionEntrega() {
-        return direccionEntrega;
+    public long getCedula() {
+        return this.cedula;
     }
 
     @XmlElement
     public String getNombre() {
         return nombre;
     }
+
+    @XmlElement
+    public String getApellidos() {
+        return this.apellidos;
+    }
+
+    @XmlElement
+    public String getDireccionEntrega() {
+        return direccionEntrega;
+    }
+
+    
 
     @XmlElement
     public long getTelefono() {

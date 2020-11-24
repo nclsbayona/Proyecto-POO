@@ -36,19 +36,19 @@ public class Cuadro extends Obra {
     }
 
     @XmlElement
-    public Clasificacion getClasificacion() {
-        return this.clasificacion;
+    public String getTema() {
+        return this.tema;
     }
 
     @XmlElement
     public String getTecnica() {
         return this.tecnica;
     }
-
+    
     @XmlElement
-    public String getTema() {
-        return this.tema;
-    }
+    public Clasificacion getClasificacion() {
+        return this.clasificacion;
+    }    
 
     public void setClasificacion(Clasificacion clasificacion) {
         this.clasificacion = clasificacion;

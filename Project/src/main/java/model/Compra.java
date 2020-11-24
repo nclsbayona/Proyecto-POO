@@ -48,36 +48,31 @@ public class Compra {
 	}
 
 	// Accessors
-	// Cliente
-	@XmlElement
-	public Cliente getCliente() {
-		return this.cliente;
-	}
-
 	// Codigo compra
 	@XmlElement
 	public long getCodigoCompra() {
 		return this.codigoCompra;
 	}
-
 	// Fecha
 	@XmlElement
 	public Calendar getFecha() {
 		return this.fecha;
 	}
-
-	// Obra
-	@XmlElement
-	public Obra getObra() {
-		return this.obra;
-	}
-
 	// Pagado
 	@XmlElement
 	public boolean getPagado() {
 		return this.pagado;
 	}
-
+	// Cliente
+	@XmlElement
+	public Cliente getCliente() {
+		return this.cliente;
+	}
+	// Obra
+	@XmlElement
+	public Obra getObra() {
+		return this.obra;
+	}
 	// Organizar para busqueda
 	@Override
 	public int hashCode() {

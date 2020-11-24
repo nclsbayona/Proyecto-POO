@@ -33,13 +33,13 @@ public class Escultura extends Obra {
     }
 
     @XmlElement
-    public Material getMateriales() {
-        return this.materiales;
+    public double getPeso() {
+        return this.peso;
     }
 
     @XmlElement
-    public double getPeso() {
-        return this.peso;
+    public Material getMateriales() {
+        return this.materiales;
     }
 
     public void setMaterial(String material) {

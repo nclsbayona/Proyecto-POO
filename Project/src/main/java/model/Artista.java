@@ -67,20 +67,10 @@ public class Artista {
 		}
 	}
 
-	// Accessors de apellidos
-	@XmlElement
-	public String getApellidos() {
-		return this.apellidos;
-	}
+	
 
 	public void setApellidos(String apellidos) {
 		this.apellidos = apellidos;
-	}
-
-	// Accessors de cedula
-	@XmlElement
-	public long getCedula() {
-		return this.cedula;
 	}
 
 	// Accessors de codigoArtista
@@ -89,23 +79,28 @@ public class Artista {
 		return this.codigoArtista;
 	}
 
-	// Accessors de fechaNacimento
+	// Accessors de cedula
 	@XmlElement
-	public Calendar getFechaNacimiento() {
-		return this.fechaNacimiento;
+	public long getCedula() {
+		return this.cedula;
 	}
+
+	
 
 	// Accessors de nombre
 	@XmlElement
 	public String getNombre() {
 		return this.nombre;
 	}
-
-	// Métodos
-	// Accessors de setDeObras
+	// Accessors de apellidos
 	@XmlElement
-	public HashSet<Obra> getObras() {
-		return this.obras;
+	public String getApellidos() {
+		return this.apellidos;
+	}
+	// Accessors de fechaNacimento
+	@XmlElement
+	public Calendar getFechaNacimiento() {
+		return this.fechaNacimiento;
 	}
 
 	// Accessors de telefono
@@ -114,6 +109,13 @@ public class Artista {
 		return this.telefono;
 	}
 
+	// Accessors de setDeObras
+	@XmlElement
+	public HashSet<Obra> getObras() {
+		return this.obras;
+	}
+
+	// Métodos
 	// Organizacion para la busqueda de elementos
 	@Override
 	public int hashCode() {

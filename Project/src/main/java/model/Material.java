@@ -24,16 +24,16 @@ public class Material {
         return this.codigo;
     }
 
-    // Descripcion
-    @XmlElement
-    public String getDescripcion() {
-        return this.descripcion;
-    }
-
     // Nombre
     @XmlElement
     public String getNombre() {
         return this.nombre;
+    }
+
+    // Descripcion
+    @XmlElement
+    public String getDescripcion() {
+        return this.descripcion;
     }
 
     public void setCodigo(long codigo) {

@@ -10,12 +10,12 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public abstract class Obra {
-    private HashSet<Artista> artistas;
-    private Calendar fecha;
-    private String titulo;
-    private float precioRef;
-    private long codigoObra;
-    private String dimensiones;
+    protected HashSet<Artista> artistas;
+    protected Calendar fecha;
+    protected String titulo;
+    protected float precioRef;
+    protected long codigoObra;
+    protected String dimensiones;
 
     public Obra() {
     }
@@ -68,18 +68,13 @@ public abstract class Obra {
     // Métodos accesors->
     // Getters
     @XmlElement
-    public HashSet<Artista> getArtista() {
-        return this.artistas;
-    }
-
-    @XmlElement
     public long getCodigoObra() {
         return this.codigoObra;
     }
 
     @XmlElement
-    public String getDimensiones() {
-        return this.dimensiones;
+    public String getTitulo() {
+        return this.titulo;
     }
 
     @XmlElement
@@ -93,8 +88,13 @@ public abstract class Obra {
     }
 
     @XmlElement
-    public String getTitulo() {
-        return this.titulo;
+    public String getDimensiones() {
+        return this.dimensiones;
+    }
+
+    @XmlElement
+    public HashSet<Artista> getArtista() {
+        return this.artistas;
     }
 
     // Organización del hash set
