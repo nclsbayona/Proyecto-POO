@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<compra>
+    <cliente>
+        <codigoCliente>1</codigoCliente>
+        <cedula>1422373</cedula>
+        <nombre>Alfredo</nombre>
+        <apellidos>Santamaria</apellidos>
+        <direccionEntrega>2085 NW Traverse Street</direccionEntrega>
+        <telefono>6543212</telefono>
+    </cliente>
+    <obra>
+        <fecha>2020-12-01T21:39:23.094-05:00</fecha>
+        <titulo>La gorda</titulo>
+        <precioRef>20000.0</precioRef>
+        <codigoObra>1324567</codigoObra>
+        <dimensiones>20x5</dimensiones>
+    </obra>
+    <codigoCompra>1</codigoCompra>
+    <fecha>2020-12-01T21:39:23.094-05:00</fecha>
+    <pagado>false</pagado>
+</compra>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<compra>
+    <cliente>
+        <codigoCliente>2</codigoCliente>
+        <cedula>1293723</cedula>
+        <nombre>Fred</nombre>
+        <apellidos>Jones</apellidos>
+        <direccionEntrega>20822 SW Luxury Park</direccionEntrega>
+        <telefono>98765432</telefono>
+    </cliente>
+    <obra>
+        <fecha>2010-06-20T21:39:23.094-05:00</fecha>
+        <titulo>Eva pilla</titulo>
+        <precioRef>20000.0</precioRef>
+        <codigoObra>2435678</codigoObra>
+        <dimensiones>10x8</dimensiones>
+    </obra>
+    <codigoCompra>2</codigoCompra>
+    <fecha>2020-12-01T21:39:23.094-05:00</fecha>
+    <pagado>false</pagado>
+</compra>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<compra>
+    <cliente>
+        <codigoCliente>6</codigoCliente>
+        <cedula>1183937</cedula>
+        <nombre>Juan</nombre>
+        <apellidos>Acosta</apellidos>
+        <direccionEntrega>Calle 100 #20-29</direccionEntrega>
+        <telefono>3208426</telefono>
+    </cliente>
+    <obra>
+        <fecha>2001-09-06T21:39:23.094-05:00</fecha>
+        <titulo>Sociopata</titulo>
+        <precioRef>15000.0</precioRef>
+        <codigoObra>3456789</codigoObra>
+        <dimensiones>10x2</dimensiones>
+    </obra>
+    <codigoCompra>3</codigoCompra>
+    <fecha>2020-12-01T21:39:23.094-05:00</fecha>
+    <pagado>false</pagado>
+</compra>

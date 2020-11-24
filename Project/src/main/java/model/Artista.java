@@ -8,6 +8,9 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class Artista {
+
+	public Artista() {
+	}
 	@XmlElement
 	private HashSet<Obra> obras;
 	@XmlElement
@@ -71,42 +74,42 @@ public class Artista {
 	}
 
 	// Accessors de apellidos
-	public String getApellidos() {
+	public String nGetApellidos() {
 		return this.apellidos;
 	}
 
-	public void getApellidos(String apellidos) {
+	public void nGetApellidos(String apellidos) {
 		this.apellidos = apellidos;
 	}
 
 	// Accessors de cedula
-	public long getCedula() {
+	public long nGetCedula() {
 		return this.cedula;
 	}
 
 	// Accessors de codigoArtista
-	public long getCodigoArtista() {
+	public long nGetCodigoArtista() {
 		return this.codigoArtista;
 	}
 
 	// Accessors de fechaNacimento
-	public Calendar getFechaNacimiento() {
+	public Calendar nGetFechaNacimiento() {
 		return this.fechaNacimiento;
 	}
 
 	// Accessors de nombre
-	public String getNombre() {
+	public String nGetNombre() {
 		return this.nombre;
 	}
 
 	// Métodos
 	// Accessors de setDeObras
-	public HashSet<Obra> getObras() {
+	public HashSet<Obra> nGetObras() {
 		return this.obras;
 	}
 
 	// Accessors de telefono
-	public long getTelefono() {
+	public long nGetTelefono() {
 		return this.telefono;
 	}
 

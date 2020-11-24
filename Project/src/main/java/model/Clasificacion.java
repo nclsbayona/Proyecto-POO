@@ -10,18 +10,15 @@ public enum Clasificacion {
     @XmlElement
     private String nombre;
 
-
-
-
     private Clasificacion(String nombre) {
         this.nombre = nombre;
     }
 
-    public Object getOBRA_MAESTRA() {
+    public Object nGetOBRA_MAESTRA() {
         return Clasificacion.OBRA_MAESTRA;
     }
 
-    public Object getOBRA_REPRESENTATIVA() {
+    public Object nGetOBRA_REPRESENTATIVA() {
         return Clasificacion.OBRA_REPRESENTATIVA;
     }
 

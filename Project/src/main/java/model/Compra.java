@@ -19,10 +19,7 @@ public class Compra {
 	@XmlElement
 	private boolean pagado;
 
-	public Compra(long codigoCompra) {
-
-		this.codigoCompra = codigoCompra;
-	}
+	
 
 	// Constructores
 	public Compra(long codigoCompra, Calendar fecha, boolean pagado) {
@@ -31,6 +28,19 @@ public class Compra {
 		this.pagado = pagado;
 	}
 
+	public Compra(long codigoCompra) {
+		this.codigoCompra = codigoCompra;
+	}
+
+	public Compra(long codigoCompra, Calendar fecha, boolean pagado, Obra obra, Cliente cliente) {
+		this.codigoCompra = codigoCompra;
+		this.fecha = fecha;
+		this.pagado = pagado;
+		this.obra=obra;
+		this.cliente=cliente;
+	}
+
+	public Compra(){}
 	// Equals
 	@Override
 	public boolean equals(Object obj) {
@@ -44,27 +54,27 @@ public class Compra {
 
 	// Accessors
 	// Cliente
-	public Cliente getCliente() {
+	public Cliente nGetCliente() {
 		return this.cliente;
 	}
 
 	// Codigo compra
-	public long getCodigoCompra() {
+	public long nGetCodigoCompra() {
 		return this.codigoCompra;
 	}
 
 	// Fecha
-	public Calendar getFecha() {
+	public Calendar nGetFecha() {
 		return this.fecha;
 	}
 
 	// Obra
-	public Obra getObra() {
+	public Obra nGetObra() {
 		return this.obra;
 	}
 
 	// Pagado
-	public boolean getPagado() {
+	public boolean nGetPagado() {
 		return this.pagado;
 	}
 
@@ -99,9 +109,9 @@ public class Compra {
 	// Imprimir
 	@Override
 	public String toString() {
-		return String.valueOf(this.codigoCompra) + ": " + this.cliente.retNombre() + " " + this.cliente.retApellidos()
-				+ "->" + this.obra.getTitulo() + " " + this.fecha.get(Calendar.DATE) + '/'
+		return String.valueOf(this.codigoCompra) + ": " + this.cliente.nGetNombre() + " " + this.cliente.nGetApellidos()
+				+ "->" + this.obra.nGetTitulo() + " " + this.fecha.get(Calendar.DATE) + '/'
 				+ this.fecha.get(Calendar.MONTH) + '/' + this.fecha.get(Calendar.YEAR) + ":\t$"
-				+ this.obra.getPrecioRef();
+				+ this.obra.nGetPrecioRef();
 	}
 }

@@ -66,21 +66,21 @@ class CuadroTest {
 		materiales.add(m3);
 		materiales.add(m4);
 		i.setMateriales(materiales);
-		assertEquals(materiales, i.getMateriales());
+		assertEquals(materiales, i.nGetMateriales());
 	}
 
 	@Test
 	void testProbarEscultura() {
 		Escultura e = new Escultura((123), "titulo creado", Calendar.getInstance().getTime(), 10000, "10X10",
 				"Cuarzo", (2));
-		assertFalse(e.getPeso() >= 10);
+		assertFalse(e.nGetPeso() >= 10);
 	}
 
 	@Test
 	void testProbarEscultura2() {
 		Escultura e = new Escultura((123), "titulo creado", Calendar.getInstance().getTime(), 10000, "10X10",
 				"Cuarzo", (12));
-		assertFalse(e.getPeso() <= 10);
+		assertFalse(e.nGetPeso() <= 10);
 	}
 
 	// No hay materiales
@@ -88,7 +88,7 @@ class CuadroTest {
 	void testProbarMateriales_0Materiales() {
 		Instalacion i = new Instalacion(1112345, "Titulo creado", Calendar.getInstance().getTime(), 10000, "10x10",
 				"Descripcion");
-		assertEquals(i.getMateriales().size(), 0);
+		assertEquals(i.nGetMateriales().size(), 0);
 	}
 
 	@Test
@@ -96,21 +96,21 @@ class CuadroTest {
 		Instalacion i = new Instalacion(1231145, "Titulo creado", Calendar.getInstance().getTime(), 10000, "10x10",
 				"Descripcion");
 		Material m = new Material(1, "Hola", "Este es un material 1");
-		i.getMateriales().add(m);
-		assertEquals(i.getMateriales().size(), 1);
+		i.nGetMateriales().add(m);
+		assertEquals(i.nGetMateriales().size(), 1);
 	}
 
 	@Test
 	void testProbarObraMaestra() {
 		Cuadro oCuadro = new Cuadro(123, "Titulo creado", Calendar.getInstance().getTime(), 200000, "20x20", "Cuarto",
 				"Hola", Clasificacion.OBRA_MAESTRA);
-		assertEquals(Clasificacion.OBRA_MAESTRA, oCuadro.getClasificacion());
+		assertEquals(Clasificacion.OBRA_MAESTRA, oCuadro.nGetClasificacion());
 	}
 
 	@Test
 	void testProbarObraSignificativa() {
 		Cuadro o = new Cuadro(123, "Titulo creado", Calendar.getInstance().getTime(), 200000, "20x20", "Cuarto", "Hola",
 				Clasificacion.OBRA_REPRESENTATIVA);
-		assertEquals(Clasificacion.OBRA_REPRESENTATIVA, o.getClasificacion());
+		assertEquals(Clasificacion.OBRA_REPRESENTATIVA, o.nGetClasificacion());
 	}
 }

@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.Calendar;
 import java.util.HashSet;
 
-import excepciones.CodeSizeException;
+import exceptions.CodeSizeException;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 
@@ -23,6 +23,9 @@ public abstract class Obra {
     private long codigoObra;
     @XmlElement
     private String dimensiones;
+
+    public Obra() {
+    }
 
     // Constructor
     public Obra(long _codigoObra, String _titulo, Calendar _fecha, float _precioRef, String _dimensiones)
@@ -71,27 +74,27 @@ public abstract class Obra {
 
     // Métodos accesors->
     // Getters
-    public HashSet<Artista> getArtista() {
+    public HashSet<Artista> nGetArtista() {
         return this.artistas;
     }
 
-    public long getCodigoObra() {
+    public long nGetCodigoObra() {
         return this.codigoObra;
     }
 
-    public String getDimensiones() {
+    public String nGetDimensiones() {
         return this.dimensiones;
     }
 
-    public Calendar getFecha() {
+    public Calendar nGetFecha() {
         return this.fecha;
     }
 
-    public float getPrecioRef() {
+    public float nGetPrecioRef() {
         return this.precioRef;
     }
 
-    public String getTitulo() {
+    public String nGetTitulo() {
         return this.titulo;
     }
 

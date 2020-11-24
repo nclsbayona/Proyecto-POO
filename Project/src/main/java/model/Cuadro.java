@@ -25,7 +25,7 @@ public class Cuadro extends Obra {
 
     @Override
     public double calcularPrecio() {
-        double precio = super.getPrecioRef();
+        double precio = super.nGetPrecioRef();
         switch (clasificacion.ordinal()) {
             case 0: {
                 precio *= 1.05;
@@ -39,15 +39,15 @@ public class Cuadro extends Obra {
         return precio;
     }
 
-    public Clasificacion getClasificacion() {
+    public Clasificacion nGetClasificacion() {
         return this.clasificacion;
     }
 
-    public String getTecnica() {
+    public String nGetTecnica() {
         return this.tecnica;
     }
 
-    public String getTema() {
+    public String nGetTema() {
         return this.tema;
     }
 

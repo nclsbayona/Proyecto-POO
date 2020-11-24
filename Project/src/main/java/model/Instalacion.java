@@ -24,17 +24,17 @@ public class Instalacion extends Obra {
     @Override
     public double calcularPrecio() {
         int numMateriales = this.materiales.size();
-        double precio = this.getPrecioRef();
-        double add = 0.05 * this.getPrecioRef();
+        double precio = this.nGetPrecioRef();
+        double add = 0.05 * this.nGetPrecioRef();
         precio += (add * numMateriales);
         return precio;
     }
 
-    public String getDescripcion() {
+    public String nGetDescripcion() {
         return this.descripcion;
     }
 
-    public HashSet<Material> getMateriales() {
+    public HashSet<Material> nGetMateriales() {
         return this.materiales;
     }
 

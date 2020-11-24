@@ -24,22 +24,22 @@ public class Escultura extends Obra {
 
     @Override
     public double calcularPrecio() {
-        double precio = super.getPrecioRef();
+        double precio = super.nGetPrecioRef();
         double add = 0.01 * precio;
         if (this.peso > 10)
             precio += (Math.ceil(this.peso - 10) * add);
         return precio;
     }
 
-    public String getMaterial() {
+    public String nGetMaterial() {
         return this.material;
     }
 
-    public Material getMateriales() {
+    public Material nGetMateriales() {
         return this.materiales;
     }
 
-    public double getPeso() {
+    public double nGetPeso() {
         return this.peso;
     }
 

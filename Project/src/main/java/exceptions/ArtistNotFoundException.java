@@ -1,4 +1,4 @@
-package excepciones;
+package exceptions;
 
 public class ArtistNotFoundException extends Exception {
     private static final long serialVersionUID = 1L;
