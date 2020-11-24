@@ -5,6 +5,18 @@ import java.util.HashSet;
 import java.util.Scanner;
 
 import control.ControlGaleria;
+import exceptions.ArtistNotFoundException;
+import exceptions.ArtworkDoesntExistException;
+import exceptions.ArtworkExistsException;
+import exceptions.ArtworkNotPurchasedException;
+import exceptions.ClientDoesntExistException;
+import exceptions.ClientExistsException;
+import exceptions.ClientNotFoundException;
+import exceptions.CodeSizeException;
+import exceptions.EmptyArtistListException;
+import exceptions.EmptyPurchasesListException;
+import exceptions.PurchaseNotFoundException;
+import exceptions.TypoException;
 import model.*;
 
 //Boundary
@@ -63,8 +75,8 @@ public class PantallaGaleria {
 		String opcionSeleect = entrada.nextLine();
 		System.out.println("---------------------------------");
 		System.out.println(" ");
-		try {
-			// Procesa la decición del Usuario
+		// Procesa la decición del Usuario
+		try{
 			switch (Integer.parseInt(opcionSeleect)) {
 
 				// Obras
@@ -128,8 +140,12 @@ public class PantallaGaleria {
 							System.out.println("Escribe el Codigo:");
 							buscarObraporCodigo = entrada.next();
 							System.out.println("--Obra del Codigo " + buscarObraporCodigo);
-							if (controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo)) != null) {
+							try {
 								System.out.println(controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo)));
+							} catch (ArtworkDoesntExistException e) {
+								System.out.println("No existe");
+							} catch (NumberFormatException ne) {
+								System.out.println(ne.getMessage());
 							}
 							break;
 						}
@@ -138,11 +154,15 @@ public class PantallaGaleria {
 							this.clearScreen();// Limpia la Pantalla
 							System.out.println("Busca Obras por Fecha");
 							System.out.println("Escribe el Año:");
-							int anos = entrada.nextInt();
-							fecha.set(anos, 1, 1);
-							System.out.println("--Obras de la Fecha " + fecha.get(Calendar.YEAR));
-							for (Obra o : controlGaleria.buscarObra(fecha)) {
-								System.out.println(o);
+							String anos = entrada.next();
+							try {
+								fecha.set(Integer.parseInt(anos), 1, 1);
+								System.out.println("--Obras de la Fecha " + fecha.get(Calendar.YEAR));
+								for (Obra o : controlGaleria.buscarObra(fecha)) {
+									System.out.println(o);
+								}
+							} catch (NumberFormatException e) {
+								System.out.println(e.getMessage());
 							}
 							break;
 						}
@@ -164,110 +184,139 @@ public class PantallaGaleria {
 						System.out.println("Codigo de la obra(7 digitos):");
 						codigoObra = entrada.next();
 					} while (codigoObra.length() != 7);
-					if (controlGaleria.buscarObra(Long.parseLong(codigoObra)) != null) {
+					try {
+						controlGaleria.buscarObra(Long.parseLong(codigoObra));
 						System.out.println("Ya existe una obra con este codigo");
 						break;
+					} catch (ArtworkDoesntExistException e) {
+						System.out.println("Titulo: ");
+						Titulo = entrada.next();
+						System.out.println("_________Fecha__________ ");
+						System.out.println("Año:");
+						ano = entrada.next();
+						System.out.println("Mes:");
+						mes = entrada.next();
+						System.out.println("Dia:");
+						dia = entrada.next();
+						System.out.println("Precio de referencia: ");
+						precioRef = entrada.next();
+						System.out.println("Dimensiones: ");
+						dimensiones = entrada.next();
+						switch (Integer.valueOf(seleObra)) {
+							case 1:
+								// Cuadro
+								System.out.println("Tema:");
+								tema = entrada.next();
+								System.out.println("Tecnica:");
+								tecnica = entrada.next();
+								System.out.println("Clasificación:");
+								do {
+									System.out.println("1. Obra maestra\n2. Obra representativa");
+									buscarClienteC = entrada.next();
+								} while (!(buscarClienteC.equals("1") || buscarClienteC.equals("2")));
+								if (Integer.valueOf(buscarClienteC) == 1)
+									clasificacion = Clasificacion.OBRA_MAESTRA;
+								else
+									clasificacion = Clasificacion.OBRA_REPRESENTATIVA;
+								System.out.println("Artista");
+								System.out.println("Cedula:");
+								valor = entrada.next();
+								try {
+									controlGaleria.buscarArtista(Long.parseLong(valor));
+									controlGaleria.insertarObra(Titulo, precioRef, valor, codigoObra, dimensiones, ano, mes,
+											dia, controlGaleria.buscarArtista(Long.parseLong(valor)), tema, tecnica,
+											clasificacion);
+								} catch (TypoException oe) {
+									System.out.println("La obra no existe");
+								} catch (EmptyArtistListException ae) {
+									System.out.println("La lista de artistas está vacia");
+								} catch (ArtistNotFoundException ne) {
+									System.out.println("Nombre: ");
+									nombre = entrada.next();
+									System.out.println("Apellidos: ");
+									apellido = entrada.next();
+									System.out.println("Telefono: ");
+									telefono = entrada.next();
+									try {
+										controlGaleria.insertarObra(Titulo, precioRef, valor, codigoObra, dimensiones, ano,
+												mes, dia, nombre, apellido, telefono, tema, tecnica, clasificacion);
+										System.out.println("Se ha agregado con exito la obra al nuevo artista");
+									} catch (NumberFormatException | TypoException e1) {
+										System.out.println("Error en la obra");
+									}
+								}
+								break;
+							case 2:
+								// Instalacion
+								System.out.println("Descripcion:");
+								descripcion = entrada.next();
+								System.out.println("Artista");
+								System.out.println("Cedula:");
+								valor = entrada.next();
+								try {
+									controlGaleria.buscarArtista(Long.parseLong(valor));
+									controlGaleria.insertarObra(Titulo, precioRef, valor, codigoObra, dimensiones, ano, mes,
+											dia, controlGaleria.buscarArtista(Long.parseLong(valor)), descripcion);
+								} catch (TypoException awe) {
+									System.out.println("La obra no existe");
+								} catch (EmptyArtistListException ele) {
+									System.out.println("Lista de artistas vacía");
+								} catch (ArtistNotFoundException ae) {
+									System.out.println("Nombre: ");
+									nombre = entrada.next();
+									System.out.println("Apellidos: ");
+									apellido = entrada.next();
+									System.out.println("Telefono: ");
+									telefono = entrada.next();
+									try {
+										controlGaleria.insertarObra(Titulo, precioRef, valor, codigoObra, dimensiones, ano,
+												mes, dia, nombre, apellido, telefono, descripcion);
+										System.out.println("Se ha agregado con exito la obra al nuevo artista");
+									} catch (NumberFormatException | TypoException e1) {
+										System.out.println("Error en la obra");
+									}
+								}
+								break;
+							case 3:
+								// Escultura
+								System.out.println("Material:");
+								material = entrada.next();
+								System.out.println("Peso:");
+								peso = entrada.next();
+								System.out.println("Artista");
+								System.out.println("Cedula:");
+								valor = entrada.next();
+								try {
+									controlGaleria.buscarArtista(Long.parseLong(valor));
+									controlGaleria.insertarObra(Titulo, precioRef, valor, codigoObra, dimensiones, ano, mes,
+											dia, controlGaleria.buscarArtista(Long.parseLong(valor)), material,
+											Double.valueOf(peso));
+								} catch (TypoException oe) {
+									System.out.println("La obra no existe");
+								} catch (EmptyArtistListException ae) {
+									System.out.println("La lista de artistas está vacia");
+								} catch (ArtistNotFoundException ne) {
+									System.out.println("Nombre: ");
+									nombre = entrada.next();
+									System.out.println("Apellidos: ");
+									apellido = entrada.next();
+									System.out.println("Telefono: ");
+									telefono = entrada.next();
+									try {
+										controlGaleria.insertarObra(Titulo, precioRef, valor, codigoObra, dimensiones, ano,
+												mes, dia, nombre, apellido, telefono, material, Double.valueOf(peso));
+										System.out.println("Se ha agregado con exito la obra al nuevo artista");
+									} catch (NumberFormatException | TypoException e1) {
+										System.out.println("Error en la obra");
+									}
+								}
+								break;
+							default:
+								break;
+						}
+						System.out.println("---------------------------------");
+						break;
 					}
-					System.out.println("Titulo: ");
-					Titulo = entrada.next();
-					System.out.println("_________Fecha__________ ");
-					System.out.println("Año:");
-					ano = entrada.next();
-					System.out.println("Mes:");
-					mes = entrada.next();
-					System.out.println("Dia:");
-					dia = entrada.next();
-					System.out.println("Precio de referencia: ");
-					precioRef = entrada.next();
-					System.out.println("Dimensiones: ");
-					dimensiones = entrada.next();
-					switch (Integer.valueOf(seleObra)) {
-						case 1:
-							// Cuadro
-							System.out.println("Tema:");
-							tema = entrada.next();
-							System.out.println("Tecnica:");
-							tecnica = entrada.next();
-							System.out.println("Clasificación:");
-							do {
-								System.out.println("1. Obra maestra\n2. Obra representativa");
-								buscarClienteC = entrada.next();
-							} while (!(buscarClienteC.equals("1") || buscarClienteC.equals("2")));
-							if (Integer.valueOf(buscarClienteC) == 1)
-								clasificacion = Clasificacion.OBRA_MAESTRA;
-							else
-								clasificacion = Clasificacion.OBRA_REPRESENTATIVA;
-							System.out.println("Artista");
-							System.out.println("Cedula:");
-							valor = entrada.next();
-							if (controlGaleria.buscarArtista(Long.parseLong(valor)) != null) {
-								controlGaleria.insertarObra(Titulo, precioRef, valor, codigoObra, dimensiones, ano, mes,
-										dia, controlGaleria.buscarArtista(Long.parseLong(valor)), tema, tecnica,
-										clasificacion);
-							} else {
-								System.out.println("Nombre: ");
-								nombre = entrada.next();
-								System.out.println("Apellidos: ");
-								apellido = entrada.next();
-								System.out.println("Telefono: ");
-								telefono = entrada.next();
-								controlGaleria.insertarObra(Titulo, precioRef, valor, codigoObra, dimensiones, ano, mes,
-										dia, nombre, apellido, telefono, tema, tecnica, clasificacion);
-								System.out.println("Se ha agregado con exito la obra al nuevo artista");
-							}
-							break;
-						case 2:
-							// Instalacion
-							System.out.println("Descripcion:");
-							descripcion = entrada.next();
-							System.out.println("Artista");
-							System.out.println("Cedula:");
-							valor = entrada.next();
-							if (controlGaleria.buscarArtista(Long.parseLong(valor)) != null) {
-								controlGaleria.insertarObra(Titulo, precioRef, valor, codigoObra, dimensiones, ano, mes,
-										dia, controlGaleria.buscarArtista(Long.parseLong(valor)), descripcion);
-							} else {
-								System.out.println("Nombre: ");
-								nombre = entrada.next();
-								System.out.println("Apellidos: ");
-								apellido = entrada.next();
-								System.out.println("Telefono: ");
-								telefono = entrada.next();
-								controlGaleria.insertarObra(Titulo, precioRef, valor, codigoObra, dimensiones, ano, mes,
-										dia, nombre, apellido, telefono, descripcion);
-								System.out.println("Se ha agregado con exito la obra al nuevo artista");
-							}
-							break;
-						case 3:
-							// Escultura
-							System.out.println("Material:");
-							material = entrada.next();
-							System.out.println("Peso:");
-							peso = entrada.next();
-							System.out.println("Artista");
-							System.out.println("Cedula:");
-							valor = entrada.next();
-							if (controlGaleria.buscarArtista(Long.parseLong(valor)) != null) {
-								controlGaleria.insertarObra(Titulo, precioRef, valor, codigoObra, dimensiones, ano, mes,
-										dia, controlGaleria.buscarArtista(Long.parseLong(valor)), material,
-										Double.valueOf(peso));
-							} else {
-								System.out.println("Nombre: ");
-								nombre = entrada.next();
-								System.out.println("Apellidos: ");
-								apellido = entrada.next();
-								System.out.println("Telefono: ");
-								telefono = entrada.next();
-								controlGaleria.insertarObra(Titulo, precioRef, valor, codigoObra, dimensiones, ano, mes,
-										dia, nombre, apellido, telefono, material, Double.valueOf(peso));
-								System.out.println("Se ha agregado con exito la obra al nuevo artista");
-							}
-							break;
-						default:
-							break;
-					}
-					System.out.println("---------------------------------");
-					break;
 				}
 				// Modifica Obra por Codigo
 				case 4: {
@@ -277,25 +326,17 @@ public class PantallaGaleria {
 					System.out.println("Modificar Obra");
 					System.out.println("Escribe el Codigo:");
 					buscarObraporCodigo = entrada.next();
-					if (controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo)) != null) {
+					try {
+						Obra modificar = controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo));
 						System.out.println();
-						System.out.println("\tModificando Obra *"
-								+ controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo)).getTitulo() + "*");
+						System.out.println("\tModificando Obra *" + modificar.getTitulo() + "*");
 						System.out.println();
-						System.out.println("1. Codigo: "
-								+ controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo)).getCodigoObra());
-						System.out.println("2. Titulo: "
-								+ controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo)).getTitulo());
-						System.out.println("3. Fecha: "
-								+ controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo)).getFecha().get(0)
-								+ " / "
-								+ controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo)).getFecha().get(2)
-								+ " / "
-								+ controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo)).getFecha().get(1));
-						System.out.println("4. Precio referencia: "
-								+ controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo)).getPrecioRef());
-						System.out.println("5. Dimensiones del cuadro: "
-								+ controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo)).getDimensiones());
+						System.out.println("1. Codigo: " + modificar.getCodigoObra());
+						System.out.println("2. Titulo: " + modificar.getTitulo());
+						System.out.println("3. Fecha: " + modificar.getFecha().get(0) + " / " + modificar.getFecha().get(2)
+								+ " / " + modificar.getFecha().get(1));
+						System.out.println("4. Precio referencia: " + modificar.getPrecioRef());
+						System.out.println("5. Dimensiones del cuadro: " + modificar.getDimensiones());
 						System.out.println("6. No modificar ");
 						System.out.println();
 						System.out.println("Que opcion desea ingresar: ");
@@ -308,18 +349,41 @@ public class PantallaGaleria {
 									System.out.print("El codigo debe tener 7 caracteres: ");
 									newCodigo = entrada.next();
 								} while (newCodigo.length() != 7);
-								modObra = this.controlGaleria.modificarObra(
-										controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo)),
-										Integer.parseInt(criterio), newCodigo);
+								try {
+									modObra = this.controlGaleria.modificarObra(modificar, Integer.parseInt(criterio),
+											newCodigo);
+								} catch (NumberFormatException e) {
+									System.out.println("Error en el formato del numero");
+								} catch (CodeSizeException e) {
+									System.out.println("Error en el tamaño del codigo");
+								} catch (TypoException e) {
+									System.out.println(e.getMessage());
+								} catch (ArtworkNotPurchasedException e) {
+									System.out.println(e.getMessage());
+								} catch (ArtworkExistsException e) {
+									System.out.println(e.getMessage());
+								}
 								break;
 							}
 							case 2: {
 								System.out.println("Ingrese Titulo nuevo: ");
 								entrada.nextLine();
 								String newTittle = entrada.nextLine();
-								modObra = this.controlGaleria.modificarObra(
-										controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo)),
-										Integer.parseInt(criterio), newTittle);
+								try {
+									modObra = this.controlGaleria.modificarObra(
+											controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo)),
+											Integer.parseInt(criterio), newTittle);
+								} catch (NumberFormatException e) {
+									System.out.println("Error en el formato del numero");
+								} catch (CodeSizeException e) {
+									System.out.println("Error en el tamaño del codigo");
+								} catch (TypoException e) {
+									System.out.println(e.getMessage());
+								} catch (ArtworkNotPurchasedException e) {
+									System.out.println(e.getMessage());
+								} catch (ArtworkExistsException e) {
+									System.out.println(e.getMessage());
+								}
 								break;
 							}
 							case 3: {
@@ -332,25 +396,61 @@ public class PantallaGaleria {
 								System.out.println("Dia:");
 								dia = entrada.next();
 								fecha_ = ano + "/" + mes + "/" + dia;
-								modObra = this.controlGaleria.modificarObra(
-										controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo)),
-										Integer.parseInt(criterio), fecha_);
+								try {
+									modObra = this.controlGaleria.modificarObra(
+											controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo)),
+											Integer.parseInt(criterio), fecha_);
+								} catch (NumberFormatException e) {
+									System.out.println("Error en el formato del numero");
+								} catch (CodeSizeException e) {
+									System.out.println("Error en el tamaño del codigo");
+								} catch (TypoException e) {
+									System.out.println(e.getMessage());
+								} catch (ArtworkNotPurchasedException e) {
+									System.out.println(e.getMessage());
+								} catch (ArtworkExistsException e) {
+									System.out.println(e.getMessage());
+								}
 								break;
 							}
 							case 4: {
 								System.out.println("Ingrese el nuevo precio de referencia: ");
 								String newPrecio = entrada.next();
-								modObra = this.controlGaleria.modificarObra(
-										controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo)),
-										Integer.parseInt(criterio), newPrecio);
+								try {
+									modObra = this.controlGaleria.modificarObra(
+											controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo)),
+											Integer.parseInt(criterio), newPrecio);
+								} catch (NumberFormatException e) {
+									System.out.println("Error en el formato del numero");
+								} catch (CodeSizeException e) {
+									System.out.println("Error en el tamaño del codigo");
+								} catch (TypoException e) {
+									System.out.println(e.getMessage());
+								} catch (ArtworkNotPurchasedException e) {
+									System.out.println(e.getMessage());
+								} catch (ArtworkExistsException e) {
+									System.out.println(e.getMessage());
+								}
 								break;
 							}
 							case 5: {
 								System.out.println("Ingrese la dimension: ");
 								dimensiones = entrada.next();
-								modObra = this.controlGaleria.modificarObra(
-										controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo)),
-										Integer.parseInt(criterio), dimensiones);
+								try {
+									modObra = this.controlGaleria.modificarObra(
+											controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo)),
+											Integer.parseInt(criterio), dimensiones);
+								} catch (ArtworkExistsException e) {
+									System.out.println(e.getMessage());
+								} catch (NumberFormatException e) {
+									System.out.println("Error en el formato del numero");
+								} catch (CodeSizeException e) {
+									System.out.println("Error en el tamaño del codigo");
+								} catch (TypoException e) {
+									System.out.println(e.getMessage());
+								} catch (ArtworkNotPurchasedException e) {
+									System.out.println(e.getMessage());
+								}
 								break;
 							}
 							case 6: {
@@ -363,8 +463,10 @@ public class PantallaGaleria {
 							System.out.println("La obra se modificó correctamente");
 						else
 							System.out.println("La obra no se modifico correctamente");
-					} else
+					} catch (ArtworkDoesntExistException ae) {
 						System.out.println("No se encontro la obra");
+						break;
+					}
 					System.out.println("---------------------------------");
 					break;
 				}
@@ -375,7 +477,14 @@ public class PantallaGaleria {
 					System.out.println("Eliminar Obra");
 					System.out.println("Escribe el Codigo:");
 					codigo = entrada.next();
-					boolean mensaje = this.controlGaleria.eliminarObra(Long.parseLong(codigo));
+					boolean mensaje = false;
+					try {
+						mensaje = this.controlGaleria.eliminarObra(Long.parseLong(codigo));
+					} catch (NumberFormatException e) {
+						System.out.println("Error en el formato del numero");
+					} catch (ArtworkDoesntExistException e) {
+						System.out.println(e.getMessage());
+					}
 					if (mensaje)
 						System.out.println("Eliminado con exito");
 					else
@@ -423,17 +532,24 @@ public class PantallaGaleria {
 						case 1:
 							System.out.println("Ingrese el codigo");
 							buscarClienteC = entrada.next();
-							System.out.println(controlGaleria.buscarCliente(Long.parseLong(buscarClienteC)) != null
-									? controlGaleria.buscarCliente(Long.parseLong(buscarClienteC))
-									: "No se encuentra un cliente con ese codigo");
+							try {
+								System.out.println(controlGaleria.buscarCliente(Long.parseLong(buscarClienteC)));
+							} catch (NumberFormatException e) {
+								System.out.println("El formato del numero está mal");
+							} catch (ClientNotFoundException e) {
+								System.out.println(e.getMessage());
+							}
 							break;
 						case 2:
 							System.out.println("Ingrese la cedula");
 							buscarClienteC = entrada.next();
-							System.out.println(
-									controlGaleria.buscarCliente(Long.parseLong(buscarClienteC), "cedula") != null
-											? controlGaleria.buscarCliente(Long.parseLong(buscarClienteC), "cedula")
-											: "No se encuentra un cliente con esa cedula");
+							try {
+								System.out.println(controlGaleria.buscarCliente(Long.parseLong(buscarClienteC), ""));
+							} catch (NumberFormatException e) {
+								System.out.println("El formato del numero está mal");
+							} catch (ClientNotFoundException e) {
+								System.out.println(e.getMessage());
+							}
 							break;
 						default:
 							break;
@@ -452,23 +568,26 @@ public class PantallaGaleria {
 						System.out.println("Codigo invalido");
 						return retornar;
 					}
-					if (controlGaleria.buscarCliente(Integer.parseInt(codigoCliente)) != null) {
+					try {
+						controlGaleria.buscarCliente(Integer.parseInt(codigoCliente));
 						System.out.println("Este cliente ya existe");
 						break;
-					}
-					do {
-						System.out.println("Ingrese la cedula del cliente");
-						valor = entrada.next();
-						if (valor.length() < 7) {
-							System.out.println("Cedula invalida");
+					} catch (ClientNotFoundException ce) {
+						do {
+							System.out.println("Ingrese la cedula del cliente");
+							valor = entrada.next();
+							if (valor.length() < 7)
+								System.out.println("Cedula invalida");
+						} while (valor.length() < 7);
+						try {
+							controlGaleria.buscarCliente(Long.parseLong(valor), "cedula");
+							System.out.println("Este cliente ya existe");
+							break;
+						} catch (ClientNotFoundException cne) {
 						}
-					} while (valor.length() < 7);
-					if (controlGaleria.buscarCliente(Long.parseLong(valor), "cedula") != null) {
-						System.out.println("Este cliente ya existe");
-						break;
 					}
 					String nombres;
-					boolean agregado;
+					boolean agregado = false;
 					System.out.println("Ingrese los nombres del cliente");
 					nombres = entrada.next();
 					String apellidos;
@@ -479,8 +598,16 @@ public class PantallaGaleria {
 					direccionEntrega = entrada.next();
 					System.out.println("Ingrese el telefono del cliente");
 					telefono = entrada.next();
-					agregado = controlGaleria.crearCliente(Integer.parseInt(codigoCliente), Long.parseLong(valor),
-							nombres, apellidos, direccionEntrega, Long.parseLong(telefono));
+					try {
+						agregado = controlGaleria.crearCliente(Integer.parseInt(codigoCliente), Long.parseLong(valor),
+								nombres, apellidos, direccionEntrega, Long.parseLong(telefono));
+					} catch (NumberFormatException e) {
+						System.out.println(e.getMessage());
+					} catch (ClientExistsException e) {
+						System.out.println(e.getMessage());
+					} catch (CodeSizeException e) {
+						System.out.println(e.getMessage());
+					}
 					System.out.println((agregado) ? "Cliente agregado con exito" : "Ocurrio un error");
 					System.out.println("---------------------------------");
 					break;
@@ -492,11 +619,24 @@ public class PantallaGaleria {
 					System.out.println("Modificar Cliente");
 					System.out.print("Ingrese el codigo del cliente a modificar: ");
 					codigoCliente = entrada.next();
-					if (controlGaleria.buscarCliente(Long.parseLong(codigoCliente)) == null) {
-						System.out.println("No encontrado");
+					try {
+						controlGaleria.buscarCliente(Long.parseLong(codigoCliente));
+					} catch (NumberFormatException e) {
+						System.out.println(e.getMessage());
+						break;
+					} catch (ClientNotFoundException e) {
+						System.out.println(e.getMessage());
 						break;
 					}
-					controlGaleria.buscarCliente(Long.parseLong(codigoCliente)).printC();
+					try {
+						controlGaleria.buscarCliente(Long.parseLong(codigoCliente)).printC();
+					} catch (NumberFormatException e) {
+						System.out.println(e.getMessage());
+						break;
+					} catch (ClientNotFoundException e) {
+						System.out.println(e.getMessage());
+						break;
+					}
 					do {
 						System.out.print("Ingrese numero de atributo a modificar: ");
 						respuesta = entrada.next();
@@ -510,17 +650,29 @@ public class PantallaGaleria {
 								System.err.println("Codigo invalido");
 								return retornar;
 							}
-							if (this.controlGaleria.buscarCliente(Long.parseLong(valor)) != null) {
+							try {
+								this.controlGaleria.buscarCliente(Long.parseLong(valor));
 								System.out.println("Ya existe un cliente con ese codigo");
-								return retornar;
+							} catch (NumberFormatException e) {
+								System.out.println(e.getMessage());
+								break;
+							} catch (ClientNotFoundException e) {
+								System.out.println(e.getMessage());
+								break;
 							}
 							break;
 						case 2:
 							System.out.print("Ingrese la cedula nueva: ");
 							valor = entrada.next();
-							if (this.controlGaleria.buscarCliente(Long.parseLong(valor), "cedula") != null) {
+							try {
+								this.controlGaleria.buscarCliente(Long.parseLong(valor), "cedula");
 								System.out.println("Ya existe un cliente con esa cedula");
-								return retornar;
+							} catch (NumberFormatException e) {
+								System.out.println(e.getMessage());
+								break;
+							} catch (ClientNotFoundException e) {
+								System.out.println(e.getMessage());
+								break;
 							}
 							break;
 						case 3:
@@ -543,9 +695,19 @@ public class PantallaGaleria {
 							System.err.println("Opcion invalida");
 							return retornar;
 					}
-					System.out.println((controlGaleria.modificarCliente(
-							controlGaleria.buscarCliente(Long.parseLong(codigoCliente)), Integer.parseInt(respuesta),
-							valor)) ? "Modificado con exito" : "Ocurrio un error");
+					try {
+						controlGaleria.modificarCliente(controlGaleria.buscarCliente(Long.parseLong(codigoCliente)),
+								Integer.parseInt(respuesta), valor);
+					} catch (NumberFormatException e) {
+						System.out.println(e.getMessage());
+						break;
+					} catch (ClientNotFoundException e) {
+						System.out.println(e.getMessage());
+						break;
+					} catch (TypoException e) {
+						System.out.println(e.getMessage());
+						break;
+					}
 					System.out.println("---------------------------------");
 					break;
 				}
@@ -557,10 +719,15 @@ public class PantallaGaleria {
 					System.out.println("Eliminar Cliente");
 					System.out.println("Ingrese el codigo del cliente a eliminar: ");
 					codigoCliente = entrada.next();
-					System.out
-							.println((this.controlGaleria.eliminarCliente(Long.parseLong(codigoCliente))) ? "Eliminado"
-									: "No se elimino el cliente");
-					System.out.println("---------------------------------");
+					try {
+						this.controlGaleria.eliminarCliente(Long.parseLong(codigoCliente));
+					} catch (NumberFormatException e) {
+						System.out.println(e.getMessage());
+						break;
+					} catch (ClientNotFoundException e) {
+						System.out.println(e.getMessage());
+						break;
+					}
 					break;
 				}
 				case 13: {
@@ -569,28 +736,78 @@ public class PantallaGaleria {
 					System.out.println("Realizar compra de una Obra");
 					System.out.println("Ingrese codigo del cliente");
 					valor = entrada.next();
-					if (controlGaleria.buscarCliente(Long.parseLong(valor)) == null) {
-						System.out.println("No existe");
-						return retornar;
+					try {
+						controlGaleria.buscarCliente(Long.parseLong(valor));
+					} catch (NumberFormatException e) {
+						System.out.println(e.getMessage());
+						break;
+					} catch (ClientNotFoundException e) {
+						System.out.println(e.getMessage());
+						break;
 					}
 					System.out.println("Ingrese codigo de la obra");
 					respuesta = entrada.next();
-					if (controlGaleria.buscarObra(Long.parseLong(respuesta)) == null) {
-						System.out.println("No existe la obra");
-						return retornar;
+					try {
+						controlGaleria.buscarObra(Long.parseLong(respuesta));
+					} catch (NumberFormatException e) {
+						System.out.println(e.getMessage());
+						break;
+					} catch (ArtworkDoesntExistException e) {
+						System.out.println(e.getMessage());
+						break;
 					}
-					if (controlGaleria.buscarClienteYObraEnCompra(controlGaleria.buscarCliente(Long.parseLong(valor)),
-							controlGaleria.buscarObra(Long.parseLong(respuesta)))) {
-						System.out.println("Esta compra ya existe en el sistema");
-						return retornar;
+					try {
+						controlGaleria.buscarClienteYObraEnCompra(controlGaleria.buscarCliente(Long.parseLong(valor)),
+								controlGaleria.buscarObra(Long.parseLong(respuesta)));
+						System.out.println("Ya existe");
+						break;
+					} catch (NumberFormatException e) {
+						System.out.println(e.getMessage());
+						break;
+					} catch (EmptyPurchasesListException e) {
+						System.out.println(e.getMessage());
+						break;
+					} catch (PurchaseNotFoundException e) {
+						System.out.println(e.getMessage());
+						try {
+							controlGaleria.buscarObraEnCompras(controlGaleria.buscarObra(Long.parseLong(respuesta)));
+							System.out.println("Esta obra ya fue comprada");
+							break;
+						} catch (NumberFormatException e2) {
+							System.out.println(e2.getMessage());
+							break;
+						} catch (ArtworkNotPurchasedException e2) {
+							System.out.println(e2.getMessage());
+							try {
+								controlGaleria.realizarCompra(controlGaleria.buscarCliente(Long.parseLong(valor)),
+										controlGaleria.buscarObra(Long.parseLong(respuesta)));
+								System.out.println("---------------------------------");
+							} catch (NumberFormatException e1) {
+								System.out.println(e1.getMessage());
+								break;
+							} catch (ArtworkDoesntExistException e1) {
+								System.out.println(e1.getMessage());
+								break;
+							} catch (ClientDoesntExistException e1) {
+								System.out.println(e1.getMessage());
+								break;
+							} catch (EmptyPurchasesListException e1) {
+								System.out.println(e1.getMessage());
+								break;
+							} catch (ClientNotFoundException e1) {
+								System.out.println(e1.getMessage());
+								break;
+							}
+							break;
+						} catch (ArtworkDoesntExistException e2) {
+							System.out.println(e2.getMessage());
+							break;
+						}
+					} catch (ClientNotFoundException e) {
+						System.out.println(e.getMessage());
+					} catch (ArtworkDoesntExistException e) {
+						System.out.println(e.getMessage());
 					}
-					if (controlGaleria.buscarObraEnCompras(controlGaleria.buscarObra(Long.parseLong(respuesta)))) {
-						System.out.println("Esta obra ya fue comprada");
-						return retornar;
-					}
-					controlGaleria.realizarCompra(controlGaleria.buscarCliente(Long.parseLong(valor)),
-							controlGaleria.buscarObra(Long.parseLong(respuesta)));
-					System.out.println("---------------------------------");
 					break;
 				}
 				case 14: {
@@ -599,8 +816,13 @@ public class PantallaGaleria {
 					System.out.println("Eliminar compra de una Obra");
 					System.out.println("Ingrese codigo de la compra");
 					valor = entrada.next();
-					if (controlGaleria.buscarCompra(valor) == null) {
-						System.out.println("La compra no existe");
+					try {
+						controlGaleria.buscarCompra(valor);
+					} catch (EmptyPurchasesListException e) {
+						System.out.println(e.getMessage());
+						break;
+					} catch (PurchaseNotFoundException e) {
+						System.out.println(e.getMessage());
 						break;
 					}
 					System.out.println("Seguro? (0/1)");
@@ -608,7 +830,13 @@ public class PantallaGaleria {
 					if (Integer.parseInt(respuesta) != 1) {
 						break;
 					}
-					controlGaleria.eliminCompra(valor);
+					try {
+						controlGaleria.eliminCompra(valor);
+					} catch (EmptyPurchasesListException e) {
+						System.out.println(e.getMessage());
+					} catch (PurchaseNotFoundException e) {
+						System.out.println(e.getMessage());
+					}
 					System.out.println("---------------------------------");
 					break;
 				}
@@ -635,8 +863,13 @@ public class PantallaGaleria {
 				case 17: {
 					retornar = 17;
 					// Ver listado de Artistas más vendidos
-					for (Artista a : controlGaleria.verListadoArtistas().values())
-						System.out.println(a);
+					try {
+						for (Artista a : controlGaleria.verListadoArtistas().values())
+							System.out.println(a);
+					} catch (EmptyPurchasesListException e) {
+						System.out.println(e.getMessage());
+						break;
+					}
 					break;
 				}
 				case 18: {
@@ -656,12 +889,12 @@ public class PantallaGaleria {
 					System.out.println("Opcion incorrecta!");
 					break;
 			}
-			return retornar;
-		} catch (Exception e) {
+		}catch(NumberFormatException e){
 			System.out.println(e.getMessage());
-			return -1;
 		}
+		return retornar;
 	}
+	
 
 	// Accesors control galeria
 	public ControlGaleria getControlGaleria() {
