@@ -8,15 +8,10 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class Compra {
 
-	@XmlElement
 	private Cliente cliente;
-	@XmlElement
 	private Obra obra;
-	@XmlElement
 	private long codigoCompra;
-	@XmlElement
 	private Calendar fecha;
-	@XmlElement
 	private boolean pagado;
 
 	
@@ -54,27 +49,32 @@ public class Compra {
 
 	// Accessors
 	// Cliente
-	public Cliente nGetCliente() {
+	@XmlElement
+	public Cliente getCliente() {
 		return this.cliente;
 	}
 
 	// Codigo compra
-	public long nGetCodigoCompra() {
+	@XmlElement
+	public long getCodigoCompra() {
 		return this.codigoCompra;
 	}
 
 	// Fecha
-	public Calendar nGetFecha() {
+	@XmlElement
+	public Calendar getFecha() {
 		return this.fecha;
 	}
 
 	// Obra
-	public Obra nGetObra() {
+	@XmlElement
+	public Obra getObra() {
 		return this.obra;
 	}
 
 	// Pagado
-	public boolean nGetPagado() {
+	@XmlElement
+	public boolean getPagado() {
 		return this.pagado;
 	}
 
@@ -109,9 +109,9 @@ public class Compra {
 	// Imprimir
 	@Override
 	public String toString() {
-		return String.valueOf(this.codigoCompra) + ": " + this.cliente.nGetNombre() + " " + this.cliente.nGetApellidos()
-				+ "->" + this.obra.nGetTitulo() + " " + this.fecha.get(Calendar.DATE) + '/'
+		return String.valueOf(this.codigoCompra) + ": " + this.cliente.getNombre() + " " + this.cliente.getApellidos()
+				+ "->" + this.obra.getTitulo() + " " + this.fecha.get(Calendar.DATE) + '/'
 				+ this.fecha.get(Calendar.MONTH) + '/' + this.fecha.get(Calendar.YEAR) + ":\t$"
-				+ this.obra.nGetPrecioRef();
+				+ this.obra.getPrecioRef();
 	}
 }

@@ -280,22 +280,22 @@ public class PantallaGaleria {
 					if (controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo)) != null) {
 						System.out.println();
 						System.out.println("\tModificando Obra *"
-								+ controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo)).nGetTitulo() + "*");
+								+ controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo)).getTitulo() + "*");
 						System.out.println();
 						System.out.println("1. Codigo: "
-								+ controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo)).nGetCodigoObra());
+								+ controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo)).getCodigoObra());
 						System.out.println("2. Titulo: "
-								+ controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo)).nGetTitulo());
+								+ controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo)).getTitulo());
 						System.out.println("3. Fecha: "
-								+ controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo)).nGetFecha().get(0)
+								+ controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo)).getFecha().get(0)
 								+ " / "
-								+ controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo)).nGetFecha().get(2)
+								+ controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo)).getFecha().get(2)
 								+ " / "
-								+ controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo)).nGetFecha().get(1));
+								+ controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo)).getFecha().get(1));
 						System.out.println("4. Precio referencia: "
-								+ controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo)).nGetPrecioRef());
+								+ controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo)).getPrecioRef());
 						System.out.println("5. Dimensiones del cuadro: "
-								+ controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo)).nGetDimensiones());
+								+ controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo)).getDimensiones());
 						System.out.println("6. No modificar ");
 						System.out.println();
 						System.out.println("Que opcion desea ingresar: ");

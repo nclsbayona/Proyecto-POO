@@ -5,17 +5,11 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class Cliente implements Comparable<Cliente> {
-    @XmlElement
     private long codigoCliente;
-    @XmlElement
     private long cedula;
-    @XmlElement
     private String nombre;
-    @XmlElement
     private String apellidos;
-    @XmlElement
     private String direccionEntrega;
-    @XmlElement
     private long telefono;
 
     // Costructor del Cliente
@@ -39,8 +33,8 @@ public class Cliente implements Comparable<Cliente> {
          */
         int a = -1;
         try {
-            a = (this.codigoCliente < cliente.nGetCodigoCliente()) ? -1
-                    : (this.codigoCliente == cliente.nGetCodigoCliente()) ? 0 : 1;
+            a = (this.codigoCliente < cliente.getCodigoCliente()) ? -1
+                    : (this.codigoCliente == cliente.getCodigoCliente()) ? 0 : 1;
         } catch (Exception e) {
             a = -1;
         }
@@ -52,34 +46,40 @@ public class Cliente implements Comparable<Cliente> {
     public boolean equals(Object obj) {
         try {
             Cliente c = (Cliente) (obj);
-            return (this.codigoCliente == c.nGetCodigoCliente() || this.cedula == c.nGetCedula()) ? true : false;
+            return (this.codigoCliente == c.getCodigoCliente() || this.cedula == c.getCedula()) ? true : false;
         } catch (Exception e) {
             return false;
         }
     }
     
-    public String nGetApellidos() {
+    @XmlElement
+    public String getApellidos() {
         return this.apellidos;
     }
 
-    public long nGetCedula() {
+    @XmlElement
+    public long getCedula() {
         return this.cedula;
     }
 
     // Getters
-    public long nGetCodigoCliente() {
+    @XmlElement
+    public long getCodigoCliente() {
         return this.codigoCliente;
     }
 
-    public String nGetDireccionEntrega() {
+    @XmlElement
+    public String getDireccionEntrega() {
         return direccionEntrega;
     }
 
-    public String nGetNombre() {
+    @XmlElement
+    public String getNombre() {
         return nombre;
     }
 
-    public long nGetTelefono() {
+    @XmlElement
+    public long getTelefono() {
         return telefono;
     }
 

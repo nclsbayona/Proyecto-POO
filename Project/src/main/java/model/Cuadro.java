@@ -7,12 +7,8 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class Cuadro extends Obra {
-
-    @XmlElement
     private String tema;
-    @XmlElement
     private String tecnica;
-    @XmlElement
     private Clasificacion clasificacion;
 
     public Cuadro(long _codigoObra, String _titulo, Date _fecha, float _precioRef, String _dimensiones, String tema,
@@ -25,7 +21,7 @@ public class Cuadro extends Obra {
 
     @Override
     public double calcularPrecio() {
-        double precio = super.nGetPrecioRef();
+        double precio = super.getPrecioRef();
         switch (clasificacion.ordinal()) {
             case 0: {
                 precio *= 1.05;
@@ -39,15 +35,18 @@ public class Cuadro extends Obra {
         return precio;
     }
 
-    public Clasificacion nGetClasificacion() {
+    @XmlElement
+    public Clasificacion getClasificacion() {
         return this.clasificacion;
     }
 
-    public String nGetTecnica() {
+    @XmlElement
+    public String getTecnica() {
         return this.tecnica;
     }
 
-    public String nGetTema() {
+    @XmlElement
+    public String getTema() {
         return this.tema;
     }
 

@@ -5,11 +5,8 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class Material {
-    @XmlElement
     private long codigo;
-    @XmlElement
     private String nombre;
-    @XmlElement
     private String descripcion;
 
     // Constructor
@@ -22,16 +19,19 @@ public class Material {
     // Metodos
     // Accesors
     // Codigo
+    @XmlElement
     public long getCodigo() {
         return this.codigo;
     }
 
     // Descripcion
+    @XmlElement
     public String getDescripcion() {
         return this.descripcion;
     }
 
     // Nombre
+    @XmlElement
     public String getNombre() {
         return this.nombre;
     }

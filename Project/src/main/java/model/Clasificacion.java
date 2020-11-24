@@ -5,20 +5,20 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public enum Clasificacion {
-    @XmlElement
     OBRA_MAESTRA("Obra maestra"), OBRA_REPRESENTATIVA("Obra representativa");
-    @XmlElement
     private String nombre;
 
     private Clasificacion(String nombre) {
         this.nombre = nombre;
     }
 
-    public Object nGetOBRA_MAESTRA() {
+    @XmlElement
+    public Object getOBRA_MAESTRA() {
         return Clasificacion.OBRA_MAESTRA;
     }
 
-    public Object nGetOBRA_REPRESENTATIVA() {
+    @XmlElement
+    public Object getOBRA_REPRESENTATIVA() {
         return Clasificacion.OBRA_REPRESENTATIVA;
     }
 

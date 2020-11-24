@@ -41,33 +41,33 @@ public class ControlGaleria {
 
     // Añade una obra a un artista y viceversa
     public boolean addCircObryArt(Obra o, Artista a) throws ArtworkDoesntExistException {
-        this.buscarObra(o.nGetCodigoObra());
-        o.nGetArtista().add(a);
+        this.buscarObra(o.getCodigoObra());
+        o.getArtista().add(a);
         this.listaObras.add(o);
-        a.nGetObras().add(o);
-        this.listaArtistas.put(a.nGetCedula(), a);
+        a.getObras().add(o);
+        this.listaArtistas.put(a.getCedula(), a);
         return true;
     }
 
     // Agregar Cliente
     public Cliente addCliente(Cliente cliente) throws ClientExistsException, ClientNotFoundException {
         try {
-            this.buscarCliente(cliente.nGetCodigoCliente());
+            this.buscarCliente(cliente.getCodigoCliente());
         } catch (ClientNotFoundException e) {
-            throw new ClientExistsException(String.valueOf(cliente.nGetCodigoCliente()));
+            throw new ClientExistsException(String.valueOf(cliente.getCodigoCliente()));
         }
         try {
-            this.buscarCliente(cliente.nGetCedula(), "");
+            this.buscarCliente(cliente.getCedula(), "");
         } catch (Exception e) {
-            throw new ClientExistsException(String.valueOf(cliente.nGetCedula()));
+            throw new ClientExistsException(String.valueOf(cliente.getCedula()));
         }
-        this.listaClientes.put(cliente.nGetCedula(), cliente);
+        this.listaClientes.put(cliente.getCedula(), cliente);
         return cliente;
     }
 
     // Añade una obra
     public Obra addObra(Obra obra) throws ArtworkDoesntExistException {
-        this.buscarObra(obra.nGetCodigoObra());
+        this.buscarObra(obra.getCodigoObra());
         this.listaObras.add(obra);
         return obra;
     }
@@ -78,7 +78,7 @@ public class ControlGaleria {
             if (art.equals(artista))
                 return null;
         }
-        this.listaArtistas.put(artista.nGetCedula(), artista);
+        this.listaArtistas.put(artista.getCedula(), artista);
         return artista;
     }
 
@@ -86,7 +86,7 @@ public class ControlGaleria {
     public Artista buscarArtista(long cedula) throws EmptyArtistListException, ArtistNotFoundException {
         try {
             for (Artista a : this.listaArtistas.values()) {
-                if (a.nGetCedula() == cedula)
+                if (a.getCedula() == cedula)
                     return a;
             }
         } catch (NullPointerException e) {
@@ -99,7 +99,7 @@ public class ControlGaleria {
     public Cliente buscarCliente(long codigoCliente) throws ClientNotFoundException {
         try {
             for (Cliente cliente : this.listaClientes.values()) {
-                if (cliente.nGetCodigoCliente() == codigoCliente) {
+                if (cliente.getCodigoCliente() == codigoCliente) {
                     return cliente;
                 }
             }
@@ -112,7 +112,7 @@ public class ControlGaleria {
     public Cliente buscarCliente(long cedula, String s) throws ClientNotFoundException {
         try {
             for (Cliente cliente : this.listaClientes.values()) {
-                if (cliente.nGetCedula() == cedula) {
+                if (cliente.getCedula() == cedula) {
                     return cliente;
                 }
             }
@@ -126,7 +126,7 @@ public class ControlGaleria {
             throws EmptyPurchasesListException, PurchaseNotFoundException {
         try {
             for (Compra compra : this.listaCompras) {
-                if (compra.nGetCliente() == cliente && compra.nGetObra() == obra) {
+                if (compra.getCliente() == cliente && compra.getObra() == obra) {
                     return true;
                 }
             }
@@ -144,7 +144,7 @@ public class ControlGaleria {
     public Compra buscarCompra(String codigo) throws EmptyPurchasesListException, PurchaseNotFoundException {
         try {
             for (Compra c : this.listaCompras) {
-                if (c.nGetCodigoCompra() == Long.parseLong(codigo))
+                if (c.getCodigoCompra() == Long.parseLong(codigo))
                     return c;
             }
         } catch (Exception e) {
@@ -166,7 +166,7 @@ public class ControlGaleria {
     public HashSet<Obra> buscarObra(Calendar fecha) {
         HashSet<Obra> obras = new HashSet<>();
         for (Obra obra : this.listaObras) {
-            if (obra.nGetFecha().get(Calendar.YEAR) == fecha.get(Calendar.YEAR)) {
+            if (obra.getFecha().get(Calendar.YEAR) == fecha.get(Calendar.YEAR)) {
                 if (!this.obraEnCompra(obra))
                     obras.add(obra);
             }
@@ -177,7 +177,7 @@ public class ControlGaleria {
     // Buscar obra por código
     public Obra buscarObra(long codigo) throws ArtworkDoesntExistException {
         for (Obra obra : this.listaObras) {
-            if (obra.nGetCodigoObra() == codigo) {
+            if (obra.getCodigoObra() == codigo) {
                 return obra;
             }
         }
@@ -189,7 +189,7 @@ public class ControlGaleria {
     public HashSet<Obra> buscarObra(String titulo) {
         HashSet<Obra> obras = new HashSet<>();
         for (Obra obra : this.listaObras) {
-            if (obra.nGetTitulo().equals(titulo)) {
+            if (obra.getTitulo().equals(titulo)) {
                 if (!this.obraEnCompra(obra))
                     obras.add(obra);
             }
@@ -200,18 +200,18 @@ public class ControlGaleria {
     // Busca una obra en las compras
     public boolean buscarObraEnCompras(Obra obra) throws ArtworkNotPurchasedException {
         for (Compra c : this.listaCompras) {
-            if (c.nGetObra().nGetCodigoObra() == obra.nGetCodigoObra())
+            if (c.getObra().getCodigoObra() == obra.getCodigoObra())
                 return true;
         }
-        throw new ArtworkNotPurchasedException(String.valueOf(obra.nGetCodigoObra()));
+        throw new ArtworkNotPurchasedException(String.valueOf(obra.getCodigoObra()));
     }
 
     // Ver si una obra le pertenece a un artista
     public HashSet<Obra> buscarObraporArtista(String nombre_artista) {
         HashSet<Obra> obras = new HashSet<>();
         for (Obra obra : this.listaObras) {
-            for (Artista artista : obra.nGetArtista()) {
-                if (artista.nGetNombre().equals(nombre_artista)) {
+            for (Artista artista : obra.getArtista()) {
+                if (artista.getNombre().equals(nombre_artista)) {
                     obras.add(obra);
                 }
             }
@@ -223,7 +223,7 @@ public class ControlGaleria {
     public double calcularPrecioTotal() {
         double precio = 0;
         for (Compra co : this.listaCompras)
-            precio += co.nGetObra().calcularPrecio();
+            precio += co.getObra().calcularPrecio();
         return precio;
     }
 
@@ -231,7 +231,7 @@ public class ControlGaleria {
     public HashSet<Compra> comprasAsociadasACuadro() {
         HashSet<Compra> compras = new HashSet<Compra>();
         for (Compra c : this.listaCompras)
-            if (c.nGetObra() instanceof Cuadro)
+            if (c.getObra() instanceof Cuadro)
                 compras.add(c);
         return compras;
     }
@@ -249,7 +249,7 @@ public class ControlGaleria {
     // Eliminar Cliente
     public boolean eliminarCliente(long codigo) throws ClientNotFoundException {
         Cliente c = this.buscarCliente(codigo);
-        this.listaClientes.remove(c.nGetCedula());
+        this.listaClientes.remove(c.getCedula());
         return true;
     }
 
@@ -274,7 +274,7 @@ public class ControlGaleria {
     // Compras
     public boolean existeCodCompra(long cod) throws PurchaseExistsException {
         for (Compra compra : this.listaCompras) {
-            if (compra.nGetCodigoCompra() == cod) {
+            if (compra.getCodigoCompra() == cod) {
                 return true;
             }
         }
@@ -437,14 +437,14 @@ public class ControlGaleria {
         HashSet<String> retornar = new HashSet<>();
         String append;
         for (Compra compra : this.listaCompras) {
-            if ((compra.nGetFecha().get(Calendar.YEAR) == Integer.parseInt(anio))
-                    && (compra.nGetFecha().get(Calendar.MONTH) == Integer.parseInt(mes))) {
+            if ((compra.getFecha().get(Calendar.YEAR) == Integer.parseInt(anio))
+                    && (compra.getFecha().get(Calendar.MONTH) == Integer.parseInt(mes))) {
                 append = "";
-                append += "Obra: " + compra.nGetObra().nGetTitulo();
-                append += "\nComprador: " + compra.nGetCliente().nGetNombre();
-                append += "\nFecha: " + compra.nGetFecha().get(Calendar.DATE) + '/'
-                        + compra.nGetFecha().get(Calendar.MONTH) + '/' + compra.nGetFecha().get(Calendar.YEAR);
-                append += "\nPrecio: " + compra.nGetObra().nGetPrecioRef();
+                append += "Obra: " + compra.getObra().getTitulo();
+                append += "\nComprador: " + compra.getCliente().getNombre();
+                append += "\nFecha: " + compra.getFecha().get(Calendar.DATE) + '/'
+                        + compra.getFecha().get(Calendar.MONTH) + '/' + compra.getFecha().get(Calendar.YEAR);
+                append += "\nPrecio: " + compra.getObra().getPrecioRef();
                 retornar.add(append);
             }
         }
@@ -454,8 +454,8 @@ public class ControlGaleria {
     // Modificar Cliente
     public boolean modificarCliente(Cliente cliente, int respuesta, String valor)
             throws NumberFormatException, ClientNotFoundException, TypoException {
-        this.buscarCliente(cliente.nGetCodigoCliente());
-        this.buscarCliente(cliente.nGetCedula(), "");
+        this.buscarCliente(cliente.getCodigoCliente());
+        this.buscarCliente(cliente.getCedula(), "");
         switch (respuesta) {
             case 1:
                 this.buscarCliente(Long.parseLong(valor));
@@ -532,7 +532,7 @@ public class ControlGaleria {
     // Ver si una obra ya fue comprada
     public boolean obraEnCompra(Obra obra) {
         for (Compra compra : this.listaCompras) {
-            if (compra.nGetObra().equals(obra)) {
+            if (compra.getObra().equals(obra)) {
                 return true;
             }
         }
@@ -547,7 +547,7 @@ public class ControlGaleria {
             throw new ArtworkDoesntExistException();
         if(clien == null)
             throw new ClientDoesntExistException();
-        this.buscarObra(obr.nGetCodigoObra());
+        this.buscarObra(obr.getCodigoObra());
         Compra comp;
         long cod;
         Calendar fecha = Calendar.getInstance();
@@ -575,12 +575,12 @@ public class ControlGaleria {
     public void startDay() {
         for (Cliente c : this.gestionClientes.listaClientes().values()) {
             if (c != null)
-                this.listaClientes.put(c.nGetCedula(), c);
+                this.listaClientes.put(c.getCedula(), c);
 
         }
         for (Artista c : this.gestionObras.startArtistas().values()) {
             if (c != null) {
-                this.listaArtistas.put(c.nGetCedula(), c);
+                this.listaArtistas.put(c.getCedula(), c);
             }
         }
         for (Obra c : this.gestionObras.listaObras()) {
@@ -599,7 +599,7 @@ public class ControlGaleria {
         HashSet<Artista> artistas = new HashSet<Artista>();
         Map<Integer, Artista> sort = new TreeMap<Integer, Artista>(Collections.reverseOrder());
         try{        for (Compra compra : this.listaCompras) {
-            artistas = compra.nGetObra().nGetArtista();
+            artistas = compra.getObra().getArtista();
             for (Artista art : artistas) {
                 if (mapsold.containsKey(art)) {
                     mapsold.put(art, mapsold.get(art) + 1);
@@ -682,13 +682,13 @@ public class ControlGaleria {
                     // No debería
                 }
             }
-            e.printStackTrace();
+            // No debería
             throw new TypoException("marshaller");
         }
         try {
             m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
         } catch (PropertyException e1) {
-            e1.printStackTrace();
+            //No debería
         }
         for (T t : collection) {
             try {

@@ -7,12 +7,8 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class Escultura extends Obra {
-
-    @XmlElement
     private String material;
-    @XmlElement
     private double peso;
-    @XmlElement
     private Material materiales;
 
     public Escultura(long _codigoObra, String _titulo, Date _fecha, float _precioRef, String _dimensiones,
@@ -24,22 +20,25 @@ public class Escultura extends Obra {
 
     @Override
     public double calcularPrecio() {
-        double precio = super.nGetPrecioRef();
+        double precio = super.getPrecioRef();
         double add = 0.01 * precio;
         if (this.peso > 10)
             precio += (Math.ceil(this.peso - 10) * add);
         return precio;
     }
 
-    public String nGetMaterial() {
+    @XmlElement
+    public String getMaterial() {
         return this.material;
     }
 
-    public Material nGetMateriales() {
+    @XmlElement
+    public Material getMateriales() {
         return this.materiales;
     }
 
-    public double nGetPeso() {
+    @XmlElement
+    public double getPeso() {
         return this.peso;
     }
 

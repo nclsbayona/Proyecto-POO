@@ -8,10 +8,7 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class Instalacion extends Obra {
-
-    @XmlElement
     private String descripcion;
-    @XmlElement
     private HashSet<Material> materiales;
 
     public Instalacion(long _codigoObra, String _titulo, Date _fecha, float _precioRef, String _dimensiones,
@@ -24,17 +21,19 @@ public class Instalacion extends Obra {
     @Override
     public double calcularPrecio() {
         int numMateriales = this.materiales.size();
-        double precio = this.nGetPrecioRef();
-        double add = 0.05 * this.nGetPrecioRef();
+        double precio = this.getPrecioRef();
+        double add = 0.05 * this.getPrecioRef();
         precio += (add * numMateriales);
         return precio;
     }
 
-    public String nGetDescripcion() {
+    @XmlElement
+    public String getDescripcion() {
         return this.descripcion;
     }
 
-    public HashSet<Material> nGetMateriales() {
+    @XmlElement
+    public HashSet<Material> getMateriales() {
         return this.materiales;
     }
 
