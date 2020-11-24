@@ -3,6 +3,9 @@ package model;
 import java.util.Date;
 import java.util.HashSet;
 
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+
 @XmlRootElement
 public class Instalacion extends Obra {
 

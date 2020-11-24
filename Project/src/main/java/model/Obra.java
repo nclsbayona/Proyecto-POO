@@ -5,6 +5,8 @@ import java.util.Calendar;
 import java.util.HashSet;
 
 import excepciones.CodeSizeException;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public abstract class Obra {

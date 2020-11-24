@@ -1,5 +1,8 @@
 package model;
 
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+
 @XmlRootElement
 public enum Clasificacion {
     @XmlElement

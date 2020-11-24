@@ -2,6 +2,9 @@ package model;
 
 import java.util.Calendar;
 
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+
 @XmlRootElement
 public class Compra {
 
