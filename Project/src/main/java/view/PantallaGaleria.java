@@ -789,8 +789,10 @@ public class PantallaGaleria {
 						controlGaleria.eliminCompra(valor);
 					} catch (EmptyPurchasesListException e) {
 						System.out.println(e.getMessage());
+						break;
 					} catch (PurchaseNotFoundException e) {
 						System.out.println(e.getMessage());
+						break;
 					}
 					System.out.println("---------------------------------");
 					break;
