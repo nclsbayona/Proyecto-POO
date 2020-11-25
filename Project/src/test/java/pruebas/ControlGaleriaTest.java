@@ -105,13 +105,19 @@ class ControlGaleriaTest {
 				new Instalacion(1342573, "La gorda", fecha.getTime(), 20000, "20x5", "Prueba de instalacion"),
 				new Artista(1000512331, "Natalia", "Castro Sepulveda", fecha, 314231233)));
 	}
-	/*
-	 * @Test // insertarObra caso falso void testAddCircObraYArtista2() { Calendar
-	 * fecha = Calendar.getInstance();
-	 * assertFalse(this.controlGaleria.addCircObryArt( new Instalacion(1234567,
-	 * "La gorda", fecha.getTime(), 20000, "20x5", "Prueba de instalacion"), new
-	 * Artista(1000512331, "Natalia", "Castro Sepulveda", fecha, 314231233))); }
-	 * 
+
+	@Test // insertarObra caso falso (TYPOEXCEPTION)
+	void testAddCircObraYArtista2() {
+		Calendar fecha = Calendar.getInstance();
+		try {
+			this.controlGaleria.addCircObryArt(
+					new Instalacion(1234567, "La gorda", fecha.getTime(), 20000, "20x5", "Prueba de instalacion"),
+					new Artista(1000512331, "Natalia", "Castro Sepulveda", fecha, 314231233));
+		} catch (TypoException e) {
+			assertTrue(true);
+		}
+	}
+	/* 
 	 * @Test // Add cliente mal , por codigo void testAddCliente() { Cliente client
 	 * = new Cliente(1, Long.valueOf(114223731), "Alfredo", "Santamaria",
 	 * "2085 NW Traverse Street", 6543212);
