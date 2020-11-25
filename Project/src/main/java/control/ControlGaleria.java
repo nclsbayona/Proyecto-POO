@@ -678,18 +678,15 @@ public class ControlGaleria {
     public <T> boolean exportarReporteXML(String route, Class<T> clase, Collection<T> collection) throws TypoException {
         boolean logrado = true;
         int counter = 0;
-        System.err.println(clase);
         BufferedWriter bw = null;
         while ((bw == null) && (counter++ < 3)) {
             try {
                 bw = this.newBufferedWriter(route);
             } catch (Exception e) {
-                // Error abriendo el archivo
                 if (bw != null) {
                     try {
                         bw.close();
                     } catch (IOException e1) {
-                        // No debería
                     }
                 }
             }
@@ -707,10 +704,8 @@ public class ControlGaleria {
                 try {
                     bw.close();
                 } catch (IOException e1) {
-                    // No debería
                 }
             }
-            e.printStackTrace();
             throw new TypoException("clase");
         }
         Marshaller m = null;
@@ -722,16 +717,13 @@ public class ControlGaleria {
                 try {
                     bw.close();
                 } catch (IOException e1) {
-                    // No debería
                 }
             }
-            // No debería
             throw new TypoException("marshaller");
         }
         try {
             m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
         } catch (PropertyException e1) {
-            // No debería
         }
         for (T t : collection) {
             try {

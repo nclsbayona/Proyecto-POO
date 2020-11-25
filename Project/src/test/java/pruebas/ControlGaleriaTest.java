@@ -646,6 +646,24 @@ class ControlGaleriaTest {
 		} catch (TypoException e) {
 			fail(e.getMessage());
 		} catch (Exception e) {
+			//Error eliminando
+		}
+	}
+	// Exportar a XML (ERROR)
+	@Test
+	void exportarXML2Test() {
+		String ruta = "archivo";
+		File archivo = new File(ruta);
+		HashSet<Cliente> clientes = new HashSet<>();
+		try {
+			this.controlGaleria.exportarReporteXML(ruta, Cliente.class, clientes);
+			archivo.delete();
+			//Lo elimino otra vez
+			assertFalse(archivo.delete());
+		} catch (TypoException e) {
+			fail(e.getMessage());
+		} catch (Exception e) {
+			fail(e.getMessage());
 		}
 	}
 }
