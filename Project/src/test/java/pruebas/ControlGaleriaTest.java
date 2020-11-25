@@ -106,8 +106,8 @@ class ControlGaleriaTest {
 				new Artista(1000512331, "Natalia", "Castro Sepulveda", fecha, 314231233)));
 	}
 
-	@Test // insertarObra caso falso (TYPOEXCEPTION)
-	void testAddCircObraYArtista2() {
+	@Test // insertarObra caso falso (OBRA EXISTE)
+	void addCircObraYArtista2(){
 		Calendar fecha = Calendar.getInstance();
 		try {
 			this.controlGaleria.addCircObryArt(
