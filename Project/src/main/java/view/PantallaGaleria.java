@@ -747,7 +747,6 @@ public class PantallaGaleria {
 							} catch (ClientDoesntExistException e1) {
 								System.out.println(e1.getMessage());
 								break;
-							} catch (EmptyPurchasesListException e1) {
 							} catch (ClientNotFoundException e1) {
 								System.out.println(e1.getMessage());
 								break;

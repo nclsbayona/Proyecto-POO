@@ -69,10 +69,14 @@ public class ControlGaleria {
     }
 
     // Añade una obra
-    public Obra addObra(Obra obra) throws ArtworkDoesntExistException {
-        this.buscarObra(obra.getCodigoObra());
-        this.listaObras.add(obra);
-        return obra;
+    public Obra addObra(Obra obra) throws ArtworkExistsException {
+        try {
+            this.buscarObra(obra.getCodigoObra());
+        } catch (ArtworkDoesntExistException e) {
+            this.listaObras.add(obra);
+            return obra;
+        }
+        throw new ArtworkExistsException(String.valueOf(obra.getCodigoObra()));
     }
 
     // Agregar un artista
@@ -559,7 +563,7 @@ public class ControlGaleria {
 
     // Realizar una compra
     public boolean realizarCompra(Cliente clien, Obra obr)
-            throws ArtworkDoesntExistException, ClientDoesntExistException, EmptyPurchasesListException {
+            throws ArtworkDoesntExistException, ClientDoesntExistException {
 
         if (obr == null)
             throw new ArtworkDoesntExistException();
@@ -581,7 +585,7 @@ public class ControlGaleria {
         } while (ac);
         try {
             this.buscarClienteYObraEnCompra(clien, obr);
-        } catch (EmptyPurchasesListException|PurchaseNotFoundException e) {
+        } catch (EmptyPurchasesListException | PurchaseNotFoundException e) {
         }
         comp = new Compra(cod, fecha, true);
         comp.setCliente(clien);
