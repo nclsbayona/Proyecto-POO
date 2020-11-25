@@ -18,9 +18,9 @@ public class Prueba {
         ArrayList<Cliente> clientes = new ArrayList<>();
         
         clientes.add(
-                new Cliente(1, Long.valueOf(1422373), "Alfredo", "Santamaria", "2085 NW Traverse Street", 6543212));
-        clientes.add(new Cliente(2, Long.valueOf(1293723), "Fred", "Jones", "20822 SW Luxury Park", 98765432));
-        clientes.add(new Cliente(6, Long.valueOf(1183937), "Juan", "Acosta", "Calle 100 #20-29", 3208426));
+                new Cliente(1, Long.valueOf(1451231), "Alfredo", "Santamaria", "2085 NW Traverse Street", 6543212));
+        clientes.add(new Cliente(2, Long.valueOf(1112221131), "Fred", "Jones", "20822 SW Luxury Park", 98765432));
+        clientes.add(new Cliente(6, Long.valueOf(1111183937), "Juan", "Acosta", "Calle 100 #20-29", 3208426));
         try {
             cg.exportarReporteXML("archivo_de_pruebaClientes.xml", Cliente.class, clientes);
         } catch (TypoException e) {
