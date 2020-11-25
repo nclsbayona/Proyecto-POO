@@ -70,7 +70,6 @@
       <version>${jfx.version}</version>
       <classifier>mac</classifier>
   </dependency>
-
   </dependencies>
 
   <build>
