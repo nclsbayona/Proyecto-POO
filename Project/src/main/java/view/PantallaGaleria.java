@@ -485,33 +485,14 @@ public class PantallaGaleria {
 				}
 				case 6: {
 					retornar = 6;
-					// Imprimir obras de tipo escultura
-					System.out.println("Obras de tipo escultura: ");
-					this.imprimirEsculturas();
-					System.out.println("---------------------------------");
-					break;
-				}
-				case 7: {
-					retornar = 7;
-					// Imprimir valor total de todas las obras
-					System.out.println("Valor total de todas las obras: ");
-					this.imprimirTotal();
-					System.out.println("---------------------------------");
-					break;
-				}
-				// Clientes
-				// Lista Clientes Activos
-				case 8: {
-					retornar = 8;
 					this.clearScreen();// Limpia la Pantalla
 					System.out.println("Listar Clientes");
 					this.printClientes();
 					System.out.println("---------------------------------");
 					break;
 				}
-				// Buscar Clientes Activos
-				case 9: {
-					retornar = 9;
+				case 7: {
+					retornar = 7;
 					this.clearScreen();// Limpia la Pantalla
 					System.out.println("Buscar Cliente");
 					System.out.println("Menu Busca Clientes por: ");
@@ -543,10 +524,13 @@ public class PantallaGaleria {
 					}
 					System.out.println("---------------------------------");
 					break;
+
 				}
-				// Insertar Cliente
-				case 10: {
-					retornar = 10;
+				// Clientes
+				// Lista Clientes Activos
+				case 8: {
+
+					retornar = 8;
 					this.clearScreen();// Limpia la Pantalla
 					System.out.println("Insertar clientes");
 					System.out.println("Ingrese el codigo del cliente");
@@ -560,12 +544,8 @@ public class PantallaGaleria {
 						System.out.println("Este cliente ya existe");
 						break;
 					} catch (ClientNotFoundException ce) {
-						do {
-							System.out.println("Ingrese la cedula del cliente");
-							valor = entrada.next();
-							if (valor.length() < 7)
-								System.out.println("Cedula invalida");
-						} while (valor.length() < 7);
+						System.out.println("Ingrese la cedula del cliente");
+						valor = entrada.next();
 						try {
 							controlGaleria.buscarCliente(Long.parseLong(valor), "cedula");
 							System.out.println("Este cliente ya existe");
@@ -591,16 +571,14 @@ public class PantallaGaleria {
 					} catch (ClientExistsException e) {
 						System.out.println(e.getMessage());
 						break;
-					} catch (CodeSizeException e) {
-						System.out.println(e.getMessage());
-						break;
 					}
 					System.out.println((agregado) ? "Cliente agregado con exito" : "Ocurrio un error");
 					System.out.println("---------------------------------");
 					break;
+
 				}
-				// Modificar cliente
-				case 11: {
+				// Buscar Clientes Activos
+				case 9: {
 					retornar = 11;
 					this.clearScreen();// Limpia la Bundle
 					System.out.println("Modificar Cliente");
@@ -680,9 +658,8 @@ public class PantallaGaleria {
 					System.out.println("---------------------------------");
 					break;
 				}
-
-				case 12: {
-					retornar = 12;
+				case 10: {
+					retornar = 10;
 					// Eliminar cliente
 					this.clearScreen();// Limpia la Pantalla
 					System.out.println("Eliminar Cliente");
@@ -695,9 +672,10 @@ public class PantallaGaleria {
 						break;
 					}
 					break;
+
 				}
-				case 13: {
-					retornar = 13;
+				case 11: {
+					retornar = 11;
 					// Realizar compra de una Obra
 					System.out.println("Realizar compra de una Obra");
 					System.out.println("Ingrese codigo del cliente");
@@ -752,9 +730,11 @@ public class PantallaGaleria {
 						System.out.println(e.getMessage());
 					}
 					break;
+
 				}
-				case 14: {
-					retornar = 14;
+
+				case 12: {
+					retornar = 12;
 					// Eliminar compra de obra
 					System.out.println("Eliminar compra de una Obra");
 					System.out.println("Ingrese codigo de la compra");
@@ -785,16 +765,16 @@ public class PantallaGaleria {
 					System.out.println("---------------------------------");
 					break;
 				}
-				case 15: {
-					retornar = 15;
+				case 13: {
+					retornar = 13;
 					// Ver listado de Compras existentes
 					System.out.println("Ver listado de Compras existentes");
 					this.printCompras();
 					System.out.println("---------------------------------");
 					break;
 				}
-				case 16: {
-					retornar = 16;
+				case 14: {
+					retornar = 14;
 					// Ver listado de Compras para un mes y año específico insertado por el
 					// usuario
 					System.out.println("Mes");
@@ -806,9 +786,10 @@ public class PantallaGaleria {
 					for (String s : controlGaleria.listadoDeCompra(valor, respuesta))
 						System.out.println(s);
 					break;
+
 				}
-				case 17: {
-					retornar = 17;
+				case 15: {
+					retornar = 15;
 					// Ver listado de Artistas más vendidos
 					try {
 						for (Artista a : controlGaleria.verListadoArtistas().values()) {
@@ -820,11 +801,29 @@ public class PantallaGaleria {
 					}
 					break;
 				}
-				case 18: {
-					retornar = 18;
+				case 16: {
+					retornar = 16;
+					// Imprimir obras de tipo escultura
+					System.out.println("Obras de tipo escultura: ");
+					this.imprimirEsculturas();
+					System.out.println("---------------------------------");
+					break;
+
+				}
+				case 17: {
+					retornar = 17;
 					// Compras asociadas a un Cuadro
 					System.out.println("Compras asociadas a un cuadro: ");
 					this.imprimirAsociadasCuadro();
+					System.out.println("---------------------------------");
+					break;
+
+				}
+				case 18: {
+					retornar = 18;
+					// Imprimir valor total de todas las obras
+					System.out.println("Valor total de todas las obras: ");
+					this.imprimirTotal();
 					System.out.println("---------------------------------");
 					break;
 				}
@@ -926,23 +925,19 @@ public class PantallaGaleria {
 		System.out.println("3. Insertar Obra");
 		System.out.println("4. Modificar Obra");
 		System.out.println("5. Eliminar Obra");
-		System.out.println("6. Imprimir obras de tipo escultura");
-		System.out.println("7. Imprimir valor total de todas las obras");
-		System.out.println(" ");
-		System.out.println("-- Clientes ----------------");
-		System.out.println("8. Listar Clientes");
-		System.out.println("9. Buscar Cliente");
-		System.out.println("10. Insertar Cliente");
-		System.out.println("11. Modificar Cliente");
-		System.out.println("12. Eliminar Cliente");
-		System.out.println(" ");
-		System.out.println("-- Compras ------------------");
-		System.out.println("13. Compra de Obra");
-		System.out.println("14. Eliminar Compra");
-		System.out.println("15. Listar Compras");
-		System.out.println("16. Listar Compras Filtado");
-		System.out.println("17. Listar Artistas mas Vendidos");
-		System.out.println("18. Compras asociadas a un Cuadro");
+		System.out.println("6. Listar Clientes");
+		System.out.println("7. Buscar Cliente");
+		System.out.println("8. Insertar Cliente");
+		System.out.println("9. Modificar Cliente");
+		System.out.println("10. Eliminar Cliente");
+		System.out.println("11. Compra de Obra");
+		System.out.println("12. Eliminar Compra");
+		System.out.println("13. Listar Compras");
+		System.out.println("14. Listar Compras Filtrado");
+		System.out.println("15. Listar Artistas mas Vendidos");
+		System.out.println("16. Imprimir obras de tipo escultura");
+		System.out.println("17. Compras asociadas a un Cuadro");
+		System.out.println("18. Imprimir valor total de todas las obras");
 		System.out.println("19. Salir");
 		System.out.println("---------------------------------");
 	}

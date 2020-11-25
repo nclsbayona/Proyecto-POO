@@ -8,6 +8,8 @@ import java.util.HashSet;
 
 import control.ControlGaleria;
 import exceptions.*;
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.Unmarshaller;
 import model.*;
 
 import org.junit.jupiter.api.AfterAll;
@@ -407,7 +409,7 @@ class ControlGaleriaTest {
 		try {
 			assertTrue(this.controlGaleria.crearCliente(101, Long.valueOf(1001191743), "Lucas", "Ramirez",
 					"Diagonal 68 #78-03", 3208426));
-		} catch (ClientExistsException | CodeSizeException e) {
+		} catch (ClientExistsException e) {
 			fail(e.getMessage());
 		}
 	}
@@ -646,9 +648,34 @@ class ControlGaleriaTest {
 		} catch (TypoException e) {
 			fail(e.getMessage());
 		} catch (Exception e) {
-			//Error eliminando
+			// Error eliminando
 		}
 	}
+
+	// Exportar a XML (BIEN, CONSISTENCIA DE LOS DATOS)
+	@Test
+	void exportarXML3Test() {
+		String ruta = "archivo.xml";
+		File archivo = new File(ruta);
+		HashSet<Cliente> clientes = new HashSet<>();
+		HashSet<Cliente> clientesR = new HashSet<>();
+		clientes.add(
+				new Cliente(1, Long.valueOf(1422373000), "Alfredo", "Santamaria", "2085 NW Traverse Street", 6543212));
+		clientes.add(new Cliente(2, Long.valueOf(1293723000), "Fred", "Jones", "20822 SW Luxury Park", 98765432));
+		try {
+			this.controlGaleria.exportarReporteXML(ruta, Cliente.class, clientes);
+			//Codigo para leer
+			//Faltan las clases aux
+			
+			//
+			//assertFalse(archivo.delete());
+		} catch (TypoException e) {
+			fail(e.getMessage());
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
+	}
+
 	// Exportar a XML (ERROR)
 	@Test
 	void exportarXML2Test() {
@@ -658,7 +685,7 @@ class ControlGaleriaTest {
 		try {
 			this.controlGaleria.exportarReporteXML(ruta, Cliente.class, clientes);
 			archivo.delete();
-			//Lo elimino otra vez
+			// Lo elimino otra vez
 			assertFalse(archivo.delete());
 		} catch (TypoException e) {
 			fail(e.getMessage());

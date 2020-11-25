@@ -1,6 +1,4 @@
 package control;
-
-import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Calendar;
@@ -253,7 +251,7 @@ public class ControlGaleria {
 
     // Crear un cliente
     public boolean crearCliente(int codigoC, long cedula, String nombre, String apellido, String direccion,
-            long telefono) throws ClientExistsException, CodeSizeException {
+            long telefono) throws ClientExistsException {
 
         try {
             this.buscarCliente(codigoC);
@@ -663,32 +661,25 @@ public class ControlGaleria {
         // https://es.stackoverflow.com/questions/2464/c%C3%B3mo-iterar-a-trav%C3%A9s-de-un-hashmap
     }
 
-    private BufferedWriter newBufferedWriter(String route) throws IllegalAccessException {
-        FileWriter fw;
+    private FileWriter newBufferedWriter(String route) throws IllegalAccessException {
+        FileWriter fw = null;
         try {
             fw = new FileWriter(route);
         } catch (Exception e) {
             throw new IllegalAccessException("Problem with file");
         }
-        return new BufferedWriter(fw);
+        return fw;
     }
 
     // Exportar a xml
     public <T> boolean exportarReporteXML(String route, Class<T> clase, Collection<T> collection) throws TypoException {
         boolean logrado = true;
         int counter = 0;
-        BufferedWriter bw = null;
+        FileWriter bw = null;
         while ((bw == null) && (counter++ < 3)) {
             try {
-                bw = this.newBufferedWriter(route);
-            } catch (Exception e) {
-                if (bw != null) {
-                    try {
-                        bw.close();
-                    } catch (IOException e1) {
-                    }
-                }
-            }
+                bw=this.newBufferedWriter(route);
+            } catch (Exception e) {}
         }
         if (bw == null) {
             logrado = false;
@@ -727,9 +718,9 @@ public class ControlGaleria {
         for (T t : collection) {
             try {
                 m.marshal(t, bw);
-            } catch (Exception e) {
+            } catch (JAXBException e) {
+                }
             }
-        }
         return logrado;
     }
 }
