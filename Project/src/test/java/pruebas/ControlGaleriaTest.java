@@ -533,62 +533,103 @@ class ControlGaleriaTest {
 		}
 	}
 
-	/*
-	 * @Test // Modificar Obra caso positivo void testModificarObra() { Obra o =
-	 * this.controlGaleria.buscarObra(1234567);
-	 * assertTrue(this.controlGaleria.modificarObra(o, 1, "1031456"));
-	 * 
-	 * }**
-	 * 
-	 * @Test // Modificar obra caso codigo repetido void testModificarObra2() { Obra
-	 * o = this.controlGaleria.buscarObra(1234567);
-	 * assertFalse(this.controlGaleria.modificarObra(o, 1, "1234567")); }**
-	 * 
-	 * @Test // Modificar obra valor mal insertado void testModificarObra3() { Obra
-	 * o = this.controlGaleria.buscarObra(123457);
-	 * assertFalse(this.controlGaleria.modificarObra(o, 1, "123")); }**
-	 * 
-	 * @Test // Mirar si una obra ya fue comprada,no deberia estar void
-	 * testObraEnCompra() { boolean expected = false; Obra obra =
-	 * this.controlGaleria.buscarObra(1234567); assertEquals(expected,
-	 * this.controlGaleria.obraEnCompra(obra)); }**
-	 * 
-	 * @Test // Mirar si una obra ya fue comprada, si deberia estar void
-	 * testObraEnCompra2() { boolean expected = true; Obra obra =
-	 * this.controlGaleria.buscarObra(1234567); Cliente c = new Cliente(100,
-	 * Long.valueOf(143325536), "Jorge", "Muñoz", "tr 100 # 20-36", 98826628);
-	 * this.controlGaleria.realizarCompra(c, obra); assertEquals(expected,
-	 * this.controlGaleria.obraEnCompra(obra)); }** // Funciona
-	 **
-	 * 
-	 * @Test void testPrecioTotal() { double
-	 * expected=0;assertEquals(expected,*this.controlGaleria.calcularPrecioTotal());
-	 * ** }** // No funciona
-	 **
-	 * 
-	 * @Test void testPrecioTotal2() { double
-	 * expected=-1;*assertNotEquals(expected,this.controlGaleria.calcularPrecioTotal
-	 * ()); }**
-	 * 
-	 * @Test // Realizar compra caso verdadero void testRealizarCompra() { Calendar
-	 * fecha = Calendar.getInstance(); try {
-	 * assertTrue(this.controlGaleria.realizarCompra( new Cliente(3,
-	 * Long.valueOf(9253620), "Lucas", "Ramirez", "Diagonal 68 #78-03", 3208426),
-	 * new Escultura(1234567, "Machupichu", fecha.getTime(), 15000, "10x2",
-	 * "Marmol", 1550)));
-	 * }catch(ArtworkDoesntExistException|*ClientDoesntExistException|
-	 * 
-	 * EmptyPurchasesListException e){ }}*** // Realizar compra caso falso
-	 **
-	 * 
-	 * @Test void testRealizarCompra2() throws
-	 * ArtworkDoesntExistException,*ClientDoesntExistException,
-	 * EmptyPurchasesListException { String expected=*"";Calendar
-	 * fecha=Calendar.getInstance();*assertThrows(ArtworkDoesntExistException.class,
-	 * *this.controlGaleria.realizarCompra(new
-	 * Cliente(3,Long.valueOf(9253620),*"Lucas","Ramirez","Diagonal 68 #78-03"
-	 * ,3208426),new
-	 * Escultura(726382,*"Machupichu",fecha.getTime(),15000,"10x2","Marmol",1550)));
-	 * }
-	 */
+	@Test // Modificar Obra caso positivo
+	void testModificarObra() {
+		Obra o;
+		try {
+			o = this.controlGaleria.buscarObra(1234567);
+			assertTrue(this.controlGaleria.modificarObra(o, 1, "1031456"));
+		} catch (CodeSizeException | TypoException | ArtworkNotPurchasedException | ArtworkExistsException
+				| ArtworkDoesntExistException e) {
+			fail(e.getMessage());
+		}
+	}
+
+	@Test // Modificar obra caso codigo repetido
+	void testModificarObra2() {
+		try {
+			Obra o = this.controlGaleria.buscarObra(1234567);
+			assertThrows(ArtworkExistsException.class, () -> {
+				this.controlGaleria.modificarObra(o, 1, "1234567");
+			});
+		} catch (ArtworkDoesntExistException e) {
+			fail(e.getMessage());
+		}
+	}
+
+	@Test // Modificar obra valor mal insertado
+	void testModificarObra3() {
+		Obra o;
+		try {
+			o = this.controlGaleria.buscarObra(Long.valueOf(1234567));
+			assertThrows(TypoException.class, () -> {
+				this.controlGaleria.modificarObra(o, 1, "123");
+			});
+		} catch (ArtworkDoesntExistException e) {
+			fail(e.getMessage());
+		}
+	}
+
+	@Test // Mirar si una obra ya fue comprada,no deberia estar
+	void testObraEnCompra() {
+		Obra obra;
+		try {
+			obra = this.controlGaleria.buscarObra(Long.valueOf(1234567));
+			assertThrows(PurchaseDoesntExistException.class, () -> {
+				this.controlGaleria.obraEnCompra(obra);
+			});
+		} catch (ArtworkDoesntExistException e) {
+			fail(e.getMessage());
+		}
+	}
+
+	@Test // Mirar si una obra ya fue comprada, si deberia estar
+	void testObraEnCompra2() {
+		Obra obra;
+		try {
+			obra = this.controlGaleria.buscarObra(1234567);
+			Cliente c = new Cliente(100, Long.valueOf(143325536), "Jorge", "Muñoz", "tr 100 # 20-36", 98826628);
+			this.controlGaleria.realizarCompra(c, obra);
+			assertTrue(this.controlGaleria.obraEnCompra(obra));
+		} catch (PurchaseDoesntExistException | ClientDoesntExistException | ArtworkDoesntExistException e) {
+			fail(e.getMessage());
+		}
+	}
+	// Funciona
+
+	@Test
+	void testPrecioTotal() {
+		double expected = 0;
+		assertEquals(expected, this.controlGaleria.calcularPrecioTotal());
+	}
+	// No funciona
+
+	@Test
+	void testPrecioTotal2() {
+		double expected = -1;
+		assertNotEquals(expected, this.controlGaleria.calcularPrecioTotal());
+	}
+
+	@Test // Realizar compra caso verdadero
+	void testRealizarCompra() {
+		Calendar fecha = Calendar.getInstance();
+		try {
+			assertTrue(this.controlGaleria.realizarCompra(
+					new Cliente(3, Long.valueOf(9253620), "Lucas", "Ramirez", "Diagonal 68 #78-03", 3208426),
+					new Escultura(1234567, "Machupichu", fecha.getTime(), 15000, "10x2", "Marmol", 1550)));
+		} catch (ArtworkDoesntExistException | ClientDoesntExistException | TypoException e) {
+			fail(e.getMessage());
+		}
+	}
+
+	// Realizar compra caso falso
+	@Test
+	void testRealizarCompra2() {
+		Calendar fecha = Calendar.getInstance();
+		assertThrows(TypoException.class, () -> {
+			this.controlGaleria.realizarCompra(
+					new Cliente(3, Long.valueOf(9253620), "Lucas", "Ramirez", "Diagonal 68 #78-03", 3208426),
+					new Escultura(726382, "Machupichu", fecha.getTime(), 15000, "10x2", "Marmol", 1550));
+		});
+	}
 }

@@ -15,6 +15,7 @@ import exceptions.ClientNotFoundException;
 import exceptions.CodeSizeException;
 import exceptions.EmptyArtistListException;
 import exceptions.EmptyPurchasesListException;
+import exceptions.PurchaseDoesntExistException;
 import exceptions.PurchaseNotFoundException;
 import exceptions.TypoException;
 import model.*;
@@ -887,8 +888,12 @@ public class PantallaGaleria {
 			return;
 		} else {
 			for (Obra obra : this.controlGaleria.getListaObras()) {
-				if (!this.controlGaleria.obraEnCompra(obra))
+				try {
+					this.controlGaleria.obraEnCompra(obra);
+						
+				} catch (PurchaseDoesntExistException e) {
 					System.out.println(obra);
+				}
 			}
 		}
 	}
