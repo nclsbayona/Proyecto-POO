@@ -2,6 +2,7 @@ package pruebas;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.File;
 import java.util.Calendar;
 import java.util.HashSet;
 
@@ -631,5 +632,20 @@ class ControlGaleriaTest {
 					new Cliente(3, Long.valueOf(9253620), "Lucas", "Ramirez", "Diagonal 68 #78-03", 3208426),
 					new Escultura(726382, "Machupichu", fecha.getTime(), 15000, "10x2", "Marmol", 1550));
 		});
+	}
+
+	// Exportar a XML (NO PASA NADA)
+	@Test
+	void exportarXMLTest() {
+		String ruta = "archivo.xml";
+		File archivo = new File(ruta);
+		HashSet<Cliente> clientes = new HashSet<>();
+		try {
+			this.controlGaleria.exportarReporteXML(ruta, Cliente.class, clientes);
+			assertTrue(archivo.delete());
+		} catch (TypoException e) {
+			fail(e.getMessage());
+		} catch (Exception e) {
+		}
 	}
 }
