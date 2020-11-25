@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.HashSet;
 
 import exceptions.CodeSizeException;
+import exceptions.TypoException;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 
@@ -36,11 +37,12 @@ public abstract class Obra {
     }
 
     // Constructor
-    public Obra(long _codigoObra, String _titulo, Date _fecha, float _precioRef, String _dimensiones) {
+    public Obra(long _codigoObra, String _titulo, Date _fecha, float _precioRef, String _dimensiones)
+            throws TypoException {
         // El código de una obra tiene 7 números. Debe validar que nunca exista una obra
         // con más o menos números
         if (String.valueOf(_codigoObra).length() != 7) {
-            return;
+            throw new TypoException(String.valueOf(_codigoObra));
         }
         this.codigoObra = _codigoObra;
         this.titulo = _titulo;

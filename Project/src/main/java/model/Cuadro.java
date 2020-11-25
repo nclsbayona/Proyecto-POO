@@ -2,6 +2,7 @@ package model;
 
 import java.util.Date;
 
+import exceptions.TypoException;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 
@@ -12,7 +13,7 @@ public class Cuadro extends Obra {
     private Clasificacion clasificacion;
 
     public Cuadro(long _codigoObra, String _titulo, Date _fecha, float _precioRef, String _dimensiones, String tema,
-            String tecnica, Clasificacion valorA) {
+            String tecnica, Clasificacion valorA) throws TypoException {
         super(_codigoObra, _titulo, _fecha, _precioRef, _dimensiones);
         this.tema = tema;
         this.tecnica = tecnica;

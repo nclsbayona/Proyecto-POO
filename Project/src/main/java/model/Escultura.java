@@ -2,6 +2,7 @@ package model;
 
 import java.util.Date;
 
+import exceptions.TypoException;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 
@@ -12,7 +13,7 @@ public class Escultura extends Obra {
     private Material materiales;
 
     public Escultura(long _codigoObra, String _titulo, Date _fecha, float _precioRef, String _dimensiones,
-            String material, double peso) {
+            String material, double peso) throws TypoException {
         super(_codigoObra, _titulo, _fecha, _precioRef, _dimensiones);
         this.material = material;
         this.peso = peso;

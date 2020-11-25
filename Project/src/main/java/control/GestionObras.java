@@ -2,6 +2,7 @@ package control;
 
 import java.util.HashSet;
 
+import exceptions.TypoException;
 import model.Artista;
 import model.Clasificacion;
 import model.Cuadro;
@@ -14,8 +15,8 @@ import java.util.HashMap;
 
 public class GestionObras {
 
-    // Retorna una lista de obras para comenzar el dia
-    public HashSet<Obra> listaObras() {
+        // Retorna una lista de obras para comenzar el dia
+        public HashSet<Obra> listaObras() throws TypoException {
 
         HashSet<Obra> obras = new HashSet<Obra>();
         Calendar fecha = Calendar.getInstance();

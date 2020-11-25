@@ -3,6 +3,7 @@ package model;
 import java.util.Date;
 import java.util.HashSet;
 
+import exceptions.TypoException;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 
@@ -12,7 +13,7 @@ public class Instalacion extends Obra {
     private HashSet<Material> materiales;
 
     public Instalacion(long _codigoObra, String _titulo, Date _fecha, float _precioRef, String _dimensiones,
-            String descripcion) {
+            String descripcion) throws TypoException {
         super(_codigoObra, _titulo, _fecha, _precioRef, _dimensiones);
         this.descripcion = descripcion;
         this.materiales = new HashSet<Material>();

@@ -13,7 +13,7 @@ import model.Obra;
 import exceptions.TypoException;
 
 public class Prueba {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws TypoException {
         ControlGaleria cg = new ControlGaleria();
         ArrayList<Cliente> clientes = new ArrayList<>();
         

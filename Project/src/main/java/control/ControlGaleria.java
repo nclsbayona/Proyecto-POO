@@ -472,17 +472,23 @@ public class ControlGaleria {
 
     // Modificar Cliente
     public boolean modificarCliente(Cliente cliente, int respuesta, String valor)
-            throws NumberFormatException, ClientNotFoundException, TypoException {
-        this.buscarCliente(cliente.getCodigoCliente());
-        this.buscarCliente(cliente.getCedula(), "");
+            throws NumberFormatException, TypoException {
         switch (respuesta) {
             case 1:
-                this.buscarCliente(Long.parseLong(valor));
-                cliente.setCodigoCliente(Long.parseLong(valor));
+                try {
+                    this.buscarCliente(Long.parseLong(valor));
+                    throw new TypoException();
+                } catch (ClientNotFoundException e) {
+                    cliente.setCodigoCliente(Long.parseLong(valor));
+                }
                 break;
             case 2:
-                this.buscarCliente(Long.parseLong(valor), "");
-                cliente.setCedula(Long.parseLong(valor));
+                try {
+                    this.buscarCliente(Long.parseLong(valor), "");
+                    throw new TypoException();
+                } catch (ClientNotFoundException e) {
+                    cliente.setCedula(Long.parseLong(valor));
+                }
                 break;
             case 3:
                 cliente.setNombre(valor);
@@ -606,9 +612,12 @@ public class ControlGaleria {
                 this.listaArtistas.put(c.getCedula(), c);
             }
         }
-        for (Obra c : this.gestionObras.listaObras()) {
-            if (c != null)
-                this.listaObras.add(c);
+        try {
+            for (Obra c : this.gestionObras.listaObras()) {
+                if (c != null)
+                    this.listaObras.add(c);
+            }
+        } catch (TypoException e) {
         }
     }
 
