@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<obra>
+    <codigoObra>1324567</codigoObra>
+    <dimensiones>20x5</dimensiones>
+    <fecha>2020-12-01T16:06:15.174-05:00</fecha>
+    <precioRef>20000.0</precioRef>
+    <titulo>La gorda</titulo>
+</obra>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<obra>
+    <codigoObra>2435678</codigoObra>
+    <dimensiones>10x8</dimensiones>
+    <fecha>2010-06-20T16:06:15.174-05:00</fecha>
+    <precioRef>20000.0</precioRef>
+    <titulo>Eva pilla</titulo>
+</obra>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<obra>
+    <codigoObra>3456789</codigoObra>
+    <dimensiones>10x2</dimensiones>
+    <fecha>2001-09-06T16:06:15.174-05:00</fecha>
+    <precioRef>15000.0</precioRef>
+    <titulo>Sociopata</titulo>
+</obra>

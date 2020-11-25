@@ -176,9 +176,9 @@ public class ControlGaleria {
         HashSet<Obra> obras = new HashSet<>();
         for (Obra obra : this.listaObras) {
             if (obra.getFecha().get(Calendar.YEAR) == fecha.get(Calendar.YEAR)) {
-                try{
+                try {
                     this.obraEnCompra(obra);
-                }catch (PurchaseDoesntExistException e){
+                } catch (PurchaseDoesntExistException e) {
                     obras.add(obra);
                 }
             }
@@ -202,9 +202,9 @@ public class ControlGaleria {
         HashSet<Obra> obras = new HashSet<>();
         for (Obra obra : this.listaObras) {
             if (obra.getTitulo().equals(titulo)) {
-                try{
+                try {
                     this.obraEnCompra(obra);
-                }catch (PurchaseDoesntExistException e){
+                } catch (PurchaseDoesntExistException e) {
                     obras.add(obra);
                 }
             }
@@ -283,9 +283,9 @@ public class ControlGaleria {
         Obra obra;
         obra = this.buscarObra(codigo);
         if (obra != null) {
-            try{
+            try {
                 this.obraEnCompra(obra);
-            }catch(PurchaseDoesntExistException e){
+            } catch (PurchaseDoesntExistException e) {
                 this.listaObras.remove(obra);
                 return true;
             }
@@ -525,7 +525,7 @@ public class ControlGaleria {
         switch (criterio) {
             case 1: {
                 try {
-                    if (value.length()!=7)
+                    if (value.length() != 7)
                         throw new TypoException();
                     this.buscarObra(Long.parseLong(value));
                     throw new ArtworkExistsException();
@@ -580,12 +580,10 @@ public class ControlGaleria {
     // Realizar una compra
     public boolean realizarCompra(Cliente clien, Obra obr)
             throws ArtworkDoesntExistException, ClientDoesntExistException {
-
         if (obr == null)
             throw new ArtworkDoesntExistException();
         if (clien == null)
             throw new ClientDoesntExistException();
-        this.buscarObra(obr.getCodigoObra());
         Compra comp;
         long cod;
         Calendar fecha = Calendar.getInstance();
@@ -602,12 +600,13 @@ public class ControlGaleria {
         try {
             this.buscarClienteYObraEnCompra(clien, obr);
         } catch (EmptyPurchasesListException | PurchaseNotFoundException e) {
+            comp = new Compra(cod, fecha, true);
+            comp.setCliente(clien);
+            comp.setObra(obr);
+            this.listaCompras.add(comp);
+            return true;
         }
-        comp = new Compra(cod, fecha, true);
-        comp.setCliente(clien);
-        comp.setObra(obr);
-        this.listaCompras.add(comp);
-        return true;
+        return false;
     }
 
     // Este método añade Clientes, Obras y Artistas a la galería

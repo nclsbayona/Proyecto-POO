@@ -5,19 +5,7 @@ import java.util.HashSet;
 import java.util.Scanner;
 
 import control.ControlGaleria;
-import exceptions.ArtistNotFoundException;
-import exceptions.ArtworkDoesntExistException;
-import exceptions.ArtworkExistsException;
-import exceptions.ArtworkNotPurchasedException;
-import exceptions.ClientDoesntExistException;
-import exceptions.ClientExistsException;
-import exceptions.ClientNotFoundException;
-import exceptions.CodeSizeException;
-import exceptions.EmptyArtistListException;
-import exceptions.EmptyPurchasesListException;
-import exceptions.PurchaseDoesntExistException;
-import exceptions.PurchaseNotFoundException;
-import exceptions.TypoException;
+import exceptions.*;
 import model.*;
 
 //Boundary
@@ -733,8 +721,7 @@ public class PantallaGaleria {
 								controlGaleria.buscarObra(Long.parseLong(respuesta)));
 						System.out.println("Ya existe");
 						break;
-					} catch (EmptyPurchasesListException e) {
-					} catch (PurchaseNotFoundException e) {
+					} catch (EmptyPurchasesListException | PurchaseNotFoundException e) {
 						try {
 							controlGaleria.buscarObraEnCompras(controlGaleria.buscarObra(Long.parseLong(respuesta)));
 							System.out.println("Esta obra ya fue comprada");
@@ -743,8 +730,10 @@ public class PantallaGaleria {
 							try {
 								controlGaleria.realizarCompra(controlGaleria.buscarCliente(Long.parseLong(valor)),
 										controlGaleria.buscarObra(Long.parseLong(respuesta)));
-								System.out.println("---------------------------------");
+								System.out.println("---------------------------------"
+										+ this.controlGaleria.getListaCompras().size());
 							} catch (ArtworkDoesntExistException e1) {
+								System.out.println("La obra no existe");
 							} catch (ClientDoesntExistException e1) {
 								System.out.println(e1.getMessage());
 								break;
@@ -822,8 +811,9 @@ public class PantallaGaleria {
 					retornar = 17;
 					// Ver listado de Artistas más vendidos
 					try {
-						for (Artista a : controlGaleria.verListadoArtistas().values())
+						for (Artista a : controlGaleria.verListadoArtistas().values()) {
 							System.out.println(a);
+						}
 					} catch (EmptyPurchasesListException e) {
 						System.out.println(e.getMessage());
 						break;
@@ -890,7 +880,7 @@ public class PantallaGaleria {
 			for (Obra obra : this.controlGaleria.getListaObras()) {
 				try {
 					this.controlGaleria.obraEnCompra(obra);
-						
+
 				} catch (PurchaseDoesntExistException e) {
 					System.out.println(obra);
 				}

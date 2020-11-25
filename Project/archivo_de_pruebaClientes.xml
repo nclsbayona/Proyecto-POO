@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<cliente>
+    <apellidos>Santamaria</apellidos>
+    <cedula>1422373</cedula>
+    <codigoCliente>1</codigoCliente>
+    <direccionEntrega>2085 NW Traverse Street</direccionEntrega>
+    <nombre>Alfredo</nombre>
+    <telefono>6543212</telefono>
+</cliente>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<cliente>
+    <apellidos>Jones</apellidos>
+    <cedula>1293723</cedula>
+    <codigoCliente>2</codigoCliente>
+    <direccionEntrega>20822 SW Luxury Park</direccionEntrega>
+    <nombre>Fred</nombre>
+    <telefono>98765432</telefono>
+</cliente>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<cliente>
+    <apellidos>Acosta</apellidos>
+    <cedula>1183937</cedula>
+    <codigoCliente>6</codigoCliente>
+    <direccionEntrega>Calle 100 #20-29</direccionEntrega>
+    <nombre>Juan</nombre>
+    <telefono>3208426</telefono>
+</cliente>
