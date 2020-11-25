@@ -135,7 +135,7 @@ class ControlGaleriaTest {
 
 	@Test // Add cliente mal , por cedula
 	void testAddCliente1() {
-		Cliente client = new Cliente(231, Long.valueOf(1183937), "Alfredo", "Santamaria", "2085 NW Traverse Street",
+		Cliente client = new Cliente(231, Long.valueOf(1422373000), "Alfredo", "Santamaria", "2085 NW Traverse Street",
 				6543212);
 		assertThrows(ClientExistsException.class, () -> {
 			this.controlGaleria.addCliente(client);
@@ -238,10 +238,10 @@ class ControlGaleriaTest {
 
 	@Test // Buscar cliente bien , por cedula
 	void testBuscarCliente2() {
-		Cliente client = new Cliente(1, Long.valueOf(1422373), "Alfredo", "Santamaria", "2085 NW Traverse Street",
+		Cliente client = new Cliente(1, Long.valueOf(1422373000), "Alfredo", "Santamaria", "2085 NW Traverse Street",
 				6543212);
 		try {
-			assertEquals(client, this.controlGaleria.buscarCliente(1422373, ""));
+			assertEquals(client, this.controlGaleria.buscarCliente(1422373000, ""));
 		} catch (ClientNotFoundException e) {
 			fail(e.getMessage());
 		}
@@ -529,7 +529,7 @@ class ControlGaleriaTest {
 		try {
 			c = this.controlGaleria.buscarCliente(1);
 			assertThrows(TypoException.class, () -> {
-				this.controlGaleria.modificarCliente(c, 2, "1422373");
+				this.controlGaleria.modificarCliente(c, 2, "1422373000");
 			});
 		} catch (ClientNotFoundException e) {
 			fail(e.getMessage());
