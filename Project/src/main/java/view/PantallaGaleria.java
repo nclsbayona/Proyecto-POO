@@ -739,7 +739,6 @@ public class PantallaGaleria {
 							System.out.println("Esta obra ya fue comprada");
 							break;
 						} catch (ArtworkNotPurchasedException e2) {
-							System.out.println(e2.getMessage());
 							try {
 								controlGaleria.realizarCompra(controlGaleria.buscarCliente(Long.parseLong(valor)),
 										controlGaleria.buscarObra(Long.parseLong(respuesta)));
@@ -849,7 +848,7 @@ public class PantallaGaleria {
 					break;
 			}
 		} catch (NumberFormatException e) {
-			System.out.println("Error al escribir: " + e.getCause());
+			System.out.println("Error al escribir: " + e.getMessage());
 		}
 		return retornar;
 	}
