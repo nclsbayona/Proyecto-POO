@@ -5,9 +5,7 @@ import java.util.HashSet;
 
 import exceptions.TypoException;
 import jakarta.xml.bind.annotation.XmlElement;
-import jakarta.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement
 public class Instalacion extends Obra {
     private String descripcion;
     private HashSet<Material> materiales;

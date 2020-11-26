@@ -1,6 +1,5 @@
 package control;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
@@ -10,9 +9,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import jakarta.xml.bind.JAXBContext;
-import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Marshaller;
-import jakarta.xml.bind.PropertyException;
 import model.*;
 import exceptions.*;
 
@@ -661,66 +658,19 @@ public class ControlGaleria {
         // https://es.stackoverflow.com/questions/2464/c%C3%B3mo-iterar-a-trav%C3%A9s-de-un-hashmap
     }
 
-    private FileWriter newBufferedWriter(String route) throws IllegalAccessException {
-        FileWriter fw = null;
-        try {
-            fw = new FileWriter(route);
-        } catch (Exception e) {
-            throw new IllegalAccessException("Problem with file");
-        }
-        return fw;
-    }
-
     // Exportar a xml
-    public <T> boolean exportarReporteXML(String route, Class<T> clase, Collection<T> collection) throws TypoException {
-        boolean logrado = true;
-        int counter = 0;
-        FileWriter bw = null;
-        while ((bw == null) && (counter++ < 3)) {
-            try {
-                bw=this.newBufferedWriter(route);
-            } catch (Exception e) {}
+    public boolean exportarReporteXML(String route, Collection<Cliente> collection) throws TypoException {
+        boolean logrado =true;
+        try (FileWriter fw = new FileWriter(route)) {
+            ReporteClientes catalogo=new ReporteClientes();
+            catalogo.setLista(collection);
+            JAXBContext context = JAXBContext.newInstance(catalogo.getClass());
+            Marshaller marshaller = context.createMarshaller();
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+            marshaller.marshal(catalogo, fw);
+        } catch (Exception e) {
+            logrado=false;
         }
-        if (bw == null) {
-            logrado = false;
-            throw new TypoException("ruta");
-        }
-        JAXBContext context = null;
-        try {
-            context = JAXBContext.newInstance(clase);
-        } catch (JAXBException e) {
-            logrado = false;
-            if (bw != null) {
-                try {
-                    bw.close();
-                } catch (IOException e1) {
-                }
-            }
-            throw new TypoException("clase");
-        }
-        Marshaller m = null;
-        try {
-            m = context.createMarshaller();
-        } catch (JAXBException e) {
-            logrado = false;
-            if (bw != null) {
-                try {
-                    bw.close();
-                } catch (IOException e1) {
-                }
-            }
-            throw new TypoException("marshaller");
-        }
-        try {
-            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-        } catch (PropertyException e1) {
-        }
-        for (T t : collection) {
-            try {
-                m.marshal(t, bw);
-            } catch (JAXBException e) {
-                }
-            }
         return logrado;
     }
 }

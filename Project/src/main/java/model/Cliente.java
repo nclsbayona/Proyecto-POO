@@ -14,7 +14,7 @@ public class Cliente implements Comparable<Cliente> {
 
     // Costructor del Cliente
     public Cliente(long codigoCliente, long cedula, String nombre, String Apellidos, String direccionEntrega,
-            long telefono){
+            long telefono) {
         this.codigoCliente = codigoCliente;
         this.cedula = cedula;
         this.nombre = nombre;
@@ -51,10 +51,7 @@ public class Cliente implements Comparable<Cliente> {
             return false;
         }
     }
-    
-    
 
-    
     // Getters
     @XmlElement
     public long getCodigoCliente() {
@@ -80,8 +77,6 @@ public class Cliente implements Comparable<Cliente> {
     public String getDireccionEntrega() {
         return direccionEntrega;
     }
-
-    
 
     @XmlElement
     public long getTelefono() {

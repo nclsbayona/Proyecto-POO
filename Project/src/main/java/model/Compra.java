@@ -3,9 +3,7 @@ package model;
 import java.util.Calendar;
 
 import jakarta.xml.bind.annotation.XmlElement;
-import jakarta.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement
 public class Compra {
 
 	private Cliente cliente;
@@ -13,8 +11,6 @@ public class Compra {
 	private long codigoCompra;
 	private Calendar fecha;
 	private boolean pagado;
-
-	
 
 	// Constructores
 	public Compra(long codigoCompra, Calendar fecha, boolean pagado) {
@@ -31,11 +27,13 @@ public class Compra {
 		this.codigoCompra = codigoCompra;
 		this.fecha = fecha;
 		this.pagado = pagado;
-		this.obra=obra;
-		this.cliente=cliente;
+		this.obra = obra;
+		this.cliente = cliente;
 	}
 
-	public Compra(){}
+	public Compra() {
+	}
+
 	// Equals
 	@Override
 	public boolean equals(Object obj) {
@@ -53,26 +51,31 @@ public class Compra {
 	public long getCodigoCompra() {
 		return this.codigoCompra;
 	}
+
 	// Fecha
 	@XmlElement
 	public Calendar getFecha() {
 		return this.fecha;
 	}
+
 	// Pagado
 	@XmlElement
 	public boolean getPagado() {
 		return this.pagado;
 	}
+
 	// Cliente
 	@XmlElement
 	public Cliente getCliente() {
 		return this.cliente;
 	}
+
 	// Obra
 	@XmlElement
 	public Obra getObra() {
 		return this.obra;
 	}
+
 	// Organizar para busqueda
 	@Override
 	public int hashCode() {

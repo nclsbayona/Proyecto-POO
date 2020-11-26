@@ -4,9 +4,7 @@ import java.util.Date;
 
 import exceptions.TypoException;
 import jakarta.xml.bind.annotation.XmlElement;
-import jakarta.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement
 public class Cuadro extends Obra {
     private String tema;
     private String tecnica;
@@ -45,11 +43,11 @@ public class Cuadro extends Obra {
     public String getTecnica() {
         return this.tecnica;
     }
-    
+
     @XmlElement
     public Clasificacion getClasificacion() {
         return this.clasificacion;
-    }    
+    }
 
     public void setClasificacion(Clasificacion clasificacion) {
         this.clasificacion = clasificacion;

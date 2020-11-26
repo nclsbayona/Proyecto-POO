@@ -4,9 +4,7 @@ import java.util.Date;
 
 import exceptions.TypoException;
 import jakarta.xml.bind.annotation.XmlElement;
-import jakarta.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement
 public class Escultura extends Obra {
     private String material;
     private double peso;

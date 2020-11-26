@@ -7,9 +7,7 @@ import java.util.HashSet;
 import exceptions.CodeSizeException;
 import exceptions.TypoException;
 import jakarta.xml.bind.annotation.XmlElement;
-import jakarta.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement
 public abstract class Obra {
     protected HashSet<Artista> artistas;
     protected Calendar fecha;
@@ -26,7 +24,7 @@ public abstract class Obra {
             throws CodeSizeException {
         // El código de una obra tiene 7 números. Debe validar que nunca exista una obra
         // con más o menos números
-        if (String.valueOf(codigoObra).length()!=7)
+        if (String.valueOf(codigoObra).length() != 7)
             throw new CodeSizeException();
         this.codigoObra = _codigoObra;
         this.titulo = _titulo;

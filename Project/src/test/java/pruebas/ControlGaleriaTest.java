@@ -635,6 +635,7 @@ class ControlGaleriaTest {
 					new Escultura(726382, "Machupichu", fecha.getTime(), 15000, "10x2", "Marmol", 1550));
 		});
 	}
+	/*
 
 	// Exportar a XML (NO PASA NADA)
 	@Test
@@ -675,7 +676,7 @@ class ControlGaleriaTest {
 			fail(e.getMessage());
 		}
 	}
-
+	
 	// Exportar a XML (ERROR)
 	@Test
 	void exportarXML2Test() {
@@ -692,5 +693,5 @@ class ControlGaleriaTest {
 		} catch (Exception e) {
 			fail(e.getMessage());
 		}
-	}
+	}*/
 }

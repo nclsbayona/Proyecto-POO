@@ -1,11 +1,10 @@
 package model;
 
 import jakarta.xml.bind.annotation.XmlElement;
-import jakarta.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement
 public enum Clasificacion {
     OBRA_MAESTRA("Obra maestra"), OBRA_REPRESENTATIVA("Obra representativa");
+
     private String nombre;
 
     private Clasificacion(String nombre) {
