@@ -846,10 +846,24 @@ public class PantallaGaleria {
 					}
 					GestionXML gc = new GestionXML(new TreeSet<Cliente>(c));
 					controlGaleria.exportarReporteXML("ReporteClientes.xml", GestionXML.class, gc);
+					//Listar Cuadros
+					TreeSet <Cuadro> cSet = new TreeSet<>();
+					cSet=this.controlGaleria.
 					// LISTAR OBRAS
 					HashSet<Obra> o = new HashSet<>();
+					TreeSet <Cuadro> cu=new TreeSet<>();
+					TreeSet <Instalacion> ins=new TreeSet<>();
+					TreeSet <Escultura> ess=new TreeSet<>();
 					o = this.controlGaleria.getListaObras();
-					GestionObrasXML go = new GestionObrasXML(new TreeSet<Obra>(o));
+					for (Obra co:o){
+						if (co instanceof Cuadro)
+							cu.add((Cuadro)(co));
+						else if (co instanceof Escultura)
+						ess.add((Escultura)(co));
+						else if (co instanceof Instalacion)
+						ins.add((Instalacion)(co));
+					}
+					GestionObrasXML go = new GestionObrasXML(cu, ess, ins);
 					controlGaleria.exportarReporteXML("ReporteObras.xml", GestionObrasXML.class, go);
 					// LISTAR ARTISTA
 					HashSet<Artista> art = new HashSet<>();

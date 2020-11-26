@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gestionArtistasXML>
+    <list>
+        <apellidos>Castro Sepulveda</apellidos>
+        <cedula>1000512331</cedula>
+        <codigoArtista>0</codigoArtista>
+        <fechaNacimiento>2001-12-11T14:49:52.603-05:00</fechaNacimiento>
+        <nombre>Natalia</nombre>
+        <telefono>314231233</telefono>
+    </list>
+    <list>
+        <apellidos>Herrera Guaitero</apellidos>
+        <cedula>1000471976</cedula>
+        <codigoArtista>0</codigoArtista>
+        <fechaNacimiento>2001-12-11T14:49:52.603-05:00</fechaNacimiento>
+        <nombre>Sebastian</nombre>
+        <telefono>350612646</telefono>
+    </list>
+</gestionArtistasXML>

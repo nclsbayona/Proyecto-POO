@@ -1,8 +1,8 @@
 package xml;
 
-import java.util.HashSet;
 import java.util.TreeSet;
 
+import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import model.Cliente;
 
@@ -18,6 +18,7 @@ public class GestionXML  {
 	public GestionXML() {
 	}
 
+	@XmlElement
 	public TreeSet<Cliente> getList() {
 		return list;
 	}
@@ -25,6 +26,4 @@ public class GestionXML  {
 	public void setList(TreeSet<Cliente> list) {
 		this.list = list;
 	}
-	
-
 }
