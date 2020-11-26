@@ -1,4 +1,4 @@
-package xml;
+package reportes;
 
 import java.util.TreeSet;
 
@@ -8,18 +8,18 @@ import model.Cuadro;
 import model.Escultura;
 import model.Instalacion;
 @XmlRootElement
-public class GestionObrasXML {
+public class GestionObrasReporte {
 	private TreeSet<Cuadro> listaCuadros;
 	private TreeSet<Escultura> listaEsculturas;
 	private TreeSet<Instalacion> listaInstalaciones;
 
-	public GestionObrasXML(TreeSet <Cuadro> listaC,TreeSet <Escultura> listaE,TreeSet <Instalacion> listaI) {
+	public GestionObrasReporte(TreeSet <Cuadro> listaC,TreeSet <Escultura> listaE,TreeSet <Instalacion> listaI) {
 		this.listaCuadros = listaC;
 		this.listaEsculturas=listaE;
 		this.listaInstalaciones=listaI;
 	}
 
-	public GestionObrasXML() {
+	public GestionObrasReporte() {
 	}
 
 

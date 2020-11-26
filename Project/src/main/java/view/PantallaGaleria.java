@@ -9,10 +9,10 @@ import java.util.TreeSet;
 import control.ControlGaleria;
 import exceptions.*;
 import model.*;
-import xml.GestionArtistasXML;
-import xml.GestionComprasXML;
-import xml.GestionObrasXML;
-import xml.GestionXML;
+import reportes.GestionArtistasReporte;
+import reportes.GestionComprasReporte;
+import reportes.GestionObrasReporte;
+import reportes.GestionClientesReporte;
 
 //Boundary
 public class PantallaGaleria {
@@ -844,11 +844,14 @@ public class PantallaGaleria {
 					for (Map.Entry<Long, Cliente> a : this.controlGaleria.getListaClientes().entrySet()) {
 						c.add(a.getValue());
 					}
-					GestionXML gc = new GestionXML(new TreeSet<Cliente>(c));
-					controlGaleria.exportarReporteXML("ReporteClientes.xml", GestionXML.class, gc);
+					GestionClientesReporte gc = new GestionClientesReporte(new TreeSet<Cliente>(c));
+					controlGaleria.exportarReporteXML("ReporteClientes.xml", GestionClientesReporte.class, gc);
 					//Listar Cuadros
-					TreeSet <Cuadro> cSet = new TreeSet<>();
-					cSet=this.controlGaleria.
+					TreeSet <Escultura> cSet = new TreeSet<>();
+					cSet=this.controlGaleria.buscarEsculturas();
+					GestionObrasReporte gcu=new GestionObrasReporte();
+					gcu.setListaEsculturas(cSet);
+					controlGaleria.exportarReporteXML("ReporteEsculturas.xml", GestionObrasReporte.class, gcu);
 					// LISTAR OBRAS
 					HashSet<Obra> o = new HashSet<>();
 					TreeSet <Cuadro> cu=new TreeSet<>();
@@ -863,20 +866,20 @@ public class PantallaGaleria {
 						else if (co instanceof Instalacion)
 						ins.add((Instalacion)(co));
 					}
-					GestionObrasXML go = new GestionObrasXML(cu, ess, ins);
-					controlGaleria.exportarReporteXML("ReporteObras.xml", GestionObrasXML.class, go);
+					GestionObrasReporte go = new GestionObrasReporte(cu, ess, ins);
+					controlGaleria.exportarReporteXML("ReporteObras.xml", GestionObrasReporte.class, go);
 					// LISTAR ARTISTA
 					HashSet<Artista> art = new HashSet<>();
 					for (Map.Entry<Long, Artista> i : this.controlGaleria.getListaArtistas().entrySet()) {
 						art.add(i.getValue());
 					}
-					GestionArtistasXML ga = new GestionArtistasXML((new TreeSet<Artista>(art)));
-					controlGaleria.exportarReporteXML("ReporteArtista.xml", GestionArtistasXML.class, ga);
+					GestionArtistasReporte ga = new GestionArtistasReporte((new TreeSet<Artista>(art)));
+					controlGaleria.exportarReporteXML("ReporteArtista.xml", GestionArtistasReporte.class, ga);
 					// LISTAR COMPRAS
 					HashSet<Compra> compras = new HashSet<>();
 					compras = this.controlGaleria.getListaCompras();
-					GestionComprasXML gcompras = new GestionComprasXML(new TreeSet<Compra>(compras));
-					controlGaleria.exportarReporteXML("ReporteCompras.xml", GestionComprasXML.class, gcompras);
+					GestionComprasReporte gcompras = new GestionComprasReporte(new TreeSet<Compra>(compras));
+					controlGaleria.exportarReporteXML("ReporteCompras.xml", GestionComprasReporte.class, gcompras);
 					break;
 
 				}
@@ -904,7 +907,7 @@ public class PantallaGaleria {
 
 	// Imprime el metodo de esculturas
 	public void imprimirEsculturas() {
-		HashSet<Obra> esculturas = this.controlGaleria.buscarEsculturas();
+		TreeSet<Escultura> esculturas = this.controlGaleria.buscarEsculturas();
 		for (Obra o : esculturas)
 			System.out.println(o);
 	}

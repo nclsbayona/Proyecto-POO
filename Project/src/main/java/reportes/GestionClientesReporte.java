@@ -1,4 +1,4 @@
-package xml;
+package reportes;
 
 import java.util.TreeSet;
 
@@ -7,18 +7,18 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 import model.Cliente;
 
 @XmlRootElement
-public class GestionXML  {
+public class GestionClientesReporte  {
 
 	private TreeSet<Cliente> list;
 
-	public GestionXML(TreeSet<Cliente> list) {
+	public GestionClientesReporte(TreeSet<Cliente> list) {
 		this.list = list;
 	}
 
-	public GestionXML() {
+	public GestionClientesReporte() {
 	}
 
-	@XmlElement
+	@XmlElement (name="Cliente")
 	public TreeSet<Cliente> getList() {
 		return list;
 	}

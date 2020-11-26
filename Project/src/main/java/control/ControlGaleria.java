@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.TreeSet;
 
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.Marshaller;
@@ -157,11 +158,11 @@ public class ControlGaleria {
     }
 
     // Retorna todas las esculturas en el sistema
-    public HashSet<Obra> buscarEsculturas() {
-        HashSet<Obra> esculturas = new HashSet<Obra>();
+    public TreeSet<Escultura> buscarEsculturas() {
+        TreeSet<Escultura> esculturas = new TreeSet<>();
         for (Obra o : this.listaObras)
             if (o instanceof Escultura)
-                esculturas.add(o);
+                esculturas.add((Escultura)(o));
         return esculturas;
     }
 
