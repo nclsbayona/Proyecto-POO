@@ -238,7 +238,9 @@ public class ControlGaleria {
     }
 
     // Retorna todas las compras asociadas a una Obra tipo Cuadro en el sistema
-    public HashSet<Compra> comprasAsociadasACuadro() {
+    public HashSet<Compra> comprasAsociadasACuadro() throws EmptyPurchasesListException {
+        if (this.listaCompras.size()==0)
+            throw new EmptyPurchasesListException();
         HashSet<Compra> compras = new HashSet<Compra>();
         for (Compra c : this.listaCompras)
             if (c.getObra() instanceof Cuadro)

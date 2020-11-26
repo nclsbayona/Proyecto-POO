@@ -846,25 +846,25 @@ public class PantallaGaleria {
 					}
 					GestionClientesReporte gc = new GestionClientesReporte(new TreeSet<Cliente>(c));
 					controlGaleria.exportarReporteXML("ReporteClientes.xml", GestionClientesReporte.class, gc);
-					//Listar Cuadros
-					TreeSet <Escultura> cSet = new TreeSet<>();
-					cSet=this.controlGaleria.buscarEsculturas();
-					GestionObrasReporte gcu=new GestionObrasReporte();
+					// Listar Cuadros
+					TreeSet<Escultura> cSet = new TreeSet<>();
+					cSet = this.controlGaleria.buscarEsculturas();
+					GestionObrasReporte gcu = new GestionObrasReporte();
 					gcu.setListaEsculturas(cSet);
 					controlGaleria.exportarReporteXML("ReporteEsculturas.xml", GestionObrasReporte.class, gcu);
 					// LISTAR OBRAS
 					HashSet<Obra> o = new HashSet<>();
-					TreeSet <Cuadro> cu=new TreeSet<>();
-					TreeSet <Instalacion> ins=new TreeSet<>();
-					TreeSet <Escultura> ess=new TreeSet<>();
+					TreeSet<Cuadro> cu = new TreeSet<>();
+					TreeSet<Instalacion> ins = new TreeSet<>();
+					TreeSet<Escultura> ess = new TreeSet<>();
 					o = this.controlGaleria.getListaObras();
-					for (Obra co:o){
+					for (Obra co : o) {
 						if (co instanceof Cuadro)
-							cu.add((Cuadro)(co));
+							cu.add((Cuadro) (co));
 						else if (co instanceof Escultura)
-						ess.add((Escultura)(co));
+							ess.add((Escultura) (co));
 						else if (co instanceof Instalacion)
-						ins.add((Instalacion)(co));
+							ins.add((Instalacion) (co));
 					}
 					GestionObrasReporte go = new GestionObrasReporte(cu, ess, ins);
 					controlGaleria.exportarReporteXML("ReporteObras.xml", GestionObrasReporte.class, go);
@@ -902,9 +902,15 @@ public class PantallaGaleria {
 
 	// Imprimir asociadas a un cuadro
 	public void imprimirAsociadasCuadro() {
-		HashSet<Compra> compras = this.controlGaleria.comprasAsociadasACuadro();
+		HashSet<Compra> compras;
+		try {
+			compras = this.controlGaleria.comprasAsociadasACuadro();
+
 		for (Compra c : compras)
-			System.out.println(c);
+		System.out.println(c);
+		} catch (EmptyPurchasesListException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 
 	// Imprime el metodo de esculturas

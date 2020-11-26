@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.io.File;
 import java.io.FileReader;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.TreeSet;
 
@@ -31,7 +32,7 @@ class ControlGaleriaTest {
 
 	@Test
 	// Busca un cliente en las compras (FALLA POR EL TAMAÑO DE LA LISTA)
-	void buscarClienteYObraEnCompra() {
+	void testBuscarClienteYObraEnCompra() {
 		Calendar fecha3 = Calendar.getInstance();
 		try {
 			final Obra o = new Cuadro(1234567, "Michuelo", fecha3.getTime(), 20000, "20x5", "Cubismo", "Pastel",
@@ -47,7 +48,7 @@ class ControlGaleriaTest {
 
 	@Test
 	// Busca cliente y obra en compra (FALLA PORQUE NO LO ENCUENTRA)
-	void buscarClienteYObraEnCompra3() {
+	void testBuscarClienteYObraEnCompra3() {
 		Calendar fecha3 = Calendar.getInstance();
 		Obra o;
 		try {
@@ -66,7 +67,7 @@ class ControlGaleriaTest {
 
 	@Test
 	// Busca un cliente en las compras (BIEN)
-	void buscarClienteYObraEnCompra2() {
+	void testBuscarClienteYObraEnCompra2() {
 		Calendar fecha3 = Calendar.getInstance();
 		Obra o = null;
 		try {
@@ -83,7 +84,7 @@ class ControlGaleriaTest {
 
 	@Test
 	// Rectificar si existe compra, en este caso deberia ser verdadero (BIEN)
-	void existeCodCompra() {
+	void testExisteCodCompra() {
 		Obra obra = null;
 		try {
 			obra = this.controlGaleria.buscarObra(1234567);
@@ -97,7 +98,7 @@ class ControlGaleriaTest {
 
 	@Test
 	// Rectificar si existe compra, en este caso deberia ser falso (NO EXISTE)
-	void existeCodCompra2() {
+	void testExisteCodCompra2() {
 		assertThrows(PurchaseDoesntExistException.class, () -> {
 			this.controlGaleria.existeCodCompra(1);
 		});
@@ -105,7 +106,7 @@ class ControlGaleriaTest {
 
 	@Test
 	// addCircObrayArtista Caso verdadero
-	void addCircObrayArtista() {
+	void testAddCircObrayArtista() {
 		Calendar fecha = Calendar.getInstance();
 		try {
 			assertTrue(this.controlGaleria.addCircObryArt(
@@ -117,7 +118,7 @@ class ControlGaleriaTest {
 	}
 
 	@Test // insertarObra caso falso (OBRA EXISTE)
-	void addCircObraYArtista2() {
+	void testAddCircObraYArtista2() {
 		Calendar fecha = Calendar.getInstance();
 		assertThrows(TypoException.class, () -> {
 			this.controlGaleria.addCircObryArt(
@@ -229,6 +230,24 @@ class ControlGaleriaTest {
 		assertThrows(ArtistNotFoundException.class, () -> {
 			this.controlGaleria.buscarArtista(1000000000);
 		});
+	}
+
+	@Test // Buscar cliente mal , por codigo
+	void testBuscarCliente3() {
+		assertThrows(ClientNotFoundException.class, () -> {
+			this.controlGaleria.buscarCliente(Long.valueOf(000001010000));
+		});
+	}
+
+	@Test // Buscar cliente bien , por codigo
+	void testBuscarCliente4() {
+		Cliente client = new Cliente(1, Long.valueOf(1422373000), "Alfredo", "Santamaria", "2085 NW Traverse Street",
+				6543212);
+		try {
+			assertEquals(client, this.controlGaleria.buscarCliente(1));
+		} catch (ClientNotFoundException e) {
+			fail(e.getMessage());
+		}
 	}
 
 	@Test // Buscar cliente mal , por cedula
@@ -640,7 +659,7 @@ class ControlGaleriaTest {
 
 	// Exportar a XML (NO PASA NADA)
 	@Test
-	void exportarXMLTest() {
+	void testExportarXMLTest() {
 		String ruta = "archivo.xml";
 		File archivo = new File(ruta);
 		TreeSet<Cliente> clientes = new TreeSet<>();
@@ -658,7 +677,7 @@ class ControlGaleriaTest {
 
 	// Exportar a XML (BIEN, CONSISTENCIA DE LOS DATOS)
 	@Test
-	void exportarXML3Test() {
+	void testExportarXML3Test() {
 		String ruta = "archivo.xml";
 		HashSet<Cliente> clientes = new HashSet<>();
 		GestionClientesReporte gcT = new GestionClientesReporte();
@@ -686,7 +705,7 @@ class ControlGaleriaTest {
 
 	// Exportar a XML (ERROR)
 	@Test
-	void exportarXML2Test() {
+	void testExportarXML2Test() {
 		String ruta = "archivo";
 		File archivo = new File(ruta);
 		GestionClientesReporte gc = new GestionClientesReporte();
@@ -711,9 +730,171 @@ class ControlGaleriaTest {
 			fail(e.getMessage());
 		}
 	}
+
 	@Test
 	void testAgregarArtista2() {
-		assertThrows(ArtistExistsException.class, () -> {this.controlGaleria
-			.agregarArtista(new Artista(1000512331, "Natalia", "Castro Sepulveda", Calendar.getInstance(), 314231233));});
+		assertThrows(ArtistExistsException.class, () -> {
+			this.controlGaleria.agregarArtista(
+					new Artista(1000512331, "Natalia", "Castro Sepulveda", Calendar.getInstance(), 314231233));
+		});
+	}
+
+	@Test
+	void testBuscarClienteYObraEnCompras() {
+		Cliente clien = new Cliente(1, Long.valueOf(1422373000), "Alfredo", "Santamaria", "2085 NW Traverse Street",
+				6543212);
+		Obra obr;
+		try {
+			obr = new Cuadro(5432198, "Okalokas", Calendar.getInstance().getTime(), 20000, "10x8", "Cubismo", "Pastel",
+					Clasificacion.OBRA_REPRESENTATIVA);
+			this.controlGaleria.realizarCompra(clien, obr);
+			this.controlGaleria.buscarClienteYObraEnCompra(clien, obr);
+		} catch (TypoException | ArtworkDoesntExistException | ClientDoesntExistException | EmptyPurchasesListException
+				| PurchaseNotFoundException e) {
+			fail(e.getMessage());
+		}
+	}
+
+	@Test
+	void testBuscarClienteYObraEnCompras2() {
+		Cliente clien = new Cliente(1, Long.valueOf(1422373000), "Alfredo", "Santamaria", "2085 NW Traverse Street",
+				6543212);
+		Obra obr;
+		try {
+			obr = new Cuadro(5432198, "Okalokas", Calendar.getInstance().getTime(), 20000, "10x8", "Cubismo", "Pastel",
+					Clasificacion.OBRA_REPRESENTATIVA);
+
+			this.controlGaleria.realizarCompra(clien, obr);
+		} catch (TypoException | ArtworkDoesntExistException | ClientDoesntExistException e) {
+			fail(e.getLocalizedMessage());
+		}
+		assertThrows(PurchaseNotFoundException.class, () -> {
+			this.controlGaleria.buscarClienteYObraEnCompra(clien, null);
+		});
+	}
+
+	@Test
+	void testBuscarObraEnCompras() {
+		try {
+			Cliente clien = new Cliente(1, Long.valueOf(1422373000), "Alfredo", "Santamaria", "2085 NW Traverse Street",
+					6543212);
+			Obra obr = new Cuadro(5432198, "Okalokas", Calendar.getInstance().getTime(), 20000, "10x8", "Cubismo",
+					"Pastel", Clasificacion.OBRA_REPRESENTATIVA);
+			this.controlGaleria.realizarCompra(clien, obr);
+			assertTrue(this.controlGaleria.obraEnCompra(obr));
+		} catch (TypoException | ArtworkDoesntExistException | ClientDoesntExistException
+				| PurchaseDoesntExistException e) {
+			fail(e.getLocalizedMessage());
+		}
+	}
+
+	@Test
+	void testBuscarObraEnCompras2() {
+		try {
+			Obra obr = new Cuadro(5432198, "Okalokas", Calendar.getInstance().getTime(), 20000, "10x8", "Cubismo",
+					"Pastel", Clasificacion.OBRA_REPRESENTATIVA);
+			assertThrows(PurchaseDoesntExistException.class, () -> {
+				this.controlGaleria.obraEnCompra(obr);
+			});
+		} catch (TypoException e) {
+			fail(e.getLocalizedMessage());
+		}
+	}
+
+	@Test
+	void testVerListadoArtistas() {
+		Cliente clien = new Cliente(1, Long.valueOf(1422373000), "Alfredo", "Santamaria", "2085 NW Traverse Street",
+				6543212);
+		Obra obr;
+		try {
+			obr = new Cuadro(5432198, "Okalokas", Calendar.getInstance().getTime(), 20000, "10x8", "Cubismo", "Pastel",
+					Clasificacion.OBRA_REPRESENTATIVA);
+			this.controlGaleria.realizarCompra(clien, obr);
+			HashSet<Compra> compras = new HashSet<Compra>();
+			assertNotEquals(compras, this.controlGaleria.comprasAsociadasACuadro());
+		} catch (ArtworkDoesntExistException | ClientDoesntExistException | TypoException
+				| EmptyPurchasesListException e) {
+			fail(e.getMessage());
+		}
+
+	}
+
+	@Test
+	void testComprasAsociadasACuadro2() {
+		Cliente clien = new Cliente(1, Long.valueOf(1422373000), "Alfredo", "Santamaria", "2085 NW Traverse Street",
+				6543212);
+		Obra obr;
+		try {
+			obr = new Cuadro(5432198, "Okalokas", Calendar.getInstance().getTime(), 20000, "10x8", "Cubismo", "Pastel",
+					Clasificacion.OBRA_REPRESENTATIVA);
+			this.controlGaleria.realizarCompra(clien, obr);
+			HashSet<Compra> compras = new HashSet<Compra>();
+			assertNotEquals(compras, this.controlGaleria.comprasAsociadasACuadro());
+		} catch (EmptyPurchasesListException | ArtworkDoesntExistException | ClientDoesntExistException
+				| TypoException e) {
+			fail(e.getMessage());
+		}
+
+	}
+
+	@Test
+	void testComprasAsociadasACuadro() {
+		Cliente clien = new Cliente(1, Long.valueOf(1422373000), "Alfredo", "Santamaria", "2085 NW Traverse Street",
+				6543212);
+		Obra obr;
+		try {
+			obr = new Cuadro(5432198, "Okalokas", Calendar.getInstance().getTime(), 20000, "10x8", "Cubismo", "Pastel",
+					Clasificacion.OBRA_REPRESENTATIVA);
+					this.controlGaleria.realizarCompra(clien, obr);
+			HashSet<Compra> compras = new HashSet<Compra>();
+		assertNotEquals(compras, this.controlGaleria.comprasAsociadasACuadro());
+		} catch (TypoException | ArtworkDoesntExistException | ClientDoesntExistException
+				| EmptyPurchasesListException e) {
+					fail(e.getMessage());
+		}
+	}
+
+	@Test
+	void testStartDay() {
+		Cliente clien = new Cliente(1, Long.valueOf(1422373000), "Alfredo", "Santamaria", "2085 NW Traverse Street",
+				6543212);
+			HashSet<Cliente> clientes = new HashSet<>();
+			clientes.add(clien);
+		assertNotEquals(this.controlGaleria.getListaClientes(),clientes);
+	}
+
+	@Test
+	void testStartDay2() {
+		HashMap<Long, Cliente> clientes = new HashMap<Long, Cliente>();
+        clientes.put(Long.valueOf(1422373000),new Cliente(1, Long.valueOf(1422373000), "Alfredo", "Santamaria", "2085 NW Traverse Street", 6543212));
+        clientes.put(Long.valueOf(1293723000),new Cliente(2, Long.valueOf(1293723000), "Fred", "Jones", "20822 SW Luxury Park", 98765432));
+        clientes.put(Long.valueOf(1183937000), new Cliente(6, Long.valueOf(1183937000), "Juan", "Acosta", "Calle 100 #20-29", 3208426));
+        clientes.put(Long.valueOf(1001110000), new Cliente(3, Long.valueOf(1001110000), "Lucas", "Ramirez", "Diagonal 68 #78-03", 3208426));
+		assertEquals(this.controlGaleria.getListaClientes(),clientes);
+	}
+
+
+	@Test
+	void testVerListadoDeCompras2() {
+		Cliente clien = new Cliente(1, Long.valueOf(1422373000), "Alfredo", "Santamaria", "2085 NW Traverse Street",
+				6543212);
+		Obra obr;
+		try {
+			obr = new Cuadro(5432198, "Okalokas", Calendar.getInstance().getTime(), 20000, "10x8", "Cubismo", "Pastel",
+					Clasificacion.OBRA_REPRESENTATIVA);
+					this.controlGaleria.realizarCompra(clien, obr);
+			HashSet<Compra> compras = new HashSet<Compra>();
+		assertNotEquals(compras, this.controlGaleria.comprasAsociadasACuadro());
+		} catch (TypoException | ArtworkDoesntExistException | ClientDoesntExistException
+				| EmptyPurchasesListException e) {}
+		Calendar hoy=Calendar.getInstance();
+		assertNotNull(this.controlGaleria.listadoDeCompra(String.valueOf(hoy.get(1)), String.valueOf(hoy.get(0))));
+	}
+
+	@Test
+	void testVerListadoDeCompras() {
+		Calendar hoy=Calendar.getInstance();
+		HashSet<String> retornar = new HashSet<>();
+		assertEquals(retornar, this.controlGaleria.listadoDeCompra(String.valueOf(hoy.get(1)), String.valueOf(hoy.get(0))));
 	}
 }
