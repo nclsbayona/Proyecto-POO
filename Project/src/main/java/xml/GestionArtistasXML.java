@@ -1,28 +1,29 @@
 package xml;
+import java.util.TreeSet;
 
-import java.util.HashSet;
-
-import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import model.Artista;
+
 @XmlRootElement
 public class GestionArtistasXML {
-	private HashSet<Artista> list;
+	private TreeSet<Artista> list;
 
-	public GestionArtistasXML(HashSet<Artista> list) {
+	public GestionArtistasXML(TreeSet<Artista> list) {
 		this.list = list;
 	}
 
 	public GestionArtistasXML() {
-	
+
 	}
-	@XmlElement
-	public HashSet<Artista> getList() {
+
+	public TreeSet<Artista> getList() {
 		return list;
 	}
 
-	public void setList(HashSet<Artista> list) {
+	public void setList(TreeSet<Artista> list) {
 		this.list = list;
 	}
-	
+
+
+
 }

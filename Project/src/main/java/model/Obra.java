@@ -8,7 +8,7 @@ import exceptions.CodeSizeException;
 import exceptions.TypoException;
 import jakarta.xml.bind.annotation.XmlElement;
 
-public abstract class Obra {
+public abstract class Obra implements Comparable<Obra>{
     protected HashSet<Artista> artistas;
     protected Calendar fecha;
     protected String titulo;
@@ -136,4 +136,16 @@ public abstract class Obra {
                 + '/' + this.fecha.get(Calendar.YEAR) + ":\t$" + this.precioRef + '\t' + this.dimensiones;
         return impresion;
     }
+	@Override
+	public int compareTo(Obra o) {
+		// TODO Auto-generated method stub
+		if (this.getFecha().compareTo(o.getFecha())<0) {
+			return -1;
+		}
+		if (this.getFecha().compareTo(o.getFecha()) > 0) {
+			return 1;
+		} else
+			return 0;
+	}
+    
 }

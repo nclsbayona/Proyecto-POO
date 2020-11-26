@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.TreeSet;
 
 import control.ControlGaleria;
 import exceptions.*;
@@ -843,29 +844,24 @@ public class PantallaGaleria {
 					for (Map.Entry<Long, Cliente> a : this.controlGaleria.getListaClientes().entrySet()) {
 						c.add(a.getValue());
 					}
-					GestionXML gc = new GestionXML(c);
+					GestionXML gc = new GestionXML(new TreeSet<Cliente>(c));
 					controlGaleria.exportarReporteXML("ReporteClientes.xml", GestionXML.class, gc);
 					// LISTAR OBRAS
 					HashSet<Obra> o = new HashSet<>();
 					o = this.controlGaleria.getListaObras();
-					HashSet <Cuadro> cs=new HashSet<>();
-					for (Obra os: o){
-						if (os instanceof Cuadro)
-							cs.add((Cuadro)(os));
-					}
-					GestionObrasXML go = new GestionObrasXML(cs);
+					GestionObrasXML go = new GestionObrasXML(new TreeSet<Obra>(o));
 					controlGaleria.exportarReporteXML("ReporteObras.xml", GestionObrasXML.class, go);
 					// LISTAR ARTISTA
 					HashSet<Artista> art = new HashSet<>();
 					for (Map.Entry<Long, Artista> i : this.controlGaleria.getListaArtistas().entrySet()) {
 						art.add(i.getValue());
 					}
-					GestionArtistasXML ga = new GestionArtistasXML(art);
+					GestionArtistasXML ga = new GestionArtistasXML((new TreeSet<Artista>(art)));
 					controlGaleria.exportarReporteXML("ReporteArtista.xml", GestionArtistasXML.class, ga);
 					// LISTAR COMPRAS
 					HashSet<Compra> compras = new HashSet<>();
 					compras = this.controlGaleria.getListaCompras();
-					GestionComprasXML gcompras = new GestionComprasXML(compras);
+					GestionComprasXML gcompras = new GestionComprasXML(new TreeSet<Compra>(compras));
 					controlGaleria.exportarReporteXML("ReporteCompras.xml", GestionComprasXML.class, gcompras);
 					break;
 
