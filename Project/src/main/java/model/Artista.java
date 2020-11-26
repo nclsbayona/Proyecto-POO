@@ -5,7 +5,7 @@ import java.util.HashSet;
 
 import jakarta.xml.bind.annotation.XmlElement;
 
-public class Artista {
+public class Artista implements Comparable<Artista> {
 
 	public Artista() {
 	}
@@ -148,5 +148,17 @@ public class Artista {
 	@Override
 	public String toString() {
 		return this.cedula + "\t" + this.nombre + " " + this.apellidos;
+	}
+
+	@Override
+	public int compareTo(Artista o) {
+		// TODO Auto-generated method stub
+		if (this.getNombre().compareTo(o.getNombre()) < 0) {
+			return -1;
+		}
+		if (this.getNombre().compareTo(o.getNombre()) > 0) {
+			return 1;
+		} else
+			return 0;
 	}
 }

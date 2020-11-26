@@ -1,25 +1,25 @@
 package xml;
 
-import java.util.HashSet;
+import java.util.TreeSet;
 
 import jakarta.xml.bind.annotation.XmlRootElement;
 import model.Obra;
 @XmlRootElement
 public class GestionObrasXML {
-	private HashSet<Obra> list;
+	private TreeSet<Obra> list;
 
-	public GestionObrasXML(HashSet<Obra> list) {
+	public GestionObrasXML(TreeSet<Obra> list) {
 		this.list = list;
 	}
 
 	public GestionObrasXML() {
 	}
 
-	public HashSet<Obra> getList() {
+	public TreeSet<Obra> getList() {
 		return list;
 	}
 
-	public void setList(HashSet<Obra> list) {
+	public void setList(TreeSet<Obra> list) {
 		this.list = list;
 	}
 }

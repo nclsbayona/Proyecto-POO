@@ -4,7 +4,7 @@ import java.util.Calendar;
 
 import jakarta.xml.bind.annotation.XmlElement;
 
-public class Compra {
+public class Compra implements Comparable<Compra> {
 
 	private Cliente cliente;
 	private Obra obra;
@@ -111,5 +111,17 @@ public class Compra {
 				+ "->" + this.obra.getTitulo() + " " + this.fecha.get(Calendar.DATE) + '/'
 				+ this.fecha.get(Calendar.MONTH) + '/' + this.fecha.get(Calendar.YEAR) + ":\t$"
 				+ this.obra.getPrecioRef();
+	}
+
+	@Override
+	public int compareTo(Compra o) {
+		// TODO Auto-generated method stub
+		if (this.fecha.compareTo(o.getFecha()) > 0) {
+			return 1;
+		}
+		if (this.fecha.compareTo(o.getFecha()) < 0) {
+			return -1;
+		} else
+			return 0;
 	}
 }
