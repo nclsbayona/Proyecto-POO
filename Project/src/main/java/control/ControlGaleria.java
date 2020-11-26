@@ -1,5 +1,6 @@
 package control;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
@@ -9,6 +10,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Marshaller;
 import model.*;
 import exceptions.*;
@@ -659,18 +661,19 @@ public class ControlGaleria {
     }
 
     // Exportar a xml
-    public boolean exportarReporteXML(String route, Collection<Cliente> collection) throws TypoException {
-        boolean logrado =true;
-        try (FileWriter fw = new FileWriter(route)) {
-            ReporteClientes catalogo=new ReporteClientes();
-            catalogo.setLista(collection);
-            JAXBContext context = JAXBContext.newInstance(catalogo.getClass());
-            Marshaller marshaller = context.createMarshaller();
-            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-            marshaller.marshal(catalogo, fw);
-        } catch (Exception e) {
-            logrado=false;
-        }
-        return logrado;
+    public <T> boolean exportarReporteXML(String route, Class<T> clase, T info) {
+    	try (FileWriter out = new FileWriter(route)){	
+			JAXBContext context=JAXBContext.newInstance(clase);
+			Marshaller m=context.createMarshaller();
+			m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+			m.marshal(info, out);
+		 } catch (IOException e) {
+			 System.err.println("Error escribiendo en archivo");
+			e.printStackTrace();
+		} catch (JAXBException e) {
+			System.err.println("Error conviertiendo objeto en XML");
+			e.printStackTrace();
+		}
+        return true;
     }
 }
