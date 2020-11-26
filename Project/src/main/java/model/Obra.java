@@ -138,7 +138,7 @@ public abstract class Obra implements Comparable<Obra>{
     }
 	@Override
 	public int compareTo(Obra o) {
-		// TODO Auto-generated method stub
+		// 
 		if (this.getFecha().compareTo(o.getFecha())<0) {
 			return -1;
 		}

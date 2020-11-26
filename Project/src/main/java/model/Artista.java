@@ -152,7 +152,7 @@ public class Artista implements Comparable<Artista> {
 
 	@Override
 	public int compareTo(Artista o) {
-		// TODO Auto-generated method stub
+		// 
 		if (this.getNombre().compareTo(o.getNombre()) < 0) {
 			return -1;
 		}

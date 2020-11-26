@@ -115,7 +115,7 @@ public class Compra implements Comparable<Compra> {
 
 	@Override
 	public int compareTo(Compra o) {
-		// TODO Auto-generated method stub
+		// 
 		if (this.fecha.compareTo(o.getFecha()) > 0) {
 			return 1;
 		}
