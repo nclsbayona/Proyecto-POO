@@ -848,7 +848,12 @@ public class PantallaGaleria {
 					// LISTAR OBRAS
 					HashSet<Obra> o = new HashSet<>();
 					o = this.controlGaleria.getListaObras();
-					GestionObrasXML go = new GestionObrasXML(o);
+					HashSet <Cuadro> cs=new HashSet<>();
+					for (Obra os: o){
+						if (os instanceof Cuadro)
+							cs.add((Cuadro)(os));
+					}
+					GestionObrasXML go = new GestionObrasXML(cs);
 					controlGaleria.exportarReporteXML("ReporteObras.xml", GestionObrasXML.class, go);
 					// LISTAR ARTISTA
 					HashSet<Artista> art = new HashSet<>();
