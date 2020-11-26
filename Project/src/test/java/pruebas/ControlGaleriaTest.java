@@ -2,14 +2,11 @@ package pruebas;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.io.File;
 import java.util.Calendar;
 import java.util.HashSet;
 
 import control.ControlGaleria;
 import exceptions.*;
-import jakarta.xml.bind.JAXBContext;
-import jakarta.xml.bind.Unmarshaller;
 import model.*;
 
 import org.junit.jupiter.api.AfterAll;

@@ -1,8 +1,6 @@
 package control;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -10,7 +8,6 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import jakarta.xml.bind.JAXBContext;
-import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Marshaller;
 import model.*;
 import exceptions.*;
@@ -667,12 +664,8 @@ public class ControlGaleria {
 			Marshaller m=context.createMarshaller();
 			m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 			m.marshal(info, out);
-		 } catch (IOException e) {
-			 System.err.println("Error escribiendo en archivo");
-			e.printStackTrace();
-		} catch (JAXBException e) {
-			System.err.println("Error conviertiendo objeto en XML");
-			e.printStackTrace();
+		 } catch (Exception e) {
+			return false;
 		}
         return true;
     }

@@ -18,7 +18,7 @@ import jakarta.xml.bind.Unmarshaller;
 
 public class Prueba {
     public static void main(String[] args) throws TypoException {
-        ControlGaleria cg = new ControlGaleria();
+        /*ControlGaleria cg = new ControlGaleria();
         ArrayList<Cliente> clientes = new ArrayList<>();
 
         clientes.add(
@@ -27,10 +27,10 @@ public class Prueba {
         clientes.add(new Cliente(6, Long.valueOf(1111183937), "Juan", "Acosta", "Calle 100 #20-29", 3208426));
         try {
             cg.exportarReporteXML("archivo_de_pruebaClientes.xml", clientes);
-            /*JAXBContext context = JAXBContext.newInstance(Cliente.class);
+            JAXBContext context = JAXBContext.newInstance(Cliente.class);
             Unmarshaller um = context.createUnmarshaller();
             Cliente c100=(Cliente) (um.unmarshal(new File("archivo_de_pruebaClientes.xml")));
-            System.out.println(c100);*/
+            System.out.println(c100);
         } catch (TypoException e) {
             System.out.println(e.getLocalizedMessage());
         }
