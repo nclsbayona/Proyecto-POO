@@ -75,10 +75,10 @@ public class ControlGaleria {
     }
 
     // Agregar un artista
-    public Artista agregarArtista(Artista artista) {
+    public Artista agregarArtista(Artista artista) throws ArtistExistsException {
         for (Artista art : this.listaArtistas.values()) {
             if (art.equals(artista))
-                return null;
+                throw new ArtistExistsException();
         }
         this.listaArtistas.put(artista.getCedula(), artista);
         return artista;
@@ -659,14 +659,14 @@ public class ControlGaleria {
     }
 
     // Exportar a xml
-    public <T> boolean exportarReporteXML(String route, Class<T> clase, T info) {
+    public <T> boolean exportarReporteXML(String route, Class<T> clase, T info) throws TypoException {
     	try (FileWriter out = new FileWriter(route)){	
 			JAXBContext context=JAXBContext.newInstance(clase);
 			Marshaller m=context.createMarshaller();
 			m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 			m.marshal(info, out);
 		 } catch (Exception e) {
-			return false;
+			throw new TypoException("ruta");
 		}
         return true;
     }

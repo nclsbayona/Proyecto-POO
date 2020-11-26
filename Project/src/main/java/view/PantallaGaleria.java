@@ -889,6 +889,8 @@ public class PantallaGaleria {
 			}
 		} catch (NumberFormatException e) {
 			System.out.println("Error al escribir: " + e.getMessage());
+		} catch (TypoException e) {
+			System.out.println(e.getMessage());
 		}
 		return retornar;
 	}

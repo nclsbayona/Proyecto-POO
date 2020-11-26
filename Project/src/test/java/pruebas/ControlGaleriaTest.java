@@ -2,12 +2,17 @@ package pruebas;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.File;
+import java.io.FileReader;
 import java.util.Calendar;
 import java.util.HashSet;
+import java.util.TreeSet;
 
 import control.ControlGaleria;
 import exceptions.*;
+import jakarta.xml.bind.JAXB;
 import model.*;
+import reportes.GestionClientesReporte;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -632,21 +637,22 @@ class ControlGaleriaTest {
 					new Escultura(726382, "Machupichu", fecha.getTime(), 15000, "10x2", "Marmol", 1550));
 		});
 	}
-	/*
 
 	// Exportar a XML (NO PASA NADA)
 	@Test
 	void exportarXMLTest() {
 		String ruta = "archivo.xml";
 		File archivo = new File(ruta);
-		HashSet<Cliente> clientes = new HashSet<>();
+		TreeSet<Cliente> clientes = new TreeSet<>();
+		GestionClientesReporte reporteC = new GestionClientesReporte();
+		reporteC.setList(clientes);
 		try {
-			this.controlGaleria.exportarReporteXML(ruta, Cliente.class, clientes);
+			this.controlGaleria.exportarReporteXML(ruta, GestionClientesReporte.class, reporteC);
 			assertTrue(archivo.delete());
 		} catch (TypoException e) {
 			fail(e.getMessage());
 		} catch (Exception e) {
-			// Error eliminando
+			fail(e.getMessage());
 		}
 	}
 
@@ -654,34 +660,38 @@ class ControlGaleriaTest {
 	@Test
 	void exportarXML3Test() {
 		String ruta = "archivo.xml";
-		File archivo = new File(ruta);
 		HashSet<Cliente> clientes = new HashSet<>();
-		HashSet<Cliente> clientesR = new HashSet<>();
+		GestionClientesReporte gcT = new GestionClientesReporte();
 		clientes.add(
 				new Cliente(1, Long.valueOf(1422373000), "Alfredo", "Santamaria", "2085 NW Traverse Street", 6543212));
 		clientes.add(new Cliente(2, Long.valueOf(1293723000), "Fred", "Jones", "20822 SW Luxury Park", 98765432));
+		GestionClientesReporte gcC = new GestionClientesReporte();
+		gcC.setList(new TreeSet<>(clientes));
 		try {
-			this.controlGaleria.exportarReporteXML(ruta, Cliente.class, clientes);
-			//Codigo para leer
-			//Faltan las clases aux
-			
-			//
-			//assertFalse(archivo.delete());
+			this.controlGaleria.exportarReporteXML(ruta, GestionClientesReporte.class, gcC);
+			// Codigo para leer
+			try (FileReader fr = new FileReader(ruta);) {
+				gcT = JAXB.unmarshal(fr, GestionClientesReporte.class);
+				for (Cliente cliente : clientes) {
+					if (!gcT.getList().contains(cliente))
+						fail("Fallo");
+				}
+			}
 		} catch (TypoException e) {
 			fail(e.getMessage());
 		} catch (Exception e) {
 			fail(e.getMessage());
 		}
 	}
-	
+
 	// Exportar a XML (ERROR)
 	@Test
 	void exportarXML2Test() {
 		String ruta = "archivo";
 		File archivo = new File(ruta);
-		HashSet<Cliente> clientes = new HashSet<>();
+		GestionClientesReporte gc = new GestionClientesReporte();
 		try {
-			this.controlGaleria.exportarReporteXML(ruta, Cliente.class, clientes);
+			this.controlGaleria.exportarReporteXML(ruta, GestionClientesReporte.class, gc);
 			archivo.delete();
 			// Lo elimino otra vez
 			assertFalse(archivo.delete());
@@ -690,5 +700,20 @@ class ControlGaleriaTest {
 		} catch (Exception e) {
 			fail(e.getMessage());
 		}
-	}*/
+	}
+
+	@Test
+	void testAgregarArtista() {
+		try {
+			this.controlGaleria
+					.agregarArtista(new Artista(1001191743, "Nicolas", "Bayona", Calendar.getInstance(), 350612646));
+		} catch (ArtistExistsException e) {
+			fail(e.getMessage());
+		}
+	}
+	@Test
+	void testAgregarArtista2() {
+		assertThrows(ArtistExistsException.class, () -> {this.controlGaleria
+			.agregarArtista(new Artista(1000512331, "Natalia", "Castro Sepulveda", Calendar.getInstance(), 314231233));});
+	}
 }
