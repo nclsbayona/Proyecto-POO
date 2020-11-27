@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Text?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TabPane prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+            <Tab text="Obra">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Text layoutX="39.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LISTA OBRAS DISPONIBLES" wrappingWidth="149.75" />
+                        <ListView fx:id="ListaObras" layoutX="14.0" layoutY="61.0" prefHeight="204.0" prefWidth="200.0" />
+                        <Button layoutX="76.0" layoutY="284.0" mnemonicParsing="false" text="Seleccionar" />
+                        <TextField layoutX="224.0" layoutY="61.0" prefHeight="204.0" prefWidth="178.0" />
+                        <TextField layoutX="226.0" layoutY="26.0" promptText="Obra Seleccionada" />
+                        <Button layoutX="412.0" layoutY="284.0" mnemonicParsing="false" text="Modificar" />
+                        <Button layoutX="289.0" layoutY="284.0" mnemonicParsing="false" text="Borrar" />
+                        <Text layoutX="429.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MODIFICAR O CREAR" />
+                        <TextField layoutX="412.0" layoutY="61.0" promptText="Titulo" />
+                        <TextField layoutX="412.0" layoutY="98.0" promptText="Autor" />
+                        <TextField layoutX="412.0" layoutY="138.0" promptText="Codigo" />
+                        <TextField layoutX="412.0" layoutY="179.0" promptText="Fecha" />
+                        <TextField layoutX="412.0" layoutY="221.0" promptText="Dimencion" />
+                        <Button layoutX="518.0" layoutY="284.0" mnemonicParsing="false" text="Crear" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+          <Tab text="Cliente">
+               <content>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+               </content>
+            </Tab>
+          <Tab text="Compra">
+               <content>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <TextField layoutX="226.0" layoutY="45.0" promptText="Buscar Obra por Titulo" />
+                        <TextField layoutX="226.0" layoutY="86.0" promptText="Buscar Obra por Año" />
+                        <TextField layoutX="226.0" layoutY="132.0" promptText="Buscar por Artista" />
+                        <ListView layoutX="14.0" layoutY="45.0" prefHeight="276.0" prefWidth="200.0" />
+                        <Button layoutX="275.0" layoutY="175.0" mnemonicParsing="false" text="Buscar" />
+                        <Button layoutX="83.0" layoutY="330.0" mnemonicParsing="false" text="Comprar" />
+                        <ListView layoutX="386.0" layoutY="43.0" prefHeight="280.0" prefWidth="200.0" />
+                        <Text layoutX="38.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LISTA DE OBRA BUSCADA" />
+                        <Text layoutX="405.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LISTA DE OBRAS COMPRADAS" />
+                        <Button layoutX="466.0" layoutY="330.0" mnemonicParsing="false" text="Eliminar" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</Pane>
