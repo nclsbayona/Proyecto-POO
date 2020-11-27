@@ -366,7 +366,7 @@ public class PantallaGaleria {
 									System.out.println(e.getMessage());
 								} catch (ArtworkNotPurchasedException e) {
 
-								} catch (ArtworkExistsException e) {
+								} catch (ArtworkAlreadyPurchasedException | ArtworkExistsException e) {
 									System.out.println(e.getMessage());
 								}
 								break;
@@ -385,7 +385,7 @@ public class PantallaGaleria {
 									System.out.println(e.getMessage());
 								} catch (ArtworkNotPurchasedException e) {
 									System.out.println(e.getMessage());
-								} catch (ArtworkExistsException e) {
+								} catch (ArtworkAlreadyPurchasedException | ArtworkExistsException e) {
 									System.out.println(e.getMessage());
 								}
 								break;
@@ -410,7 +410,7 @@ public class PantallaGaleria {
 									System.out.println(e.getMessage());
 								} catch (ArtworkNotPurchasedException e) {
 									System.out.println(e.getMessage());
-								} catch (ArtworkExistsException e) {
+								} catch (ArtworkAlreadyPurchasedException | ArtworkExistsException e) {
 									System.out.println(e.getMessage());
 								}
 								break;
@@ -428,7 +428,7 @@ public class PantallaGaleria {
 									System.out.println(e.getMessage());
 								} catch (ArtworkNotPurchasedException e) {
 									System.out.println(e.getMessage());
-								} catch (ArtworkExistsException e) {
+								} catch (ArtworkAlreadyPurchasedException | ArtworkExistsException e) {
 									System.out.println(e.getMessage());
 								}
 								break;
@@ -440,7 +440,7 @@ public class PantallaGaleria {
 									modObra = this.controlGaleria.modificarObra(
 											controlGaleria.buscarObra(Long.parseLong(buscarObraporCodigo)),
 											Integer.parseInt(criterio), dimensiones);
-								} catch (ArtworkExistsException e) {
+								} catch (ArtworkAlreadyPurchasedException | ArtworkExistsException e) {
 									System.out.println(e.getMessage());
 								} catch (CodeSizeException e) {
 									System.out.println("Error en el tamaño del codigo");
@@ -839,6 +839,7 @@ public class PantallaGaleria {
 					break;
 				}
 				case 20: {
+					//Hidden Option
 					// LISTAR CLIENTES
 					HashSet<Cliente> c = new HashSet<>();
 					for (Map.Entry<Long, Cliente> a : this.controlGaleria.getListaClientes().entrySet()) {

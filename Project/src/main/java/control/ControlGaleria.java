@@ -232,8 +232,10 @@ public class ControlGaleria {
     // Retorna el precio total de todas las obras en el sistema
     public double calcularPrecioTotal() {
         double precio = 0;
-        for (Compra co : this.listaCompras)
-            precio += co.getObra().calcularPrecio();
+        for (Compra co : this.listaCompras){
+            if (co.getPagado())
+                precio += co.getObra().calcularPrecio();
+        }
         return precio;
     }
 
@@ -515,10 +517,13 @@ public class ControlGaleria {
 
     // Modifica una obra
     public boolean modificarObra(Obra obra, int criterio, String value) throws ArtworkDoesntExistException,
-            CodeSizeException, TypoException, ArtworkNotPurchasedException, ArtworkExistsException {
+            CodeSizeException, TypoException, ArtworkNotPurchasedException, ArtworkExistsException,
+            ArtworkAlreadyPurchasedException {
         boolean retornar = false;
         if (obra == null)
             throw new ArtworkDoesntExistException();
+        if (this.buscarObraEnCompras(obra))
+                throw new ArtworkAlreadyPurchasedException();
         switch (criterio) {
             case 1: {
                 try {

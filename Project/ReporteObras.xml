@@ -3,7 +3,7 @@
     <Cuadro>
         <codigoObra>5432198</codigoObra>
         <dimensiones>10x8</dimensiones>
-        <fecha>1999-11-10T20:30:14.384-05:00</fecha>
+        <fecha>1999-11-10T20:13:32.802-05:00</fecha>
         <precioRef>20000.0</precioRef>
         <titulo>Okalokas</titulo>
         <clasificacion>OBRA_REPRESENTATIVA</clasificacion>
@@ -13,7 +13,7 @@
     <Cuadro>
         <codigoObra>2435678</codigoObra>
         <dimensiones>10x8</dimensiones>
-        <fecha>2010-06-20T20:30:14.384-05:00</fecha>
+        <fecha>2010-06-20T20:13:32.802-05:00</fecha>
         <precioRef>20000.0</precioRef>
         <titulo>Eva pilla</titulo>
         <clasificacion>OBRA_MAESTRA</clasificacion>
@@ -23,7 +23,7 @@
     <Escultura>
         <codigoObra>7654321</codigoObra>
         <dimensiones>10x2</dimensiones>
-        <fecha>1984-03-03T20:30:14.384-05:00</fecha>
+        <fecha>1984-03-03T20:13:32.802-05:00</fecha>
         <precioRef>15000.0</precioRef>
         <titulo>Machupichu</titulo>
         <material>Marmol</material>
@@ -32,7 +32,7 @@
     <Escultura>
         <codigoObra>3456789</codigoObra>
         <dimensiones>10x2</dimensiones>
-        <fecha>2001-09-06T20:30:14.384-05:00</fecha>
+        <fecha>2001-09-06T20:13:32.802-05:00</fecha>
         <precioRef>15000.0</precioRef>
         <titulo>Sociopata</titulo>
         <material>Cemento</material>
@@ -41,7 +41,7 @@
     <Instalacion>
         <codigoObra>1234567</codigoObra>
         <dimensiones>20x5</dimensiones>
-        <fecha>2000-11-10T20:30:14.384-05:00</fecha>
+        <fecha>2000-11-10T20:13:32.802-05:00</fecha>
         <precioRef>20000.0</precioRef>
         <titulo>Michuelo</titulo>
         <descripcion>Esta es otra prueba</descripcion>
@@ -49,7 +49,7 @@
     <Instalacion>
         <codigoObra>1324567</codigoObra>
         <dimensiones>20x5</dimensiones>
-        <fecha>2020-12-01T20:30:14.384-05:00</fecha>
+        <fecha>2020-12-01T20:13:32.802-05:00</fecha>
         <precioRef>20000.0</precioRef>
         <titulo>La gorda</titulo>
         <descripcion>Prueba de instalacion</descripcion>

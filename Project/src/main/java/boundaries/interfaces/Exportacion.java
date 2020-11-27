@@ -1,7 +1,10 @@
 package boundaries.interfaces;
 
+import java.io.File;
 import java.util.Collection;
 import java.util.TreeSet;
+
+import javax.swing.JFileChooser;
 
 import control.ControlGaleria;
 import exceptions.TypoException;

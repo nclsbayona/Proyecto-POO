@@ -1,6 +1,9 @@
 package boundaries.interfaces;
 
+import java.io.File;
 import java.util.*;
+
+import javax.swing.JFileChooser;
 
 import exceptions.TypoException;
 import model.Clasificacion;
@@ -22,6 +25,11 @@ public class EXPPruebas {
         fecha.set(2020, 11, 01);
         // Creación de instancias
         try {
+            String ruta=null;
+            JFileChooser fchooser=new JFileChooser();
+            fchooser.setCurrentDirectory(new File("."));
+            if (fchooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION)
+                ruta=fchooser.getSelectedFile().toString();
             Exportacion exportacion=new Exportacion();
             obras.add(new Instalacion(1324567, "La gorda", fecha.getTime(), 20000, "20x5", "Prueba de instalacion"));
             fecha1.set(2010, 5, 20);
@@ -36,14 +44,18 @@ public class EXPPruebas {
                         Clasificacion.OBRA_REPRESENTATIVA));
                 fecha5.set(1984, 2, 3);
                 obras.add(new Escultura(7654321, "Machupichu", fecha5.getTime(), 15000, "10x2", "Marmol", 1550));
-                exportacion.exportarXML("LaCompleta.xml","a", obras);
+                exportacion.exportarXML(ruta,"a", obras);
                 HashSet<Obra>cuadros=new HashSet<>();
                 cuadros.add(new Escultura(3456789, "Sociopata", fecha2.getTime(), 15000, "10x2", "Cemento", 2084));
-                exportacion.exportarXML("EsculturasSolamente.xml","p", cuadros);
+                if (fchooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION)
+                ruta=fchooser.getSelectedFile().toString();
+                exportacion.exportarXML(ruta,"p", cuadros);
                 HashSet<Compra>compras=new HashSet<>();
                 compras.add(new Compra(1));
                 compras.add(new Compra(2));
-                exportacion.exportarXML("ComprasSolo.xml", "m", compras);
+                if (fchooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION)
+                ruta=fchooser.getSelectedFile().toString();
+                exportacion.exportarXML(ruta, "m", compras);
         } catch (TypoException e) {
             System.out.println(e.getMessage());
         }   

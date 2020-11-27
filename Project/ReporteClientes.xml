@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gestionClientesReporte>
+    <Cliente>
+        <apellidos>Jones</apellidos>
+        <cedula>1293723000</cedula>
+        <codigoCliente>2</codigoCliente>
+        <direccionEntrega>20822 SW Luxury Park</direccionEntrega>
+        <nombre>Fred</nombre>
+        <telefono>98765432</telefono>
+    </Cliente>
+    <Cliente>
+        <apellidos>Ramirez</apellidos>
+        <cedula>1001110000</cedula>
+        <codigoCliente>3</codigoCliente>
+        <direccionEntrega>Diagonal 68 #78-03</direccionEntrega>
+        <nombre>Lucas</nombre>
+        <telefono>3208426</telefono>
+    </Cliente>
+    <Cliente>
+        <apellidos>Acosta</apellidos>
+        <cedula>1183937000</cedula>
+        <codigoCliente>6</codigoCliente>
+        <direccionEntrega>Calle 100 #20-29</direccionEntrega>
+        <nombre>Juan</nombre>
+        <telefono>3208426</telefono>
+    </Cliente>
+    <Cliente>
+        <apellidos>Santamaria</apellidos>
+        <cedula>1422373000</cedula>
+        <codigoCliente>100</codigoCliente>
+        <direccionEntrega>2085 NW Traverse Street</direccionEntrega>
+        <nombre>Lucas</nombre>
+        <telefono>6543212</telefono>
+    </Cliente>
+</gestionClientesReporte>
