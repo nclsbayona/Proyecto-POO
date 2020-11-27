@@ -1,8 +1,6 @@
 package boundaries.interfaces.control;
 
 import java.net.URL;
-import java.util.Calendar;
-import java.util.HashSet;
 import java.util.ResourceBundle;
 
 import boundaries.interfaces.Exportacion;
@@ -12,11 +10,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.stage.FileChooser;
-import model.Clasificacion;
-import model.Cuadro;
-import model.Escultura;
-import model.Instalacion;
-import model.Obra;
 
 public class BotonExportar {
 

@@ -5,7 +5,6 @@ import java.util.TreeSet;
 
 import control.ControlGaleria;
 import exceptions.TypoException;
-import javafx.stage.FileChooser;
 import model.Escultura;
 import model.Instalacion;
 import reportes.GestionArtistasReporte;
