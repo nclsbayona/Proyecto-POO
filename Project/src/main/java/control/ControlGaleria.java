@@ -1,4 +1,5 @@
 package control;
+
 import java.io.FileWriter;
 import java.util.Calendar;
 import java.util.Collections;
@@ -162,7 +163,7 @@ public class ControlGaleria {
         TreeSet<Escultura> esculturas = new TreeSet<>();
         for (Obra o : this.listaObras)
             if (o instanceof Escultura)
-                esculturas.add((Escultura)(o));
+                esculturas.add((Escultura) (o));
         return esculturas;
     }
 
@@ -232,7 +233,7 @@ public class ControlGaleria {
     // Retorna el precio total de todas las obras en el sistema
     public double calcularPrecioTotal() {
         double precio = 0;
-        for (Compra co : this.listaCompras){
+        for (Compra co : this.listaCompras) {
             if (co.getPagado())
                 precio += co.getObra().calcularPrecio();
         }
@@ -241,7 +242,7 @@ public class ControlGaleria {
 
     // Retorna todas las compras asociadas a una Obra tipo Cuadro en el sistema
     public HashSet<Compra> comprasAsociadasACuadro() throws EmptyPurchasesListException {
-        if (this.listaCompras.size()==0)
+        if (this.listaCompras.size() == 0)
             throw new EmptyPurchasesListException();
         HashSet<Compra> compras = new HashSet<Compra>();
         for (Compra c : this.listaCompras)
@@ -517,13 +518,15 @@ public class ControlGaleria {
 
     // Modifica una obra
     public boolean modificarObra(Obra obra, int criterio, String value) throws ArtworkDoesntExistException,
-            CodeSizeException, TypoException, ArtworkNotPurchasedException, ArtworkExistsException,
-            ArtworkAlreadyPurchasedException {
+            CodeSizeException, TypoException, ArtworkExistsException, ArtworkAlreadyPurchasedException {
         boolean retornar = false;
         if (obra == null)
             throw new ArtworkDoesntExistException();
-        if (this.buscarObraEnCompras(obra))
+        try {
+            if (this.buscarObraEnCompras(obra))
                 throw new ArtworkAlreadyPurchasedException();
+        } catch (ArtworkNotPurchasedException e) {
+        }
         switch (criterio) {
             case 1: {
                 try {
@@ -553,10 +556,14 @@ public class ControlGaleria {
                 break;
             }
             case 4: {
-                this.buscarObraEnCompras(obra);
-                obra.setPrecioRef(Long.parseLong(value));
-                retornar = true;
-                break;
+                try {
+                    this.buscarObraEnCompras(obra);
+                } catch (ArtworkNotPurchasedException e) {
+                    obra.setPrecioRef(Long.parseLong(value));
+                    retornar = true;
+                    break;
+                }
+
             }
             case 5: {
                 obra.setDimensiones(value);
@@ -667,14 +674,14 @@ public class ControlGaleria {
 
     // Exportar a xml
     public <T> boolean exportarReporteXML(String route, Class<T> clase, T info) throws TypoException {
-    	try (FileWriter out = new FileWriter(route)){	
-			JAXBContext context=JAXBContext.newInstance(clase);
-			Marshaller m=context.createMarshaller();
-			m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-			m.marshal(info, out);
-		 } catch (Exception e) {
-			throw new TypoException("ruta");
-		}
+        try (FileWriter out = new FileWriter(route)) {
+            JAXBContext context = JAXBContext.newInstance(clase);
+            Marshaller m = context.createMarshaller();
+            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+            m.marshal(info, out);
+        } catch (Exception e) {
+            throw new TypoException("ruta");
+        }
         return true;
     }
 }

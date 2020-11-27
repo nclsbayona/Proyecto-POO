@@ -364,9 +364,7 @@ public class PantallaGaleria {
 									System.out.println("Error en el tamaño del codigo");
 								} catch (TypoException e) {
 									System.out.println(e.getMessage());
-								} catch (ArtworkNotPurchasedException e) {
-
-								} catch (ArtworkAlreadyPurchasedException | ArtworkExistsException e) {
+								} catch (Exception e) {
 									System.out.println(e.getMessage());
 								}
 								break;
@@ -383,9 +381,7 @@ public class PantallaGaleria {
 									System.out.println("Error en el tamaño del codigo");
 								} catch (TypoException e) {
 									System.out.println(e.getMessage());
-								} catch (ArtworkNotPurchasedException e) {
-									System.out.println(e.getMessage());
-								} catch (ArtworkAlreadyPurchasedException | ArtworkExistsException e) {
+								} catch (Exception e) {
 									System.out.println(e.getMessage());
 								}
 								break;
@@ -408,9 +404,7 @@ public class PantallaGaleria {
 									System.out.println("Error en el tamaño del codigo");
 								} catch (TypoException e) {
 									System.out.println(e.getMessage());
-								} catch (ArtworkNotPurchasedException e) {
-									System.out.println(e.getMessage());
-								} catch (ArtworkAlreadyPurchasedException | ArtworkExistsException e) {
+								} catch (Exception e) {
 									System.out.println(e.getMessage());
 								}
 								break;
@@ -426,9 +420,7 @@ public class PantallaGaleria {
 									System.out.println("Error en el tamaño del codigo");
 								} catch (TypoException e) {
 									System.out.println(e.getMessage());
-								} catch (ArtworkNotPurchasedException e) {
-									System.out.println(e.getMessage());
-								} catch (ArtworkAlreadyPurchasedException | ArtworkExistsException e) {
+								} catch (Exception e) {
 									System.out.println(e.getMessage());
 								}
 								break;
@@ -446,7 +438,7 @@ public class PantallaGaleria {
 									System.out.println("Error en el tamaño del codigo");
 								} catch (TypoException e) {
 									System.out.println(e.getMessage());
-								} catch (ArtworkNotPurchasedException e) {
+								} catch (Exception e){
 									System.out.println(e.getMessage());
 								}
 								break;

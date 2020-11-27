@@ -561,10 +561,10 @@ class ControlGaleriaTest {
 	void testModificarObra() {
 		Obra o;
 		try {
-			o = this.controlGaleria.buscarObra(1234567);
+			o = this.controlGaleria.buscarObra(Long.valueOf(1234567));
 			assertTrue(this.controlGaleria.modificarObra(o, 1, "1031456"));
-		} catch (CodeSizeException | TypoException | ArtworkNotPurchasedException | ArtworkExistsException
-				| ArtworkDoesntExistException e) {
+		} catch (CodeSizeException | TypoException | ArtworkExistsException
+				| ArtworkDoesntExistException | ArtworkAlreadyPurchasedException e) {
 			fail(e.getMessage());
 		}
 	}
