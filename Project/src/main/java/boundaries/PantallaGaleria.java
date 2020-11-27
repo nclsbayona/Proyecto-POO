@@ -438,7 +438,7 @@ public class PantallaGaleria {
 									System.out.println("Error en el tamaño del codigo");
 								} catch (TypoException e) {
 									System.out.println(e.getMessage());
-								} catch (Exception e){
+								} catch (Exception e) {
 									System.out.println(e.getMessage());
 								}
 								break;
@@ -831,7 +831,7 @@ public class PantallaGaleria {
 					break;
 				}
 				case 20: {
-					//Hidden Option
+					// Hidden Option
 					// LISTAR CLIENTES
 					HashSet<Cliente> c = new HashSet<>();
 					for (Map.Entry<Long, Cliente> a : this.controlGaleria.getListaClientes().entrySet()) {
@@ -899,8 +899,8 @@ public class PantallaGaleria {
 		try {
 			compras = this.controlGaleria.comprasAsociadasACuadro();
 
-		for (Compra c : compras)
-		System.out.println(c);
+			for (Compra c : compras)
+				System.out.println(c);
 		} catch (EmptyPurchasesListException e) {
 			System.out.println(e.getMessage());
 		}
@@ -921,21 +921,16 @@ public class PantallaGaleria {
 
 	// Imprimir listaObras
 	public void listaObras() {
-		System.out.println("Imprimiendo la lista de Obras:");
-		if (this.controlGaleria.getListaCompras().isEmpty()) {
-			for (Obra obra : this.controlGaleria.getListaObras()) {
-				System.out.println(obra);
-			}
-			return;
-		} else {
-			for (Obra obra : this.controlGaleria.getListaObras()) {
-				try {
-					this.controlGaleria.obraEnCompra(obra);
-
-				} catch (PurchaseDoesntExistException e) {
-					System.out.println(obra);
-				}
-			}
+		/*
+		 * System.out.println("Imprimiendo la lista de Obras:"); if
+		 * (this.controlGaleria.getListaCompras().isEmpty()) { for (Obra obra :
+		 * this.controlGaleria.getListaObras()) { System.out.println(obra); } return; }
+		 * else { for (Obra obra : this.controlGaleria.getListaObras()) { try {
+		 * this.controlGaleria.obraEnCompra(obra); } catch (PurchaseDoesntExistException
+		 * e) { System.out.println(obra); } } }
+		 */
+		for (Obra o : this.controlGaleria.listaObrasDisponibles()) {
+			System.out.println(o);
 		}
 	}
 

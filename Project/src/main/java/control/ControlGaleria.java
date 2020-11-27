@@ -299,6 +299,18 @@ public class ControlGaleria {
         return compra;
     }
 
+    public HashSet<Obra> listaObrasDisponibles(){
+        HashSet<Obra> obras=new HashSet<>();
+        for (Obra obra : this.getListaObras()) {
+            try {
+                this.obraEnCompra(obra);
+            } catch (PurchaseDoesntExistException e) {
+                obras.add(obra);
+            }
+        }
+        return obras;
+    }
+
     // Compras
     public boolean existeCodCompra(long cod) throws PurchaseDoesntExistException {
         for (Compra compra : this.listaCompras) {

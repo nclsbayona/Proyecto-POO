@@ -44,12 +44,12 @@ public class EXPPruebas {
                         Clasificacion.OBRA_REPRESENTATIVA));
                 fecha5.set(1984, 2, 3);
                 obras.add(new Escultura(7654321, "Machupichu", fecha5.getTime(), 15000, "10x2", "Marmol", 1550));
-                exportacion.exportarXML(ruta,"a", obras);
+                exportacion.exportarXML(ruta, "a", obras);
                 HashSet<Obra>cuadros=new HashSet<>();
                 cuadros.add(new Escultura(3456789, "Sociopata", fecha2.getTime(), 15000, "10x2", "Cemento", 2084));
                 if (fchooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION)
                 ruta=fchooser.getSelectedFile().toString();
-                exportacion.exportarXML(ruta,"p", cuadros);
+                exportacion.exportarXML(ruta, "p", cuadros);
                 HashSet<Compra>compras=new HashSet<>();
                 compras.add(new Compra(1));
                 compras.add(new Compra(2));

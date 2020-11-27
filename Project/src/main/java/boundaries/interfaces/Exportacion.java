@@ -1,13 +1,11 @@
 package boundaries.interfaces;
 
-import java.io.File;
 import java.util.Collection;
 import java.util.TreeSet;
 
-import javax.swing.JFileChooser;
-
 import control.ControlGaleria;
 import exceptions.TypoException;
+import javafx.stage.FileChooser;
 import model.Escultura;
 import model.Instalacion;
 import reportes.GestionArtistasReporte;
@@ -21,8 +19,10 @@ import model.Cuadro;;
 
 public class Exportacion {
 
+
     public <T> boolean exportarXML(String route, String opc, Collection<T> coleccion) throws TypoException {
         ControlGaleria cg = new ControlGaleria();
+        //Ubicación
         // Obras: a, p
         // Clientes: f
         // Compras: m, n, q

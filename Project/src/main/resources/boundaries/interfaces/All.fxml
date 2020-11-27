@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundaries.interfaces.control.ControlBotones">
+   <children>
+      <Button fx:id="butA" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#changeToA" text="A" />
+      <Button fx:id="butB" layoutX="93.0" layoutY="14.0" mnemonicParsing="false" onAction="#changeToB" text="B" />
+      <Button fx:id="butC" layoutX="196.0" layoutY="14.0" mnemonicParsing="false" onAction="#changeToC" text="C" />
+      <Button fx:id="butD" layoutX="318.0" layoutY="14.0" mnemonicParsing="false" onAction="#changeToD" text="D" />
+      <Button fx:id="butE" layoutX="398.0" layoutY="14.0" mnemonicParsing="false" onAction="#changeToE" text="E" />
+      <Button fx:id="butF" layoutX="500.0" layoutY="14.0" mnemonicParsing="false" onAction="#changeToF" text="F" />
+      <Button fx:id="butG" layoutX="66.0" layoutY="174.0" mnemonicParsing="false" onAction="#changeToG" text="G" />
+      <Button fx:id="butH" layoutX="167.0" layoutY="174.0" mnemonicParsing="false" onAction="#changeToH" text="H" />
+      <Button fx:id="butI" layoutX="255.0" layoutY="174.0" mnemonicParsing="false" onAction="#changeToI" text="I" />
+      <Button fx:id="butJ" layoutX="322.0" layoutY="174.0" mnemonicParsing="false" onAction="#changeToJ" text="J" />
+      <Button fx:id="butK" layoutX="387.0" layoutY="174.0" mnemonicParsing="false" onAction="#changeToK" text="K" />
+   </children>
+</AnchorPane>

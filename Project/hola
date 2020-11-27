@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gestionObrasReporte>
+    <Cuadro>
+        <codigoObra>5432198</codigoObra>
+        <dimensiones>10x8</dimensiones>
+        <fecha>1999-11-10T17:13:30.905-05:00</fecha>
+        <precioRef>20000.0</precioRef>
+        <titulo>Okalokas</titulo>
+        <clasificacion>OBRA_REPRESENTATIVA</clasificacion>
+        <tecnica>Pastel</tecnica>
+        <tema>Cubismo</tema>
+    </Cuadro>
+    <Cuadro>
+        <codigoObra>2435678</codigoObra>
+        <dimensiones>10x8</dimensiones>
+        <fecha>2010-06-20T17:13:30.905-05:00</fecha>
+        <precioRef>20000.0</precioRef>
+        <titulo>Eva pilla</titulo>
+        <clasificacion>OBRA_MAESTRA</clasificacion>
+        <tecnica>Acuarela</tecnica>
+        <tema>Polimorfismo</tema>
+    </Cuadro>
+    <Escultura>
+        <codigoObra>7654321</codigoObra>
+        <dimensiones>10x2</dimensiones>
+        <fecha>1984-03-03T17:13:30.905-05:00</fecha>
+        <precioRef>15000.0</precioRef>
+        <titulo>Machupichu</titulo>
+        <material>Marmol</material>
+        <peso>1550.0</peso>
+    </Escultura>
+    <Escultura>
+        <codigoObra>3456789</codigoObra>
+        <dimensiones>10x2</dimensiones>
+        <fecha>2001-09-06T17:13:30.905-05:00</fecha>
+        <precioRef>15000.0</precioRef>
+        <titulo>Sociopata</titulo>
+        <material>Cemento</material>
+        <peso>2084.0</peso>
+    </Escultura>
+    <Instalacion>
+        <codigoObra>1234567</codigoObra>
+        <dimensiones>20x5</dimensiones>
+        <fecha>2000-11-10T17:13:30.905-05:00</fecha>
+        <precioRef>20000.0</precioRef>
+        <titulo>Michuelo</titulo>
+        <descripcion>Esta es otra prueba</descripcion>
+    </Instalacion>
+    <Instalacion>
+        <codigoObra>1324567</codigoObra>
+        <dimensiones>20x5</dimensiones>
+        <fecha>2020-12-01T17:13:30.905-05:00</fecha>
+        <precioRef>20000.0</precioRef>
+        <titulo>La gorda</titulo>
+        <descripcion>Prueba de instalacion</descripcion>
+    </Instalacion>
+</gestionObrasReporte>
