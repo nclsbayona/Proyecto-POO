@@ -21,6 +21,7 @@ public class Compra implements Comparable<Compra> {
 
 	public Compra(long codigoCompra) {
 		this.codigoCompra = codigoCompra;
+		this.pagado=true;
 	}
 
 	public Compra(long codigoCompra, Calendar fecha, boolean pagado, Obra obra, Cliente cliente) {
@@ -115,11 +116,10 @@ public class Compra implements Comparable<Compra> {
 
 	@Override
 	public int compareTo(Compra o) {
-		// 
-		if (this.fecha.compareTo(o.getFecha()) > 0) {
+		if (this.codigoCompra > o.getCodigoCompra()) {
 			return 1;
 		}
-		if (this.fecha.compareTo(o.getFecha()) < 0) {
+		if (this.codigoCompra < o.getCodigoCompra()) {
 			return -1;
 		} else
 			return 0;

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gestionComprasReporte>
+    <Compra>
+        <codigoCompra>1</codigoCompra>
+        <pagado>false</pagado>
+    </Compra>
+    <Compra>
+        <codigoCompra>2</codigoCompra>
+        <pagado>false</pagado>
+    </Compra>
+</gestionComprasReporte>

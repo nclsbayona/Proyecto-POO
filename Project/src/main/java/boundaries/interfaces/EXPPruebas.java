@@ -4,6 +4,7 @@ import java.util.*;
 
 import exceptions.TypoException;
 import model.Clasificacion;
+import model.Compra;
 import model.Cuadro;
 import model.Escultura;
 import model.Instalacion;
@@ -39,6 +40,10 @@ public class EXPPruebas {
                 HashSet<Obra>cuadros=new HashSet<>();
                 cuadros.add(new Escultura(3456789, "Sociopata", fecha2.getTime(), 15000, "10x2", "Cemento", 2084));
                 exportacion.exportarXML("EsculturasSolamente.xml","p", cuadros);
+                HashSet<Compra>compras=new HashSet<>();
+                compras.add(new Compra(1));
+                compras.add(new Compra(2));
+                exportacion.exportarXML("ComprasSolo.xml", "m", compras);
         } catch (TypoException e) {
             System.out.println(e.getMessage());
         }   
