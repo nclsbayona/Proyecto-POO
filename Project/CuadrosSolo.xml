@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gestionObrasReporte>
+    <Escultura>
+        <codigoObra>3456789</codigoObra>
+        <dimensiones>10x2</dimensiones>
+        <fecha>2001-09-06T19:09:51.409-05:00</fecha>
+        <precioRef>15000.0</precioRef>
+        <titulo>Sociopata</titulo>
+        <material>Cemento</material>
+        <peso>2084.0</peso>
+    </Escultura>
+</gestionObrasReporte>
