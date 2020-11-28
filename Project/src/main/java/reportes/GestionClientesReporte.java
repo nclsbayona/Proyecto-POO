@@ -6,7 +6,7 @@ import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import model.Cliente;
 
-@XmlRootElement
+@XmlRootElement (name = "Clientes")
 public class GestionClientesReporte  {
 
 	private TreeSet<Cliente> list;

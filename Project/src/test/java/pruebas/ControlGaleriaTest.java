@@ -948,7 +948,7 @@ class ControlGaleriaTest {
 		Calendar hoy = Calendar.getInstance();
 		HashSet<String> retornar = new HashSet<>();
 		assertEquals(retornar,
-		this.controlGaleria.listadoDeCompra(String.valueOf(hoy.get(1)), String.valueOf(hoy.get(0))));
+				this.controlGaleria.listadoDeCompra(String.valueOf(hoy.get(1)), String.valueOf(hoy.get(0))));
 	}
 
 	@Test
@@ -960,10 +960,127 @@ class ControlGaleriaTest {
 			obr = new Cuadro(5432198, "Okalokas", Calendar.getInstance().getTime(), 20000, "10x8", "Cubismo", "Pastel",
 					Clasificacion.OBRA_REPRESENTATIVA);
 			this.controlGaleria.realizarCompra(clien, obr);
-		} catch (TypoException | ArtworkDoesntExistException | ClientDoesntExistException
-				 e) {
+		} catch (TypoException | ArtworkDoesntExistException | ClientDoesntExistException e) {
 		}
 		Calendar hoy = Calendar.getInstance();
 		assertNotNull(this.controlGaleria.listadoDeCompra(String.valueOf(hoy.get(1)), String.valueOf(hoy.get(0))));
+	}
+
+	@Test
+	void testInsertarObra3() {
+		try {
+			this.controlGaleria.insertarObra("Titulo", "25000000", "11910", "1342916", "15x15", "2006", "05", "3",
+					new Artista(1000512331, "Nicolas", "Castro Sepulveda", Calendar.getInstance(), 14231233), "Hola");
+		} catch (TypoException e) {
+			fail(e.getMessage());
+		}
+	}
+
+	@Test
+	void testInsertarObra4() {
+		assertThrows(TypoException.class, () -> {
+			this.controlGaleria.insertarObra("Titulo", "25000000", "11910", "1234567", "15x15", "2006", "05", "3",
+					new Artista(1000512331, "Nicolas", "Castro Sepulveda", Calendar.getInstance(), 14231233), "Hola");
+		});
+	}
+
+	@Test
+	void testInsertarObra6() {
+		try {
+			this.controlGaleria.insertarObra("Titulo", "25000000", "11910", "1342916", "15x15", "2006", "05", "3",
+					new Artista(1000512331, "Nicolas", "Castro Sepulveda", Calendar.getInstance(), 14231233), "Hola");
+		} catch (TypoException e) {
+			fail(e.getMessage());
+		}
+	}
+
+	@Test
+	void testInsertarObra5() {
+		assertThrows(TypoException.class, () -> {
+			this.controlGaleria.insertarObra("Titulo", "25000000", "11910", "1234567", "15x15", "2006", "05", "3",
+					new Artista(1000512331, "Nicolas", "Castro Sepulveda", Calendar.getInstance(), 14231233), "Hola");
+		});
+	}
+
+	@Test
+	void testInsertarObra7() {
+		try {
+			this.controlGaleria.insertarObra("Titulo", "25000000", "11910", "1342916", "15x15", "2006", "05", "3",
+					new Artista(1000512331, "Nicolas", "Castro Sepulveda", Calendar.getInstance(), 14231233), "Hola");
+		} catch (TypoException e) {
+			fail(e.getMessage());
+		}
+	}
+
+	@Test
+	void testInsertarObra8() {
+		assertThrows(TypoException.class, () -> {
+			this.controlGaleria.insertarObra("Titulo", "25000000", "11910", "1234567", "15x15", "2006", "05", "3",
+					new Artista(1000512331, "Nicolas", "Castro Sepulveda", Calendar.getInstance(), 14231233), "Hola");
+		});
+	}
+
+	@Test
+	void testInsertarObra9() {
+		try {
+			this.controlGaleria.insertarObra("Titulo", "25000000", "11910", "1342916", "15x15", "2006", "05", "3",
+					"Nicolas", "Castro Sepulveda", "314231233", "Tema", "Hola", Clasificacion.OBRA_MAESTRA);
+		} catch (TypoException e) {
+			fail(e.getMessage());
+		}
+	}
+
+	@Test
+	void testInsertarObra10() {
+		assertThrows(TypoException.class, () -> {
+			this.controlGaleria.insertarObra("Titulo", "25000000", "11910", "1234567", "15x15", "2006", "05", "3",
+					"Nicolas", "Castro Sepulveda", "314231233", "Tema", "Hola", Clasificacion.OBRA_MAESTRA);
+		});
+	}
+
+	@Test
+	void testInsertarObra11() {
+		try {
+			this.controlGaleria.insertarObra("Titulo", "25000000", "11910", "1342916", "15x15", "2006", "05", "3",
+					"Nicolas", "Castro Sepulveda", "314231233", "Tema", 15000);
+		} catch (TypoException e) {
+			fail(e.getMessage());
+		}
+	}
+
+	@Test
+	void testInsertarObra12() {
+		assertThrows(TypoException.class, () -> {
+			this.controlGaleria.insertarObra("Titulo", "25000000", "11910", "1234567", "15x15", "2006", "05", "3",
+					"Nicolas", "Castro Sepulveda", "314231233", "Tema", 15000);
+		});
+	}
+
+	@Test
+	void testInsertarObra13() {
+		try {
+			this.controlGaleria.insertarObra("Titulo", "25000000", "11910", "1342916", "15x15", "2006", "05", "3",
+					"Nicolas", "Castro Sepulveda", "314231233", "Tema");
+		} catch (TypoException e) {
+			fail(e.getMessage());
+		}
+	}
+
+	@Test
+	void testInsertarObra14() {
+		assertThrows(TypoException.class, () -> {
+			this.controlGaleria.insertarObra("Titulo", "25000000", "11910", "1234567", "15x15", "2006", "05", "3",
+					"Nicolas", "Castro Sepulveda", "314231233", "Tema");
+		});
+
+	}
+
+	@Test
+	void testInsertarObra15() {
+		assertThrows(TypoException.class, () -> {
+			this.controlGaleria.insertarObra("Titulo", "25000000", "11910", "1234567", "15x15", "2006", "05", "3",
+			new Artista(1000512331, "Nicolas", "Castro Sepulveda", Calendar.getInstance(), 14231233),
+					"Tema", 15000);
+		});
 	}
 }

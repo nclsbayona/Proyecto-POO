@@ -7,7 +7,7 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 import model.Cuadro;
 import model.Escultura;
 import model.Instalacion;
-@XmlRootElement
+@XmlRootElement (name = "Obras")
 public class GestionObrasReporte {
 	private TreeSet<Cuadro> listaCuadros;
 	private TreeSet<Escultura> listaEsculturas;

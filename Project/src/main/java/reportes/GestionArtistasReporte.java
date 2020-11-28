@@ -5,7 +5,7 @@ import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import model.Artista;
 
-@XmlRootElement
+@XmlRootElement (name = "Artistas")
 public class GestionArtistasReporte {
 	private TreeSet<Artista> list;
 
