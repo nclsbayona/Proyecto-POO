@@ -947,7 +947,23 @@ class ControlGaleriaTest {
 	void testListadoDeCompras1() {
 		Calendar hoy = Calendar.getInstance();
 		HashSet<String> retornar = new HashSet<>();
-		assertNotEquals(retornar,
+		assertEquals(retornar,
 		this.controlGaleria.listadoDeCompra(String.valueOf(hoy.get(1)), String.valueOf(hoy.get(0))));
+	}
+
+	@Test
+	void testVerListadoDeCompras4() {
+		Cliente clien = new Cliente(1, Long.valueOf(1422373000), "Alfredo", "Santamaria", "2085 NW Traverse Street",
+				6543212);
+		Obra obr;
+		try {
+			obr = new Cuadro(5432198, "Okalokas", Calendar.getInstance().getTime(), 20000, "10x8", "Cubismo", "Pastel",
+					Clasificacion.OBRA_REPRESENTATIVA);
+			this.controlGaleria.realizarCompra(clien, obr);
+		} catch (TypoException | ArtworkDoesntExistException | ClientDoesntExistException
+				 e) {
+		}
+		Calendar hoy = Calendar.getInstance();
+		assertNotNull(this.controlGaleria.listadoDeCompra(String.valueOf(hoy.get(1)), String.valueOf(hoy.get(0))));
 	}
 }
