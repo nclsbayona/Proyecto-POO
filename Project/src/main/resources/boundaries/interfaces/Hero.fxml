@@ -33,7 +33,10 @@
             </Tab>
           <Tab text="Cliente">
                <content>
-                  <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="btn_ExportarF" layoutX="38.0" layoutY="38.0" mnemonicParsing="false" onAction="#exportarF" text="Exportar" />
+                     </children></AnchorPane>
                </content>
             </Tab>
           <Tab text="Compra">
@@ -49,14 +52,19 @@
                         <ListView layoutX="386.0" layoutY="43.0" prefHeight="280.0" prefWidth="200.0" />
                         <Text layoutX="38.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LISTA DE OBRA BUSCADA" />
                         <Text layoutX="405.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LISTA DE OBRAS COMPRADAS" />
-                        <Button layoutX="466.0" layoutY="330.0" mnemonicParsing="false" text="Eliminar" />
+                        <Button layoutX="508.0" layoutY="330.0" mnemonicParsing="false" text="Eliminar" />
+                        <Button fx:id="btn_ExportarM" layoutX="405.0" layoutY="330.0" mnemonicParsing="false" onAction="#exportarM" text="Exportar" />
                      </children>
                   </AnchorPane>
                </content>
             </Tab>
             <Tab fx:id="tabExportar" text="Artista">
               <content>
-                <AnchorPane fx:id="l" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <AnchorPane fx:id="l" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="btn_ExportarO" layoutX="31.0" layoutY="28.0" mnemonicParsing="false" onAction="#exportarO" text="Exportar" />
+                     </children>
+                  </AnchorPane>
               </content>
             </Tab>
         </tabs>
