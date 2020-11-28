@@ -224,6 +224,29 @@ class ControlGaleriaTest {
 		}
 	}
 
+	// No
+	@Test
+	void testBuscarArtista3() {
+		HashMap<Long, Artista> listaArtistas = null;
+		this.controlGaleria.setListaArtistas(listaArtistas);
+		assertThrows(EmptyArtistListException.class, () -> {
+			this.controlGaleria.buscarArtista(Long.valueOf("1000471976"));
+		});
+	}
+
+	// Funciona
+	@Test
+	void testListadoObrasDisponibles() {
+		assertEquals(this.controlGaleria.getListaObras(), this.controlGaleria.listaObrasDisponibles());
+	}
+
+	// No funciona
+	@Test
+	void testListadoObrasDisponibles2() {
+		this.testRealizarCompra();
+		assertNotEquals(this.controlGaleria.getListaObras(), this.controlGaleria.listaObrasDisponibles());
+	}
+
 	// No funciona
 	@Test
 	void testBuscarArtista2() {
@@ -563,8 +586,8 @@ class ControlGaleriaTest {
 		try {
 			o = this.controlGaleria.buscarObra(Long.valueOf(1234567));
 			assertTrue(this.controlGaleria.modificarObra(o, 1, "1031456"));
-		} catch (CodeSizeException | TypoException | ArtworkExistsException
-				| ArtworkDoesntExistException | ArtworkAlreadyPurchasedException e) {
+		} catch (CodeSizeException | TypoException | ArtworkExistsException | ArtworkDoesntExistException
+				| ArtworkAlreadyPurchasedException e) {
 			fail(e.getMessage());
 		}
 	}
@@ -845,12 +868,12 @@ class ControlGaleriaTest {
 		try {
 			obr = new Cuadro(5432198, "Okalokas", Calendar.getInstance().getTime(), 20000, "10x8", "Cubismo", "Pastel",
 					Clasificacion.OBRA_REPRESENTATIVA);
-					this.controlGaleria.realizarCompra(clien, obr);
+			this.controlGaleria.realizarCompra(clien, obr);
 			HashSet<Compra> compras = new HashSet<Compra>();
-		assertNotEquals(compras, this.controlGaleria.comprasAsociadasACuadro());
+			assertNotEquals(compras, this.controlGaleria.comprasAsociadasACuadro());
 		} catch (TypoException | ArtworkDoesntExistException | ClientDoesntExistException
 				| EmptyPurchasesListException e) {
-					fail(e.getMessage());
+			fail(e.getMessage());
 		}
 	}
 
@@ -858,21 +881,24 @@ class ControlGaleriaTest {
 	void testStartDay() {
 		Cliente clien = new Cliente(1, Long.valueOf(1422373000), "Alfredo", "Santamaria", "2085 NW Traverse Street",
 				6543212);
-			HashSet<Cliente> clientes = new HashSet<>();
-			clientes.add(clien);
-		assertNotEquals(this.controlGaleria.getListaClientes(),clientes);
+		HashSet<Cliente> clientes = new HashSet<>();
+		clientes.add(clien);
+		assertNotEquals(this.controlGaleria.getListaClientes(), clientes);
 	}
 
 	@Test
 	void testStartDay2() {
 		HashMap<Long, Cliente> clientes = new HashMap<Long, Cliente>();
-        clientes.put(Long.valueOf(1422373000),new Cliente(1, Long.valueOf(1422373000), "Alfredo", "Santamaria", "2085 NW Traverse Street", 6543212));
-        clientes.put(Long.valueOf(1293723000),new Cliente(2, Long.valueOf(1293723000), "Fred", "Jones", "20822 SW Luxury Park", 98765432));
-        clientes.put(Long.valueOf(1183937000), new Cliente(6, Long.valueOf(1183937000), "Juan", "Acosta", "Calle 100 #20-29", 3208426));
-        clientes.put(Long.valueOf(1001110000), new Cliente(3, Long.valueOf(1001110000), "Lucas", "Ramirez", "Diagonal 68 #78-03", 3208426));
-		assertEquals(this.controlGaleria.getListaClientes(),clientes);
+		clientes.put(Long.valueOf(1422373000),
+				new Cliente(1, Long.valueOf(1422373000), "Alfredo", "Santamaria", "2085 NW Traverse Street", 6543212));
+		clientes.put(Long.valueOf(1293723000),
+				new Cliente(2, Long.valueOf(1293723000), "Fred", "Jones", "20822 SW Luxury Park", 98765432));
+		clientes.put(Long.valueOf(1183937000),
+				new Cliente(6, Long.valueOf(1183937000), "Juan", "Acosta", "Calle 100 #20-29", 3208426));
+		clientes.put(Long.valueOf(1001110000),
+				new Cliente(3, Long.valueOf(1001110000), "Lucas", "Ramirez", "Diagonal 68 #78-03", 3208426));
+		assertEquals(this.controlGaleria.getListaClientes(), clientes);
 	}
-
 
 	@Test
 	void testVerListadoDeCompras2() {
@@ -882,19 +908,21 @@ class ControlGaleriaTest {
 		try {
 			obr = new Cuadro(5432198, "Okalokas", Calendar.getInstance().getTime(), 20000, "10x8", "Cubismo", "Pastel",
 					Clasificacion.OBRA_REPRESENTATIVA);
-					this.controlGaleria.realizarCompra(clien, obr);
+			this.controlGaleria.realizarCompra(clien, obr);
 			HashSet<Compra> compras = new HashSet<Compra>();
-		assertNotEquals(compras, this.controlGaleria.comprasAsociadasACuadro());
+			assertNotEquals(compras, this.controlGaleria.comprasAsociadasACuadro());
 		} catch (TypoException | ArtworkDoesntExistException | ClientDoesntExistException
-				| EmptyPurchasesListException e) {}
-		Calendar hoy=Calendar.getInstance();
+				| EmptyPurchasesListException e) {
+		}
+		Calendar hoy = Calendar.getInstance();
 		assertNotNull(this.controlGaleria.listadoDeCompra(String.valueOf(hoy.get(1)), String.valueOf(hoy.get(0))));
 	}
 
 	@Test
 	void testVerListadoDeCompras() {
-		Calendar hoy=Calendar.getInstance();
+		Calendar hoy = Calendar.getInstance();
 		HashSet<String> retornar = new HashSet<>();
-		assertEquals(retornar, this.controlGaleria.listadoDeCompra(String.valueOf(hoy.get(1)), String.valueOf(hoy.get(0))));
+		assertEquals(retornar,
+				this.controlGaleria.listadoDeCompra(String.valueOf(hoy.get(1)), String.valueOf(hoy.get(0))));
 	}
 }

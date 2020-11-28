@@ -14,8 +14,7 @@ import reportes.GestionObrasReporte;
 import model.Artista;
 import model.Cliente;
 import model.Compra;
-import model.Cuadro;;
-
+import model.Cuadro;
 public class Exportacion {
 
 
