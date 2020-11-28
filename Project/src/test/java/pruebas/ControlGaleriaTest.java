@@ -293,10 +293,20 @@ class ControlGaleriaTest {
 
 	@Test // Ver listado artistas mal
 	void testVerListadoArtistas3() {
-		assertThrows(EmptyPurchasesListException.class, () -> {this.controlGaleria.verListadoArtistas().size();});
+		assertThrows(EmptyPurchasesListException.class, () -> {
+			this.controlGaleria.verListadoArtistas().size();
+		});
 	}
 
-	@Test
+	@Test // Ver listado artistas bien
+	void testVerListadoArtistas4() {
+		this.testRealizarCompra();
+		try {
+			assertNotEquals(EmptyPurchasesListException.class, this.controlGaleria.verListadoArtistas().size());
+		} catch (EmptyPurchasesListException e) {
+			fail(e.getMessage());
+		}
+	}
 
 	@Test // Buscar compra, debe encontrarlo
 	void testBuscarCompra() {
@@ -931,5 +941,13 @@ class ControlGaleriaTest {
 		HashSet<String> retornar = new HashSet<>();
 		assertEquals(retornar,
 				this.controlGaleria.listadoDeCompra(String.valueOf(hoy.get(1)), String.valueOf(hoy.get(0))));
+	}
+
+	@Test
+	void testListadoDeCompras1() {
+		Calendar hoy = Calendar.getInstance();
+		HashSet<String> retornar = new HashSet<>();
+		assertNotEquals(retornar,
+		this.controlGaleria.listadoDeCompra(String.valueOf(hoy.get(1)), String.valueOf(hoy.get(0))));
 	}
 }
