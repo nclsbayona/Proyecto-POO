@@ -19,14 +19,15 @@
                      <children>
                         <Text layoutX="39.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LISTA OBRAS DISPONIBLES" wrappingWidth="149.75" />
                         <ListView fx:id="ListaObras" layoutX="14.0" layoutY="61.0" prefHeight="204.0" prefWidth="200.0" />
-                        <Button layoutX="121.0" layoutY="284.0" mnemonicParsing="false" text="Seleccionar" />
+                        <Button layoutX="138.0" layoutY="284.0" mnemonicParsing="false" text="Seleccionar" />
                         <TextField layoutX="224.0" layoutY="61.0" prefHeight="204.0" prefWidth="178.0" />
                         <TextField layoutX="226.0" layoutY="26.0" promptText="Obra Seleccionada" />
                         <Button layoutX="419.0" layoutY="138.0" mnemonicParsing="false" text="Modificar" />
                         <Button layoutX="289.0" layoutY="284.0" mnemonicParsing="false" text="Borrar" />
                         <Text layoutX="429.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MODIFICAR O CREAR" />
                         <Button layoutX="507.0" layoutY="138.0" mnemonicParsing="false" text="Crear" />
-                        <Button fx:id="btn_Exportar" layoutX="39.0" layoutY="284.0" mnemonicParsing="false" onAction="#exportarA" text="Exportar" />
+                        <Button fx:id="btn_Exportar" layoutX="14.0" layoutY="284.0" mnemonicParsing="false" onAction="#exportarA" text="Exportar" />
+                        <Button fx:id="btn_ListarObras" layoutX="83.0" layoutY="284.0" mnemonicParsing="false" onAction="#listarObras" text="Listar" />
                      </children>
                   </AnchorPane>
               </content>

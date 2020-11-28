@@ -698,4 +698,6 @@ public class ControlGaleria {
         }
         return true;
     }
+
+
 }
