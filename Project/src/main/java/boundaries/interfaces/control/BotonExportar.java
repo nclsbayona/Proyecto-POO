@@ -15,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.stage.FileChooser;
+import model.Cliente;
 import model.Obra;
 
 public class BotonExportar {
@@ -103,12 +104,24 @@ public class BotonExportar {
     private Button btn_ListarObras;
     @FXML
     private ListView<String> ListaObras;
+    @FXML
+    private Button btn_ListarClientes;
+    @FXML
+    private ListView<String> ListarClientes;
 
     @FXML
     void listarObras(ActionEvent event) throws TypoException {
         ControlGaleria cGaleria = new ControlGaleria();
         for(Obra o: cGaleria.listaObrasDisponibles()){
             ListaObras.getItems().add(o.getTitulo());
+        }
+
+    }
+    @FXML
+    void listarClientes(ActionEvent event) throws TypoException {
+        ControlGaleria cGaleria = new ControlGaleria();
+        for(Cliente c: cGaleria.getListaClientes().values()){
+            ListarClientes.getItems().add(c.getNombre());
         }
 
     }
@@ -125,6 +138,7 @@ public class BotonExportar {
         //........................................................................................................./
 
         assert btn_ListarObras != null : "fx:id=\"btn_ListarObras\" was not injected: check your FXML file 'Hero.fxml'.";
+        assert btn_ListarClientes != null : "fx:id=\"btn_ListarClientes\" was not injected: check your FXML file 'Hero.fxml'.";
 
     }
 }

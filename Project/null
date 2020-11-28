@@ -1,19 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<gestionArtistasReporte>
-    <Artista>
-        <apellidos>Castro Sepulveda</apellidos>
-        <cedula>1000512331</cedula>
-        <codigoArtista>0</codigoArtista>
-        <fechaNacimiento>2001-12-11T20:36:18.276-05:00</fechaNacimiento>
-        <nombre>Natalia</nombre>
-        <telefono>314231233</telefono>
-    </Artista>
-    <Artista>
-        <apellidos>Herrera Guaitero</apellidos>
-        <cedula>1000471976</cedula>
-        <codigoArtista>0</codigoArtista>
-        <fechaNacimiento>2001-12-11T20:36:18.276-05:00</fechaNacimiento>
-        <nombre>Sebastian</nombre>
-        <telefono>350612646</telefono>
-    </Artista>
-</gestionArtistasReporte>
+<gestionClientesReporte>
+    <Cliente>
+        <apellidos>Santamaria</apellidos>
+        <cedula>1422373000</cedula>
+        <codigoCliente>1</codigoCliente>
+        <direccionEntrega>2085 NW Traverse Street</direccionEntrega>
+        <nombre>Alfredo</nombre>
+        <telefono>6543212</telefono>
+    </Cliente>
+    <Cliente>
+        <apellidos>Jones</apellidos>
+        <cedula>1293723000</cedula>
+        <codigoCliente>2</codigoCliente>
+        <direccionEntrega>20822 SW Luxury Park</direccionEntrega>
+        <nombre>Fred</nombre>
+        <telefono>98765432</telefono>
+    </Cliente>
+    <Cliente>
+        <apellidos>Ramirez</apellidos>
+        <cedula>1001110000</cedula>
+        <codigoCliente>3</codigoCliente>
+        <direccionEntrega>Diagonal 68 #78-03</direccionEntrega>
+        <nombre>Lucas</nombre>
+        <telefono>3208426</telefono>
+    </Cliente>
+    <Cliente>
+        <apellidos>Acosta</apellidos>
+        <cedula>1183937000</cedula>
+        <codigoCliente>6</codigoCliente>
+        <direccionEntrega>Calle 100 #20-29</direccionEntrega>
+        <nombre>Juan</nombre>
+        <telefono>3208426</telefono>
+    </Cliente>
+</gestionClientesReporte>
