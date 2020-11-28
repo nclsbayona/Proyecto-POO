@@ -13,7 +13,7 @@ import javafx.scene.control.ListView;
 import javafx.stage.FileChooser;
 import model.Cliente;
 import model.Obra;
-public class BotonExportar {
+public class Botones {
     ControlGaleria cGaleria;
     Exportacion cExportacion;
     FileChooser fileChooser;
