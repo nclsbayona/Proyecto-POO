@@ -6,10 +6,16 @@ import java.util.ResourceBundle;
 import boundaries.interfaces.Exportacion;
 import control.ControlGaleria;
 import exceptions.TypoException;
+import javafx.beans.Observable;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.ObservableSet;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.stage.FileChooser;
+import model.Obra;
 
 public class BotonExportar {
 
@@ -19,6 +25,7 @@ public class BotonExportar {
     @FXML
     private URL location;
 
+//....................BONTON EXPORTAR ........................./
     @FXML
     private Button btn_Exportar;
     @FXML
@@ -85,14 +92,39 @@ public class BotonExportar {
         }
     }
 
+
+
+//....................FIN BONTON EXPORTAR ........................./
+
+
+
+    //....................BONTON LISTAR ........................./
+    @FXML
+    private Button btn_ListarObras;
+    @FXML
+    private ListView<String> ListaObras;
+
+    @FXML
+    void listarObras(ActionEvent event) throws TypoException {
+        ControlGaleria cGaleria = new ControlGaleria();
+        for(Obra o: cGaleria.listaObrasDisponibles()){
+            ListaObras.getItems().add(o.getTitulo());
+        }
+
+    }
+
+    //....................FIN BONTON LISTAR ........................./
+
     @FXML
     void initialize() {
+        //........................................................................................................./
         assert btn_Exportar != null : "fx:id=\"btn_Exportar\" was not injected: check your FXML file 'Hero.fxml'.";
         assert btn_ExportarF != null : "fx:id=\"btn_ExportarF\" was not injected: check your FXML file 'Hero.fxml'.";
         assert btn_ExportarM != null : "fx:id=\"btn_ExportarM\" was not injected: check your FXML file 'Hero.fxml'.";
         assert btn_ExportarO != null : "fx:id=\"btn_ExportarO\" was not injected: check your FXML file 'Hero.fxml'.";
+        //........................................................................................................./
+
+        assert btn_ListarObras != null : "fx:id=\"btn_ListarObras\" was not injected: check your FXML file 'Hero.fxml'.";
 
     }
-
-
 }
