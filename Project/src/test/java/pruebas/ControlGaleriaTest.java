@@ -291,6 +291,13 @@ class ControlGaleriaTest {
 		}
 	}
 
+	@Test // Ver listado artistas mal
+	void testVerListadoArtistas3() {
+		assertThrows(EmptyPurchasesListException.class, () -> {this.controlGaleria.verListadoArtistas().size();});
+	}
+
+	@Test
+
 	@Test // Buscar compra, debe encontrarlo
 	void testBuscarCompra() {
 		try {
