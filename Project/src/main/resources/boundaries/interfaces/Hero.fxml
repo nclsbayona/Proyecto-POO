@@ -9,8 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Text?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundaries.interfaces.control.BotonExportar">
    <children>
       <TabPane prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
@@ -20,18 +19,14 @@
                      <children>
                         <Text layoutX="39.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LISTA OBRAS DISPONIBLES" wrappingWidth="149.75" />
                         <ListView fx:id="ListaObras" layoutX="14.0" layoutY="61.0" prefHeight="204.0" prefWidth="200.0" />
-                        <Button layoutX="76.0" layoutY="284.0" mnemonicParsing="false" text="Seleccionar" />
+                        <Button layoutX="121.0" layoutY="284.0" mnemonicParsing="false" text="Seleccionar" />
                         <TextField layoutX="224.0" layoutY="61.0" prefHeight="204.0" prefWidth="178.0" />
                         <TextField layoutX="226.0" layoutY="26.0" promptText="Obra Seleccionada" />
-                        <Button layoutX="412.0" layoutY="284.0" mnemonicParsing="false" text="Modificar" />
+                        <Button layoutX="419.0" layoutY="138.0" mnemonicParsing="false" text="Modificar" />
                         <Button layoutX="289.0" layoutY="284.0" mnemonicParsing="false" text="Borrar" />
                         <Text layoutX="429.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MODIFICAR O CREAR" />
-                        <TextField layoutX="412.0" layoutY="61.0" promptText="Titulo" />
-                        <TextField layoutX="412.0" layoutY="98.0" promptText="Autor" />
-                        <TextField layoutX="412.0" layoutY="138.0" promptText="Codigo" />
-                        <TextField layoutX="412.0" layoutY="179.0" promptText="Fecha" />
-                        <TextField layoutX="412.0" layoutY="221.0" promptText="Dimencion" />
-                        <Button layoutX="518.0" layoutY="284.0" mnemonicParsing="false" text="Crear" />
+                        <Button layoutX="507.0" layoutY="138.0" mnemonicParsing="false" text="Crear" />
+                        <Button fx:id="btn_Exportar" layoutX="39.0" layoutY="284.0" mnemonicParsing="false" onAction="#exportarA" text="Exportar" />
                      </children>
                   </AnchorPane>
               </content>
@@ -58,6 +53,11 @@
                      </children>
                   </AnchorPane>
                </content>
+            </Tab>
+            <Tab fx:id="tabExportar" text="Artista">
+              <content>
+                <AnchorPane fx:id="l" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              </content>
             </Tab>
         </tabs>
       </TabPane>

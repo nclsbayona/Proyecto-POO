@@ -20,7 +20,7 @@ public class BotonExportar {
     private URL location;
 
     @FXML
-    private Button butA;
+    private Button btn_Exportar;
 
     @FXML
     void exportarA(ActionEvent event) {
@@ -39,7 +39,7 @@ public class BotonExportar {
 
     @FXML
     void initialize() {
-        assert butA != null : "fx:id=\"butE\" was not injected: check your FXML file 'UIVacia.fxml'.";
+        assert btn_Exportar != null : "fx:id=\"btn_Exportar\" was not injected: check your FXML file 'Hero.fxml'.";
 
     }
 }
