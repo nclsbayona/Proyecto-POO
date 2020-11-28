@@ -1083,4 +1083,40 @@ class ControlGaleriaTest {
 					"Tema", 15000);
 		});
 	}
+
+	@Test
+	void testGetGestionClientes(){
+		this.controlGaleria.setGestionClientes(null);
+		assertNull(this.controlGaleria.getGestionClientes());
+	}
+
+	@Test
+	void testGetGestionObras(){
+		this.controlGaleria.setGestionObras(null);
+		assertNull(this.controlGaleria.getGestionObras());
+	}
+
+	@Test
+	void testGetListaClientes(){
+		this.controlGaleria.setListaClientes(null);
+		assertNull(this.controlGaleria.getListaClientes());
+	}
+
+	@Test
+	void testGetListaArtistas(){
+		this.controlGaleria.setListaArtistas(null);
+		assertNull(this.controlGaleria.getListaArtistas());
+	}
+
+	@Test
+	void testGetListaCompras(){
+		this.controlGaleria.setListaCompras(null);
+		assertNull(this.controlGaleria.getListaCompras());
+	}
+
+	@Test
+	void testGetListaObras(){
+		this.controlGaleria.setListaObras(null);
+		assertNull(this.controlGaleria.getListaObras());
+	}
 }
