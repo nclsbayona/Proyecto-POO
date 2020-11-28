@@ -6,10 +6,6 @@ import java.util.ResourceBundle;
 import boundaries.interfaces.Exportacion;
 import control.ControlGaleria;
 import exceptions.TypoException;
-import javafx.beans.Observable;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.collections.ObservableSet;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -17,8 +13,10 @@ import javafx.scene.control.ListView;
 import javafx.stage.FileChooser;
 import model.Cliente;
 import model.Obra;
-
 public class BotonExportar {
+    ControlGaleria cGaleria;
+    Exportacion cExportacion;
+    FileChooser fileChooser;
 
     @FXML
     private ResourceBundle resources;
@@ -38,56 +36,35 @@ public class BotonExportar {
 
     @FXML
     void exportarA(ActionEvent event) {
-        String ruta = "";
-        ControlGaleria cGaleria = new ControlGaleria();
-        Exportacion cExportacion = new Exportacion();
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Select Report File");
-        ruta = String.valueOf(fileChooser.showSaveDialog(null));
         try {
-            cExportacion.exportarXML(ruta, "a", cGaleria.listaObrasDisponibles());
+            this.cExportacion.exportarXML(String.valueOf(fileChooser.showSaveDialog(null)), "a", this.cGaleria.listaObrasDisponibles());
         } catch (TypoException e) {
             e.printStackTrace();
         }
     }
     @FXML
     void exportarF(ActionEvent event) {
-        String ruta = "";
-        ControlGaleria cGaleria = new ControlGaleria();
-        Exportacion cExportacion = new Exportacion();
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Select Report File");
-        ruta = String.valueOf(fileChooser.showSaveDialog(null));
+    
         try {
-            cExportacion.exportarXML(ruta, "f", cGaleria.getListaClientes().values());
+            this.cExportacion.exportarXML(String.valueOf(fileChooser.showSaveDialog(null)), "f", this.cGaleria.getListaClientes().values());
         } catch (TypoException e) {
             e.printStackTrace();
         }
     }
+    
     @FXML
     void exportarM(ActionEvent event) {
-        String ruta = "";
-        ControlGaleria cGaleria = new ControlGaleria();
-        Exportacion cExportacion = new Exportacion();
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Select Report File");
-        ruta = String.valueOf(fileChooser.showSaveDialog(null));
         try {
-            cExportacion.exportarXML(ruta, "m", cGaleria.getListaCompras());
+            this.cExportacion.exportarXML(String.valueOf(fileChooser.showSaveDialog(null)), "m", this.cGaleria.getListaCompras());
         } catch (TypoException e) {
             e.printStackTrace();
         }
     }
+
     @FXML
     void exportarO(ActionEvent event) {
-        String ruta = "";
-        ControlGaleria cGaleria = new ControlGaleria();
-        Exportacion cExportacion = new Exportacion();
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Select Report File");
-        ruta = String.valueOf(fileChooser.showSaveDialog(null));
         try {
-            cExportacion.exportarXML(ruta, "o", cGaleria.getListaArtistas().values());
+            this.cExportacion.exportarXML(String.valueOf(fileChooser.showSaveDialog(null)), "o", this.cGaleria.getListaArtistas().values());
         } catch (TypoException e) {
             e.printStackTrace();
         }
@@ -111,16 +88,14 @@ public class BotonExportar {
 
     @FXML
     void listarObras(ActionEvent event) throws TypoException {
-        ControlGaleria cGaleria = new ControlGaleria();
-        for(Obra o: cGaleria.listaObrasDisponibles()){
+        for(Obra o: this.cGaleria.listaObrasDisponibles()){
             ListaObras.getItems().add(o.getTitulo());
         }
 
     }
     @FXML
     void listarClientes(ActionEvent event) throws TypoException {
-        ControlGaleria cGaleria = new ControlGaleria();
-        for(Cliente c: cGaleria.getListaClientes().values()){
+        for(Cliente c: this.cGaleria.getListaClientes().values()){
             ListarClientes.getItems().add(c.getNombre());
         }
 
@@ -130,6 +105,10 @@ public class BotonExportar {
 
     @FXML
     void initialize() {
+        this.cGaleria = new ControlGaleria();
+        this.cExportacion = new Exportacion();
+        this.fileChooser = new FileChooser();
+        this.fileChooser.setTitle("Select Report File");
         //........................................................................................................./
         assert btn_Exportar != null : "fx:id=\"btn_Exportar\" was not injected: check your FXML file 'Hero.fxml'.";
         assert btn_ExportarF != null : "fx:id=\"btn_ExportarF\" was not injected: check your FXML file 'Hero.fxml'.";
