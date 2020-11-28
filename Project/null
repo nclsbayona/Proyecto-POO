@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<gestionClientesReporte>
+<Clientes>
     <Cliente>
         <apellidos>Santamaria</apellidos>
         <cedula>1422373000</cedula>
@@ -32,4 +32,4 @@
         <nombre>Juan</nombre>
         <telefono>3208426</telefono>
     </Cliente>
-</gestionClientesReporte>
+</Clientes>
