@@ -660,6 +660,8 @@ public class ControlGaleria {
         HashMap<Artista, Integer> mapsold = new HashMap<Artista, Integer>();
         HashSet<Artista> artistas = new HashSet<Artista>();
         Map<Integer, Artista> sort = new TreeMap<Integer, Artista>(Collections.reverseOrder());
+        if (this.listaCompras.size()==0)
+            throw new EmptyPurchasesListException();
         try {
             for (Compra compra : this.listaCompras) {
                 artistas = compra.getObra().getArtista();

@@ -20,7 +20,7 @@ public class Exportacion {
 
     public <T> boolean exportarXML(String route, String opc, Collection<T> coleccion) throws TypoException {
         ControlGaleria cg = new ControlGaleria();
-        //Ubicación
+        // Ubicación
         // Obras: a, p
         // Clientes: f
         // Compras: m, n, q
