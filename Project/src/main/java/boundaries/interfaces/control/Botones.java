@@ -1,9 +1,12 @@
 package boundaries.interfaces.control;
+
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import boundaries.interfaces.Exportacion;
 import control.ControlGaleria;
 import exceptions.TypoException;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -39,11 +42,16 @@ public class Botones {
     private Button btn_ListarObras;
     @FXML
     private ListView<String> ListaObras;
+
+    private ArrayList<String> obras;
     @FXML
     void listarObras(ActionEvent event) throws TypoException {
-        for(Obra o: this.cGaleria.listaObrasDisponibles()){
-            ListaObras.getItems().add(o.getTitulo()+"-"+o.getCodigoObra());
+        this.ListaObras.setItems(null);
+        this.obras=new ArrayList<>();
+        for (Obra o: this.cGaleria.listaObrasDisponibles()) {
+            this.obras.add(o.toString());
         }
+        this.ListaObras.setItems(FXCollections.observableArrayList(this.obras));
 
     }
     @FXML
