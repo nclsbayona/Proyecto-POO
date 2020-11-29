@@ -77,17 +77,17 @@
                         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#242c32" height="425.0" stroke="BLACK" strokeType="INSIDE" width="700.0" />
                         <Button fx:id="btn_ExportarF" layoutX="393.0" layoutY="367.0" mnemonicParsing="false" onAction="#exportarF" text="Exportar" />
                         <Text fill="#fffefe" layoutX="67.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AGREGAR NUEVO CLIENTE" />
-                        <TextField layoutX="53.0" layoutY="97.0" />
+                        <TextField fx:id="txtNombreAC" layoutX="53.0" layoutY="97.0" />
                         <Text fill="#fffefe" layoutX="53.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre" />
-                        <TextField layoutX="53.0" layoutY="146.0" />
+                        <TextField fx:id="txtApellidoAC" layoutX="53.0" layoutY="146.0" />
                         <Text fill="#fffefe" layoutX="53.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Apellido" />
-                        <TextField layoutX="53.0" layoutY="196.0" />
+                        <TextField fx:id="txtCedulaAC" layoutX="53.0" layoutY="196.0" />
                         <Text fill="#fffefe" layoutX="53.0" layoutY="192.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cedula" />
-                        <TextField layoutX="53.0" layoutY="247.0" />
+                        <TextField fx:id="txtTelefonoAC" layoutX="53.0" layoutY="247.0" />
                         <Text fill="#fffefe" layoutX="53.0" layoutY="243.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Telefono" />
-                        <TextField layoutX="53.0" layoutY="299.0" />
+                        <TextField fx:id="txtDireccionAC" layoutX="53.0" layoutY="299.0" />
                         <Text fill="#fffefe" layoutX="53.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dirección" />
-                        <Button layoutX="98.0" layoutY="367.0" mnemonicParsing="false" text="Agregar" />
+                        <Button fx:id="btnAgregarCliente" layoutX="98.0" layoutY="367.0" mnemonicParsing="false" onAction="#agregarCliente" text="Agregar" />
                         <Text fill="#fffefe" layoutX="300.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CLIENTES REGISTRADOS" />
                         <ListView fx:id="ListarClientes" layoutX="254.0" layoutY="140.0" prefHeight="187.0" prefWidth="200.0" />
                         <Button fx:id="btn_ListarClientes" layoutX="254.0" layoutY="367.0" mnemonicParsing="false" onAction="#listarClientes" text="Listar" />

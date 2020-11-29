@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import model.Cliente;
 import model.Obra;
@@ -33,6 +34,7 @@ public class Botones {
     private Button btn_ExportarM;
     @FXML
     private Button btn_ExportarO;
+
 
     @FXML
     void exportarA(ActionEvent event) {
@@ -102,6 +104,32 @@ public class Botones {
     }
 
     //....................FIN BONTON LISTAR ........................./
+    //Boton Agregar Cliente
+    @FXML
+    private TextField txtNombreAC;
+
+    @FXML
+    private TextField txtApellidoAC;
+
+    @FXML
+    private TextField txtCedulaAC;
+
+    @FXML
+    private TextField txtTelefonoAC;
+
+    @FXML
+    private TextField txtDireccionAC;
+
+    @FXML
+    private Button btnAgregarCliente;
+    @FXML
+    void agregarCliente(ActionEvent event) {
+        try {
+            
+        } catch (Exception e) {
+            //Ventana de error
+        }
+    }
 
     @FXML
     void initialize() {
@@ -118,6 +146,13 @@ public class Botones {
 
         assert btn_ListarObras != null : "fx:id=\"btn_ListarObras\" was not injected: check your FXML file 'Hero.fxml'.";
         assert btn_ListarClientes != null : "fx:id=\"btn_ListarClientes\" was not injected: check your FXML file 'Hero.fxml'.";
+        //......................................................................................................................
+        assert txtNombreAC != null : "fx:id=\"txtNombreAC\" was not injected: check your FXML file 'Hero.fxml'.";
+        assert txtApellidoAC != null : "fx:id=\"txtApellidoAC\" was not injected: check your FXML file 'Hero.fxml'.";
+        assert txtCedulaAC != null : "fx:id=\"txtCedulaAC\" was not injected: check your FXML file 'Hero.fxml'.";
+        assert txtTelefonoAC != null : "fx:id=\"txtTelefonoAC\" was not injected: check your FXML file 'Hero.fxml'.";
+        assert txtDireccionAC != null : "fx:id=\"txtDireccionAC\" was not injected: check your FXML file 'Hero.fxml'.";
+        assert btnAgregarCliente != null : "fx:id=\"btnAgregarCliente\" was not injected: check your FXML file 'Hero.fxml'.";
 
     }
 }
