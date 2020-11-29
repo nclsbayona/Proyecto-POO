@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="445.0" prefWidth="688.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundaries.interfaces.control.Botones">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="445.0" prefWidth="688.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundaries.interfaces.control.Botones">
    <children>
       <TabPane layoutY="-1.0" prefHeight="445.0" prefWidth="688.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
@@ -64,8 +64,8 @@
                         <TextField layoutX="514.0" layoutY="281.0" text="dd-MM-yy" />
                         <Text fill="WHITE" layoutX="24.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Buscar Obra por:" />
                         <TextField layoutX="24.0" layoutY="85.0" prefHeight="25.0" prefWidth="200.0" promptText="Titulo | Artista | Fecha " />
-                        <CheckBox layoutX="24.0" layoutY="317.0" mnemonicParsing="false" text="Solo Tipo Escultura" textFill="WHITE" />
-                        <CheckBox layoutX="24.0" layoutY="339.0" mnemonicParsing="false" text="Filtrar por artistas mas vendidos" textFill="WHITE" />
+                        <CheckBox layoutX="24.0" layoutY="317.0" mnemonicParsing="false" text="Filtrar por Tipo Escultura" textFill="WHITE" />
+                        <CheckBox layoutX="24.0" layoutY="339.0" mnemonicParsing="false" text="Filtrar por Artistas mas Vendidos" textFill="WHITE" />
                      </children>
                   </AnchorPane>
               </content>
@@ -118,9 +118,9 @@
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
                         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#242c32" height="421.0" layoutX="-18.0" stroke="WHITE" strokeType="INSIDE" width="720.0" />
-                        <TextField layoutX="41.0" layoutY="84.0" prefHeight="23.0" prefWidth="169.0" promptText="Titulo | Artista | Fecha " />
-                        <ListView layoutX="38.0" layoutY="117.0" prefHeight="237.0" prefWidth="174.0" />
-                        <Button layoutX="161.0" layoutY="386.0" mnemonicParsing="false" text="Buscar" />
+                        <TextField layoutX="41.0" layoutY="84.0" prefHeight="25.0" prefWidth="189.0" promptText="Titulo | Artista | Fecha dd-MM-yy " />
+                        <ListView layoutX="38.0" layoutY="117.0" prefHeight="237.0" prefWidth="190.0" />
+                        <Button layoutX="177.0" layoutY="386.0" mnemonicParsing="false" text="Buscar" />
                         <Button layoutX="38.0" layoutY="386.0" mnemonicParsing="false" text="Comprar" />
                         <ListView layoutX="266.0" layoutY="114.0" prefHeight="180.0" prefWidth="405.0" />
                         <Text fill="WHITE" layoutX="69.0" layoutY="43.0" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="COMPRAR OBRA" wrappingWidth="111.255859375">
@@ -134,11 +134,11 @@
                         <CheckBox layoutX="273.0" layoutY="302.0" mnemonicParsing="false" text="¿Eliminar?" textFill="WHITE" />
                         <Text fill="WHITE" layoutX="41.0" layoutY="73.0" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Buscar Obra por:" />
                         <CheckBox layoutX="45.0" layoutY="361.0" mnemonicParsing="false" text="Solo tipo cuadro" textFill="WHITE" />
-                        <TextField layoutX="266.0" layoutY="84.0" text="Ano | Mes" />
+                        <TextField layoutX="266.0" layoutY="84.0" text="Año yyy | Mes MM" />
                         <Text fill="WHITE" layoutX="266.0" layoutY="73.0" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Filtrar por fecha:" />
-                        <Button layoutX="429.0" layoutY="84.0" mnemonicParsing="false" text="Filtrar" />
+                        <Button layoutX="429.0" layoutY="84.0" mnemonicParsing="false" text="Listar" />
                         <Text fill="WHITE" layoutX="377.0" layoutY="359.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GANACIA TOTAL COMPRA DE OBRAS" />
-                        <TextField layoutX="402.0" layoutY="371.0" />
+                        <Text fill="WHITE" layoutX="440.0" layoutY="383.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$" wrappingWidth="72.46875" />
                      </children>
                   </AnchorPane>
                </content>
