@@ -14,7 +14,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        String nomFXML = "Hero.fxml";
+        String nomFXML = "ListarObra.fxml";
         Parent root = FXMLLoader.load(getClass().getResource(nomFXML));
         Scene scene = new Scene(root);
         primaryStage.setTitle(nomFXML);
