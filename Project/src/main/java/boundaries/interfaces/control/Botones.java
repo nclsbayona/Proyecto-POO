@@ -1,6 +1,8 @@
 package boundaries.interfaces.control;
 
 import javafx.scene.control.TextField;
+
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -11,10 +13,15 @@ import exceptions.TypoException;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ListView;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import model.Obra;
 
 public class Botones {
@@ -119,8 +126,48 @@ public class Botones {
 			cGaleria.eliminarObra(search);
 			System.out.println("Eliminado");
 		} catch (ArtworkDoesntExistException e) {
-			
+
 		}
+	}
+
+//--------------------------------------CREAR OBRA---------------------------------
+	@FXML
+	private Button bton_cuadro;
+
+	@FXML
+	private Button bton_Escultura;
+
+	@FXML
+	private Button bton_Instalacion;
+
+	@FXML
+	void bton_callCreateCuadroScreen(ActionEvent event) {
+	}
+
+	@FXML
+	void bton_callCreateEsculturaScreen(ActionEvent event) {
+
+	}
+
+	@FXML
+	void bton_callCreateInstalacionScreen(ActionEvent event) {
+
+	}
+
+	@FXML
+	void changeToA(ActionEvent event) {
+		String nomFXML = "ListarObra.fxml";
+		Stage primaryStage = new Stage();
+		Parent root = null;
+		try {
+			root = FXMLLoader.load(getClass().getResource(nomFXML));
+		} catch (IOException e) {
+		}
+		Scene scene = new Scene(root);
+		primaryStage.setTitle(nomFXML);
+		primaryStage.setScene(scene);
+		primaryStage.initModality(Modality.APPLICATION_MODAL);
+		primaryStage.showAndWait();
 	}
 
 	@FXML
@@ -130,6 +177,12 @@ public class Botones {
 		this.fileChooser = new FileChooser();
 		this.fileChooser.setTitle("Select Report File");
 		this.nomFXMLError = "ErrorWindow.fxml";
+		// Crear obra________________________________________-
+		assert bton_cuadro != null : "fx:id=\"bton_cuadro\" was not injected: check your FXML file 'MenuCrear.fxml'.";
+		assert bton_Escultura != null
+				: "fx:id=\"bton_Escultura\" was not injected: check your FXML file 'MenuCrear.fxml'.";
+		assert bton_Instalacion != null
+				: "fx:id=\"bton_Instalacion\" was not injected: check your FXML file 'MenuCrear.fxml'.";
 		/// _______________________________________________ELIMINAR
 		/// OBRA_____________________________
 		assert txt_buscarObraEliminar != null
