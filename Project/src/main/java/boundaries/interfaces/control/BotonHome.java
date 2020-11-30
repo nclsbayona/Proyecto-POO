@@ -73,13 +73,13 @@ public class BotonHome {
     @FXML
     void goToObraMain(ActionEvent event) {
 
-        String nomFXML = "Obra.fxml";
+        String nomFXML = "obra/Obra.fxml";
         Parent root = null;
 
         try {
             root = FXMLLoader.load(getClass().getResource(nomFXML));
         } catch (IOException e) {
-
+            System.out.println(e.getLocalizedMessage());
         }
         Scene scene = new Scene(root);
         Stage stage = new Stage();
