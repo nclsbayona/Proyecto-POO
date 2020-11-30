@@ -20,20 +20,20 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Rectangle fx:id="txtCodigo" arcHeight="5.0" arcWidth="5.0" fill="#242c32" height="431.0" layoutY="-11.0" stroke="BLACK" strokeType="INSIDE" width="688.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#242c32" height="431.0" layoutY="-11.0" stroke="BLACK" strokeType="INSIDE" width="688.0" />
                         <Text fill="WHITE" layoutX="276.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="OBRAS DISPONIBLES" wrappingWidth="149.75">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Text>
-                        <ListView fx:id="ListaObras" layoutX="150.0" layoutY="103.0" prefHeight="199.0" prefWidth="401.0" />
-                        <Button fx:id="btn_BuscarObra" layoutX="251.0" layoutY="360.0" mnemonicParsing="false" text="Buscar" />
-                        <Button fx:id="btn_ExportarObra" layoutX="386.0" layoutY="360.0" mnemonicParsing="false" onAction="#exportarObra" text="Exportar" />
-                        <Button fx:id="btn_ListarObras" layoutX="322.0" layoutY="360.0" mnemonicParsing="false" onAction="#listarObras" text="Listar" />
-                        <Text fill="WHITE" layoutX="150.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Buscar Obra por:" />
-                        <TextField fx:id="txtBuscarObra" layoutX="149.0" layoutY="69.0" prefHeight="25.0" prefWidth="403.0" promptText="Titulo | Artista | Fecha " />
-                        <CheckBox layoutX="426.0" layoutY="317.0" mnemonicParsing="false" text="Solo Tipo Escultura" textFill="WHITE" />
-                        <CheckBox layoutX="135.0" layoutY="317.0" mnemonicParsing="false" text="Filtrar por artistas mas vendidos" textFill="WHITE" />
+                        <ListView fx:id="ListaObras" layoutX="103.0" layoutY="103.0" prefHeight="201.0" prefWidth="491.0" />
+                        <Button fx:id="btn_BuscarObra" layoutX="605.0" layoutY="69.0" mnemonicParsing="false" onAction="#buscarObra" text="Buscar" />
+                        <Button fx:id="btn_ExportarObra" layoutX="351.0" layoutY="360.0" mnemonicParsing="false" onAction="#exportarObra" text="Exportar" />
+                        <Button fx:id="btn_ListarObras" layoutX="270.0" layoutY="360.0" mnemonicParsing="false" onAction="#listarObras" prefHeight="26.0" prefWidth="63.0" text="Listar" />
+                        <Text fill="WHITE" layoutX="103.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Buscar Obra por:" />
+                        <TextField fx:id="txtBuscarObra" layoutX="103.0" layoutY="69.0" prefHeight="25.0" prefWidth="491.0" promptText="" />
+                        <CheckBox fx:id="opt_typeArtWork" layoutX="470.0" layoutY="317.0" mnemonicParsing="false" onAction="#listarEscultura" text="Solo Tipo Escultura" textFill="WHITE" />
+                        <CheckBox layoutX="105.0" layoutY="317.0" mnemonicParsing="false" text="Filtrar por artistas mas vendidos" textFill="WHITE" />
                      </children>
                   </AnchorPane>
               </content>

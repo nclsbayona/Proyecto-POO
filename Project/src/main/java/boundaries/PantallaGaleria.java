@@ -56,7 +56,7 @@ public class PantallaGaleria {
 		// Variables internas
 		int retornar = 0;
 		Scanner entrada = new Scanner(System.in);
-		entrada.useDelimiter("\n");
+		entrada.useDelimiter("\r\n");
 		ControlGaleria controlGaleria = this.getControlGaleria();
 		String opcionObras = "0", buscarObraporCodigo, buscarCliente, buscarClienteC, buscarObraporArtista = " ";
 		Calendar fecha = Calendar.getInstance();
