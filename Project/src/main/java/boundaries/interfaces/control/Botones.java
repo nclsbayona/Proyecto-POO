@@ -1,12 +1,11 @@
+//LLLASLASDLSADSA
 package boundaries.interfaces.control;
 
-import javafx.scene.control.TextField;
-import java.time.LocalDate;
+import model.Clasificacion;
 import java.io.IOException;
 import java.net.URL;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -27,22 +26,566 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import model.Clasificacion;
+import model.Cliente;
+import model.Compra;
 import model.Cuadro;
+import model.Obra;
 import model.Escultura;
 import model.Instalacion;
-import model.Obra;
 
 public class Botones {
+
+	// General
 	private static ControlGaleria cGaleria = new ControlGaleria();
-	Exportacion cExportacion;
-	FileChooser fileChooser;
-	String nomFXMLError;
+	private Exportacion cExportacion;
+	private FileChooser fileChooser;
+
+	// Main
+    @FXML
+    private Button btnObras1;
+	@FXML
+	private ResourceBundle resources;
+
+	@FXML
+	private URL location;
+
+	@FXML
+	private Button btnClientes;
+
+	@FXML
+	private Button btnCompras;
+
+
+    @FXML
+    void cambiarAObras(ActionEvent event) {
+    	this.changeToA("MainObras.fxml");
+
+    }
+	@FXML
+	void cambiarACliente(ActionEvent event) {
+		String nomFXML = "cliente/Clientes.fxml";
+		Parent root = null;
+		try {
+			root = FXMLLoader.load(getClass().getResource(nomFXML));
+		} catch (IOException e) {
+			this.createNewStage(e.getMessage(), AlertType.ERROR, "Error modificando");
+		}
+		Scene scene = new Scene(root);
+		Stage stage = new Stage();
+		stage.initModality(Modality.APPLICATION_MODAL);
+		stage.setTitle("Cliente");
+		stage.setScene(scene);
+		stage.showAndWait();
+	}
+
+	@FXML
+	void cambiarACompras(ActionEvent event) {
+		String nomFXML = "compras/Compras.fxml";
+		Parent root = null;
+		try {
+			root = FXMLLoader.load(getClass().getResource(nomFXML));
+		} catch (IOException e) {
+			this.createNewStage(e.getMessage(), AlertType.ERROR, "Error modificando");
+		}
+		Scene scene = new Scene(root);
+		Stage stage = new Stage();
+		stage.initModality(Modality.APPLICATION_MODAL);
+		stage.setTitle("Cliente");
+		stage.setScene(scene);
+		stage.showAndWait();
+	}
+
+	// End del main
+	// Clientes
+
+	// ....................BONTON EXPORTAR ........................./
+	@FXML
+	private Button btn_ExportarF;
+
+	@FXML
+	void exportarF(ActionEvent event) {
+
+		try {
+			this.cExportacion.exportarXML(String.valueOf(fileChooser.showSaveDialog(null)), "f",
+					Botones.cGaleria.getListaClientes().values());
+		} catch (TypoException e) {
+			this.createNewStage(e.getMessage(), AlertType.ERROR, "Error exportando");
+		}
+	}
+
+	// ....................FIN BONTON EXPORTAR ........................./
+
+	// ....................BONTON LISTAR ........................./
+	@FXML
+	private Button btn_ListarClientes;
+	@FXML
+	private ListView<String> listarClientes;
+
+	private ArrayList<String> clientes;
+
+	@FXML
+	void listarLosClientes(ActionEvent event) throws TypoException {
+		listarClientes.refresh();
+		this.clientes = new ArrayList<>();
+		// System.out.println("Lista de clientes en el listar\n" +
+		// Botones.cGaleria.getListaClientes());
+		for (Cliente c : Botones.cGaleria.getListaClientes().values()) {
+			this.clientes.add(c.toString());
+		}
+		this.listarClientes.setItems(FXCollections.observableArrayList(this.clientes));
+		this.clientes = null;
+	}
+
+	// Buscar cliente
+	@FXML
+	private TextField txtCedulaClienteBuscarC;
+
+	@FXML
+	private Button btnBuscarC;
+
+	@FXML
+	private TextField txtCodigoClienteBuscarC;
+
+	@FXML
+	private Label buscarClientes;
+
+	@FXML
+	void buscarCliente(ActionEvent event) {
+		String code = txtCodigoClienteBuscarC.getText();
+		String cc = txtCedulaClienteBuscarC.getText();
+		this.buscarClientes.setText("");
+		String c = null;
+		try {
+			if (!code.equals("")) {
+				c = (Botones.cGaleria.buscarCliente(Long.parseLong(code)).toString());
+			} else if (!cc.equals("")) {
+				c = (Botones.cGaleria.buscarCliente(Long.parseLong(cc), "").toString());
+			} else {
+				throw new TypoException();
+			}
+			buscarClientes.setText(c);
+		} catch (Exception e) {
+			this.createNewStage(e.getMessage(), AlertType.ERROR, "Error buscando");
+		} finally {
+			this.txtCedulaClienteBuscarC.setText("");
+			this.txtCodigoClienteBuscarC.setText("");
+		}
+	}
+
+	// ....................FIN BONTON LISTAR ........................./
+	// Boton Agregar Cliente
+	@FXML
+	private TextField txtCodigoClienteAC;
+
+	@FXML
+	private TextField txtNombreAC;
+
+	@FXML
+	private TextField txtApellidoAC;
+
+	@FXML
+	private TextField txtCedulaAC;
+
+	@FXML
+	private TextField txtTelefonoAC;
+
+	@FXML
+	private TextField txtDireccionAC;
+
+	@FXML
+	private Button btnAgregarCliente;
+
+	@FXML
+	void agregarCliente(ActionEvent event) {
+		try {
+			if (txtNombreAC.getText().equals("") || txtCedulaAC.getText().equals("")
+					|| txtCodigoClienteAC.getText().equals("") || txtTelefonoAC.getText().equals("")
+					|| txtDireccionAC.equals("") || txtApellidoAC.getText().equals(""))
+				throw new TypoException();
+			Cliente n = new Cliente(Long.parseLong(txtCodigoClienteAC.getText()), Long.parseLong(txtCedulaAC.getText()),
+					txtNombreAC.getText(), txtApellidoAC.getText(), txtDireccionAC.getText(),
+					Long.parseLong(txtTelefonoAC.getText()));
+			Botones.cGaleria.addCliente(n);
+			txtCodigoClienteAC.clear();
+			txtNombreAC.clear();
+			txtApellidoAC.clear();
+			txtCedulaAC.clear();
+			txtTelefonoAC.clear();
+			txtDireccionAC.clear();
+		} catch (Exception e) {
+			this.createNewStage(e.getMessage(), AlertType.ERROR, "Error agregando");
+		}
+	}
+
+	// Boton error
+	@FXML
+	private Pane mainWindow;
+
+	@FXML
+	private Label txtLabelError;
+
+	// Boton modificar
+	@FXML
+	private Button btnModificarCliente;
+
+	@FXML
+	private TextField txtCedulaClienteBuscarC2;
+
+	@FXML
+	private Button btnBuscarC2;
+
+	@FXML
+	private TextField txtCodigoClienteBuscarC2;
+
+	@FXML
+	private Text txtCodigoClienteMC;
+
+	@FXML
+	private Text txtNombreMC;
+
+	@FXML
+	private Text txtApellidoMC;
+
+	@FXML
+	private Text txtCedulaMC;
+
+	@FXML
+	private Text txtTelefonoMC;
+
+	@FXML
+	private Text txtDireccionMC;
+
+	@FXML
+	private TextField campoModificar;
+
+	@FXML
+	private TextField valorModificar;
+
+	@FXML
+	private Button btnModificar;
+
+	@FXML
+	private Pane modificarWindow;
+
+	private Cliente c;
+
+	@FXML
+	void buscarCliente2(ActionEvent event) {
+		try {
+			this.c = null;
+			String code = txtCodigoClienteBuscarC2.getText();
+			String cc = txtCedulaClienteBuscarC2.getText();
+			if (!code.equals("")) {
+				this.c = (Botones.cGaleria.buscarCliente(Long.parseLong(code)));
+			} else if (!cc.equals("")) {
+				this.c = (Botones.cGaleria.buscarCliente(Long.parseLong(cc), ""));
+			} else {
+				throw new TypoException();
+			}
+			txtCodigoClienteMC.setText(String.valueOf(this.c.getCodigoCliente()));
+			txtApellidoMC.setText(this.c.getApellidos());
+			txtCedulaMC.setText(String.valueOf(this.c.getCedula()));
+			txtDireccionMC.setText(this.c.getDireccionEntrega());
+			txtNombreMC.setText(this.c.getNombre());
+			txtTelefonoMC.setText(String.valueOf(this.c.getTelefono()));
+		} catch (Exception e) {
+			this.c = null;
+			this.createNewStage(e.getMessage(), AlertType.ERROR, "Error eliminando");
+		}
+	}
+
+	@FXML
+	void modificarCliente(ActionEvent event) {
+		try {
+			Botones.cGaleria.modificarCliente(Botones.cGaleria.buscarCliente(this.c.getCodigoCliente()),
+					Integer.parseInt(this.campoModificar.getText()), this.valorModificar.getText());
+			System.out.println("Lista de clientes en el modificar\n" + Botones.cGaleria.getListaClientes());
+			txtCodigoClienteMC.setText(String.valueOf(this.c.getCodigoCliente()));
+			txtApellidoMC.setText(this.c.getApellidos());
+			txtCedulaMC.setText(String.valueOf(this.c.getCedula()));
+			txtDireccionMC.setText(this.c.getDireccionEntrega());
+			txtNombreMC.setText(this.c.getNombre());
+			txtTelefonoMC.setText(String.valueOf(this.c.getTelefono()));
+
+		} catch (Exception e) {
+			this.createNewStage(e.getMessage(), AlertType.ERROR, "Error eliminando");
+		}
+	}
+
+	@FXML
+	void modificarClientePantalla(ActionEvent event) {
+		String nomFXML = "cliente/ModificarCliente.fxml";
+		Parent root = null;
+		this.listarClientes.refresh();
+		this.listarClientes.setItems(null);
+		try {
+			root = FXMLLoader.load(getClass().getResource(nomFXML));
+		} catch (IOException e) {
+			this.createNewStage(e.getMessage(), AlertType.ERROR, "Error eliminando");
+		}
+		Scene scene = new Scene(root);
+		Stage stage = new Stage();
+		stage.initModality(Modality.APPLICATION_MODAL);
+		stage.setTitle("Modificar Cliente");
+		stage.setScene(scene);
+		stage.showAndWait();
+	}
+
+	// Boton eliminar Cliente
+
+	@FXML
+	private Pane eliminarWindow;
+
+	@FXML
+	private TextField txtCedulaClienteEliminar;
+
+	@FXML
+	private Button btnBuscarEliminar;
+
+	@FXML
+	private TextField txtCodigoClienteBuscarEliminar;
+
+	@FXML
+	private Text txtCodigoClienteEC;
+
+	@FXML
+	private Text txtNombreEC;
+
+	@FXML
+	private Text txtApellidoEC;
+
+	@FXML
+	private Text txtCedulaEC;
+
+	@FXML
+	private Text txtTelefonoEC;
+
+	@FXML
+	private Text txtDireccionEC;
+
+	@FXML
+	private Button btnEliminar;
+
+	private Cliente clien;
+
+	@FXML
+	void buscarCliente3(ActionEvent event) {
+		try {
+			this.clien = null;
+			String code = txtCodigoClienteBuscarEliminar.getText();
+			String cc = txtCedulaClienteEliminar.getText();
+			if (!code.equals("")) {
+				this.clien = (Botones.cGaleria.buscarCliente(Long.parseLong(code)));
+			} else if (!cc.equals("")) {
+				this.clien = (Botones.cGaleria.buscarCliente(Long.parseLong(cc), ""));
+			} else {
+				throw new TypoException();
+			}
+			txtCodigoClienteEC.setText(String.valueOf(this.clien.getCodigoCliente()));
+			txtApellidoEC.setText(this.clien.getApellidos());
+			txtCedulaEC.setText(String.valueOf(this.clien.getCedula()));
+			txtDireccionEC.setText(this.clien.getDireccionEntrega());
+			txtNombreEC.setText(this.clien.getNombre());
+			txtTelefonoEC.setText(String.valueOf(this.clien.getTelefono()));
+		} catch (Exception e) {
+			this.clien = null;
+			this.createNewStage(e.getMessage(), AlertType.ERROR, "Error eliminando");
+		}
+	}
+
+	@FXML
+	void eliminarCliente(ActionEvent event) {
+		try {
+			boolean opc = this.createNewStage("Seguro?", AlertType.CONFIRMATION, "Error eliminando");
+			// System.out.println("Lista de clientes en el eliminar\n" +
+			// Botones.cGaleria.getListaClientes());
+			if (opc) {
+				Botones.cGaleria.eliminarCliente(this.clien.getCodigoCliente());
+				txtCodigoClienteEC.setText("");
+				txtNombreEC.setText("");
+				txtApellidoEC.setText("");
+				txtCedulaEC.setText("");
+				txtTelefonoEC.setText("");
+				txtDireccionEC.setText("");
+			}
+		} catch (Exception e) {
+			this.createNewStage(e.getMessage(), AlertType.ERROR, "Error eliminando");
+		}
+	}
+
+	@FXML
+	void eliminarClientePantalla(ActionEvent event) {
+		String nomFXML = "cliente/EliminarCliente.fxml";
+		Parent root = null;
+		this.listarClientes.refresh();
+		this.listarClientes.setItems(null);
+		try {
+			root = FXMLLoader.load(getClass().getResource(nomFXML));
+		} catch (IOException e) {
+			this.createNewStage(e.getMessage(), AlertType.ERROR, "Error abriendo pantalla");
+		}
+		Scene scene = new Scene(root);
+		Stage stage = new Stage();
+		stage.initModality(Modality.APPLICATION_MODAL);
+		stage.setTitle("Eliminar Cliente");
+		stage.setScene(scene);
+		stage.showAndWait();
+	}
+
+	private boolean createNewStage(String msg, AlertType at, String title) {
+		Alert alert = new Alert(at);
+		alert.setTitle(title);
+		alert.setHeaderText(msg);
+		alert.setContentText(msg);
+		alert.showAndWait();
+		if (at == AlertType.CONFIRMATION) {
+			if (alert.getResult() == ButtonType.YES || alert.getResult() == ButtonType.OK)
+				return true;
+			else
+				return false;
+		} else
+			return true;
+	}
+
+	// End of Clientes
+	// Compras
+	@FXML
+	private Pane CompraMainWindow;
+
+	private ArrayList<String> obrArrayList;
+	private ArrayList<String> comprArrayList;
+
+	@FXML
+	private ListView<String> listadoObrasDisponibles;
+
+	@FXML
+	private Button btnListarObrasDisponiblesCompras;
+
+	@FXML
+	private Button btnEliminarObra;
+
+	@FXML
+	private TextField txtCodigoClienteComprar;
+
+	@FXML
+	private Button btnComprarObra;
+
+	@FXML
+	private TextField txtCodigoObraComprar;
+
+	@FXML
+	private CheckBox checkFiltrado;
+
+	@FXML
+	private TextField txtCodigoCompraEliminar;
+
+	@FXML
+	private ListView<String> listadoCompras;
+
+	@FXML
+	private Button btnListarCompras;
+
+	@FXML
+	private Button btnExportarCompras;
+
+	@FXML
+	private TextField txtAñoCompra;
+
+	@FXML
+	private TextField txtMesCompra;
+
+	@FXML
+	void comprarObra(ActionEvent event) {
+		try {
+			Obra obra = Botones.cGaleria.buscarObra(Long.valueOf(this.txtCodigoObraComprar.getText()));
+			Botones.cGaleria.buscarObraEnCompras(obra);
+			if (Botones.cGaleria.buscarClienteYObraEnCompra(
+					Botones.cGaleria.buscarCliente(Long.parseLong(txtCodigoClienteComprar.getText())),
+					Botones.cGaleria.buscarObra(Long.parseLong(this.txtCodigoObraComprar.getText()))))
+				this.createNewStage("La compra ya existe", AlertType.ERROR, "_Ya existe");
+			this.createNewStage("La obra ya fue comprada", AlertType.ERROR, "La obra ya fue comprada");
+		} catch (Exception e) {
+			try {
+				Botones.cGaleria.realizarCompra(
+						Botones.cGaleria.buscarCliente(Long.parseLong(txtCodigoClienteComprar.getText())),
+						Botones.cGaleria.buscarObra(Long.parseLong(this.txtCodigoObraComprar.getText())));
+			} catch (Exception e2) {
+				this.createNewStage(e2.getMessage(), AlertType.ERROR, "La compra no fue exitosa");
+			}
+		}
+	}
+
+	@FXML
+	void eliminarCompra(ActionEvent event) {
+		try {
+			Botones.cGaleria.buscarCompra(txtCodigoCompraEliminar.getText());
+			boolean opc = this.createNewStage("Seguro", AlertType.CONFIRMATION, "Eliminar");
+			if (opc) {
+				Botones.cGaleria.eliminCompra(txtCodigoCompraEliminar.getText());
+				txtCodigoCompraEliminar.clear();
+			}
+		} catch (Exception e) {
+			this.createNewStage("Error eliminando", AlertType.ERROR, "Error eliminando");
+		}
+	}
+
+	@FXML
+	void exportarLasCompras(ActionEvent event) {
+		try {
+			if (this.checkFiltrado.isSelected()) {
+				this.cExportacion.exportarXML(String.valueOf(fileChooser.showSaveDialog(null)), "m",
+						Botones.cGaleria.listadoDeCompra(txtMesCompra.getText(), txtAñoCompra.getText()));
+			} else {
+				this.cExportacion.exportarXML(String.valueOf(fileChooser.showSaveDialog(null)), "m",
+						Botones.cGaleria.getListaCompras());
+			}
+		} catch (TypoException e) {
+			this.createNewStage(e.getMessage(), AlertType.ERROR, "Error exportando");
+		}
+
+	}
+
+	@FXML
+	void listarLasCompras(ActionEvent event) {
+		if (this.checkFiltrado.isSelected()) {
+			this.listadoCompras.setItems(null);
+			this.comprArrayList = new ArrayList<>();
+			for (String c : Botones.cGaleria.listadoDeCompra(txtMesCompra.getText(), txtAñoCompra.getText())) {
+				this.comprArrayList.add(c);
+			}
+			this.listadoCompras.setItems(FXCollections.observableArrayList(this.comprArrayList));
+		} else {
+			this.listadoCompras.setItems(null);
+			this.comprArrayList = new ArrayList<>();
+			for (Compra c : Botones.cGaleria.getListaCompras()) {
+				this.comprArrayList.add(c.toString());
+			}
+			this.listadoCompras.setItems(FXCollections.observableArrayList(this.comprArrayList));
+		}
+	}
+
+	@FXML
+	void listarLasObrasDisponiblesCompra(ActionEvent event) {
+		this.listadoObrasDisponibles.setItems(null);
+		this.obrArrayList = new ArrayList<>();
+		for (Obra c : Botones.cGaleria.listaObrasDisponibles()) {
+			this.obrArrayList.add(c.toString());
+		}
+		this.listadoObrasDisponibles.setItems(FXCollections.observableArrayList(this.obrArrayList));
+	}
+
+	// End of compras
+
+	// obras********************
 	// MAIN SCREEN
 	@FXML
 	private Button screen_listarObra;
@@ -210,7 +753,7 @@ public class Botones {
 		Stage primaryStage = new Stage();
 		Parent root = null;
 		try {
-			root = FXMLLoader.load(getClass().getResource(nomFXML));
+			root = FXMLLoader.load(getClass().getResource("obras/"+nomFXML));
 		} catch (IOException e) {
 		}
 		Scene scene = new Scene(root);
@@ -472,7 +1015,24 @@ public class Botones {
 		this.cExportacion = new Exportacion();
 		this.fileChooser = new FileChooser();
 		this.fileChooser.setTitle("Select Report File");
-		this.nomFXMLError = "ErrorWindow.fxml";
+		// ........................................................................................................./
+		assert btn_ExportarF != null : "fx:id=\"btn_ExportarF\" was not injected: check your FXML file 'Hero.fxml'.";
+		// .
+		assert btn_ListarClientes != null
+				: "fx:id=\"btn_ListarClientes\" was not injected: check your FXML file 'Hero.fxml'.";
+		// ......................................................................................................................
+		assert txtCodigoClienteAC != null
+				: "fx:id=\"txtCodigoClienteAC\" was not injected: check your FXML file 'Hero.fxml'.";
+		assert txtNombreAC != null : "fx:id=\"txtNombreAC\" was not injected: check your FXML file 'Hero.fxml'.";
+		assert txtApellidoAC != null : "fx:id=\"txtApellidoAC\" was not injected: check your FXML file 'Hero.fxml'.";
+		assert txtCedulaAC != null : "fx:id=\"txtCedulaAC\" was not injected: check your FXML file 'Hero.fxml'.";
+		assert txtTelefonoAC != null : "fx:id=\"txtTelefonoAC\" was not injected: check your FXML file 'Hero.fxml'.";
+		assert txtDireccionAC != null : "fx:id=\"txtDireccionAC\" was not injected: check your FXML file 'Hero.fxml'.";
+		assert btnAgregarCliente != null
+				: "fx:id=\"btnAgregarCliente\" was not injected: check your FXML file 'Hero.fxml'.";
+		// ................................................................................................................
+		assert mainWindow != null : "fx:id=\"errorWindow\" was not injected: check your FXML file 'Untitled'.";
+		assert txtLabelError != null : "fx:id=\"txtLabelError\" was not injected: check your FXML file 'Untitled'.";
 		// Crear Obra instalacion
 		assert txt_codigoInsta != null
 				: "fx:id=\"txt_codigoInsta\" was not injected: check your FXML file 'InstalarObra.fxml'.";
@@ -487,7 +1047,7 @@ public class Botones {
 		assert crearInstalacion != null
 				: "fx:id=\"crearInstalacion\" was not injected: check your FXML file 'InstalarObra.fxml'.";
 		assert date_fecha != null : "fx:id=\"date_fecha\" was not injected: check your FXML file 'InstalarObra.fxml'.";
-		// Crear Obra Escultura
+// Crear Obra Escultura
 		assert txt_codigodelaObraE != null
 				: "fx:id=\"txt_codigodelaObraE\" was not injected: check your FXML file 'CrearEscultura.fxml'.";
 		assert txt_TitulodelaObraE != null
@@ -503,7 +1063,7 @@ public class Botones {
 				: "fx:id=\"btn_crearEscultura\" was not injected: check your FXML file 'CrearEscultura.fxml'.";
 		assert txt_FechadelaObraE != null
 				: "fx:id=\"txt_FechadelaObraE\" was not injected: check your FXML file 'CrearEscultura.fxml'.";
-		// Crear obra cuadro
+// Crear obra cuadro
 		assert txt_cedulaObraC != null
 				: "fx:id=\"txt_cedulaObraC\" was not injected: check your FXML file 'CrearCuadro.fxml'.";
 		assert txt_codigodelaObraC != null
@@ -529,7 +1089,7 @@ public class Botones {
 		assert bton_crearObraC != null
 				: "fx:id=\"bton_crearObraC\" was not injected: check your FXML file 'CrearCuadro.fxml'.";
 
-		// MAIN SCREEN
+// MAIN SCREEN
 		assert screen_listarObra != null
 				: "fx:id=\"screen_listarObra\" was not injected: check your FXML file 'Main.fxml'.";
 		assert screen_addObra != null : "fx:id=\"screen_addObra\" was not injected: check your FXML file 'Main.fxml'.";
@@ -537,33 +1097,32 @@ public class Botones {
 				: "fx:id=\"screen_modificarObra\" was not injected: check your FXML file 'Main.fxml'.";
 		assert screen_eliminarObra != null
 				: "fx:id=\"screen_eliminarObra\" was not injected: check your FXML file 'Main.fxml'.";
-		// _______________-_______
-		// Crear obra________________________________________-
+// _______________-_______
+// Crear obra________________________________________-
 		assert bton_cuadro != null : "fx:id=\"bton_cuadro\" was not injected: check your FXML file 'MenuCrear.fxml'.";
 		assert bton_Escultura != null
 				: "fx:id=\"bton_Escultura\" was not injected: check your FXML file 'MenuCrear.fxml'.";
 		assert bton_Instalacion != null
 				: "fx:id=\"bton_Instalacion\" was not injected: check your FXML file 'MenuCrear.fxml'.";
-		/// _______________________________________________ELIMINAR
-		/// OBRA_____________________________
+/// _______________________________________________ELIMINAR
+/// OBRA_____________________________
 		assert txt_buscarObraEliminar != null
 				: "fx:id=\"txt_buscarObraEliminar\" was not injected: check your FXML file 'EliminarObra.fxml'.";
 		assert btn_buscarObraEliminar != null
 				: "fx:id=\"btn_buscarObraEliminar\" was not injected: check your FXML file 'EliminarObra.fxml'.";
 		assert list_obraEliminar != null
 				: "fx:id=\"list_obraEliminar\" was not injected: check your FXML file 'EliminarObra.fxml'.";
-		// -------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------
 		assert opt_typeArtWork != null
 				: "fx:id=\"opt_typeArtWork\" was not injected: check your FXML file 'ListarObra.fxml'.";
 		assert btn_ExportarObra != null
 				: "fx:id=\"btn_ExportarObra\" was not injected: check your FXML file 'ListarObra.fxml'.";
-		// ........................................................................................................./
+// ........................................................................................................./
 		assert btn_ListarObras != null
 				: "fx:id=\"btn_ListarObra\" was not injected: check your FXML file 'ListarObra.fxml'.";
 		assert btn_BuscarObra != null
 				: "fx:id=\"btn_BuscarObra\" was not injected: check your FXML file 'ListarObra.fxml'.";
 		assert txtBuscarObra != null
 				: "fx:id=\"txtBuscarObra\" was not injected: check your FXML file 'ListarObra.fxml'.";
-
 	}
 }

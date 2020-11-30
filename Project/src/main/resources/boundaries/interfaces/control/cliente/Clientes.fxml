@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Text?>
+
+<Pane fx:id="mainWindow" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="471.0" prefWidth="746.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundaries.interfaces.control.Botones">
+   <children>
+      <AnchorPane layoutX="-1.0" layoutY="-10.0" prefHeight="445.0" prefWidth="700.0" style="-fx-background-color: #000000;">
+         <children>
+            <Button fx:id="btn_ExportarF" layoutX="463.0" layoutY="266.0" mnemonicParsing="false" onAction="#exportarF" text="Exportar" />
+            <Text fill="#fffefe" layoutX="52.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AGREGAR NUEVO CLIENTE" />
+            <TextField fx:id="txtNombreAC" layoutX="38.0" layoutY="167.0" />
+            <Text fill="#fffefe" layoutX="38.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre" />
+            <TextField fx:id="txtApellidoAC" layoutX="38.0" layoutY="216.0" />
+            <Text fill="#fffefe" layoutX="38.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Apellido" />
+            <TextField fx:id="txtCedulaAC" layoutX="38.0" layoutY="266.0" />
+            <Text fill="#fffefe" layoutX="38.0" layoutY="262.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cedula" />
+            <TextField fx:id="txtTelefonoAC" layoutX="38.0" layoutY="317.0" />
+            <Text fill="#fffefe" layoutX="38.0" layoutY="313.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Telefono" />
+            <TextField fx:id="txtDireccionAC" layoutX="38.0" layoutY="369.0" />
+            <Text fill="#fffefe" layoutX="38.0" layoutY="365.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dirección" />
+            <Button fx:id="btnAgregarCliente" layoutX="83.0" layoutY="406.0" mnemonicParsing="false" onAction="#agregarCliente" text="Agregar" />
+            <Text fill="#fffefe" layoutX="254.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CLIENTES REGISTRADOS" />
+            <ListView fx:id="listarClientes" layoutX="244.0" layoutY="84.0" prefHeight="173.0" prefWidth="298.0" />
+            <Button fx:id="btn_ListarClientes" layoutX="243.0" layoutY="266.0" mnemonicParsing="false" onAction="#listarLosClientes" text="Listar" />
+            <Button fx:id="btnModificarCliente" layoutX="604.0" layoutY="203.0" mnemonicParsing="false" onAction="#modificarClientePantalla" text="Modificar" />
+            <Button fx:id="btnEliminarCliente" layoutX="607.0" layoutY="145.0" mnemonicParsing="false" onAction="#eliminarClientePantalla" text="Eliminar" />
+            <Text fill="#fffefe" layoutX="240.0" layoutY="314.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Buscar Cliente" />
+            <TextField fx:id="txtCedulaClienteBuscarC" layoutX="241.0" layoutY="356.0" prefHeight="25.0" prefWidth="201.0" promptText="Cedula" />
+            <Button fx:id="btnBuscarC" layoutX="460.0" layoutY="337.0" mnemonicParsing="false" onAction="#buscarCliente" text="Buscar" />
+            <TextField fx:id="txtCodigoClienteAC" layoutX="38.0" layoutY="122.0" />
+            <Text fill="#fffefe" layoutX="38.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Codigo cliente" />
+            <Text fill="#fffefe" layoutX="594.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Otras opciones" />
+            <TextField fx:id="txtCodigoClienteBuscarC" layoutX="241.0" layoutY="324.0" prefHeight="25.0" prefWidth="201.0" promptText="Codigo cliente" />
+            <ImageView fitHeight="215.0" fitWidth="200.0" layoutX="543.0" layoutY="274.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/hero.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="buscarClientes" alignment="CENTER" layoutX="244.0" layoutY="398.0" prefHeight="83.0" prefWidth="279.0" textAlignment="CENTER" textFill="WHITE" wrapText="true" />
+         </children>
+      </AnchorPane>
+   </children>
+</Pane>

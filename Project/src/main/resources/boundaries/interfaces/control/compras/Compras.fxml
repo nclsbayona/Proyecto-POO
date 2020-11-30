@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane fx:id="CompraMainWindow" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="471.0" prefWidth="746.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundaries.interfaces.control.Botones">
+   <children>
+      <AnchorPane prefHeight="471.0" prefWidth="746.0" style="-fx-background-color: #000000;">
+         <children>
+            <Text fill="#fffefe" layoutX="14.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="OBRAS DISPONIBLES" />
+            <ListView fx:id="listadoObrasDisponibles" layoutX="14.0" layoutY="72.0" prefHeight="226.0" prefWidth="327.0" />
+            <Button fx:id="btnListarObrasDisponiblesCompras" layoutX="14.0" layoutY="312.0" mnemonicParsing="false" onAction="#listarLasObrasDisponiblesCompra" text="Listar" />
+            <Button fx:id="btnEliminarObra" layoutX="660.0" layoutY="432.0" mnemonicParsing="false" onAction="#eliminarCompra" text="Eliminar" />
+            <TextField fx:id="txtCodigoClienteComprar" layoutX="14.0" layoutY="414.0" prefHeight="25.0" prefWidth="201.0" promptText="Codigo cliente" />
+            <Button fx:id="btnComprarObra" layoutX="233.0" layoutY="395.0" mnemonicParsing="false" onAction="#comprarObra" text="Comprar Obra" />
+            <TextField fx:id="txtCodigoObraComprar" layoutX="14.0" layoutY="382.0" prefHeight="25.0" prefWidth="201.0" promptText="Codigo obra" />
+            <CheckBox fx:id="checkFiltrado" layoutX="621.0" layoutY="78.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="111.0" text="Filtrado" textFill="WHITE">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </CheckBox>
+            <TextField fx:id="txtCodigoCompraEliminar" layoutX="531.0" layoutY="397.0" prefHeight="25.0" prefWidth="201.0" promptText="Codigo compra" />
+            <Text fill="#fffefe" layoutX="361.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LISTA DE COMPRAS" />
+            <ListView fx:id="listadoCompras" layoutX="373.0" layoutY="114.0" prefHeight="226.0" prefWidth="327.0" />
+            <Button fx:id="btnListarCompras" layoutX="373.0" layoutY="354.0" mnemonicParsing="false" onAction="#listarLasCompras" text="Listar" />
+            <Button fx:id="btnExportarCompras" layoutX="632.0" layoutY="354.0" mnemonicParsing="false" onAction="#exportarLasCompras" text="Exportar" />
+            <TextField fx:id="txtAñoCompra" layoutX="373.0" layoutY="49.0" text="Año" />
+            <TextField fx:id="txtMesCompra" layoutX="373.0" layoutY="81.0" text="Mes" />
+         </children>
+      </AnchorPane>
+   </children>
+</Pane>
