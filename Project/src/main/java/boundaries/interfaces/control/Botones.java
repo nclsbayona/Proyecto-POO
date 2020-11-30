@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import boundaries.interfaces.Exportacion;
 import control.ControlGaleria;
+import exceptions.ArtworkDoesntExistException;
 import exceptions.TypoException;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -28,15 +29,16 @@ public class Botones {
 //....................BONTON EXPORTAR ........................./
 	@FXML
 	private Button btn_ExportarObra;
+
 	@FXML
 	void exportarObra(ActionEvent event) {
 		try {
-			this.cExportacion.exportarXML(String.valueOf(fileChooser.showSaveDialog(null)), "a",
-					this.obras);
+			this.cExportacion.exportarXML(String.valueOf(fileChooser.showSaveDialog(null)), "a", this.obras);
 		} catch (TypoException e) {
 			e.printStackTrace();
 		}
 	}
+
 	// ....................BONTON LISTAR ........................./
 	@FXML
 	private Button btn_ListarObras;
@@ -45,6 +47,7 @@ public class Botones {
 	@FXML
 	private CheckBox opt_typeArtWork;
 	private ArrayList<String> obras;
+
 	@FXML
 	void listarObras(ActionEvent event) throws TypoException {
 		this.ListaObras.setItems(null);
@@ -67,25 +70,53 @@ public class Botones {
 		} else
 			this.listarObras(event);
 	}
-	//---------------------------------BOTON BUSCAR OBRA--------------------------------
+
+	// ---------------------------------BOTON BUSCAR
+	// OBRA--------------------------------
 	@FXML
 	private Button btn_BuscarObra;
 	@FXML
 	private TextField txtBuscarObra;
+
 	@FXML
-	void buscarObra(ActionEvent event) throws TypoException 
-	{
-		String search=txtBuscarObra.getText();
-		this.obras=new ArrayList<>();
-		for(Obra o:this.cGaleria.buscarObra(search))
-		{
+	void buscarObra(ActionEvent event) throws TypoException {
+		String search = txtBuscarObra.getText();
+		this.obras = new ArrayList<>();
+		for (Obra o : this.cGaleria.buscarObra(search)) {
 			obras.add(o.toString());
 		}
 		this.ListaObras.setItems(FXCollections.observableArrayList(this.obras));
 	}
-	//-----------------------------ELIMINAR OBRA-----------------
-	
-	
+
+	// -----------------------------ELIMINAR OBRA-----------------
+
+	@FXML
+	private TextField txt_buscarObraEliminar;
+
+	@FXML
+	private Button btn_buscarObraEliminar;
+
+	@FXML
+	private ListView<String> list_obraEliminar;
+
+	@FXML
+	void buscarObraCodigo(ActionEvent event) {
+		long search = Long.parseLong(txt_buscarObraEliminar.getText());
+		try {
+			Obra o = cGaleria.buscarObra(search);
+			this.obras = new ArrayList<>();
+			this.obras.add(o.toString());
+		} catch (ArtworkDoesntExistException e) {
+			e.printStackTrace();
+		}
+		this.list_obraEliminar.setItems(FXCollections.observableArrayList(this.obras));
+	}
+
+	@FXML
+	void eliminarObra(ActionEvent event) {
+
+	}
+
 	@FXML
 	void initialize() {
 		this.cGaleria = new ControlGaleria();
@@ -93,13 +124,15 @@ public class Botones {
 		this.fileChooser = new FileChooser();
 		this.fileChooser.setTitle("Select Report File");
 		this.nomFXMLError = "ErrorWindow.fxml";
-		// ........................................................................................................./
-		// assert btn_Exportar != null : "fx:id=\"btn_Exportar\" was not injected: check
-		// your FXML file 'Hero.fxml'.";
-		// assert btn_ExportarF != null : "fx:id=\"btn_ExportarF\" was not injected:
-		// check your FXML file 'Hero.fxml'.";
-		// assert btn_ExportarM != null : "fx:id=\"btn_ExportarM\" was not injected:
-		// check your FXML file 'Hero.fxml'.";
+		/// _______________________________________________ELIMINAR
+		/// OBRA_____________________________
+		assert txt_buscarObraEliminar != null
+				: "fx:id=\"txt_buscarObraEliminar\" was not injected: check your FXML file 'EliminarObra.fxml'.";
+		assert btn_buscarObraEliminar != null
+				: "fx:id=\"btn_buscarObraEliminar\" was not injected: check your FXML file 'EliminarObra.fxml'.";
+		assert list_obraEliminar != null
+				: "fx:id=\"list_obraEliminar\" was not injected: check your FXML file 'EliminarObra.fxml'.";
+		// -------------------------------------------------------------------------------
 		assert opt_typeArtWork != null
 				: "fx:id=\"opt_typeArtWork\" was not injected: check your FXML file 'ListarObra.fxml'.";
 		assert btn_ExportarObra != null
@@ -111,30 +144,6 @@ public class Botones {
 				: "fx:id=\"btn_BuscarObra\" was not injected: check your FXML file 'ListarObra.fxml'.";
 		assert txtBuscarObra != null
 				: "fx:id=\"txtBuscarObra\" was not injected: check your FXML file 'ListarObra.fxml'.";
-		// assert btn_ListarClientes != null : "fx:id=\"btn_ListarClientes\" was not
-		// injected: check your FXML file 'Hero.fxml'.";
-		// ......................................................................................................................
-		// assert txtCodigoClienteAC != null : "fx:id=\"txtCodigoClienteAC\" was not
-		// injected: check your FXML file 'Hero.fxml'.";
-		// assert txtNombreAC != null : "fx:id=\"txtNombreAC\" was not injected: check
-		// your FXML file 'Hero.fxml'.";
-		// assert txtApellidoAC != null : "fx:id=\"txtApellidoAC\" was not injected:
-		// check your FXML file 'Hero.fxml'.";
-		// assert txtCedulaAC != null : "fx:id=\"txtCedulaAC\" was not injected: check
-		// your FXML file 'Hero.fxml'.";
-		// assert txtTelefonoAC != null : "fx:id=\"txtTelefonoAC\" was not injected:
-		// check your FXML file 'Hero.fxml'.";
-		// assert txtDireccionAC != null : "fx:id=\"txtDireccionAC\" was not injected:
-		// check your FXML file 'Hero.fxml'.";
-		// assert btnAgregarCliente != null : "fx:id=\"btnAgregarCliente\" was not
-		// injected: check your FXML file 'Hero.fxml'.";
-		// ................................................................................................................
-		// assert errorWindow != null : "fx:id=\"errorWindow\" was not injected: check
-		// your FXML file 'Untitled'.";
-		// assert btnOk != null : "fx:id=\"btnOk\" was not injected: check your FXML
-		// file 'Untitled'.";
-		// assert txtLabelError != null : "fx:id=\"txtLabelError\" was not injected:
-		// check your FXML file 'Untitled'.";
 
 	}
 }
