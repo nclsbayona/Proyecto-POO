@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Obras>
+    <Escultura>
+        <codigoObra>7654321</codigoObra>
+        <dimensiones>10x2</dimensiones>
+        <fecha>1984-03-03T16:38:01.163-05:00</fecha>
+        <precioRef>15000.0</precioRef>
+        <titulo>Machupichu</titulo>
+        <material>Marmol</material>
+        <peso>1550.0</peso>
+    </Escultura>
+    <Escultura>
+        <codigoObra>3456789</codigoObra>
+        <dimensiones>10x2</dimensiones>
+        <fecha>2001-09-06T16:38:01.163-05:00</fecha>
+        <precioRef>15000.0</precioRef>
+        <titulo>Sociopata</titulo>
+        <material>Cemento</material>
+        <peso>2084.0</peso>
+    </Escultura>
+</Obras>

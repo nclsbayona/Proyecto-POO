@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Rectangle?>
@@ -27,13 +28,23 @@
                            </font>
                         </Text>
                         <ListView fx:id="ListaObras" layoutX="103.0" layoutY="103.0" prefHeight="201.0" prefWidth="491.0" />
-                        <Button fx:id="btn_BuscarObra" layoutX="605.0" layoutY="69.0" mnemonicParsing="false" onAction="#buscarObra" text="Buscar" />
+                        <Button fx:id="btn_BuscarObra" layoutX="563.0" layoutY="57.0" mnemonicParsing="false" onAction="#buscarObra" text="Buscar" />
                         <Button fx:id="btn_ExportarObra" layoutX="351.0" layoutY="360.0" mnemonicParsing="false" onAction="#exportarObra" text="Exportar" />
                         <Button fx:id="btn_ListarObras" layoutX="270.0" layoutY="360.0" mnemonicParsing="false" onAction="#listarObras" prefHeight="26.0" prefWidth="63.0" text="Listar" />
-                        <Text fill="WHITE" layoutX="103.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Buscar Obra por:" />
-                        <TextField fx:id="txtBuscarObra" layoutX="103.0" layoutY="69.0" prefHeight="25.0" prefWidth="491.0" promptText="" />
-                        <CheckBox fx:id="opt_typeArtWork" layoutX="470.0" layoutY="317.0" mnemonicParsing="false" onAction="#listarEscultura" text="Solo Tipo Escultura" textFill="WHITE" />
-                        <CheckBox layoutX="105.0" layoutY="317.0" mnemonicParsing="false" text="Filtrar por artistas mas vendidos" textFill="WHITE" />
+                        <Text fill="WHITE" layoutX="102.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Buscar Obra por:" />
+                        <TextField fx:id="txtBuscarObra" layoutX="102.0" layoutY="66.0" prefHeight="26.0" prefWidth="302.0" promptText="" />
+                        <RadioButton fx:id="radioBtnNombreArtistaListarObra" layoutX="418.0" layoutY="48.0" mnemonicParsing="false" text="Nombre artista" textFill="WHITE">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="GrupoB" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="radioBtnAnioListarObra" layoutX="418.0" layoutY="70.0" mnemonicParsing="false" text="Año" textFill="WHITE" toggleGroup="$GrupoB" />
+                        <RadioButton fx:id="radioBtnTituloListarObra" layoutX="479.0" layoutY="70.0" mnemonicParsing="false" text="Titulo" textFill="WHITE" toggleGroup="$GrupoB" />
+                        <RadioButton fx:id="opt_typeArtWork" layoutX="102.0" layoutY="327.0" mnemonicParsing="false" onAction="#listarEscultura" text="Solo tipo Escultura" textFill="WHITE">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="GrupoB2" />
+                           </toggleGroup>
+                        </RadioButton>
                      </children>
                   </AnchorPane>
               </content>

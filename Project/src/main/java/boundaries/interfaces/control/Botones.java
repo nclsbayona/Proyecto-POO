@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -13,6 +14,7 @@ import boundaries.interfaces.Exportacion;
 import control.ControlGaleria;
 import exceptions.ArtworkDoesntExistException;
 import exceptions.ArtworkExistsException;
+import exceptions.EmptyPurchasesListException;
 import exceptions.TypoException;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -24,12 +26,12 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
@@ -50,8 +52,8 @@ public class Botones {
 	private FileChooser fileChooser;
 
 	// Main
-    @FXML
-    private Button btnObras1;
+	@FXML
+	private Button btnObras1;
 	@FXML
 	private ResourceBundle resources;
 
@@ -64,12 +66,12 @@ public class Botones {
 	@FXML
 	private Button btnCompras;
 
+	@FXML
+	void cambiarAObras(ActionEvent event) {
+		this.changeToA("MainObras.fxml");
 
-    @FXML
-    void cambiarAObras(ActionEvent event) {
-    	this.changeToA("MainObras.fxml");
+	}
 
-    }
 	@FXML
 	void cambiarACliente(ActionEvent event) {
 		String nomFXML = "cliente/Clientes.fxml";
@@ -85,6 +87,10 @@ public class Botones {
 		stage.setTitle("Cliente");
 		stage.setScene(scene);
 		stage.showAndWait();
+	}
+
+	@FXML
+	void cambiarAArtistas(ActionEvent event) {
 	}
 
 	@FXML
@@ -123,7 +129,6 @@ public class Botones {
 	}
 
 	// ....................FIN BONTON EXPORTAR ........................./
-
 	// ....................BONTON LISTAR ........................./
 	@FXML
 	private Button btn_ListarClientes;
@@ -483,7 +488,19 @@ public class Botones {
 	private TextField txtCodigoObraComprar;
 
 	@FXML
-	private CheckBox checkFiltrado;
+	private RadioButton checkFiltrado;
+
+	@FXML
+	private ToggleGroup GrupoA;
+
+	@FXML
+	private RadioButton checkSoloCuadro;
+
+	@FXML
+	private Text gananciaTotalCompras;
+
+	@FXML
+	private Button btnRefrescarGananciaTotalCompras;
 
 	@FXML
 	private TextField txtCodigoCompraEliminar;
@@ -502,6 +519,11 @@ public class Botones {
 
 	@FXML
 	private TextField txtMesCompra;
+
+	@FXML
+	void refrescarGananciaTotalObras(ActionEvent event) {
+		this.gananciaTotalCompras.setText(String.valueOf(Botones.cGaleria.calcularPrecioTotal()));
+	}
 
 	@FXML
 	void comprarObra(ActionEvent event) {
@@ -542,12 +564,23 @@ public class Botones {
 	void exportarLasCompras(ActionEvent event) {
 		try {
 			if (this.checkFiltrado.isSelected()) {
-				this.cExportacion.exportarXML(String.valueOf(fileChooser.showSaveDialog(null)), "m",
-						Botones.cGaleria.listadoDeCompra(txtMesCompra.getText(), txtAñoCompra.getText()));
-			} else {
+				try {
+					this.cExportacion.exportarXML(String.valueOf(fileChooser.showSaveDialog(null)), "n",
+							Botones.cGaleria.listadoDeCompra(txtMesCompra.getText(), txtAñoCompra.getText()));
+				} catch (Exception e) {
+					this.createNewStage("Lista de compras vacía", AlertType.INFORMATION, "Vacía");
+				}
+
+			} else if (this.checkSoloCuadro.isSelected()) {
+				try {
+					this.cExportacion.exportarXML(String.valueOf(fileChooser.showSaveDialog(null)), "q",
+							Botones.cGaleria.comprasAsociadasACuadro());
+				} catch (EmptyPurchasesListException e) {
+					this.createNewStage("Lista de compras vacía", AlertType.INFORMATION, "Vacía");
+				}
+			} else
 				this.cExportacion.exportarXML(String.valueOf(fileChooser.showSaveDialog(null)), "m",
 						Botones.cGaleria.getListaCompras());
-			}
 		} catch (TypoException e) {
 			this.createNewStage(e.getMessage(), AlertType.ERROR, "Error exportando");
 		}
@@ -561,6 +594,17 @@ public class Botones {
 			this.comprArrayList = new ArrayList<>();
 			for (String c : Botones.cGaleria.listadoDeCompra(txtMesCompra.getText(), txtAñoCompra.getText())) {
 				this.comprArrayList.add(c);
+			}
+			this.listadoCompras.setItems(FXCollections.observableArrayList(this.comprArrayList));
+		} else if (this.checkSoloCuadro.isSelected()) {
+			this.listadoCompras.setItems(null);
+			this.comprArrayList = new ArrayList<>();
+			try {
+				for (Compra c : Botones.cGaleria.comprasAsociadasACuadro()) {
+					this.comprArrayList.add(c.toString());
+				}
+			} catch (EmptyPurchasesListException e) {
+				this.createNewStage("Lista de compras vacía", AlertType.INFORMATION, "Vacía");
 			}
 			this.listadoCompras.setItems(FXCollections.observableArrayList(this.comprArrayList));
 		} else {
@@ -619,28 +663,47 @@ public class Botones {
 
 	}
 
-//....................BONTON EXPORTAR ........................./
+	// ....................BONTON LISTAR ........................./
+	@FXML
+	private Button btn_ListarObras;
+	@FXML
+	private ListView<String> ListaObras;
+	private ArrayList<String> obras;
+	@FXML
+	private ToggleGroup GrupoB;
+	@FXML
+	private RadioButton radioBtnAnioListarObra;
+	@FXML
+	private RadioButton opt_typeArtWork;
+	@FXML
+	private RadioButton radioBtnTituloListarObra;
+	@FXML
+	private RadioButton radioBtnNombreArtistaListarObra;
+	@FXML
+	private ToggleGroup GrupoB2;
+	@FXML
+	private Button btn_BuscarObra;
+	@FXML
+	private TextField txtBuscarObra;
+
+	// ....................BONTON EXPORTAR ........................./
 	@FXML
 	private Button btn_ExportarObra;
 
 	@FXML
 	void exportarObra(ActionEvent event) {
 		try {
-			this.cExportacion.exportarXML(String.valueOf(fileChooser.showSaveDialog(null)), "a",
-					cGaleria.listaObrasDisponibles());
+			if (opt_typeArtWork.isSelected()) {
+				this.cExportacion.exportarXML(String.valueOf(fileChooser.showSaveDialog(null)), "a",
+						cGaleria.buscarEsculturas());
+			} else {
+				this.cExportacion.exportarXML(String.valueOf(fileChooser.showSaveDialog(null)), "a",
+						cGaleria.listaObrasDisponibles());
+			}
 		} catch (TypoException e) {
 			e.printStackTrace();
 		}
 	}
-
-	// ....................BONTON LISTAR ........................./
-	@FXML
-	private Button btn_ListarObras;
-	@FXML
-	private ListView<String> ListaObras;
-	@FXML
-	private CheckBox opt_typeArtWork;
-	private ArrayList<String> obras;
 
 	@FXML
 	void listarObras(ActionEvent event) throws TypoException {
@@ -648,7 +711,7 @@ public class Botones {
 		this.obras = null;
 		this.obras = new ArrayList<>();
 		for (Obra o : Botones.cGaleria.listaObrasDisponibles()) {
-			this.obras.add(o.toString());
+			obras.add(o.toString());
 		}
 		this.ListaObras.setItems(FXCollections.observableArrayList(this.obras));
 	}
@@ -669,18 +732,27 @@ public class Botones {
 
 	// ---------------------------------BOTON BUSCAR
 	// OBRA--------------------------------
-	@FXML
-	private Button btn_BuscarObra;
-	@FXML
-	private TextField txtBuscarObra;
 
 	@FXML
 	void buscarObra(ActionEvent event) throws TypoException {
-		String search = txtBuscarObra.getText();
 		this.obras = new ArrayList<>();
-		for (Obra o : Botones.cGaleria.buscarObra(search)) {
-			obras.add(o.toString());
-		}
+		if (radioBtnTituloListarObra.isSelected()) {
+			for (Obra o : Botones.cGaleria.buscarObra(txtBuscarObra.getText())) {
+				this.obras.add(o.toString());
+			}
+		} else if (radioBtnAnioListarObra.isSelected()) {
+			Calendar c = Calendar.getInstance();
+			c.set(Integer.parseInt(txtBuscarObra.getText()), 10, 10);
+			for (Obra o : Botones.cGaleria.buscarObra(c)) {
+				this.obras.add(o.toString());
+			}
+		} else if (radioBtnNombreArtistaListarObra.isSelected()) {
+			for (Obra o : Botones.cGaleria.buscarObraporArtista(txtBuscarObra.getText())) {
+				this.obras.add(o.toString());
+			}
+		} else
+			this.obras.add("No hay obra");
+
 		this.ListaObras.setItems(FXCollections.observableArrayList(this.obras));
 	}
 
@@ -723,7 +795,8 @@ public class Botones {
 		}
 	}
 
-//--------------------------------------CREAR OBRA---------------------------------
+	// --------------------------------------CREAR
+	// OBRA---------------------------------
 	@FXML
 	private Button bton_cuadro;
 
@@ -753,7 +826,7 @@ public class Botones {
 		Stage primaryStage = new Stage();
 		Parent root = null;
 		try {
-			root = FXMLLoader.load(getClass().getResource("obras/"+nomFXML));
+			root = FXMLLoader.load(getClass().getResource("obras/" + nomFXML));
 		} catch (IOException e) {
 		}
 		Scene scene = new Scene(root);
@@ -762,7 +835,7 @@ public class Botones {
 		primaryStage.initModality(Modality.APPLICATION_MODAL);
 		primaryStage.showAndWait();
 	}
-//CREAR OBRA TIPO CUADRO
+	// CREAR OBRA TIPO CUADRO
 
 	@FXML
 	private TextField txt_codigodelaObraC;
@@ -927,7 +1000,7 @@ public class Botones {
 
 	}
 
-//CREAR OBRA INSTALACION
+	// CREAR OBRA INSTALACION
 	@FXML
 	private TextField txt_codigoInsta;
 
@@ -1047,7 +1120,7 @@ public class Botones {
 		assert crearInstalacion != null
 				: "fx:id=\"crearInstalacion\" was not injected: check your FXML file 'InstalarObra.fxml'.";
 		assert date_fecha != null : "fx:id=\"date_fecha\" was not injected: check your FXML file 'InstalarObra.fxml'.";
-// Crear Obra Escultura
+		// Crear Obra Escultura
 		assert txt_codigodelaObraE != null
 				: "fx:id=\"txt_codigodelaObraE\" was not injected: check your FXML file 'CrearEscultura.fxml'.";
 		assert txt_TitulodelaObraE != null
@@ -1063,7 +1136,7 @@ public class Botones {
 				: "fx:id=\"btn_crearEscultura\" was not injected: check your FXML file 'CrearEscultura.fxml'.";
 		assert txt_FechadelaObraE != null
 				: "fx:id=\"txt_FechadelaObraE\" was not injected: check your FXML file 'CrearEscultura.fxml'.";
-// Crear obra cuadro
+		// Crear obra cuadro
 		assert txt_cedulaObraC != null
 				: "fx:id=\"txt_cedulaObraC\" was not injected: check your FXML file 'CrearCuadro.fxml'.";
 		assert txt_codigodelaObraC != null
@@ -1089,7 +1162,7 @@ public class Botones {
 		assert bton_crearObraC != null
 				: "fx:id=\"bton_crearObraC\" was not injected: check your FXML file 'CrearCuadro.fxml'.";
 
-// MAIN SCREEN
+		// MAIN SCREEN
 		assert screen_listarObra != null
 				: "fx:id=\"screen_listarObra\" was not injected: check your FXML file 'Main.fxml'.";
 		assert screen_addObra != null : "fx:id=\"screen_addObra\" was not injected: check your FXML file 'Main.fxml'.";
@@ -1097,27 +1170,35 @@ public class Botones {
 				: "fx:id=\"screen_modificarObra\" was not injected: check your FXML file 'Main.fxml'.";
 		assert screen_eliminarObra != null
 				: "fx:id=\"screen_eliminarObra\" was not injected: check your FXML file 'Main.fxml'.";
-// _______________-_______
-// Crear obra________________________________________-
+		// _______________-_______
+		// Crear obra________________________________________-
 		assert bton_cuadro != null : "fx:id=\"bton_cuadro\" was not injected: check your FXML file 'MenuCrear.fxml'.";
 		assert bton_Escultura != null
 				: "fx:id=\"bton_Escultura\" was not injected: check your FXML file 'MenuCrear.fxml'.";
 		assert bton_Instalacion != null
 				: "fx:id=\"bton_Instalacion\" was not injected: check your FXML file 'MenuCrear.fxml'.";
-/// _______________________________________________ELIMINAR
-/// OBRA_____________________________
+		/// _______________________________________________ELIMINAR
+		/// OBRA_____________________________
 		assert txt_buscarObraEliminar != null
 				: "fx:id=\"txt_buscarObraEliminar\" was not injected: check your FXML file 'EliminarObra.fxml'.";
 		assert btn_buscarObraEliminar != null
 				: "fx:id=\"btn_buscarObraEliminar\" was not injected: check your FXML file 'EliminarObra.fxml'.";
 		assert list_obraEliminar != null
 				: "fx:id=\"list_obraEliminar\" was not injected: check your FXML file 'EliminarObra.fxml'.";
-// -------------------------------------------------------------------------------
+		// -------------------------------------------------------------------------------
+		assert radioBtnNombreArtistaListarObra != null
+				: "fx:id=\"radioBtnNombreArtistaListarObra\" was not injected: check your FXML file 'ListarObra.fxml'.";
+		assert GrupoB != null : "fx:id=\"GrupoB\" was not injected: check your FXML file 'ListarObra.fxml'.";
+		assert radioBtnAnioListarObra != null
+				: "fx:id=\"radioBtnAnioListarObra\" was not injected: check your FXML file 'ListarObra.fxml'.";
+		assert radioBtnTituloListarObra != null
+				: "fx:id=\"radioBtnTituloListarObra\" was not injected: check your FXML file 'ListarObra.fxml'.";
+		assert GrupoB2 != null : "fx:id=\"GrupoB2\" was not injected: check your FXML file 'ListarObra.fxml'.";
 		assert opt_typeArtWork != null
 				: "fx:id=\"opt_typeArtWork\" was not injected: check your FXML file 'ListarObra.fxml'.";
 		assert btn_ExportarObra != null
 				: "fx:id=\"btn_ExportarObra\" was not injected: check your FXML file 'ListarObra.fxml'.";
-// ........................................................................................................./
+		// ........................................................................................................./
 		assert btn_ListarObras != null
 				: "fx:id=\"btn_ListarObra\" was not injected: check your FXML file 'ListarObra.fxml'.";
 		assert btn_BuscarObra != null
