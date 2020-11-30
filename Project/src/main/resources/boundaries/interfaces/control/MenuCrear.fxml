@@ -21,7 +21,7 @@
                         <Text fill="WHITE" layoutX="181.0" layoutY="120.0" scaleX="2.0" scaleY="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SELECCIONE EL TIPO DE OBRA PARA CREAR" underline="true" />
                         <Button fx:id="bton_cuadro" layoutX="174.0" layoutY="186.0" mnemonicParsing="false" onAction="#bton_callCreateCuadroScreen" scaleX="1.5" scaleY="1.5" text="Cuadro" />
                         <Button fx:id="bton_Escultura" layoutX="368.0" layoutY="186.0" mnemonicParsing="false" onAction="#bton_callCreateEsculturaScreen" scaleX="1.5" scaleY="1.5" text="Escultura" />
-                        <Button fx:id="bton_Instalacion" layoutX="261.0" layoutY="292.0" mnemonicParsing="false" onAction="#bton_callCreateInstalacionScreen" scaleX="1.5" scaleY="1.5" text="Instalacion" />
+                        <Button fx:id="bton_Instalacion" layoutX="261.0" layoutY="292.0" mnemonicParsing="false" onAction="#bton_callCreateInstalacionScreen" scaleX="1.5" scaleY="1.5" text="Instalación" />
                      </children>
                   </AnchorPane>
             </content>
