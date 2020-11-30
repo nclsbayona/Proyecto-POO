@@ -28,6 +28,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
+import javafx.scene.control.RadioButton;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -246,50 +247,80 @@ public class Botones {
 	@FXML
 	private Button bton_crearObraC;
 	@FXML
-	private CheckBox check_obraMaestraC;
+	private RadioButton check_obraMaestraC;
 
 	@FXML
-	private CheckBox check_obraRepresentativaC;
+	private RadioButton check_obraRepresentativaC;
 	@FXML
 	private TextField txt_cedulaObraC;
 
 	@FXML
 	void crearObraC(ActionEvent event) throws ArtworkExistsException {
-		long codigo = Long.parseLong(txt_codigodelaObraC.getText());
-		String titulo = txt_TitulodelaObraC.getText();
-		LocalDate ld = txt_FechadelaObraC.getValue();
-		Date date = java.sql.Date.valueOf(ld);
-		Calendar c = Calendar.getInstance();
-		c.setTime(date);
-		float precio = Float.parseFloat(txt_preciodelaObraC.getText());
-		String dimensiones = txt_DimensionesdelaObraC.getText();
-		String tema = txt_TemadelaObraC.getText();
-		String tecnica = txt_TecnicadelaObraC.getText();
+		Obra o = null;
 		if (check_obraMaestraC.isSelected()) {
-			Obra o;
 			try {
+				if (txt_codigodelaObraC.getText().equals("") || txt_TitulodelaObraC.getText().equals("")
+						|| txt_FechadelaObraC.getValue().equals("") || txt_preciodelaObraC.getText().equals("")
+						|| txt_DimensionesdelaObraC.getText().equals("") || txt_TemadelaObraC.getText().equals("")
+						|| txt_TecnicadelaObraC.getText().equals(""))
+					throw new TypoException();
+				long codigo = Long.parseLong(txt_codigodelaObraC.getText());
+				String titulo = txt_TitulodelaObraC.getText();
+				LocalDate ld = txt_FechadelaObraC.getValue();
+				Date date = java.sql.Date.valueOf(ld);
+				float precio = Float.parseFloat(txt_preciodelaObraC.getText());
+				String dimensiones = txt_DimensionesdelaObraC.getText();
+				String tema = txt_TemadelaObraC.getText();
+				String tecnica = txt_TecnicadelaObraC.getText();
 				o = new Cuadro(codigo, titulo, date, precio, dimensiones, tema, tecnica, Clasificacion.OBRA_MAESTRA);
-				if (Botones.confirmacionAlert("Confirmación", "Desea agregar la obra?", ""))
-					cGaleria.addObra(o);
-				else
-					Botones.infoAlert("Información", "No se agrego la obra", "");
-			} catch (TypoException e) {
+				try {
+					cGaleria.buscarObra(codigo);
+					Botones.errorAlert("Error", "Ya existe una obra con el mismo código", "");
+
+				} catch (ArtworkDoesntExistException e) {
+					if (Botones.confirmacionAlert("Confirmación", "Desea agregar la obra?", ""))
+						cGaleria.addObra(o);
+					else
+						Botones.infoAlert("Información", "No se agrego la obra", "");
+				}
+			} catch (Exception e) {
 				Botones.errorAlert("Error", e.toString(), "Excepciones");
 			}
 
 		} else if (check_obraRepresentativaC.isSelected()) {
-			Obra o;
+
 			try {
+				if (txt_codigodelaObraC.getText().equals("") || txt_TitulodelaObraC.getText().equals("")
+						|| txt_FechadelaObraC.getValue().equals("") || txt_preciodelaObraC.getText().equals("")
+						|| txt_DimensionesdelaObraC.getText().equals("") || txt_TemadelaObraC.getText().equals("")
+						|| txt_TecnicadelaObraC.getText().equals(""))
+					throw new TypoException();
+				long codigo = Long.parseLong(txt_codigodelaObraC.getText());
+				String titulo = txt_TitulodelaObraC.getText();
+				LocalDate ld = txt_FechadelaObraC.getValue();
+				Date date = java.sql.Date.valueOf(ld);
+				float precio = Float.parseFloat(txt_preciodelaObraC.getText());
+				String dimensiones = txt_DimensionesdelaObraC.getText();
+				String tema = txt_TemadelaObraC.getText();
+				String tecnica = txt_TecnicadelaObraC.getText();
 				o = new Cuadro(codigo, titulo, date, precio, dimensiones, tema, tecnica,
 						Clasificacion.OBRA_REPRESENTATIVA);
-				if (Botones.confirmacionAlert("Confirmación", "Desea agregar la obra?", ""))
-					cGaleria.addObra(o);
-				else
-					Botones.infoAlert("Información", "No se agrego la obra", "");
-			} catch (TypoException e) {
+				try {
+					cGaleria.buscarObra(codigo);
+					Botones.errorAlert("Error", "Ya existe una obra con el mismo código", "");
+
+				} catch (ArtworkDoesntExistException e) {
+					if (Botones.confirmacionAlert("Confirmación", "Desea agregar la obra?", ""))
+						cGaleria.addObra(o);
+					else
+						Botones.infoAlert("Información", "No se agrego la obra", "");
+				}
+			} catch (Exception e) {
 				Botones.errorAlert("Error", e.toString(), "Excepciones");
 			}
 
+		} else if (!check_obraRepresentativaC.isSelected() && !check_obraMaestraC.isSelected()) {
+			Botones.errorAlert("Error", "No ha seleccionado el tipo de obra", "");
 		}
 
 	}
@@ -321,24 +352,36 @@ public class Botones {
 
 	@FXML
 	void crearEscultura(ActionEvent event) throws ArtworkExistsException {
-		long codigo = Long.parseLong(txt_codigodelaObraE.getText());
-		String titulo = txt_TitulodelaObraE.getText();
-		LocalDate ld = txt_FechadelaObraE.getValue();
-		Date date = java.sql.Date.valueOf(ld);
-		float precio = Float.parseFloat(txt_preciodelaObraE.getText());
-		String dimensiones = txt_DimensionesdelaObraE.getText();
-		String material = txt_MaterialE.getText();
-		double peso = Double.parseDouble(txt_PesoE.getText());
+		Obra o = null;
 		try {
-			Obra o = new Escultura(codigo, titulo, date, precio, dimensiones, material, peso);
-			if (Botones.confirmacionAlert("Confirmación", "Desea agregar la obra?", ""))
-				cGaleria.addObra(o);
-			else
-				Botones.infoAlert("Información", "No se agrego la obra", "");
+			if (txt_codigodelaObraE.getText().equals("") || txt_TitulodelaObraE.getText().equals("")
+					|| txt_FechadelaObraE.getValue().equals("") || txt_preciodelaObraE.getText().equals("")
+					|| txt_DimensionesdelaObraE.getText().equals("") || txt_MaterialE.getText().equals("")
+					|| txt_PesoE.getText().equals(""))
+				throw new TypoException();
+			long codigo = Long.parseLong(txt_codigodelaObraE.getText());
+			String titulo = txt_TitulodelaObraE.getText();
+			LocalDate ld = txt_FechadelaObraE.getValue();
+			Date date = java.sql.Date.valueOf(ld);
+			float precio = Float.parseFloat(txt_preciodelaObraE.getText());
+			String dimensiones = txt_DimensionesdelaObraE.getText();
+			String material = txt_MaterialE.getText();
+			double peso = Double.parseDouble(txt_PesoE.getText());
+			o = new Escultura(codigo, titulo, date, precio, dimensiones, material, peso);
+			try {
+				cGaleria.buscarObra(codigo);
+				Botones.errorAlert("Error", "Ya existe una obra con el mismo código", "");
 
+			} catch (ArtworkDoesntExistException e) {
+				if (Botones.confirmacionAlert("Confirmación", "Desea agregar la obra?", ""))
+					cGaleria.addObra(o);
+				else
+					Botones.infoAlert("Información", "No se agrego la obra", "");
+			}
 		} catch (TypoException e) {
 			Botones.errorAlert("Error", e.toString(), "Excepciones");
 		}
+
 	}
 
 //CREAR OBRA INSTALACION
@@ -381,7 +424,7 @@ public class Botones {
 			o = new Instalacion(codigo, titulo, date, precio, dimensiones, descripcion);
 			try {
 				cGaleria.buscarObra(codigo);
-				Botones.errorAlert("Error","Ya existe una obra con el mismo código","");
+				Botones.errorAlert("Error", "Ya existe una obra con el mismo código", "");
 
 			} catch (ArtworkDoesntExistException e) {
 				if (Botones.confirmacionAlert("Confirmación", "Desea agregar la obra?", ""))

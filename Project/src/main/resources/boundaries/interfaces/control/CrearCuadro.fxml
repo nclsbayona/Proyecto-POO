@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Rectangle?>
@@ -32,8 +33,12 @@
                               <TextField fx:id="txt_TecnicadelaObraC" layoutX="232.0" layoutY="266.0" promptText="Tecnica" />
                               <Button fx:id="bton_crearObraC" layoutX="274.0" layoutY="335.0" mnemonicParsing="false" onAction="#crearObraC" text="Crear" />
                               <DatePicker fx:id="txt_FechadelaObraC" layoutX="232.0" layoutY="123.0" prefHeight="25.0" prefWidth="149.0" promptText="Fecha" />
-                              <CheckBox fx:id="check_obraMaestraC" layoutX="349.0" layoutY="302.0" mnemonicParsing="false" text="Obra maestra" textFill="WHITE" />
-                              <CheckBox fx:id="check_obraRepresentativaC" layoutX="191.0" layoutY="302.0" mnemonicParsing="false" text="Obra representativa" textFill="WHITE" />
+                              <RadioButton fx:id="check_obraRepresentativaC" layoutX="169.0" layoutY="302.0" mnemonicParsing="false" text="Obra representativa" textFill="WHITE">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="a" />
+                                 </toggleGroup>
+                              </RadioButton>
+                              <RadioButton fx:id="check_obraMaestraC" layoutX="372.0" layoutY="302.0" mnemonicParsing="false" text="Obra maestra" textFill="#fff9f9" toggleGroup="$a" />
                            </children>
                         </AnchorPane>
                   </content>
