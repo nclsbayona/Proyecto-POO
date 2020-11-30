@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane fx:id="mainWindow" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="497.0" prefWidth="746.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundaries.interfaces.control.BotonHome">
+<Pane fx:id="mainWindow" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="497.0" prefWidth="746.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundaries.interfaces.control.BotonesCliente">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#393939" height="504.0" layoutY="-4.0" stroke="TRANSPARENT" strokeType="INSIDE" width="746.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#4d4d4d" height="422.0" layoutX="497.0" layoutY="37.0" stroke="TRANSPARENT" strokeLineCap="ROUND" strokeLineJoin="ROUND" width="226.0" />
