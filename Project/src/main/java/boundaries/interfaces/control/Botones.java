@@ -1,14 +1,18 @@
 package boundaries.interfaces.control;
 
 import javafx.scene.control.TextField;
-
+import java.time.LocalDate;
 import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.ResourceBundle;
 import boundaries.interfaces.Exportacion;
 import control.ControlGaleria;
 import exceptions.ArtworkDoesntExistException;
+import exceptions.ArtworkExistsException;
 import exceptions.TypoException;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -18,21 +22,55 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.Clasificacion;
+import model.Cuadro;
+import model.Escultura;
+import model.Instalacion;
 import model.Obra;
 
 public class Botones {
-	ControlGaleria cGaleria;
+	private static ControlGaleria cGaleria = new ControlGaleria();
 	Exportacion cExportacion;
 	FileChooser fileChooser;
 	String nomFXMLError;
+	// MAIN SCREEN
 	@FXML
-	private ResourceBundle resources;
+	private Button screen_listarObra;
+
 	@FXML
-	private URL location;
+	private Button screen_addObra;
+
+	@FXML
+	private Button screen_modificarObra;
+
+	@FXML
+	private Button screen_eliminarObra;
+
+	@FXML
+	void call_addObraScreen(ActionEvent event) {
+		this.changeToA("MenuCrear.fxml");
+	}
+
+	@FXML
+	void call_eliminarObraScreen(ActionEvent event) {
+		this.changeToA("EliminarObra.fxml");
+	}
+
+	@FXML
+	void call_listarObraScreen(ActionEvent event) {
+		this.changeToA("ListarObra.fxml");
+	}
+
+	@FXML
+	void call_modificarObraScreen(ActionEvent event) {
+
+	}
+
 //....................BONTON EXPORTAR ........................./
 	@FXML
 	private Button btn_ExportarObra;
@@ -40,7 +78,8 @@ public class Botones {
 	@FXML
 	void exportarObra(ActionEvent event) {
 		try {
-			this.cExportacion.exportarXML(String.valueOf(fileChooser.showSaveDialog(null)), "a", this.obras);
+			this.cExportacion.exportarXML(String.valueOf(fileChooser.showSaveDialog(null)), "a",
+					cGaleria.listaObrasDisponibles());
 		} catch (TypoException e) {
 			e.printStackTrace();
 		}
@@ -58,8 +97,9 @@ public class Botones {
 	@FXML
 	void listarObras(ActionEvent event) throws TypoException {
 		this.ListaObras.setItems(null);
+		this.obras = null;
 		this.obras = new ArrayList<>();
-		for (Obra o : this.cGaleria.listaObrasDisponibles()) {
+		for (Obra o : Botones.cGaleria.listaObrasDisponibles()) {
 			this.obras.add(o.toString());
 		}
 		this.ListaObras.setItems(FXCollections.observableArrayList(this.obras));
@@ -67,10 +107,11 @@ public class Botones {
 
 	@FXML
 	void listarEscultura(ActionEvent event) throws TypoException {
+		this.obras = null;
 		if (opt_typeArtWork.isSelected()) {
 			this.ListaObras.setItems(null);
 			this.obras = new ArrayList<>();
-			for (Obra o : this.cGaleria.buscarEsculturas()) {
+			for (Obra o : Botones.cGaleria.buscarEsculturas()) {
 				this.obras.add(o.toString());
 			}
 			this.ListaObras.setItems(FXCollections.observableArrayList(this.obras));
@@ -89,7 +130,7 @@ public class Botones {
 	void buscarObra(ActionEvent event) throws TypoException {
 		String search = txtBuscarObra.getText();
 		this.obras = new ArrayList<>();
-		for (Obra o : this.cGaleria.buscarObra(search)) {
+		for (Obra o : Botones.cGaleria.buscarObra(search)) {
 			obras.add(o.toString());
 		}
 		this.ListaObras.setItems(FXCollections.observableArrayList(this.obras));
@@ -108,6 +149,8 @@ public class Botones {
 
 	@FXML
 	void buscarObraCodigo(ActionEvent event) {
+		this.obras = null;
+		this.list_obraEliminar.setItems(null);
 		long search = Long.parseLong(txt_buscarObraEliminar.getText());
 		try {
 			Obra o = cGaleria.buscarObra(search);
@@ -124,6 +167,7 @@ public class Botones {
 		long search = Long.parseLong(txt_buscarObraEliminar.getText());
 		try {
 			cGaleria.eliminarObra(search);
+			System.out.println(cGaleria.getGestionObras().toString());
 			System.out.println("Eliminado");
 		} catch (ArtworkDoesntExistException e) {
 
@@ -142,21 +186,21 @@ public class Botones {
 
 	@FXML
 	void bton_callCreateCuadroScreen(ActionEvent event) {
+		this.changeToA("CrearCuadro.fxml");
 	}
 
 	@FXML
 	void bton_callCreateEsculturaScreen(ActionEvent event) {
-
+		this.changeToA("CrearEscultura.fxml");
 	}
 
 	@FXML
 	void bton_callCreateInstalacionScreen(ActionEvent event) {
-
+		this.changeToA("InstalarObra.fxml");
 	}
 
-	@FXML
-	void changeToA(ActionEvent event) {
-		String nomFXML = "ListarObra.fxml";
+	void changeToA(String n) {
+		String nomFXML = n;
 		Stage primaryStage = new Stage();
 		Parent root = null;
 		try {
@@ -169,14 +213,234 @@ public class Botones {
 		primaryStage.initModality(Modality.APPLICATION_MODAL);
 		primaryStage.showAndWait();
 	}
+//CREAR OBRA TIPO CUADRO
+
+	@FXML
+	private TextField txt_codigodelaObraC;
+
+	@FXML
+	private TextField txt_TitulodelaObraC;
+
+	@FXML
+	private DatePicker txt_FechadelaObraC;
+
+	@FXML
+	private TextField txt_preciodelaObraC;
+
+	@FXML
+	private TextField txt_DimensionesdelaObraC;
+
+	@FXML
+	private TextField txt_TemadelaObraC;
+
+	@FXML
+	private TextField txt_TecnicadelaObraC;
+
+	@FXML
+	private TextField txt_clasidelaObraC;
+	@FXML
+	private Button bton_crearObraC;
+	@FXML
+	private CheckBox check_obraMaestraC;
+
+	@FXML
+	private CheckBox check_obraRepresentativaC;
+	@FXML
+	private TextField txt_cedulaObraC;
+
+	@FXML
+	void crearObraC(ActionEvent event) throws ArtworkExistsException {
+		long codigo = Long.parseLong(txt_codigodelaObraC.getText());
+		String titulo = txt_TitulodelaObraC.getText();
+		LocalDate ld = txt_FechadelaObraC.getValue();
+		Date date = java.sql.Date.valueOf(ld);
+		Calendar c = Calendar.getInstance();
+		c.setTime(date);
+		float precio = Float.parseFloat(txt_preciodelaObraC.getText());
+		String dimensiones = txt_DimensionesdelaObraC.getText();
+		String tema = txt_TemadelaObraC.getText();
+		String tecnica = txt_TecnicadelaObraC.getText();
+		if (check_obraMaestraC.isSelected()) {
+			Obra o;
+			try {
+				o = new Cuadro(codigo, titulo, date, precio, dimensiones, tema, tecnica, Clasificacion.OBRA_MAESTRA);
+				cGaleria.addObra(o);
+			} catch (TypoException e) {
+				e.printStackTrace();
+			}
+
+		} else if (check_obraRepresentativaC.isSelected()) {
+			Obra o;
+			try {
+				o = new Cuadro(codigo, titulo, date, precio, dimensiones, tema, tecnica,
+						Clasificacion.OBRA_REPRESENTATIVA);
+				cGaleria.addObra(o);
+			} catch (TypoException e) {
+				e.printStackTrace();
+			}
+
+		}
+
+	}
+
+	// CREAR OBRA ESCULTURA
+	@FXML
+	private TextField txt_codigodelaObraE;
+
+	@FXML
+	private TextField txt_TitulodelaObraE;
+
+	@FXML
+	private TextField txt_preciodelaObraE;
+
+	@FXML
+	private TextField txt_DimensionesdelaObraE;
+
+	@FXML
+	private TextField txt_MaterialE;
+
+	@FXML
+	private TextField txt_PesoE;
+
+	@FXML
+	private Button btn_crearEscultura;
+
+	@FXML
+	private DatePicker txt_FechadelaObraE;
+
+	@FXML
+	void crearEscultura(ActionEvent event) throws ArtworkExistsException {
+		long codigo = Long.parseLong(txt_codigodelaObraE.getText());
+		String titulo = txt_TitulodelaObraE.getText();
+		LocalDate ld = txt_FechadelaObraE.getValue();
+		Date date = java.sql.Date.valueOf(ld);
+		Calendar c = Calendar.getInstance();
+		c.setTime(date);
+		float precio = Float.parseFloat(txt_preciodelaObraE.getText());
+		String dimensiones = txt_DimensionesdelaObraE.getText();
+		String material = txt_MaterialE.getText();
+		double peso = Double.parseDouble(txt_PesoE.getText());
+		try {
+			Obra o = new Escultura(codigo, titulo, date, precio, dimensiones, material, peso);
+			cGaleria.addObra(o);
+		} catch (TypoException e) {
+			e.printStackTrace();
+		}
+	}
+
+//CREAR OBRA INSTALACION
+	@FXML
+	private TextField txt_codigoInsta;
+
+	@FXML
+	private TextField txt_tituloInsta;
+
+	@FXML
+	private TextField txt_precioInsta;
+
+	@FXML
+	private TextField txt_dimensionesInsta;
+
+	@FXML
+	private TextField txt_descripcionInsta;
+
+	@FXML
+	private Button crearInstalacion;
+
+	@FXML
+	private DatePicker date_fecha;
+
+	@FXML
+	void crearObraInstalacion(ActionEvent event) throws ArtworkExistsException {
+		long codigo = Long.parseLong(txt_codigoInsta.getText());
+		String titulo = txt_tituloInsta.getText();
+		LocalDate ld = date_fecha.getValue();
+		Date date = java.sql.Date.valueOf(ld);
+		float precio = Float.parseFloat(txt_precioInsta.getText());
+		String dimensiones = txt_dimensionesInsta.getText();
+		String descripcion = txt_descripcionInsta.getText();
+		Obra o;
+		try {
+			o = new Instalacion(codigo, titulo, date, precio, dimensiones, descripcion);
+			cGaleria.addObra(o);
+		} catch (TypoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
 
 	@FXML
 	void initialize() {
-		this.cGaleria = new ControlGaleria();
 		this.cExportacion = new Exportacion();
 		this.fileChooser = new FileChooser();
 		this.fileChooser.setTitle("Select Report File");
 		this.nomFXMLError = "ErrorWindow.fxml";
+		// Crear Obra instalacion
+		assert txt_codigoInsta != null
+				: "fx:id=\"txt_codigoInsta\" was not injected: check your FXML file 'InstalarObra.fxml'.";
+		assert txt_tituloInsta != null
+				: "fx:id=\"txt_tituloInsta\" was not injected: check your FXML file 'InstalarObra.fxml'.";
+		assert txt_precioInsta != null
+				: "fx:id=\"txt_precioInsta\" was not injected: check your FXML file 'InstalarObra.fxml'.";
+		assert txt_dimensionesInsta != null
+				: "fx:id=\"txt_dimensionesInsta\" was not injected: check your FXML file 'InstalarObra.fxml'.";
+		assert txt_descripcionInsta != null
+				: "fx:id=\"txt_descripcionInsta\" was not injected: check your FXML file 'InstalarObra.fxml'.";
+		assert crearInstalacion != null
+				: "fx:id=\"crearInstalacion\" was not injected: check your FXML file 'InstalarObra.fxml'.";
+		assert date_fecha != null : "fx:id=\"date_fecha\" was not injected: check your FXML file 'InstalarObra.fxml'.";
+		// Crear Obra Escultura
+		assert txt_codigodelaObraE != null
+				: "fx:id=\"txt_codigodelaObraE\" was not injected: check your FXML file 'CrearEscultura.fxml'.";
+		assert txt_TitulodelaObraE != null
+				: "fx:id=\"txt_TitulodelaObraE\" was not injected: check your FXML file 'CrearEscultura.fxml'.";
+		assert txt_preciodelaObraE != null
+				: "fx:id=\"txt_preciodelaObraE\" was not injected: check your FXML file 'CrearEscultura.fxml'.";
+		assert txt_DimensionesdelaObraE != null
+				: "fx:id=\"txt_DimensionesdelaObraE\" was not injected: check your FXML file 'CrearEscultura.fxml'.";
+		assert txt_MaterialE != null
+				: "fx:id=\"txt_MaterialE\" was not injected: check your FXML file 'CrearEscultura.fxml'.";
+		assert txt_PesoE != null : "fx:id=\"txt_PesoE\" was not injected: check your FXML file 'CrearEscultura.fxml'.";
+		assert btn_crearEscultura != null
+				: "fx:id=\"btn_crearEscultura\" was not injected: check your FXML file 'CrearEscultura.fxml'.";
+		assert txt_FechadelaObraE != null
+				: "fx:id=\"txt_FechadelaObraE\" was not injected: check your FXML file 'CrearEscultura.fxml'.";
+		// Crear obra cuadro
+		assert txt_cedulaObraC != null
+				: "fx:id=\"txt_cedulaObraC\" was not injected: check your FXML file 'CrearCuadro.fxml'.";
+		assert txt_codigodelaObraC != null
+				: "fx:id=\"txt_codigodelaObraC\" was not injected: check your FXML file 'CrearCuadro.fxml'.";
+		assert txt_TitulodelaObraC != null
+				: "fx:id=\"txt_TitulodelaObraC\" was not injected: check your FXML file 'CrearCuadro.fxml'.";
+		assert txt_FechadelaObraC != null
+				: "fx:id=\"txt_FechadelaObraC\" was not injected: check your FXML file 'CrearCuadro.fxml'.";
+		assert txt_preciodelaObraC != null
+				: "fx:id=\"txt_preciodelaObraC\" was not injected: check your FXML file 'CrearCuadro.fxml'.";
+		assert txt_DimensionesdelaObraC != null
+				: "fx:id=\"txt_DimensionesdelaObraC\" was not injected: check your FXML file 'CrearCuadro.fxml'.";
+		assert txt_TemadelaObraC != null
+				: "fx:id=\"txt_TemadelaObraC\" was not injected: check your FXML file 'CrearCuadro.fxml'.";
+		assert txt_TecnicadelaObraC != null
+				: "fx:id=\"txt_TecnicadelaObraC\" was not injected: check your FXML file 'CrearCuadro.fxml'.";
+		assert txt_clasidelaObraC != null
+				: "fx:id=\"txt_clasidelaObraC\" was not injected: check your FXML file 'CrearCuadro.fxml'.";
+		assert check_obraMaestraC != null
+				: "fx:id=\"check_obraMaestraC\" was not injected: check your FXML file 'CrearCuadro.fxml'.";
+		assert check_obraRepresentativaC != null
+				: "fx:id=\"check_obraRepresentativaC\" was not injected: check your FXML file 'CrearCuadro.fxml'.";
+		assert bton_crearObraC != null
+				: "fx:id=\"bton_crearObraC\" was not injected: check your FXML file 'CrearCuadro.fxml'.";
+
+		// MAIN SCREEN
+		assert screen_listarObra != null
+				: "fx:id=\"screen_listarObra\" was not injected: check your FXML file 'Main.fxml'.";
+		assert screen_addObra != null : "fx:id=\"screen_addObra\" was not injected: check your FXML file 'Main.fxml'.";
+		assert screen_modificarObra != null
+				: "fx:id=\"screen_modificarObra\" was not injected: check your FXML file 'Main.fxml'.";
+		assert screen_eliminarObra != null
+				: "fx:id=\"screen_eliminarObra\" was not injected: check your FXML file 'Main.fxml'.";
+		// _______________-_______
 		// Crear obra________________________________________-
 		assert bton_cuadro != null : "fx:id=\"bton_cuadro\" was not injected: check your FXML file 'MenuCrear.fxml'.";
 		assert bton_Escultura != null
