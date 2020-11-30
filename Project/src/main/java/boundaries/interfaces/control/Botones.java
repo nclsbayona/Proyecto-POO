@@ -114,7 +114,13 @@ public class Botones {
 
 	@FXML
 	void eliminarObra(ActionEvent event) {
-
+		long search = Long.parseLong(txt_buscarObraEliminar.getText());
+		try {
+			cGaleria.eliminarObra(search);
+			System.out.println("Eliminado");
+		} catch (ArtworkDoesntExistException e) {
+			
+		}
 	}
 
 	@FXML

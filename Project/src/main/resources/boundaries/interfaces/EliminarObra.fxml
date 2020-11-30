@@ -10,7 +10,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundaries.interfaces.control.Botones">
    <children>
       <AnchorPane layoutX="-5.0" prefHeight="400.0" prefWidth="611.0">
          <children>
@@ -22,8 +22,8 @@
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
                               <Text fill="WHITE" layoutX="260.0" layoutY="51.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="ELIMIINAR OBRA" underline="true" />
-                              <TextField fx:id="txt_buscarObraEliminar" layoutX="140.0" layoutY="89.0" prefHeight="25.0" prefWidth="212.0" promptText="Buscar Obra" />
-                              <Button fx:id="btn_buscarObraEliminar" layoutX="391.0" layoutY="89.0" mnemonicParsing="false" onAction="#buscarObraCodigo" text="Buscar" />
+                              <TextField fx:id="txt_buscarObraEliminar" layoutX="106.0" layoutY="89.0" prefHeight="25.0" prefWidth="332.0" promptText="Buscar Obra" />
+                              <Button fx:id="btn_buscarObraEliminar" layoutX="450.0" layoutY="89.0" mnemonicParsing="false" onAction="#buscarObraCodigo" text="Buscar" />
                               <Button fx:id="btn_buscarObraEliminar" layoutX="283.0" layoutY="318.0" mnemonicParsing="false" onAction="#eliminarObra" text="Eliminar" />
                               <ListView fx:id="list_obraEliminar" layoutX="105.0" layoutY="124.0" prefHeight="173.0" prefWidth="402.0" />
                            </children>
