@@ -857,6 +857,31 @@ public class Botones {
 		primaryStage.initModality(Modality.APPLICATION_MODAL);
 		primaryStage.showAndWait();
 	}
+	//Buscar Artista Cédula
+	  @FXML
+	    private TextField txt_cedulaDelArtista;
+
+	    @FXML
+	    private TextField txt_nombreArtistaC;
+
+	    @FXML
+	    private TextField txt_apellidoArtistaC;
+
+	    @FXML
+	    private TextField txt_telefonoArtistaC;
+
+	    @FXML
+	    private Button bton_buscarArtista;
+
+	    @FXML
+	    private TextField txt_cedulaNuevaArtistaC;
+
+	    @FXML
+	    void buscarCedulaArA(ActionEvent event) {
+
+
+	    }
+
 	// CREAR OBRA TIPO CUADRO
 
 	@FXML
@@ -891,10 +916,11 @@ public class Botones {
 	private RadioButton check_obraRepresentativaC;
 	@FXML
 	private TextField txt_cedulaObraC;
-    @FXML
-    private RadioButton noCrearArtCuadro;
-    @FXML
-    private RadioButton siCrearArtCuadro;
+	@FXML
+	private RadioButton noCrearArtCuadro;
+	@FXML
+	private RadioButton siCrearArtCuadro;
+
 	@FXML
 	void crearObraC(ActionEvent event) throws ArtworkExistsException {
 		Obra o = null;
@@ -915,9 +941,12 @@ public class Botones {
 				String tecnica = txt_TecnicadelaObraC.getText();
 				o = new Cuadro(codigo, titulo, date, precio, dimensiones, tema, tecnica, Clasificacion.OBRA_MAESTRA);
 				try {
-					cGaleria.buscarObra(codigo);
-					Botones.errorAlert("Error", "Ya existe una obra con el mismo código", "");
-
+					if (siCrearArtCuadro.isSelected()) {
+						cGaleria.buscarObra(codigo);
+						Botones.errorAlert("Error", "Ya existe una obra con el mismo código", "");
+					} else {
+						this.changeToA("crearArtista.fxml");
+					}
 				} catch (ArtworkDoesntExistException e) {
 					if (Botones.confirmacionAlert("Confirmación", "Desea agregar la obra?", ""))
 						cGaleria.addObra(o);
@@ -1219,6 +1248,14 @@ public class Botones {
 		this.cExportacion = new Exportacion();
 		this.fileChooser = new FileChooser();
 		this.fileChooser.setTitle("Select Report File");
+		//ARTISTA
+		assert txt_cedulaDelArtista != null : "fx:id=\"txt_cedulaDelArtista\" was not injected: check your FXML file 'crearArtista.fxml'.";
+        assert txt_nombreArtistaC != null : "fx:id=\"txt_nombreArtistaC\" was not injected: check your FXML file 'crearArtista.fxml'.";
+        assert txt_apellidoArtistaC != null : "fx:id=\"txt_apellidoArtistaC\" was not injected: check your FXML file 'crearArtista.fxml'.";
+        assert txt_telefonoArtistaC != null : "fx:id=\"txt_telefonoArtistaC\" was not injected: check your FXML file 'crearArtista.fxml'.";
+        assert bton_buscarArtista != null : "fx:id=\"bton_buscarArtista\" was not injected: check your FXML file 'crearArtista.fxml'.";
+        assert txt_cedulaNuevaArtistaC != null : "fx:id=\"txt_cedulaNuevaArtistaC\" was not injected: check your FXML file 'crearArtista.fxml'.";
+
 		// ****************************************************
 		assert btnBuscarObraM2 != null
 				: "fx:id=\"btnBuscarObraM2\" was not injected: check your FXML file 'ModificarObra.fxml'.";
@@ -1290,8 +1327,10 @@ public class Botones {
 		assert txt_FechadelaObraE != null
 				: "fx:id=\"txt_FechadelaObraE\" was not injected: check your FXML file 'CrearEscultura.fxml'.";
 		// Crear obra cuadro
-	    assert siCrearArtCuadro != null : "fx:id=\"siCrearArtCuadro\" was not injected: check your FXML file 'CrearCuadro.fxml'.";
-	    assert noCrearArtCuadro != null : "fx:id=\"noCrearArtCuadro\" was not injected: check your FXML file 'CrearCuadro.fxml'.";
+		assert siCrearArtCuadro != null
+				: "fx:id=\"siCrearArtCuadro\" was not injected: check your FXML file 'CrearCuadro.fxml'.";
+		assert noCrearArtCuadro != null
+				: "fx:id=\"noCrearArtCuadro\" was not injected: check your FXML file 'CrearCuadro.fxml'.";
 		assert txt_cedulaObraC != null
 				: "fx:id=\"txt_cedulaObraC\" was not injected: check your FXML file 'CrearCuadro.fxml'.";
 		assert txt_codigodelaObraC != null
