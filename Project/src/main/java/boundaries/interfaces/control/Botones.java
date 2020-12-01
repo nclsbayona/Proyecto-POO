@@ -541,7 +541,7 @@ public class Botones {
 
 	@FXML
 	void refrescarGananciaTotalObras(ActionEvent event) {
-		this.gananciaTotalCompras.setText(String.valueOf(Botones.cGaleria.calcularPrecioTotal()));
+		this.gananciaTotalCompras.setText("$"+String.valueOf(Botones.cGaleria.calcularPrecioTotal()));
 	}
 
 	@FXML
