@@ -14,10 +14,12 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import boundaries.interfaces.Exportacion;
 import control.ControlGaleria;
+import exceptions.ArtistNotFoundException;
 import exceptions.ArtworkAlreadyPurchasedException;
 import exceptions.ArtworkDoesntExistException;
 import exceptions.ArtworkExistsException;
 import exceptions.CodeSizeException;
+import exceptions.EmptyArtistListException;
 import exceptions.EmptyPurchasesListException;
 import exceptions.TypoException;
 import javafx.collections.FXCollections;
@@ -857,31 +859,57 @@ public class Botones {
 		primaryStage.initModality(Modality.APPLICATION_MODAL);
 		primaryStage.showAndWait();
 	}
-	//Buscar Artista Cédula
-	  @FXML
-	    private TextField txt_cedulaDelArtista;
 
-	    @FXML
-	    private TextField txt_nombreArtistaC;
+	private static Obra artwork = null;
+	private Artista artwoker = null;
+	// Buscar Artista Cédula
+	@FXML
+	private TextField txt_cedulaDelArtista;
 
-	    @FXML
-	    private TextField txt_apellidoArtistaC;
+	@FXML
+	private TextField txt_nombreArtistaC;
 
-	    @FXML
-	    private TextField txt_telefonoArtistaC;
+	@FXML
+	private TextField txt_apellidoArtistaC;
 
-	    @FXML
-	    private Button bton_buscarArtista;
+	@FXML
+	private TextField txt_telefonoArtistaC;
 
-	    @FXML
-	    private TextField txt_cedulaNuevaArtistaC;
+	@FXML
+	private Button bton_buscarArtista;
 
-	    @FXML
-	    void buscarCedulaArA(ActionEvent event) {
+	@FXML
+	private TextField txt_cedulaNuevaArtistaC;
+	@FXML
+	private Button annadirArtista;
 
+	@FXML
+	void buscarCedulaArA(ActionEvent event) throws TypoException {
 
-	    }
+		try {
+			artwoker = Botones.cGaleria.buscarArtista((Long.parseLong(txt_cedulaDelArtista.getText())));
+			if (Botones.confirmacionAlert("Confirmación",
+					"Desea agregar la obra al artista " + artwoker.getNombre() + "?", "")) {
+				Botones.cGaleria.addCircObryArt(artwork, artwoker);
+				Botones.infoAlert("Aprobado", "Se ha agregado con éxito la obra", "");
+			} else {
+				Botones.infoAlert("Información", "No se agrego la obra", "");
+			}
 
+		} catch (NumberFormatException e) {
+			Botones.errorAlert("Error", e.toString(), "");
+		} catch (EmptyArtistListException e) {
+			Botones.errorAlert("Error", e.toString(), "");
+		} catch (ArtistNotFoundException e) {
+			txt_cedulaDelArtista.setVisible(false);
+			bton_buscarArtista.setVisible(false);
+			txt_cedulaNuevaArtistaC.setVisible(true);
+			txt_nombreArtistaC.setVisible(true);
+			txt_apellidoArtistaC.setVisible(true);
+			txt_telefonoArtistaC.setVisible(true);
+			annadirArtista.setVisible(true);
+		}
+	}
 	// CREAR OBRA TIPO CUADRO
 
 	@FXML
@@ -922,8 +950,24 @@ public class Botones {
 	private RadioButton siCrearArtCuadro;
 
 	@FXML
+	void annadirObrayArtista(ActionEvent event) {
+		Artista a = new Artista(Long.parseLong(txt_cedulaNuevaArtistaC.getText()), txt_nombreArtistaC.getText(),
+				txt_apellidoArtistaC.getText(), Long.parseLong(txt_telefonoArtistaC.getText()));
+		try {
+			if (Botones.confirmacionAlert("Confirmación", "Desea agregar la obra?", "")) {
+				Botones.cGaleria.addCircObryArt(artwork, a);
+				Botones.infoAlert("Aprobado", "Se ha agregado con éxito", "");
+			} else
+				Botones.infoAlert("Información", "No se agrego la obra", "");
+
+		} catch (TypoException e) {
+			Botones.errorAlert("Error", e.getMessage().toString(), "");
+		}
+	}
+
+	@FXML
 	void crearObraC(ActionEvent event) throws ArtworkExistsException {
-		Obra o = null;
+		artwork = null;
 		if (check_obraMaestraC.isSelected()) {
 			try {
 				if (txt_codigodelaObraC.getText().equals("") || txt_TitulodelaObraC.getText().equals("")
@@ -939,17 +983,24 @@ public class Botones {
 				String dimensiones = txt_DimensionesdelaObraC.getText();
 				String tema = txt_TemadelaObraC.getText();
 				String tecnica = txt_TecnicadelaObraC.getText();
-				o = new Cuadro(codigo, titulo, date, precio, dimensiones, tema, tecnica, Clasificacion.OBRA_MAESTRA);
+				artwork = new Cuadro(codigo, titulo, date, precio, dimensiones, tema, tecnica,
+						Clasificacion.OBRA_MAESTRA);
 				try {
 					if (siCrearArtCuadro.isSelected()) {
 						cGaleria.buscarObra(codigo);
 						Botones.errorAlert("Error", "Ya existe una obra con el mismo código", "");
 					} else {
-						this.changeToA("crearArtista.fxml");
+						try {
+							cGaleria.buscarObra(codigo);
+							Botones.errorAlert("Error", "Ya existe una obra con el mismo código", "");
+						} catch (ArtworkDoesntExistException e) {
+							this.changeToA("crearArtista.fxml");
+
+						}
 					}
 				} catch (ArtworkDoesntExistException e) {
 					if (Botones.confirmacionAlert("Confirmación", "Desea agregar la obra?", ""))
-						cGaleria.addObra(o);
+						cGaleria.addObra(artwork);
 					else
 						Botones.infoAlert("Información", "No se agrego la obra", "");
 				}
@@ -973,7 +1024,7 @@ public class Botones {
 				String dimensiones = txt_DimensionesdelaObraC.getText();
 				String tema = txt_TemadelaObraC.getText();
 				String tecnica = txt_TecnicadelaObraC.getText();
-				o = new Cuadro(codigo, titulo, date, precio, dimensiones, tema, tecnica,
+				artwork = new Cuadro(codigo, titulo, date, precio, dimensiones, tema, tecnica,
 						Clasificacion.OBRA_REPRESENTATIVA);
 				try {
 					cGaleria.buscarObra(codigo);
@@ -981,7 +1032,7 @@ public class Botones {
 
 				} catch (ArtworkDoesntExistException e) {
 					if (Botones.confirmacionAlert("Confirmación", "Desea agregar la obra?", ""))
-						cGaleria.addObra(o);
+						cGaleria.addObra(artwork);
 					else
 						Botones.infoAlert("Información", "No se agrego la obra", "");
 				}
@@ -1248,13 +1299,21 @@ public class Botones {
 		this.cExportacion = new Exportacion();
 		this.fileChooser = new FileChooser();
 		this.fileChooser.setTitle("Select Report File");
-		//ARTISTA
-		assert txt_cedulaDelArtista != null : "fx:id=\"txt_cedulaDelArtista\" was not injected: check your FXML file 'crearArtista.fxml'.";
-        assert txt_nombreArtistaC != null : "fx:id=\"txt_nombreArtistaC\" was not injected: check your FXML file 'crearArtista.fxml'.";
-        assert txt_apellidoArtistaC != null : "fx:id=\"txt_apellidoArtistaC\" was not injected: check your FXML file 'crearArtista.fxml'.";
-        assert txt_telefonoArtistaC != null : "fx:id=\"txt_telefonoArtistaC\" was not injected: check your FXML file 'crearArtista.fxml'.";
-        assert bton_buscarArtista != null : "fx:id=\"bton_buscarArtista\" was not injected: check your FXML file 'crearArtista.fxml'.";
-        assert txt_cedulaNuevaArtistaC != null : "fx:id=\"txt_cedulaNuevaArtistaC\" was not injected: check your FXML file 'crearArtista.fxml'.";
+		// ARTISTA
+		assert annadirArtista != null
+				: "fx:id=\"annadirArtista\" was not injected: check your FXML file 'crearArtista.fxml'.";
+		assert txt_cedulaDelArtista != null
+				: "fx:id=\"txt_cedulaDelArtista\" was not injected: check your FXML file 'crearArtista.fxml'.";
+		assert txt_nombreArtistaC != null
+				: "fx:id=\"txt_nombreArtistaC\" was not injected: check your FXML file 'crearArtista.fxml'.";
+		assert txt_apellidoArtistaC != null
+				: "fx:id=\"txt_apellidoArtistaC\" was not injected: check your FXML file 'crearArtista.fxml'.";
+		assert txt_telefonoArtistaC != null
+				: "fx:id=\"txt_telefonoArtistaC\" was not injected: check your FXML file 'crearArtista.fxml'.";
+		assert bton_buscarArtista != null
+				: "fx:id=\"bton_buscarArtista\" was not injected: check your FXML file 'crearArtista.fxml'.";
+		assert txt_cedulaNuevaArtistaC != null
+				: "fx:id=\"txt_cedulaNuevaArtistaC\" was not injected: check your FXML file 'crearArtista.fxml'.";
 
 		// ****************************************************
 		assert btnBuscarObraM2 != null
@@ -1399,70 +1458,72 @@ public class Botones {
 				: "fx:id=\"btn_BuscarObra\" was not injected: check your FXML file 'ListarObra.fxml'.";
 		assert txtBuscarObra != null
 				: "fx:id=\"txtBuscarObra\" was not injected: check your FXML file 'ListarObra.fxml'.";
-		//Clientes
-		assert btn_ExportarF!=null:"Bad btn_ExportarF";
-		assert btn_ListarClientes!=null:"Bad btn_ListarClientes";
-		assert listarClientes!=null:"Bad listarClientes";
-		assert txtCedulaClienteBuscarC!=null:"Bad txtCedulaClienteBuscarC";
-		assert btnBuscarC!=null:"Bad btnBuscarC";
-		assert txtCodigoClienteBuscarC!=null:"Bad txtCodigoClienteBuscarC";
-		assert buscarClientes!=null:"Bad buscarClientes";
-		assert txtCodigoClienteAC!=null:"Bad txtCodigoClienteAC";
-		assert txtNombreAC!=null:"Bad txtNombreAC";
-		assert txtApellidoAC!=null:"Bad txtApellidoAC";
-		assert txtCedulaAC!=null:"Bad txtCedulaAC";
-		assert txtTelefonoAC!=null:"Bad txtTelefonoAC";
-		assert txtDireccionAC!=null:"Bad txtDireccionAC";
-		assert btnAgregarCliente!=null:"Bad btnAgregarCliente";
-		assert mainWindow!=null:"Bad mainWindow";
-		assert txtLabelError!=null:"Bad txtLabelError";
-		assert btnModificarCliente!=null:"Bad btnModificarCliente";
-		assert txtCedulaClienteBuscarC2!=null:"Bad txtCedulaClienteBuscarC2";
-		assert btnBuscarC2!=null:"Bad btnBuscarC2";
-		assert txtCodigoClienteBuscarC2!=null:"Bad txtCodigoClienteBuscarC2";
-		assert txtCodigoClienteMC!=null:"Bad txtCodigoClienteMC";
-		assert txtNombreMC!=null:"Bad txtNombreMC";
-		assert txtApellidoMC!=null:"Bad txtApellidoMC";
-		assert txtCedulaMC!=null:"Bad txtCedulaMC";
-		assert txtTelefonoMC!=null:"Bad txtTelefonoMC";
-		assert txtDireccionMC!=null:"Bad txtDireccionMC";
-		assert campoModificar!=null:"Bad campoModificar";
-		assert valorModificar!=null:"Bad valorModificar";
-		assert btnModificar!=null:"Bad btnModificar";;
-		assert modificarWindow!=null:"Bad modificarWindow";
-		assert eliminarWindow!=null:"Bad eliminarWindow";
-		assert txtCedulaClienteEliminar!=null:"Bad txtCedulaClienteEliminar";;
-		assert btnBuscarEliminar!=null:"Bad btnBuscarEliminar";
-		assert txtCodigoClienteBuscarEliminar!=null:"Bad txtCodigoClienteBuscarEliminar";
-		assert txtCodigoClienteEC!=null:"Bad txtCodigoClienteEC";
-		assert txtNombreEC!=null:"Bad txtNombreEC";
-		assert txtApellidoEC!=null:"Bad txtApellidoEC";
-		assert txtCedulaEC!=null:"Bad txtCedulaEC";
-		assert txtTelefonoEC!=null:"Bad txtTelefonoEC";
-		assert txtDireccionEC!=null:"Bad txtDireccionEC";
-		assert btnEliminar!=null:"Bad btnEliminar";
-		//Compras
-		assert CompraMainWindow!=null:"Bad CompraMainWindow";
-		assert listadoObrasDisponibles!=null:"BadlistadoObrasDisponibles ";
-		assert btnListarObrasDisponiblesCompras!=null:"Bad btnListarObrasDisponiblesCompras";
-		assert btnEliminarObra!=null:"Bad btnEliminarObra";
-		assert txtCodigoClienteComprar!=null:"Bad txtCodigoClienteComprar";
-		assert btnComprarObra!=null:"Bad btnComprarObra";
-		assert txtCodigoObraComprar!=null:"Bad txtCodigoObraComprar";
-		assert checkFiltrado!=null:"Bad checkFiltrado";
-		assert GrupoA!=null:"Bad GrupoA";
-		assert checkSoloCuadro!=null:"Bad checkSoloCuadro";
-		assert gananciaTotalCompras!=null:"Bad gananciaTotalCompras";
-		assert btnRefrescarGananciaTotalCompras!=null:"Bad btnRefrescarGananciaTotalCompras";
-		assert txtCodigoCompraEliminar!=null:"Bad txtCodigoCompraEliminar";
-		assert listadoCompras!=null:"Bad listadoCompras";
-		assert btnListarCompras!=null:"Bad btnListarCompras";
-		assert btnExportarCompras!=null:"Bad btnExportarCompras";
-		assert txtAñoCompra!=null:"Bad txtAñoCompra";
-		assert txtMesCompra!=null:"Bad txtMesCompra";
-		//Artistas
-		assert ListaArtistasMasVendidos!=null:"Bad ListaArtistasMasVendidos";
-		assert btnListarArtistasMasVendidos!=null:"Bad btnListarArtistasMasVendidos";
-		assert btnExportarArtistasMasVendidos!=null:"Bad btnExportarArtistasMasVendidos";
+		// Clientes
+		assert btn_ExportarF != null : "Bad btn_ExportarF";
+		assert btn_ListarClientes != null : "Bad btn_ListarClientes";
+		assert listarClientes != null : "Bad listarClientes";
+		assert txtCedulaClienteBuscarC != null : "Bad txtCedulaClienteBuscarC";
+		assert btnBuscarC != null : "Bad btnBuscarC";
+		assert txtCodigoClienteBuscarC != null : "Bad txtCodigoClienteBuscarC";
+		assert buscarClientes != null : "Bad buscarClientes";
+		assert txtCodigoClienteAC != null : "Bad txtCodigoClienteAC";
+		assert txtNombreAC != null : "Bad txtNombreAC";
+		assert txtApellidoAC != null : "Bad txtApellidoAC";
+		assert txtCedulaAC != null : "Bad txtCedulaAC";
+		assert txtTelefonoAC != null : "Bad txtTelefonoAC";
+		assert txtDireccionAC != null : "Bad txtDireccionAC";
+		assert btnAgregarCliente != null : "Bad btnAgregarCliente";
+		assert mainWindow != null : "Bad mainWindow";
+		assert txtLabelError != null : "Bad txtLabelError";
+		assert btnModificarCliente != null : "Bad btnModificarCliente";
+		assert txtCedulaClienteBuscarC2 != null : "Bad txtCedulaClienteBuscarC2";
+		assert btnBuscarC2 != null : "Bad btnBuscarC2";
+		assert txtCodigoClienteBuscarC2 != null : "Bad txtCodigoClienteBuscarC2";
+		assert txtCodigoClienteMC != null : "Bad txtCodigoClienteMC";
+		assert txtNombreMC != null : "Bad txtNombreMC";
+		assert txtApellidoMC != null : "Bad txtApellidoMC";
+		assert txtCedulaMC != null : "Bad txtCedulaMC";
+		assert txtTelefonoMC != null : "Bad txtTelefonoMC";
+		assert txtDireccionMC != null : "Bad txtDireccionMC";
+		assert campoModificar != null : "Bad campoModificar";
+		assert valorModificar != null : "Bad valorModificar";
+		assert btnModificar != null : "Bad btnModificar";
+		;
+		assert modificarWindow != null : "Bad modificarWindow";
+		assert eliminarWindow != null : "Bad eliminarWindow";
+		assert txtCedulaClienteEliminar != null : "Bad txtCedulaClienteEliminar";
+		;
+		assert btnBuscarEliminar != null : "Bad btnBuscarEliminar";
+		assert txtCodigoClienteBuscarEliminar != null : "Bad txtCodigoClienteBuscarEliminar";
+		assert txtCodigoClienteEC != null : "Bad txtCodigoClienteEC";
+		assert txtNombreEC != null : "Bad txtNombreEC";
+		assert txtApellidoEC != null : "Bad txtApellidoEC";
+		assert txtCedulaEC != null : "Bad txtCedulaEC";
+		assert txtTelefonoEC != null : "Bad txtTelefonoEC";
+		assert txtDireccionEC != null : "Bad txtDireccionEC";
+		assert btnEliminar != null : "Bad btnEliminar";
+		// Compras
+		assert CompraMainWindow != null : "Bad CompraMainWindow";
+		assert listadoObrasDisponibles != null : "BadlistadoObrasDisponibles ";
+		assert btnListarObrasDisponiblesCompras != null : "Bad btnListarObrasDisponiblesCompras";
+		assert btnEliminarObra != null : "Bad btnEliminarObra";
+		assert txtCodigoClienteComprar != null : "Bad txtCodigoClienteComprar";
+		assert btnComprarObra != null : "Bad btnComprarObra";
+		assert txtCodigoObraComprar != null : "Bad txtCodigoObraComprar";
+		assert checkFiltrado != null : "Bad checkFiltrado";
+		assert GrupoA != null : "Bad GrupoA";
+		assert checkSoloCuadro != null : "Bad checkSoloCuadro";
+		assert gananciaTotalCompras != null : "Bad gananciaTotalCompras";
+		assert btnRefrescarGananciaTotalCompras != null : "Bad btnRefrescarGananciaTotalCompras";
+		assert txtCodigoCompraEliminar != null : "Bad txtCodigoCompraEliminar";
+		assert listadoCompras != null : "Bad listadoCompras";
+		assert btnListarCompras != null : "Bad btnListarCompras";
+		assert btnExportarCompras != null : "Bad btnExportarCompras";
+		assert txtAñoCompra != null : "Bad txtAñoCompra";
+		assert txtMesCompra != null : "Bad txtMesCompra";
+		// Artistas
+		assert ListaArtistasMasVendidos != null : "Bad ListaArtistasMasVendidos";
+		assert btnListarArtistasMasVendidos != null : "Bad btnListarArtistasMasVendidos";
+		assert btnExportarArtistasMasVendidos != null : "Bad btnExportarArtistasMasVendidos";
 	}
 }
