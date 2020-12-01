@@ -27,15 +27,16 @@
             <Button fx:id="btnExportarCompras" layoutX="576.0" layoutY="285.0" mnemonicParsing="false" onAction="#exportarLasCompras" text="Exportar" />
             <TextField fx:id="txtAñoCompra" layoutX="373.0" layoutY="49.0" promptText="Año" />
             <TextField fx:id="txtMesCompra" layoutX="373.0" layoutY="81.0" promptText="Mes" />
-            <RadioButton fx:id="checkFiltrado" layoutX="547.0" layoutY="48.0" mnemonicParsing="false" text="Filtrado por mes" textFill="WHITE">
+            <RadioButton fx:id="checkFiltrado" layoutX="548.0" layoutY="40.0" mnemonicParsing="false" text="Filtrado por mes" textFill="WHITE">
                <toggleGroup>
                   <ToggleGroup fx:id="GrupoA" />
                </toggleGroup>
             </RadioButton>
-            <RadioButton fx:id="checkSoloCuadro" layoutX="547.0" layoutY="85.0" mnemonicParsing="false" text="Solo compras de Cuadros" textFill="WHITE" toggleGroup="$GrupoA" />
+            <RadioButton fx:id="checkSoloCuadro" layoutX="548.0" layoutY="66.0" mnemonicParsing="false" text="Solo compras de Cuadros" textFill="WHITE" toggleGroup="$GrupoA" />
             <Text fill="WHITE" layoutX="410.0" layoutY="351.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ganancia total Obras" />
             <Text fx:id="gananciaTotalCompras" fill="#76cd43" layoutX="410.0" layoutY="387.0" strokeType="OUTSIDE" strokeWidth="0.0" />
             <Button fx:id="btnRefrescarGananciaTotalCompras" layoutX="607.0" layoutY="362.0" mnemonicParsing="false" onAction="#refrescarGananciaTotalObras" text="Refrescar" />
+            <RadioButton layoutX="548.0" layoutY="94.0" mnemonicParsing="false" selected="true" text="Normal" textFill="WHITE" toggleGroup="$GrupoA" />
          </children>
       </AnchorPane>
    </children>
