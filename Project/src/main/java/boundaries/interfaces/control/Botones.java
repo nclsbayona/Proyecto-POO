@@ -560,6 +560,10 @@ public class Botones {
 			} catch (Exception e2) {
 				this.createNewStage(e2.getMessage(), AlertType.ERROR, "La compra no fue exitosa");
 			}
+			finally{
+				this.txtCodigoClienteComprar.setText("");
+				this.txtCodigoObraComprar.setText("");
+			}
 		}
 	}
 
