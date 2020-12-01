@@ -68,7 +68,7 @@
                   <Image url="@Avio.png" />
                </image>
             </ImageView>
-            <Label layoutX="270.0" layoutY="104.0" prefHeight="17.0" prefWidth="164.0" text="Nota: Fecha(4) &quot;yyyy/mm/dd&quot;" textFill="#c1c1c1" />
+            <Label layoutX="270.0" layoutY="104.0" prefHeight="17.0" prefWidth="164.0" text="Nota: Fecha(3) &quot;yyyy/mm/dd&quot;" textFill="#c1c1c1" />
          </children>
       </Pane>
    </children>

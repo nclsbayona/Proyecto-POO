@@ -888,7 +888,10 @@ public class Botones {
 	private RadioButton check_obraRepresentativaC;
 	@FXML
 	private TextField txt_cedulaObraC;
-
+    @FXML
+    private RadioButton noCrearArtCuadro;
+    @FXML
+    private RadioButton siCrearArtCuadro;
 	@FXML
 	void crearObraC(ActionEvent event) throws ArtworkExistsException {
 		Obra o = null;
@@ -1283,6 +1286,8 @@ public class Botones {
 		assert txt_FechadelaObraE != null
 				: "fx:id=\"txt_FechadelaObraE\" was not injected: check your FXML file 'CrearEscultura.fxml'.";
 		// Crear obra cuadro
+	    assert siCrearArtCuadro != null : "fx:id=\"siCrearArtCuadro\" was not injected: check your FXML file 'CrearCuadro.fxml'.";
+	    assert noCrearArtCuadro != null : "fx:id=\"noCrearArtCuadro\" was not injected: check your FXML file 'CrearCuadro.fxml'.";
 		assert txt_cedulaObraC != null
 				: "fx:id=\"txt_cedulaObraC\" was not injected: check your FXML file 'CrearCuadro.fxml'.";
 		assert txt_codigodelaObraC != null

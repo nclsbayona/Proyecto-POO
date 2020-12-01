@@ -24,21 +24,28 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <Text fill="WHITE" layoutX="257.0" layoutY="33.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="CREAR CUADRO" underline="true" />
-                              <TextField fx:id="txt_codigodelaObraC" layoutX="232.0" layoutY="49.0" promptText="Codigo Obra" />
-                              <TextField fx:id="txt_TitulodelaObraC" layoutX="232.0" layoutY="85.0" promptText="Titulo" />
-                              <TextField fx:id="txt_preciodelaObraC" layoutX="232.0" layoutY="157.0" promptText="Precio" />
-                              <TextField fx:id="txt_DimensionesdelaObraC" layoutX="232.0" layoutY="193.0" promptText="Dimensiones" />
-                              <TextField fx:id="txt_TemadelaObraC" layoutX="232.0" layoutY="230.0" promptText="Tema" />
-                              <TextField fx:id="txt_TecnicadelaObraC" layoutX="232.0" layoutY="266.0" promptText="Tecnica" />
-                              <Button fx:id="bton_crearObraC" layoutX="274.0" layoutY="335.0" mnemonicParsing="false" onAction="#crearObraC" text="Crear" />
-                              <DatePicker fx:id="txt_FechadelaObraC" layoutX="232.0" layoutY="123.0" prefHeight="25.0" prefWidth="149.0" promptText="Fecha" />
-                              <RadioButton fx:id="check_obraRepresentativaC" layoutX="169.0" layoutY="302.0" mnemonicParsing="false" text="Obra representativa" textFill="WHITE">
+                              <Text fill="WHITE" layoutX="258.0" layoutY="17.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="CREAR CUADRO" underline="true" />
+                              <TextField fx:id="txt_codigodelaObraC" layoutX="233.0" layoutY="33.0" promptText="Codigo Obra" />
+                              <TextField fx:id="txt_TitulodelaObraC" layoutX="233.0" layoutY="69.0" promptText="Titulo" />
+                              <TextField fx:id="txt_preciodelaObraC" layoutX="233.0" layoutY="141.0" promptText="Precio" />
+                              <TextField fx:id="txt_DimensionesdelaObraC" layoutX="233.0" layoutY="177.0" promptText="Dimensiones" />
+                              <TextField fx:id="txt_TemadelaObraC" layoutX="233.0" layoutY="214.0" promptText="Tema" />
+                              <TextField fx:id="txt_TecnicadelaObraC" layoutX="233.0" layoutY="250.0" promptText="Tecnica" />
+                              <Button fx:id="bton_crearObraC" layoutX="269.0" layoutY="331.0" mnemonicParsing="false" onAction="#crearObraC" prefHeight="25.0" prefWidth="77.0" text="Crear" />
+                              <DatePicker fx:id="txt_FechadelaObraC" layoutX="233.0" layoutY="107.0" prefHeight="25.0" prefWidth="149.0" promptText="Fecha" />
+                              <RadioButton fx:id="check_obraRepresentativaC" layoutX="181.0" layoutY="286.0" mnemonicParsing="false" text="Obra representativa" textFill="WHITE">
                                  <toggleGroup>
                                     <ToggleGroup fx:id="a" />
                                  </toggleGroup>
                               </RadioButton>
-                              <RadioButton fx:id="check_obraMaestraC" layoutX="372.0" layoutY="302.0" mnemonicParsing="false" text="Obra maestra" textFill="#fff9f9" toggleGroup="$a" />
+                              <RadioButton fx:id="check_obraMaestraC" layoutX="364.0" layoutY="286.0" mnemonicParsing="false" text="Obra maestra" textFill="#fff9f9" toggleGroup="$a" />
+                              <RadioButton fx:id="siCrearArtCuadro" layoutX="336.0" layoutY="312.0" mnemonicParsing="false" selected="true" text="Si" textFill="WHITE">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="b" />
+                                 </toggleGroup>
+                              </RadioButton>
+                              <RadioButton fx:id="noCrearArtCuadro" layoutX="373.0" layoutY="312.0" mnemonicParsing="false" text="No" textFill="WHITE" toggleGroup="$b" />
+                              <Text fill="WHITE" layoutX="215.0" layoutY="325.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Obra anónima ?:" wrappingWidth="118.3984375" />
                            </children>
                         </AnchorPane>
                   </content>
