@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Obras>
+    <Cuadro>
+        <codigoObra>5432198</codigoObra>
+        <dimensiones>10x8</dimensiones>
+        <fecha>1999-11-10T18:28:32.073-05:00</fecha>
+        <precioRef>20000.0</precioRef>
+        <titulo>Okalokas</titulo>
+        <clasificacion>OBRA_REPRESENTATIVA</clasificacion>
+        <tecnica>Pastel</tecnica>
+        <tema>Cubismo</tema>
+    </Cuadro>
+    <Cuadro>
+        <codigoObra>2435678</codigoObra>
+        <dimensiones>10x8</dimensiones>
+        <fecha>2010-06-20T18:28:32.073-05:00</fecha>
+        <precioRef>20000.0</precioRef>
+        <titulo>Eva pilla</titulo>
+        <clasificacion>OBRA_MAESTRA</clasificacion>
+        <tecnica>Acuarela</tecnica>
+        <tema>Polimorfismo</tema>
+    </Cuadro>
+    <Cuadro>
+        <artista>
+            <apellidos>Herrera Guaitero</apellidos>
+            <cedula>1000471976</cedula>
+            <codigoArtista>0</codigoArtista>
+            <fechaNacimiento>2001-12-11T18:28:32.072-05:00</fechaNacimiento>
+            <nombre>Sebastian</nombre>
