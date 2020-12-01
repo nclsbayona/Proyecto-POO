@@ -12,8 +12,10 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import boundaries.interfaces.Exportacion;
 import control.ControlGaleria;
+import exceptions.ArtworkAlreadyPurchasedException;
 import exceptions.ArtworkDoesntExistException;
 import exceptions.ArtworkExistsException;
+import exceptions.CodeSizeException;
 import exceptions.EmptyPurchasesListException;
 import exceptions.TypoException;
 import javafx.collections.FXCollections;
@@ -660,6 +662,7 @@ public class Botones {
 
 	@FXML
 	void call_modificarObraScreen(ActionEvent event) {
+		this.changeToA("ModificarObra.fxml");
 
 	}
 
@@ -1083,11 +1086,101 @@ public class Botones {
 		alert.showAndWait();
 	}
 
+//****************************MODIFICAR*********************************************
+	@FXML
+	private Button btnBuscarObraM2;
+
+	@FXML
+	private TextField txtCodigoBuscarMObra2;
+
+	@FXML
+	private Text txtCodigoObraMO;
+
+	@FXML
+	private Text txtFechaMObra;
+
+	@FXML
+	private Text txtPrecioMObra;
+
+	@FXML
+	private Text txtTitutloMObra;
+
+	@FXML
+	private Text txtDimensionesMObra;
+
+	@FXML
+	private TextField campoModificarObra;
+
+	@FXML
+	private TextField valorModificarObra;
+
+	@FXML
+	private Button btnModificarObra;
+	private Obra oModificar = null;
+
+	@FXML
+	void buscarObraModificar(ActionEvent event) {
+		long search = Long.parseLong(txtCodigoBuscarMObra2.getText());
+		try {
+			oModificar = cGaleria.buscarObra(search);
+			txtCodigoObraMO.setText(String.valueOf(oModificar.getCodigoObra()));
+			txtTitutloMObra.setText(oModificar.getTitulo());
+			txtDimensionesMObra.setText(oModificar.getDimensiones());
+			txtPrecioMObra.setText(String.valueOf(oModificar.getPrecioRef()));
+			Calendar c = oModificar.getFecha();
+			txtFechaMObra.setText(String.valueOf(c.get(Calendar.DATE)) + "/" + String.valueOf(c.get(Calendar.MONTH))
+					+ "/" + String.valueOf(c.get(Calendar.YEAR)));
+
+		} catch (ArtworkDoesntExistException e) {
+			Botones.infoAlert("Error", "No se encontro la obra", "");
+		}
+
+	}
+
+	@FXML
+	void modificarObraAction(ActionEvent event) throws ArtworkDoesntExistException, CodeSizeException,
+			ArtworkExistsException, ArtworkAlreadyPurchasedException {
+		int opcion = Integer.parseInt(campoModificarObra.getText());
+		try {
+			Botones.cGaleria.modificarObra(oModificar, opcion, valorModificarObra.getText());
+			Botones.infoAlert("Correcto", "Se ha modificado con éxito", "");
+
+		} catch (TypoException e) {
+			Botones.errorAlert("Error", e.getMessage().toString(), "");
+		} catch (ArtworkExistsException e) {
+			Botones.errorAlert("Error", e.getMessage().toString(), "");
+		}
+
+	}
+
+	// ******************************************************************************
 	@FXML
 	void initialize() {
 		this.cExportacion = new Exportacion();
 		this.fileChooser = new FileChooser();
 		this.fileChooser.setTitle("Select Report File");
+		// ****************************************************
+		assert btnBuscarObraM2 != null
+				: "fx:id=\"btnBuscarObraM2\" was not injected: check your FXML file 'ModificarObra.fxml'.";
+		assert txtCodigoBuscarMObra2 != null
+				: "fx:id=\"txtCodigoBuscarMObra2\" was not injected: check your FXML file 'ModificarObra.fxml'.";
+		assert txtCodigoObraMO != null
+				: "fx:id=\"txtCodigoObraMO\" was not injected: check your FXML file 'ModificarObra.fxml'.";
+		assert txtFechaMObra != null
+				: "fx:id=\"txtFechaMObra\" was not injected: check your FXML file 'ModificarObra.fxml'.";
+		assert txtPrecioMObra != null
+				: "fx:id=\"txtPrecioMObra\" was not injected: check your FXML file 'ModificarObra.fxml'.";
+		assert txtTitutloMObra != null
+				: "fx:id=\"txtTitutloMObra\" was not injected: check your FXML file 'ModificarObra.fxml'.";
+		assert txtDimensionesMObra != null
+				: "fx:id=\"txtDimensionesMObra\" was not injected: check your FXML file 'ModificarObra.fxml'.";
+		assert campoModificarObra != null
+				: "fx:id=\"campoModificarObra\" was not injected: check your FXML file 'ModificarObra.fxml'.";
+		assert valorModificarObra != null
+				: "fx:id=\"valorModificarObra\" was not injected: check your FXML file 'ModificarObra.fxml'.";
+		assert btnModificarObra != null
+				: "fx:id=\"btnModificarObra\" was not injected: check your FXML file 'ModificarObra.fxml'.";
+
 		// ........................................................................................................./
 		assert btn_ExportarF != null : "fx:id=\"btn_ExportarF\" was not injected: check your FXML file 'Hero.fxml'.";
 		// .

@@ -19,9 +19,9 @@
         <tabs>
             <Tab text="Listar Obras">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="452.0" prefWidth="697.0">
                      <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#242c32" height="431.0" layoutY="-11.0" stroke="BLACK" strokeType="INSIDE" width="688.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#242c32" height="462.0" layoutX="-10.0" layoutY="-4.0" stroke="BLACK" strokeType="INSIDE" width="715.0" />
                         <Text fill="WHITE" layoutX="276.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="OBRAS DISPONIBLES" wrappingWidth="149.75">
                            <font>
                               <Font size="14.0" />
@@ -40,11 +40,7 @@
                         </RadioButton>
                         <RadioButton fx:id="radioBtnAnioListarObra" layoutX="418.0" layoutY="70.0" mnemonicParsing="false" text="Año" textFill="WHITE" toggleGroup="$GrupoB" />
                         <RadioButton fx:id="radioBtnTituloListarObra" layoutX="479.0" layoutY="70.0" mnemonicParsing="false" text="Titulo" textFill="WHITE" toggleGroup="$GrupoB" />
-                        <RadioButton fx:id="opt_typeArtWork" layoutX="102.0" layoutY="327.0" mnemonicParsing="false" onAction="#listarEscultura" text="Solo tipo Escultura" textFill="WHITE">
-                           <toggleGroup>
-                              <ToggleGroup fx:id="GrupoB2" />
-                           </toggleGroup>
-                        </RadioButton>
+                        <RadioButton fx:id="opt_typeArtWork" graphicTextGap="0.0" layoutX="102.0" layoutY="327.0" mnemonicParsing="false" onAction="#listarEscultura" text="Solo tipo Escultura" textFill="WHITE" />
                      </children>
                   </AnchorPane>
               </content>
