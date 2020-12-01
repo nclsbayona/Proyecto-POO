@@ -905,6 +905,7 @@ private static String aux;
 			aux=txt_cedulaDelArtista.getText();
 			bton_buscarArtista.setVisible(false);
 			txt_cedulaNuevaArtistaC.setText(aux);
+			txt_cedulaNuevaArtistaC.setEditable(false);
 			txt_cedulaNuevaArtistaC.setVisible(true);
 			txt_nombreArtistaC.setVisible(true);
 			txt_apellidoArtistaC.setVisible(true);
