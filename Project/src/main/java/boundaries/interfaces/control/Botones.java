@@ -1,6 +1,7 @@
 //LLLASLASDLSADSA
 package boundaries.interfaces.control;
 
+import model.Artista;
 import model.Clasificacion;
 import java.io.IOException;
 import java.net.URL;
@@ -8,6 +9,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Map;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import boundaries.interfaces.Exportacion;
@@ -93,6 +95,19 @@ public class Botones {
 
 	@FXML
 	void cambiarAArtistas(ActionEvent event) {
+		String nomFXML = "artistas/Artistas.fxml";
+		Parent root = null;
+		try {
+			root = FXMLLoader.load(getClass().getResource(nomFXML));
+		} catch (IOException e) {
+			this.createNewStage(e.getMessage(), AlertType.ERROR, "Error modificando");
+		}
+		Scene scene = new Scene(root);
+		Stage stage = new Stage();
+		stage.initModality(Modality.APPLICATION_MODAL);
+		stage.setTitle("Cliente");
+		stage.setScene(scene);
+		stage.showAndWait();
 	}
 
 	@FXML
@@ -107,7 +122,7 @@ public class Botones {
 		Scene scene = new Scene(root);
 		Stage stage = new Stage();
 		stage.initModality(Modality.APPLICATION_MODAL);
-		stage.setTitle("Cliente");
+		stage.setTitle("Compras");
 		stage.setScene(scene);
 		stage.showAndWait();
 	}
@@ -824,6 +839,7 @@ public class Botones {
 		this.changeToA("InstalarObra.fxml");
 	}
 
+	@FXML
 	void changeToA(String n) {
 		String nomFXML = n;
 		Stage primaryStage = new Stage();
@@ -1152,6 +1168,43 @@ public class Botones {
 		}
 
 	}
+
+	//Artistas
+	@FXML
+    private ListView<String> ListaArtistasMasVendidos;
+
+    @FXML
+    private Button btnListarArtistasMasVendidos;
+
+    @FXML
+    private Button btnExportarArtistasMasVendidos;
+
+    @FXML
+    void exportarArtistasMasVendidos(ActionEvent event) {
+		try {
+			if (Botones.cGaleria.getListaCompras().isEmpty())
+				throw new EmptyPurchasesListException();
+			this.cExportacion.exportarXML(String.valueOf(fileChooser.showSaveDialog(null)), "o", Botones.cGaleria.verListadoArtistas().entrySet());
+		} catch (TypoException e) {
+			Botones.errorAlert("Error", e.getMessage().toString(), "");
+		} catch (EmptyPurchasesListException e) {
+			Botones.errorAlert("Error", e.getMessage().toString(), "");
+		}
+    }
+
+    @FXML
+    void listarArtistasMasVendidos(ActionEvent event) {
+		this.ListaArtistasMasVendidos.setItems(null);
+		ArrayList<String> arrayList=new ArrayList<>();
+		try {
+			for (Map.Entry<Integer, Artista> entry : Botones.cGaleria.verListadoArtistas().entrySet()) {
+				arrayList.add(String.valueOf(entry.getKey()) + " " + entry.getValue());
+			}
+		} catch (EmptyPurchasesListException e) {
+			Botones.errorAlert("Error", e.getMessage().toString(), "");
+		}
+	}
+	//End artistas
 
 	// ******************************************************************************
 	@FXML
