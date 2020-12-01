@@ -546,12 +546,12 @@ public class Botones {
 	void comprarObra(ActionEvent event) {
 		try {
 			Obra obra = Botones.cGaleria.buscarObra(Long.valueOf(this.txtCodigoObraComprar.getText()));
-			Botones.cGaleria.buscarObraEnCompras(obra);
+			if (Botones.cGaleria.buscarObraEnCompras(obra))
+				this.createNewStage("La obra ya fue comprada", AlertType.ERROR, "La obra ya fue comprada");
 			if (Botones.cGaleria.buscarClienteYObraEnCompra(
 					Botones.cGaleria.buscarCliente(Long.parseLong(txtCodigoClienteComprar.getText())),
 					Botones.cGaleria.buscarObra(Long.parseLong(this.txtCodigoObraComprar.getText()))))
 				this.createNewStage("La compra ya existe", AlertType.ERROR, "_Ya existe");
-			this.createNewStage("La obra ya fue comprada", AlertType.ERROR, "La obra ya fue comprada");
 		} catch (Exception e) {
 			try {
 				Botones.cGaleria.realizarCompra(
@@ -559,8 +559,7 @@ public class Botones {
 						Botones.cGaleria.buscarObra(Long.parseLong(this.txtCodigoObraComprar.getText())));
 			} catch (Exception e2) {
 				this.createNewStage(e2.getMessage(), AlertType.ERROR, "La compra no fue exitosa");
-			}
-			finally{
+			} finally {
 				this.txtCodigoClienteComprar.setText("");
 				this.txtCodigoObraComprar.setText("");
 			}
@@ -1106,7 +1105,7 @@ public class Botones {
 		alert.showAndWait();
 	}
 
-//****************************MODIFICAR*********************************************
+	// ****************************MODIFICAR*********************************************
 	@FXML
 	private Button btnBuscarObraM2;
 
@@ -1173,33 +1172,34 @@ public class Botones {
 
 	}
 
-	//Artistas
+	// Artistas
 	@FXML
-    private ListView<String> ListaArtistasMasVendidos;
+	private ListView<String> ListaArtistasMasVendidos;
 
-    @FXML
-    private Button btnListarArtistasMasVendidos;
+	@FXML
+	private Button btnListarArtistasMasVendidos;
 
-    @FXML
-    private Button btnExportarArtistasMasVendidos;
+	@FXML
+	private Button btnExportarArtistasMasVendidos;
 
-    @FXML
-    void exportarArtistasMasVendidos(ActionEvent event) {
+	@FXML
+	void exportarArtistasMasVendidos(ActionEvent event) {
 		try {
 			if (Botones.cGaleria.getListaCompras().isEmpty())
 				throw new EmptyPurchasesListException();
-			this.cExportacion.exportarXML(String.valueOf(fileChooser.showSaveDialog(null)), "o", Botones.cGaleria.verListadoArtistas().entrySet());
+			this.cExportacion.exportarXML(String.valueOf(fileChooser.showSaveDialog(null)), "o",
+					Botones.cGaleria.verListadoArtistas().entrySet());
 		} catch (TypoException e) {
 			Botones.errorAlert("Error", e.getMessage().toString(), "");
 		} catch (EmptyPurchasesListException e) {
 			Botones.errorAlert("Error", e.getMessage().toString(), "");
 		}
-    }
+	}
 
-    @FXML
-    void listarArtistasMasVendidos(ActionEvent event) {
+	@FXML
+	void listarArtistasMasVendidos(ActionEvent event) {
 		this.ListaArtistasMasVendidos.setItems(null);
-		ArrayList<String> arrayList=new ArrayList<>();
+		ArrayList<String> arrayList = new ArrayList<>();
 		try {
 			for (Map.Entry<Integer, Artista> entry : Botones.cGaleria.verListadoArtistas().entrySet()) {
 				arrayList.add(String.valueOf(entry.getKey()) + " " + entry.getValue());
@@ -1208,7 +1208,7 @@ public class Botones {
 			Botones.errorAlert("Error", e.getMessage().toString(), "");
 		}
 	}
-	//End artistas
+	// End artistas
 
 	// ******************************************************************************
 	@FXML
