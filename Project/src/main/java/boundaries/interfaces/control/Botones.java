@@ -882,7 +882,7 @@ public class Botones {
 	private TextField txt_cedulaNuevaArtistaC;
 	@FXML
 	private Button annadirArtista;
-
+private static String aux;
 	@FXML
 	void buscarCedulaArA(ActionEvent event) throws TypoException {
 
@@ -902,7 +902,9 @@ public class Botones {
 			Botones.errorAlert("Error", e.toString(), "");
 		} catch (ArtistNotFoundException e) {
 			txt_cedulaDelArtista.setVisible(false);
+			aux=txt_cedulaDelArtista.getText();
 			bton_buscarArtista.setVisible(false);
+			txt_cedulaNuevaArtistaC.setText(aux);
 			txt_cedulaNuevaArtistaC.setVisible(true);
 			txt_nombreArtistaC.setVisible(true);
 			txt_apellidoArtistaC.setVisible(true);
