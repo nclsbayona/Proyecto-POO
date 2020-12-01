@@ -4,7 +4,8 @@ import java.util.Calendar;
 import java.util.HashSet;
 
 import jakarta.xml.bind.annotation.XmlElement;
-
+import jakarta.xml.bind.annotation.XmlRootElement;
+@XmlRootElement
 public class Artista implements Comparable<Artista> {
 
 	public Artista() {
