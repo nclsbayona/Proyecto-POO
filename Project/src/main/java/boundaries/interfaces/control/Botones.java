@@ -1316,8 +1316,9 @@ private static String aux;
 		try {
 			if (Botones.cGaleria.getListaCompras().isEmpty())
 				throw new EmptyPurchasesListException();
+				System.out.println(Botones.cGaleria.verListadoArtistas());
 			this.cExportacion.exportarXML(String.valueOf(fileChooser.showSaveDialog(null)), "o",
-					Botones.cGaleria.verListadoArtistas().entrySet());
+					Botones.cGaleria.verListadoArtistas().values());
 		} catch (TypoException e) {
 			Botones.errorAlert("Error", e.getMessage().toString(), "");
 		} catch (EmptyPurchasesListException e) {
