@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Compras>
+    <Compra>
+        <cliente>
+            <apellidos>Santamaria</apellidos>
+            <cedula>1422373000</cedula>
+            <codigoCliente>1</codigoCliente>
+            <direccionEntrega>2085 NW Traverse Street</direccionEntrega>
+            <nombre>Alfredo</nombre>
+            <telefono>6543212</telefono>
+        </cliente>
+        <codigoCompra>1</codigoCompra>
+        <fecha>2020-12-01T13:51:41.018-05:00</fecha>
+        <obra>
+            <artista>
+                <apellidos>Lol</apellidos>
+                <cedula>1000471976</cedula>
+                <codigoArtista>0</codigoArtista>
+                <nombre>Seb</nombre>
