@@ -999,9 +999,10 @@ public class Botones {
 						}
 					}
 				} catch (ArtworkDoesntExistException e) {
-					if (Botones.confirmacionAlert("Confirmación", "Desea agregar la obra?", ""))
+					if (Botones.confirmacionAlert("Confirmación", "Desea agregar la obra?", "")) {
 						cGaleria.addObra(artwork);
-					else
+						Botones.infoAlert("Aprobado", "Se ha agregado la obra con éxito", "");
+					} else
 						Botones.infoAlert("Información", "No se agrego la obra", "");
 				}
 			} catch (Exception e) {
@@ -1027,13 +1028,23 @@ public class Botones {
 				artwork = new Cuadro(codigo, titulo, date, precio, dimensiones, tema, tecnica,
 						Clasificacion.OBRA_REPRESENTATIVA);
 				try {
-					cGaleria.buscarObra(codigo);
-					Botones.errorAlert("Error", "Ya existe una obra con el mismo código", "");
+					if (siCrearArtCuadro.isSelected()) {
+						cGaleria.buscarObra(codigo);
+						Botones.errorAlert("Error", "Ya existe una obra con el mismo código", "");
+					} else {
+						try {
+							cGaleria.buscarObra(codigo);
+							Botones.errorAlert("Error", "Ya existe una obra con el mismo código", "");
+						} catch (ArtworkDoesntExistException e) {
+							this.changeToA("crearArtista.fxml");
 
+						}
+					}
 				} catch (ArtworkDoesntExistException e) {
-					if (Botones.confirmacionAlert("Confirmación", "Desea agregar la obra?", ""))
+					if (Botones.confirmacionAlert("Confirmación", "Desea agregar la obra?", "")) {
 						cGaleria.addObra(artwork);
-					else
+						Botones.infoAlert("Aprobado", "Se ha agregado la obra con éxito", "");
+					} else
 						Botones.infoAlert("Información", "No se agrego la obra", "");
 				}
 			} catch (Exception e) {
@@ -1047,6 +1058,10 @@ public class Botones {
 	}
 
 	// CREAR OBRA ESCULTURA
+	@FXML
+	private RadioButton esculturaAnonima;
+	@FXML
+	private RadioButton esculturaconArtista;
 	@FXML
 	private TextField txt_codigodelaObraE;
 
@@ -1073,7 +1088,7 @@ public class Botones {
 
 	@FXML
 	void crearEscultura(ActionEvent event) throws ArtworkExistsException {
-		Obra o = null;
+		artwork = null;
 		try {
 			if (txt_codigodelaObraE.getText().equals("") || txt_TitulodelaObraE.getText().equals("")
 					|| txt_FechadelaObraE.getValue().equals("") || txt_preciodelaObraE.getText().equals("")
@@ -1088,16 +1103,27 @@ public class Botones {
 			String dimensiones = txt_DimensionesdelaObraE.getText();
 			String material = txt_MaterialE.getText();
 			double peso = Double.parseDouble(txt_PesoE.getText());
-			o = new Escultura(codigo, titulo, date, precio, dimensiones, material, peso);
-			try {
-				cGaleria.buscarObra(codigo);
-				Botones.errorAlert("Error", "Ya existe una obra con el mismo código", "");
+			artwork = new Escultura(codigo, titulo, date, precio, dimensiones, material, peso);
+			if (esculturaAnonima.isSelected()) {
+				try {
+					cGaleria.buscarObra(codigo);
+					Botones.errorAlert("Error", "Ya existe una obra con el mismo código", "");
 
-			} catch (ArtworkDoesntExistException e) {
-				if (Botones.confirmacionAlert("Confirmación", "Desea agregar la obra?", ""))
-					cGaleria.addObra(o);
-				else
-					Botones.infoAlert("Información", "No se agrego la obra", "");
+				} catch (ArtworkDoesntExistException e) {
+					if (Botones.confirmacionAlert("Confirmación", "Desea agregar la obra?", ""))
+						cGaleria.addObra(artwork);
+					else
+						Botones.infoAlert("Información", "No se agrego la obra", "");
+				}
+			} else {
+				try {
+					cGaleria.buscarObra(codigo);
+					Botones.errorAlert("Error", "Ya existe una obra con el mismo código", "");
+				} catch (ArtworkDoesntExistException e) {
+					this.changeToA("crearArtista.fxml");
+
+				}
+
 			}
 		} catch (TypoException e) {
 			Botones.errorAlert("Error", e.toString(), "Excepciones");
@@ -1106,6 +1132,12 @@ public class Botones {
 	}
 
 	// CREAR OBRA INSTALACION
+	@FXML
+	private RadioButton obraInstalacionAnonima;
+
+	@FXML
+	private RadioButton obraInstalacionArtista;
+
 	@FXML
 	private TextField txt_codigoInsta;
 
@@ -1129,7 +1161,7 @@ public class Botones {
 
 	@FXML
 	void crearObraInstalacion(ActionEvent event) throws ArtworkExistsException {
-		Obra o = null;
+		artwork = null;
 		try {
 			if (txt_codigoInsta.getText().equals("") || txt_tituloInsta.getText().equals("")
 					|| date_fecha.getValue().equals("") || txt_precioInsta.getText().equals("")
@@ -1142,17 +1174,29 @@ public class Botones {
 			float precio = Float.parseFloat(txt_precioInsta.getText());
 			String dimensiones = txt_dimensionesInsta.getText();
 			String descripcion = txt_descripcionInsta.getText();
-			o = new Instalacion(codigo, titulo, date, precio, dimensiones, descripcion);
-			try {
-				cGaleria.buscarObra(codigo);
-				Botones.errorAlert("Error", "Ya existe una obra con el mismo código", "");
+			artwork = new Instalacion(codigo, titulo, date, precio, dimensiones, descripcion);
+			if (obraInstalacionAnonima.isSelected()) {
+				try {
+					cGaleria.buscarObra(codigo);
+					Botones.errorAlert("Error", "Ya existe una obra con el mismo código", "");
 
-			} catch (ArtworkDoesntExistException e) {
-				if (Botones.confirmacionAlert("Confirmación", "Desea agregar la obra?", ""))
-					cGaleria.addObra(o);
-				else
-					Botones.infoAlert("Información", "No se agrego la obra", "");
+				} catch (ArtworkDoesntExistException e) {
+					if (Botones.confirmacionAlert("Confirmación", "Desea agregar la obra?", ""))
+						cGaleria.addObra(artwork);
+					else
+						Botones.infoAlert("Información", "No se agrego la obra", "");
+				}
+			} else {
+				try {
+					cGaleria.buscarObra(codigo);
+					Botones.errorAlert("Error", "Ya existe una obra con el mismo código", "");
+				} catch (ArtworkDoesntExistException e) {
+					this.changeToA("crearArtista.fxml");
+
+				}
+
 			}
+
 		} catch (TypoException e) {
 			Botones.errorAlert("Error", e.toString(), "Excepciones");
 		}
@@ -1356,6 +1400,11 @@ public class Botones {
 		assert mainWindow != null : "fx:id=\"errorWindow\" was not injected: check your FXML file 'Untitled'.";
 		assert txtLabelError != null : "fx:id=\"txtLabelError\" was not injected: check your FXML file 'Untitled'.";
 		// Crear Obra instalacion
+		assert obraInstalacionAnonima != null
+				: "fx:id=\"obraInstalacionAnonima\" was not injected: check your FXML file 'InstalarObra.fxml'.";
+		assert obraInstalacionArtista != null
+				: "fx:id=\"obraInstalacionArtista\" was not injected: check your FXML file 'InstalarObra.fxml'.";
+
 		assert txt_codigoInsta != null
 				: "fx:id=\"txt_codigoInsta\" was not injected: check your FXML file 'InstalarObra.fxml'.";
 		assert txt_tituloInsta != null
@@ -1370,6 +1419,10 @@ public class Botones {
 				: "fx:id=\"crearInstalacion\" was not injected: check your FXML file 'InstalarObra.fxml'.";
 		assert date_fecha != null : "fx:id=\"date_fecha\" was not injected: check your FXML file 'InstalarObra.fxml'.";
 		// Crear Obra Escultura
+		assert esculturaAnonima != null
+				: "fx:id=\"esculturaAnonima\" was not injected: check your FXML file 'CrearEscultura.fxml'.";
+		assert esculturaconArtista != null
+				: "fx:id=\"esculturaconArtista\" was not injected: check your FXML file 'CrearEscultura.fxml'.";
 		assert txt_codigodelaObraE != null
 				: "fx:id=\"txt_codigodelaObraE\" was not injected: check your FXML file 'CrearEscultura.fxml'.";
 		assert txt_TitulodelaObraE != null
