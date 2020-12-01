@@ -231,7 +231,7 @@ public class Botones {
 		try {
 			if (txtNombreAC.getText().equals("") || txtCedulaAC.getText().equals("")
 					|| txtCodigoClienteAC.getText().equals("") || txtTelefonoAC.getText().equals("")
-					|| txtDireccionAC.equals("") || txtApellidoAC.getText().equals(""))
+					|| txtDireccionAC.getText().equals("") || txtApellidoAC.getText().equals(""))
 				throw new TypoException();
 			Cliente n = new Cliente(Long.parseLong(txtCodigoClienteAC.getText()), Long.parseLong(txtCedulaAC.getText()),
 					txtNombreAC.getText(), txtApellidoAC.getText(), txtDireccionAC.getText(),
