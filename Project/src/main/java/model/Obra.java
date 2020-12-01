@@ -1,5 +1,6 @@
 package model;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Calendar;
 import java.util.HashSet;
@@ -78,7 +79,7 @@ public abstract class Obra implements Comparable<Obra>{
     }
 
     @XmlElement
-    public Calendar getFecha() {
+    public LocalDate getFecha() {
         return this.fecha;
     }
 

@@ -1,6 +1,7 @@
 package boundaries.interfaces.control;
 
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+
 import java.time.LocalDate;
 import java.io.IOException;
 import java.net.URL;
@@ -21,14 +22,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.ListView;
-import javafx.scene.control.RadioButton;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -37,6 +31,7 @@ import model.Cuadro;
 import model.Escultura;
 import model.Instalacion;
 import model.Obra;
+import org.w3c.dom.Text;
 
 public class Botones {
 	private static ControlGaleria cGaleria = new ControlGaleria();
@@ -73,10 +68,11 @@ public class Botones {
 
 	@FXML
 	void call_modificarObraScreen(ActionEvent event) {
+		this.changeToA("ModificarObra.fxml");
 
 	}
 
-//....................BONTON EXPORTAR ........................./
+//....................BOTON EXPORTAR ........................./
 	@FXML
 	private Button btn_ExportarObra;
 
@@ -90,7 +86,7 @@ public class Botones {
 		}
 	}
 
-	// ....................BONTON LISTAR ........................./
+	// ....................BOTON LISTAR ........................./
 	@FXML
 	private Button btn_ListarObras;
 	@FXML
@@ -219,6 +215,7 @@ public class Botones {
 		primaryStage.initModality(Modality.APPLICATION_MODAL);
 		primaryStage.showAndWait();
 	}
+
 //CREAR OBRA TIPO CUADRO
 
 	@FXML
@@ -384,7 +381,132 @@ public class Botones {
 
 	}
 
-//CREAR OBRA INSTALACION
+//MODIFICAR OBRA
+
+	//Ingresar nuevos datos para modificar
+
+	@FXML
+	private ResourceBundle resources;
+
+	@FXML
+	private URL location;
+
+	@FXML
+	private TextField txt_BuscarObraM;
+
+	@FXML
+	private Button boton_BuscarM;
+
+	@FXML
+	private Button boton_ModificarObra;
+
+	@FXML
+	private Button boton_SeleccionarObraM;
+
+	@FXML
+	private Text txt_NuevoCodigo;
+
+	@FXML
+	private Text txt_NuevoTitulo;
+
+	@FXML
+	private Text txt_NuevoPrecio;
+
+	@FXML
+	private Text txt_NuevaDimension;
+
+	@FXML
+	private DatePicker date_ModificarFecha;
+
+	@FXML
+	private TextField txt_NumeroCampo;
+
+	@FXML
+	private TextField txt_Valor;
+
+	@FXML
+	private ListView<?> list_MostrarObras;
+
+	@FXML
+	private Label label_BuscarObras;
+
+    private Obra obra;
+
+    private ArrayList<String> Obras;
+
+    @FXML
+	void listarLasObras(ActionEvent event) throws TypoException {
+		list_MostrarObras.refresh();
+		this.Obras = new ArrayList<>();
+		//System.out.println("Lista de clientes en el listar\n" + Botones.cGaleria.getListaObras());
+		for (Obra obra : Botones.cGaleria.getListaObras().values()) {
+			this.Obras.add(obra.toString());
+		}
+		this.list_MostrarObras.setItems(FXCollections.observableArrayList(this.Obras));
+		this.Obras = null;
+	}
+	@FXML
+	void modificarObra(ActionEvent event) {
+		try {
+			Botones.cGaleria.modificarObra(Botones.cGaleria.buscarObra(this.obra.getCodigoObra()),
+					Integer.parseInt(this.txt_NumeroCampo.getText()), this.txt_Valor.getText());
+			System.out.println("Lista de Obras en el modificar\n" + Botones.cGaleria.getListaObras());
+			txt_NuevoCodigo.setTextContent(String.valueOf(this.obra.getCodigoObra()));
+			txt_NuevoTitulo.setTextContent(this.obra.getTitulo());
+			//Fecha
+			txt_NuevoPrecio.setTextContent(String.valueOf(this.obra.getPrecioRef()));
+			txt_NuevaDimension.setTextContent(this.obra.getDimensiones());
+
+		} catch (Exception e) {
+			this.createNewStage(e.getMessage(), AlertType.ERROR, "Error eliminando");
+		}
+	}
+
+	@FXML
+	private void createNewStage(String message, AlertType error, String error_eliminando) {
+	}
+
+	@FXML
+	void modificarObraPantalla(ActionEvent event) {
+		String nomFXML = "cliente/ModificarCliente.fxml";
+		Parent root = null;
+		this.list_MostrarObras.refresh();
+		this.list_MostrarObras.setItems(null);
+		try {
+			root = FXMLLoader.load(getClass().getResource(nomFXML));
+		} catch (IOException e) {
+			this.createNewStage(e.getMessage(), AlertType.ERROR, "Error eliminando");
+		}
+		Scene scene = new Scene(root);
+		Stage stage = new Stage();
+		stage.initModality(Modality.APPLICATION_MODAL);
+		stage.setTitle("Modificar Obra");
+		stage.setScene(scene);
+		stage.showAndWait();
+	}
+
+	@FXML
+	void buscarObra2(ActionEvent event) {
+		String code = txt_BuscarObraM.getText();
+		this.label_BuscarObras.setText("");
+		String c = null;
+		try {
+			if (!code.equals("")) {
+				c = (Botones.cGaleria.buscarObra(Long.parseLong(code)).toString());
+			} else {
+				throw new TypoException();
+			}
+			label_BuscarObras.setText(c);
+		} catch (Exception e) {
+			this.createNewStage(e.getMessage(), AlertType.ERROR, "Error buscando");
+		} finally {
+			this.txt_BuscarObraM.setText("");
+		}
+	}
+
+
+
+	//CREAR OBRA INSTALACION
 	@FXML
 	private TextField txt_codigoInsta;
 
@@ -405,6 +527,8 @@ public class Botones {
 
 	@FXML
 	private DatePicker date_fecha;
+
+
 
 	@FXML
 	void crearObraInstalacion(ActionEvent event) throws ArtworkExistsException {
@@ -565,5 +689,18 @@ public class Botones {
 		assert txtBuscarObra != null
 				: "fx:id=\"txtBuscarObra\" was not injected: check your FXML file 'ListarObra.fxml'.";
 
+		//-------------------------------------------------------MODIFICAR
+		assert list_MostrarObras != null : "fx:id=\"list_MostrarObras\" was not injected: check your FXML file 'ModificarObra.fxml'.";
+		assert txt_BuscarObraM != null : "fx:id=\"txt_BuscarObraM\" was not injected: check your FXML file 'ModificarObra.fxml'.";
+		assert boton_BuscarM != null : "fx:id=\"boton_BuscarM\" was not injected: check your FXML file 'ModificarObra.fxml'.";
+		assert boton_ModificarObra != null : "fx:id=\"boton_ModificarObra\" was not injected: check your FXML file 'ModificarObra.fxml'.";
+		assert boton_SeleccionarObraM != null : "fx:id=\"boton_SeleccionarObraM\" was not injected: check your FXML file 'ModificarObra.fxml'.";
+		assert txt_NuevoCodigo != null : "fx:id=\"txt_NuevoCodigo\" was not injected: check your FXML file 'ModificarObra.fxml'.";
+		assert txt_NuevoTitulo != null : "fx:id=\"txt_NuevoTitulo\" was not injected: check your FXML file 'ModificarObra.fxml'.";
+		assert txt_NuevoPrecio != null : "fx:id=\"txt_NuevoPrecio\" was not injected: check your FXML file 'ModificarObra.fxml'.";
+		assert txt_NuevaDimension != null : "fx:id=\"txt_NuevaDimension\" was not injected: check your FXML file 'ModificarObra.fxml'.";
+		assert txt_NumeroCampo != null : "fx:id=\"txt_NumeroCampo\" was not injected: check your FXML file 'ModificarObra.fxml'.";
+		assert txt_Valor != null : "fx:id=\"txt_Valor\" was not injected: check your FXML file 'ModificarObra.fxml'.";
 	}
+
 }
