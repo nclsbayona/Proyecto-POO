@@ -105,7 +105,7 @@ public class Botones {
 		Scene scene = new Scene(root);
 		Stage stage = new Stage();
 		stage.initModality(Modality.APPLICATION_MODAL);
-		stage.setTitle("Cliente");
+		stage.setTitle("Artistas");
 		stage.setScene(scene);
 		stage.showAndWait();
 	}
