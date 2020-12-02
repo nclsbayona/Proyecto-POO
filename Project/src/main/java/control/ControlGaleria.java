@@ -1,18 +1,12 @@
 package control;
 
-import java.io.FileWriter;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.TreeMap;
-import java.util.TreeSet;
-
+import exceptions.*;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.Marshaller;
 import model.*;
-import exceptions.*;
+
+import java.io.FileWriter;
+import java.util.*;
 
 public class ControlGaleria {
     // Colecciones
@@ -170,6 +164,7 @@ public class ControlGaleria {
     // BUSCAR SOLO POR AÑO
     public HashSet<Obra> buscarObra(Calendar fecha) {
         HashSet<Obra> obras = new HashSet<>();
+
         for (Obra obra : this.listaObras) {
             if (obra.getFecha().get(Calendar.YEAR) == fecha.get(Calendar.YEAR)) {
                 try {

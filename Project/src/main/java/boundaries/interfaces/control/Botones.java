@@ -419,7 +419,7 @@ public class Botones {
 	private TextField txt_Valor;
 
 	@FXML
-	private ListView<?> list_MostrarObras;
+	private ListView<String> list_MostrarObras;
 
 	@FXML
 	private Label label_BuscarObras;
@@ -434,10 +434,10 @@ public class Botones {
 		list_MostrarObras.refresh();
 		this.Obras = new ArrayList<>();
 		//System.out.println("Lista de clientes en el listar\n" + Botones.cGaleria.getListaObras());
-		for (Obra obra : Botones.cGaleria.getListaObras().values()) {
+		for (Obra obra : Botones.cGaleria.getListaObras()) {
 			this.Obras.add(obra.toString());
 		}
-		this.list_MostrarObras.setItems(FXCollections.observableArrayList(this.Obras));
+
 		this.Obras = null;
 	}
 	@FXML
@@ -448,7 +448,9 @@ public class Botones {
 			System.out.println("Lista de Obras en el modificar\n" + Botones.cGaleria.getListaObras());
 			txt_NuevoCodigo.setTextContent(String.valueOf(this.obra.getCodigoObra()));
 			txt_NuevoTitulo.setTextContent(this.obra.getTitulo());
-			//Fecha
+
+			LocalDate fecha = date_ModificarFecha.getValue();
+
 			txt_NuevoPrecio.setTextContent(String.valueOf(this.obra.getPrecioRef()));
 			txt_NuevaDimension.setTextContent(this.obra.getDimensiones());
 

@@ -1,13 +1,12 @@
 package model;
 
-import java.time.LocalDate;
-import java.util.Date;
-import java.util.Calendar;
-import java.util.HashSet;
-
 import exceptions.CodeSizeException;
 import exceptions.TypoException;
 import jakarta.xml.bind.annotation.XmlElement;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashSet;
 
 public abstract class Obra implements Comparable<Obra>{
     protected HashSet<Artista> artistas;
@@ -79,7 +78,7 @@ public abstract class Obra implements Comparable<Obra>{
     }
 
     @XmlElement
-    public LocalDate getFecha() {
+    public Calendar getFecha() {
         return this.fecha;
     }
 
