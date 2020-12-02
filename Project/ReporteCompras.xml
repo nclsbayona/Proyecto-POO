@@ -1,2 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<Compras/>
+<Compras>
+    <Compra>
+        <cliente>
+            <apellidos>Santamaria</apellidos>
+            <cedula>1422373000</cedula>
+            <codigoCliente>1</codigoCliente>
+            <direccionEntrega>2085 NW Traverse Street</direccionEntrega>
+            <nombre>Alfredo</nombre>
+            <telefono>6543212</telefono>
+        </cliente>
+        <codigoCompra>1</codigoCompra>
+        <fecha>2020-12-01T19:02:21.804-05:00</fecha>
+        <obra>
+            <artista>
+                <apellidos>bayona</apellidos>
+                <cedula>1001191743</cedula>
+                <codigoArtista>0</codigoArtista>
+                <nombre>nicolas</nombre>

@@ -56,7 +56,7 @@ public class Exportacion {
             GestionArtistasReporte gaR = new GestionArtistasReporte(artistas);
             cg.exportarReporteXML(route, GestionArtistasReporte.class, gaR);
         }
-        else{
+        else if (opc.equals("m")||opc.equals("n")||opc.equals("q")){
             TreeSet<Compra> compras = new TreeSet<>();
             for (T co : coleccion) {
                 compras.add((Compra)(co));
