@@ -1,16 +1,5 @@
 package boundaries.interfaces.control;
 
-import javafx.scene.control.*;
-
-import java.time.LocalDate;
-import java.io.IOException;
-import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Optional;
-import java.util.ResourceBundle;
 import boundaries.interfaces.Exportacion;
 import control.ControlGaleria;
 import exceptions.ArtworkDoesntExistException;
@@ -22,16 +11,21 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import model.Clasificacion;
-import model.Cuadro;
-import model.Escultura;
-import model.Instalacion;
-import model.Obra;
+import model.*;
 import org.w3c.dom.Text;
+
+import java.io.IOException;
+import java.net.URL;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Optional;
+import java.util.ResourceBundle;
 
 public class Botones {
 	private static ControlGaleria cGaleria = new ControlGaleria();
@@ -436,6 +430,7 @@ public class Botones {
 
     @FXML
 	void listarLasObras(ActionEvent event) throws TypoException {
+
 		list_MostrarObras.refresh();
 		this.Obras = new ArrayList<>();
 		//System.out.println("Lista de clientes en el listar\n" + Botones.cGaleria.getListaObras());
