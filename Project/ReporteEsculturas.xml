@@ -3,7 +3,7 @@
     <Escultura>
         <codigoObra>7654321</codigoObra>
         <dimensiones>10x2</dimensiones>
-        <fecha>1984-03-03T19:09:15.360-05:00</fecha>
+        <fecha>1984-03-03T19:54:25.901-05:00</fecha>
         <precioRef>15000.0</precioRef>
         <titulo>Machupichu</titulo>
         <material>Marmol</material>
@@ -12,7 +12,7 @@
     <Escultura>
         <codigoObra>3456789</codigoObra>
         <dimensiones>10x2</dimensiones>
-        <fecha>2001-09-06T19:09:15.360-05:00</fecha>
+        <fecha>2001-09-06T19:54:25.900-05:00</fecha>
         <precioRef>15000.0</precioRef>
         <titulo>Sociopata</titulo>
         <material>Cemento</material>

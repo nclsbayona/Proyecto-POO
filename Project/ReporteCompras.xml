@@ -1,23 +1,2 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<Compras>
-    <Compra>
-        <cliente>
-            <apellidos>Bayona</apellidos>
-            <cedula>100111000</cedula>
-            <codigoCliente>20</codigoCliente>
-            <direccionEntrega>hola</direccionEntrega>
-            <nombre>Nicolas</nombre>
-            <telefono>345678</telefono>
-        </cliente>
-        <codigoCompra>1</codigoCompra>
-        <fecha>2020-12-01T19:14:10.587-05:00</fecha>
-        <obra>
-            <codigoObra>5432198</codigoObra>
-            <dimensiones>10x8</dimensiones>
-            <fecha>1999-11-10T19:09:15.360-05:00</fecha>
-            <precioRef>20000.0</precioRef>
-            <titulo>Okalokas</titulo>
-        </obra>
-        <pagado>true</pagado>
-    </Compra>
-</Compras>
+<Compras/>

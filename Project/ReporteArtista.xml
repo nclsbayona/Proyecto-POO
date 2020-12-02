@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Artistas>
     <Artista>
-        <apellidos>bayona</apellidos>
-        <cedula>1001191743</cedula>
+        <apellidos>Castro Sepulveda</apellidos>
+        <cedula>1000512331</cedula>
         <codigoArtista>0</codigoArtista>
-        <nombre>nicolas</nombre>
+        <fechaNacimiento>2001-12-11T19:54:25.900-05:00</fechaNacimiento>
+        <nombre>Natalia</nombre>
         <obras

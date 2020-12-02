@@ -92,7 +92,7 @@ public abstract class Obra implements Comparable<Obra>{
         return this.dimensiones;
     }
 
-    @XmlElement
+    @XmlElement 
     public HashSet<Artista> getArtista() {
         return this.artistas;
     }

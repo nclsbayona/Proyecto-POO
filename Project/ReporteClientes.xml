@@ -32,12 +32,4 @@
         <nombre>Juan</nombre>
         <telefono>3208426</telefono>
     </Cliente>
-    <Cliente>
-        <apellidos>Bayona</apellidos>
-        <cedula>100111000</cedula>
-        <codigoCliente>20</codigoCliente>
-        <direccionEntrega>hola</direccionEntrega>
-        <nombre>Nicolas</nombre>
-        <telefono>345678</telefono>
-    </Cliente>
 </Clientes>

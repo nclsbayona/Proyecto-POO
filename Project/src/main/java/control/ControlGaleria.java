@@ -1,6 +1,7 @@
 package control;
 
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;
@@ -10,8 +11,8 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 
 import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Marshaller;
-import jdk.nashorn.api.tree.Tree;
 import model.*;
 import exceptions.*;
 
@@ -694,8 +695,11 @@ public class ControlGaleria {
             Marshaller m = context.createMarshaller();
             m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
             m.marshal(info, out);
-        } catch (Exception e) {
+        } catch (IOException e) {
             throw new TypoException("ruta");
+        }catch(JAXBException e){
+            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
         return true;
     }
