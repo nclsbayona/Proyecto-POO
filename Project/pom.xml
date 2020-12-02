@@ -75,11 +75,21 @@
 
   <build>
     <plugins>
+
+        <plugin>
+        <groupId>org.openjfx</groupId>
+        <artifactId>javafx-maven-plugin</artifactId>
+        <version>0.0.1</version>
+        <configuration>
+            <mainClass>HelloFX</mainClass>
+        </configuration>
+    </plugin>
+
         <plugin>
             <artifactId>maven-surefire-plugin</artifactId>
             <version>${surefire.version}</version>
         </plugin>
-        
+
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-shade-plugin</artifactId>
@@ -99,7 +109,8 @@
                                                "org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                               <manifestEntries>
                                 <Main-Class>${mainClass}</Main-Class>
-                                <Build-By>${author}</Build-By>
+                                <!--suppress UnresolvedMavenProperty -->
+                                  <Build-By>${author}</Build-By>
                               </manifestEntries>
                           </transformer>
                       </transformers>
