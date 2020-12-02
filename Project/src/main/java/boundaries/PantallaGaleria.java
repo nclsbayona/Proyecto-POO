@@ -56,7 +56,7 @@ public class PantallaGaleria {
 		// Variables internas
 		int retornar = 0;
 		Scanner entrada = new Scanner(System.in);
-		entrada.useDelimiter("\r\n");
+		entrada.useDelimiter("\n");
 		ControlGaleria controlGaleria = this.getControlGaleria();
 		String opcionObras = "0", buscarObraporCodigo, buscarCliente, buscarClienteC, buscarObraporArtista = " ";
 		Calendar fecha = Calendar.getInstance();
@@ -169,8 +169,9 @@ public class PantallaGaleria {
 					this.clearScreen();// Limpia la Pantalla
 					System.out.println("Insertar Obra");
 					this.printArtistas();
-					System.out.print("1. Cuadro\n2. Instalación\n3. Escultura\nIngrese eleccion: ");
+					System.out.print("1. Cuadro\n2. Instalación\n3. Escultura\n");
 					do {
+						System.out.print("Eleccion: ");
 						seleObra = entrada.next();
 					} while (!(seleObra.equals("1") || seleObra.equals("2") || seleObra.equals("3")));
 					do {

@@ -11,6 +11,7 @@ import java.util.TreeSet;
 
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.Marshaller;
+import jdk.nashorn.api.tree.Tree;
 import model.*;
 import exceptions.*;
 
@@ -657,7 +658,7 @@ public class ControlGaleria {
      * vendidos ordenados de mayor a menor ventas
      */
     public Map<Integer, Artista> verListadoArtistas() throws EmptyPurchasesListException {
-        HashMap<Artista, Integer> mapsold = new HashMap<Artista, Integer>();
+        TreeMap<Artista, Integer> mapsold = new TreeMap<Artista, Integer>();
         HashSet<Artista> artistas = new HashSet<Artista>();
         Map<Integer, Artista> sort = new TreeMap<Integer, Artista>(Collections.reverseOrder());
         if (this.listaCompras.size()==0)
