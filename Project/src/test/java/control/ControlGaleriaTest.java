@@ -1,4 +1,4 @@
-package pruebas;
+package control;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -8,8 +8,6 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.TreeSet;
-
-import control.ControlGaleria;
 import exceptions.*;
 import jakarta.xml.bind.JAXB;
 import model.*;
@@ -20,6 +18,9 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class ControlGaleriaTest {
+
+	ControlGaleria controlGaleria=new ControlGaleria();
+
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 	}
@@ -27,8 +28,6 @@ class ControlGaleriaTest {
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
 	}
-
-	ControlGaleria controlGaleria = new ControlGaleria();
 
 	@Test
 	// Busca un cliente en las compras (FALLA POR EL TAMAÑO DE LA LISTA)
