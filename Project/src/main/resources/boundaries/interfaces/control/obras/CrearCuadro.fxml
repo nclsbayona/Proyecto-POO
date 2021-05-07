@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundaries.interfaces.control.Botones">
+
+   <children>
+      <AnchorPane prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#242c32" height="400.0" stroke="BLACK" strokeType="INSIDE" width="600.0" />
+            <TabPane prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+                <Tab text="CREAR CUADRO">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <Text fill="WHITE" layoutX="258.0" layoutY="17.0" scaleX="1.5" scaleY="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="CREAR CUADRO" underline="true" />
+                              <TextField fx:id="txt_codigodelaObraC" layoutX="233.0" layoutY="33.0" promptText="Codigo Obra" />
+                              <TextField fx:id="txt_TitulodelaObraC" layoutX="233.0" layoutY="69.0" promptText="Titulo" />
+                              <TextField fx:id="txt_preciodelaObraC" layoutX="233.0" layoutY="141.0" promptText="Precio" />
+                              <TextField fx:id="txt_DimensionesdelaObraC" layoutX="233.0" layoutY="177.0" promptText="Dimensiones" />
+                              <TextField fx:id="txt_TemadelaObraC" layoutX="233.0" layoutY="214.0" promptText="Tema" />
+                              <TextField fx:id="txt_TecnicadelaObraC" layoutX="233.0" layoutY="250.0" promptText="Tecnica" />
+                              <Button fx:id="bton_crearObraC" layoutX="269.0" layoutY="331.0" mnemonicParsing="false" onAction="#crearObraC" prefHeight="25.0" prefWidth="77.0" text="Crear" />
+                              <DatePicker fx:id="txt_FechadelaObraC" layoutX="233.0" layoutY="107.0" prefHeight="25.0" prefWidth="149.0" promptText="Fecha" />
+                              <RadioButton fx:id="check_obraRepresentativaC" layoutX="181.0" layoutY="286.0" mnemonicParsing="false" text="Obra representativa" textFill="WHITE">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="a" />
+                                 </toggleGroup>
+                              </RadioButton>
+                              <RadioButton fx:id="check_obraMaestraC" layoutX="364.0" layoutY="286.0" mnemonicParsing="false" text="Obra maestra" textFill="#fff9f9" toggleGroup="$a" />
+                              <RadioButton fx:id="siCrearArtCuadro" layoutX="336.0" layoutY="312.0" mnemonicParsing="false" selected="true" text="Si" textFill="WHITE">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="b" />
+                                 </toggleGroup>
+                              </RadioButton>
+                              <RadioButton fx:id="noCrearArtCuadro" layoutX="373.0" layoutY="312.0" mnemonicParsing="false" text="No" textFill="WHITE" toggleGroup="$b" />
+                              <Text fill="WHITE" layoutX="215.0" layoutY="325.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Obra anónima ?:" wrappingWidth="118.3984375" />
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+              </tabs>
+            </TabPane>
+         </children>
+      </AnchorPane>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+   </children>
+</Pane>

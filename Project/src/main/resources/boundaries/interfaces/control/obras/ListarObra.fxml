@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="445.0" prefWidth="688.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundaries.interfaces.control.Botones">
+   <children>
+      <TabPane layoutY="-1.0" prefHeight="445.0" prefWidth="688.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+            <Tab text="Listar Obras">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="452.0" prefWidth="697.0">
+                     <children>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#242c32" height="462.0" layoutX="-10.0" layoutY="-4.0" stroke="BLACK" strokeType="INSIDE" width="715.0" />
+                        <Text fill="WHITE" layoutX="276.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="OBRAS DISPONIBLES" wrappingWidth="149.75">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Text>
+                        <ListView fx:id="ListaObras" layoutX="103.0" layoutY="103.0" prefHeight="201.0" prefWidth="491.0" />
+                        <Button fx:id="btn_BuscarObra" layoutX="563.0" layoutY="57.0" mnemonicParsing="false" onAction="#buscarObra" text="Buscar" />
+                        <Button fx:id="btn_ExportarObra" layoutX="351.0" layoutY="360.0" mnemonicParsing="false" onAction="#exportarObra" text="Exportar" />
+                        <Button fx:id="btn_ListarObras" layoutX="270.0" layoutY="360.0" mnemonicParsing="false" onAction="#listarObras" prefHeight="26.0" prefWidth="63.0" text="Listar" />
+                        <Text fill="WHITE" layoutX="102.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Buscar Obra por:" />
+                        <TextField fx:id="txtBuscarObra" layoutX="102.0" layoutY="66.0" prefHeight="26.0" prefWidth="302.0" promptText="" />
+                        <RadioButton fx:id="radioBtnNombreArtistaListarObra" layoutX="418.0" layoutY="48.0" mnemonicParsing="false" text="Nombre artista" textFill="WHITE">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="GrupoB" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="radioBtnAnioListarObra" layoutX="418.0" layoutY="70.0" mnemonicParsing="false" text="Año" textFill="WHITE" toggleGroup="$GrupoB" />
+                        <RadioButton fx:id="radioBtnTituloListarObra" layoutX="479.0" layoutY="70.0" mnemonicParsing="false" text="Titulo" textFill="WHITE" toggleGroup="$GrupoB" />
+                        <RadioButton fx:id="opt_typeArtWork" graphicTextGap="0.0" layoutX="102.0" layoutY="327.0" mnemonicParsing="false" onAction="#listarEscultura" text="Solo tipo Escultura" textFill="WHITE" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</Pane>

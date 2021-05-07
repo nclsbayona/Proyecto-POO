@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="601.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundaries.interfaces.control.Botones">
+   <children>
+      <ImageView fitHeight="316.0" fitWidth="338.0" layoutX="217.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@control/img/hero.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="btnClientes" layoutX="54.0" layoutY="59.0" mnemonicParsing="false" onAction="#cambiarACliente" prefHeight="32.0" prefWidth="136.0" style="-fx-background-color: #181818;" text="Cliente" textFill="WHITE" />
+      <Button fx:id="btnCompras" layoutX="54.0" layoutY="132.0" mnemonicParsing="false" onAction="#cambiarACompras" prefHeight="32.0" prefWidth="136.0" style="-fx-background-color: #181818;" text="Compras" textFill="WHITE" />
+      <Button fx:id="btnObras1" layoutX="54.0" layoutY="213.0" mnemonicParsing="false" onAction="#cambiarAObras" prefHeight="32.0" prefWidth="136.0" style="-fx-background-color: #181818;" text="Obras" textFill="WHITE" />
+      <Button fx:id="btnArtistas" layoutX="54.0" layoutY="298.0" mnemonicParsing="false" onAction="#cambiarAArtistas" prefHeight="32.0" prefWidth="136.0" style="-fx-background-color: #181818;" text="Artistas" textFill="WHITE" />
+   </children>
+</Pane>
