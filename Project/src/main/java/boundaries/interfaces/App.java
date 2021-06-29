@@ -14,11 +14,10 @@ public class App extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        String nomFXML = "Home-Galeria.fxml";
+        String nomFXML ="Main.fxml";
         Parent root = FXMLLoader.load(getClass().getResource(nomFXML));
         Scene scene = new Scene(root);
         primaryStage.setTitle(nomFXML);
-        primaryStage.setTitle("LATOM GALERIA");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
